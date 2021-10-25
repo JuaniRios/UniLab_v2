@@ -1,0 +1,130 @@
+.chats-wrapper
+{
+    position: fixed;
+    padding: 0;
+    width: 22vw;
+    height: 0vh;
+    right: 5%;
+    bottom: 0;
+    z-index: 100;
+    transition: .5s;
+}
+
+.chats
+{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-color: rgba(214, 214, 214, 1) var(--unilab-gray);
+    scrollbar-width: thin;
+    border-radius: 0;
+    height: 53vh;
+    padding: 0;
+}
+
+/* width */
+.chats::-webkit-scrollbar {width: 10px;}
+/* Track */
+.chats::-webkit-scrollbar-track {background: var(--unilab-gray); border-radius: 20px;}
+/* Handle */
+.chats::-webkit-scrollbar-thumb {background: rgba(214, 214, 214, 1); border-radius: 20px;}
+/* Handle on hover */
+.chats::-webkit-scrollbar-thumb:hover {background: rgba(214, 214, 214, .8);}
+
+.chats-header
+{
+    height: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    right: 2%;
+    border-radius: 10px 10px 0 0;
+    width: inherit;
+    z-index: 101;
+    transition: .2s;
+    cursor: pointer;
+    color: var(--unilab-white);
+    background-color: var(--unilab-orange);
+    border-bottom: 1px solid var(--unilab-orange);
+}
+.chats-header:hover
+{
+    color: var(--unilab-white) !important;
+    background-color: rgb(243, 159, 74) !important;
+    border-bottom: 1px solid rgb(243, 159, 74) !important;
+}
+.chat-options
+{
+    background-color: var(--unilab-white);
+    border-radius:50px;
+    font-size:35px;
+    height:35px;
+    width:35px;
+    margin-left: 5%;
+    display: none;
+    cursor: pointer;
+    transition: .5s;
+    position: relative;
+}
+.chat-box
+{
+    position: relative;
+    width: 100%; 
+    margin: 5% 0;
+}
+.chat-box img
+{
+    height: 35px;
+    width: 35px;
+}
+.chat-box:hover .chat-options
+{
+    display: flex !important;
+}
+.chat-options:hover
+{
+    background-color: lightgray;
+    box-shadow: 
+    0px 0px 0px 0.5px rgba(50, 50, 93, 0.1), 
+    0px 2px 5px 0px rgba(50, 50, 93, 0.1), 
+    0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+}
+.chat-options:active
+{
+    transform: scale(0.95);
+}
+.chat-options-menu
+{
+    position: absolute;
+    top: 120%;
+    right: 2%;
+    width: 10vw;
+    background-color: var(--unilab-white);
+    border-radius: 20px;
+    padding: 3%;
+    z-index: 5;
+    display: none;
+}
+.chat-options-menu div
+{
+    margin: 5% 0;
+    padding: 5%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.chat-options-menu div:hover
+{
+    background-color: var(--unilab-gray);
+}
+.triangle
+{
+    position: absolute;
+    top: 95%;
+    right: 6%;
+    z-index: 6;
+    display: none;
+}
+.chat-name
+{
+    margin: 0 0 5% 0;
+}

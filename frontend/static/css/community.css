@@ -1,0 +1,277 @@
+.posts
+{
+    width: 50%;
+}
+.post-pfp
+{
+    width: 75px;
+    height:75px;
+    border-radius:50%;
+    background-size: cover; 
+    background-position:center center;
+}
+.post-image
+{
+    height: 350px;
+    width: 100%;
+    object-fit:contain; 
+    object-position:center center;
+    margin: 3% 0;
+    cursor: pointer;
+    background-color: none;
+}
+.action-button
+{
+    background-color:var(--unilab-white);
+    transition: .5s;
+    
+    
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+.action-button:hover
+{
+    background-color: var(--unilab-gray);
+}
+.sorting-item
+{
+    background-color: var(--unilab-white); 
+    width: 15%;
+    padding: 2%;
+    text-align: center;
+    margin: 0 1%;
+    border-radius: 50px;
+    transition: .2s;
+    cursor: pointer;
+    
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+.sorting-item:hover
+{
+    background-color: var(--unilab-gray);
+    color: black;
+}
+.toggled
+{
+    background-color: var(--unilab-orange) !important;
+    color: var(--unilab-white) !important;
+}
+.toggled:hover
+{
+    background-color: var(--unilab-orange) !important;
+    color: var(--unilab-white) !important;
+}
+.vote-container
+{
+    position: absolute;
+    left: -7%;
+    top: 5%;
+}
+.vote-img
+{
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+}
+.vote-img::before
+{
+    content: "\f2d3";
+}
+.post-field
+{
+    position: fixed;
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    left: 25vw;
+    z-index: 9501;
+    background-color: var(--unilab-white);
+    border-radius: 0 !important;
+}
+.post-field input, .post-field .input
+{
+    background-color: var(--unilab-gray);
+    padding: 2%;
+    margin: 3% 0;
+}
+.post-option-menu
+{
+    width: 90%;
+    padding: 1% 0;
+}
+.post-option
+{
+    cursor: pointer;
+    padding: 2% 0;
+    width: 25%;
+    transition: .2s;
+    border-radius: 10px;
+}
+.post-option:hover
+{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.post-option img
+{
+    height: 30px;
+    width:30px;
+    margin-right:5%;
+}
+
+.comment-section
+{
+    width: 90%;
+    
+}
+
+.post-comment-form
+{
+    position: relative;
+}
+
+.post-comment-form img
+{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+}
+
+.post-comment-form input
+{
+    padding: 2%;
+    width: 90%;
+    border-radius: 50px;
+}
+
+.picture-frame
+{
+    display: none;
+    height: 80vh;
+    width: 160vh;
+    z-index: 9550;
+    border-radius: 10px;
+    object-fit: cover;
+    background-color:var(--unilab-gray);
+    object-fit:contain; 
+    object-position:center center;
+}
+.special-h1
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.special-button
+{
+    margin-left: 5%;
+}
+
+.comment
+{
+    margin: 2% 0;
+    position: relative;
+}
+
+.comment img
+{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
+}
+
+.comment-content
+{
+    padding: 0 3%;
+    width: 90%;
+    border-radius: 0 10px 10px 10px;
+    background-color: var(--unilab-white);
+}
+
+.comment-details
+{
+    position: absolute;
+    top: 10%;
+    right: 2%;
+    font-size: 0.90em;
+    width: 50%;
+    justify-content: flex-end;
+}
+.comment-options
+{
+    cursor: pointer;
+    font-size: 25px;
+    margin-left: 5%;
+}
+
+.comment-date
+{
+    font-size: 0.90em;
+}
+
+.post-names
+{
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.post-names:hover
+{
+    text-decoration: underline;
+}
+
+.post-details
+{
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 0.90em;
+    margin: 2% 0;
+}
+.post-details-link
+{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-right: 2%;
+}
+
+.post-details-img
+{
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
+    object-position: center center;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.post-details-text, .text0
+{
+    color: black;
+}
+
+.details-text
+{
+    margin: 0;
+}
+.text0:hover
+{
+    text-decoration: underline;
+}
+
+.total-points
+{
+    text-align: center;
+}

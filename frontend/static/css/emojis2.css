@@ -1,0 +1,84 @@
+.post-emoji-container
+{
+    height: 374px;
+    width: 374px;
+    background-color: var(--unilab-white);
+    overflow-y: scroll;
+    border-radius: 10px;
+    padding: 20px;
+    position: absolute;
+    top: 25%;
+    right: -15%;
+    z-index: 100;
+}
+
+.post-emoji-container
+{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-color: rgba(214, 214, 214, 1) var(--unilab-gray);
+    scrollbar-width: thin;
+}
+
+/* width */
+.post-emoji-container::-webkit-scrollbar {width: 10px;}
+/* Track */
+.post-emoji-container::-webkit-scrollbar-track {background: var(--unilab-gray); border-radius: 20px;}
+/* Handle */
+.post-emoji-container::-webkit-scrollbar-thumb {background: rgba(214, 214, 214, 1); border-radius: 20px;}
+/* Handle on hover */
+.post-emoji-container::-webkit-scrollbar-thumb:hover {background: rgba(214, 214, 214, .8);}
+
+.emoji-block
+{
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    text-align:center;
+    transition: .2s;
+    border-radius: 10px;
+    height: 40px;
+    width: 40px;
+    margin: 1%;
+}
+.emoji-block:hover
+{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.post-emoji-button
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    outline: none;
+    position: absolute;
+    z-index: 99;
+    right: 5%;
+    top: 19%;
+    font-size: 25px;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 0;
+    height: 30px;
+    width: 30px;
+}
+.post-emoji-button img
+{
+    height: 30px !important;
+    width: 30px !important;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.post-emoji-triangle
+{
+    position: absolute;
+    top: 23.5%;
+    right: 5.5%;
+    z-index: 101;
+    display: none;
+}

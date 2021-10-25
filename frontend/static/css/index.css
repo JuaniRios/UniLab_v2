@@ -1,0 +1,371 @@
+.newest-offers-wrapper
+{
+    z-index: 6;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: rgb(241,241,241);
+}
+.newest-offers
+{
+    left: 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    width: 5000px;
+    transition: 1s;
+}
+.offer-item
+{
+    position: relative;
+    height: 250px;
+    width: 250px;
+    margin: 2rem;
+    border-radius: 10px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 200% 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: var(--unilab-white);
+    padding: 0 .3%;
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.offer-item-rev
+{
+    display: none;
+    background-color: rgba(0,0,0,0.8);
+    height: 250px;
+    width: 250px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+    flex-direction: column;
+}
+.offer-details
+{
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.offer-item h2, .offer-item h3, .offer-item h4
+{
+    background-color: rgba(0,0,0, 0.5);
+    border-radius: 10px;
+    padding: 1%;
+}
+.offer-previous, .offer-next
+{
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--unilab-orange);
+    border-radius: 50%;
+    top: 55%;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    color: var(--unilab-white);
+    cursor: pointer;
+    transition: .5s;
+    z-index: 5;
+
+    
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+.heart-img
+{
+    height: 30px;
+    width: 30px;
+    background-size: 100% 100%;
+    background-image: url('../img/heart-outline.svg');
+    margin: 2%;
+    cursor: pointer;
+}
+.heart-img:hover
+{
+    background-image: url('../img/heart-fill.svg');
+}
+.newest-offers-wrapper:hover .offer-previous
+{
+    left: 1%;
+}
+.newest-offers-wrapper:hover .offer-next
+{
+    right: 1%;
+}
+.offer-previous:hover, .offer-next:hover
+{
+    transform: scale(0.8);
+}
+.offer-previous {left: -10%;}
+.offer-next {right: -10%;}
+.offer-previous::before, .offer-previous::after, .offer-next::before, .offer-next::after
+{
+    content: '';
+    position: absolute;
+    display: block;
+    height: 13px;
+    width: 2px;
+    background-color: var(--unilab-white);
+}
+.offer-previous::before, .offer-next::before {top: 29%;}
+.offer-previous::after, .offer-next::after {bottom: 29%;}
+.offer-previous::before, .offer-next::after {transform: rotate(45deg);}
+.offer-previous::after, .offer-next::before {transform: rotate(-45deg);}
+.star-rating
+{
+    color: var(--unilab-orange);
+    font-size: 20px;
+}
+.star-rating::selection
+{
+    color: var(--unilab-white);
+}
+.learn-more
+{
+    width: 40%;
+    align-self: center;
+    padding: 3% 3%;
+    margin-top: 5%;
+}
+.more-jobs
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+.up-content, .low-content
+{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5%;
+}
+.cont-img
+{
+    display: flex;
+    height: 500px;
+    width: 500px;
+}
+.cont-img2
+{
+    display: flex;
+    height: 500px;
+    width: 1075px;
+}
+.announcements
+{
+    position: relative;
+    width: 20vw;
+    margin: 10% 0 10% 0;
+    border-radius: 10px 0 0 10px;
+    padding: 0 0 3% 0;
+}
+.announcements hr
+{
+    width: 100%;
+    opacity: 0;
+}
+.announcements h1
+{
+    background-color: var(--unilab-orange);
+    color: var(--unilab-white);
+    border-radius: 10px 0 0 0;
+    width: 100%; 
+    padding: 7% 0; 
+    margin: 0 0 7% 0;
+    top: 0; 
+    left: 0;
+    text-align: center;
+}
+.main-content-wrapper
+{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+.home-content
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 80vw;
+    margin: 10% 0;
+}
+.announcement
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 100%;
+    cursor: pointer;
+    transition: .5s;
+    padding: 7%;
+    margin: 0;
+    border-bottom: 1px solid rgba(230, 135, 41, 0);
+    border-left: 1px solid rgba(230, 135, 41, 0);
+    border-right: 1px solid rgba(230, 135, 41, 0);
+
+}
+.announcement:hover
+{
+    border-bottom: 1px solid rgba(230, 135, 41, 1);
+}
+.announcement-body
+{
+    padding: 5%;
+}
+.starting-block
+{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: var(--unilab-white);
+    height: 90vh;
+    width: 100%;
+    background-image: url('../img/vienna.jpg');
+    background-size: cover;
+    overflow: hidden;
+}
+.blackout-layer
+{
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.welcome-message
+{
+    font-size: 5em;
+    z-index: 5;
+    font-family: 'Norwester';
+    width: 50%;
+    text-align: center;
+    margin-bottom: 3%;
+}
+.sub-message
+{
+    font-size: 2em;
+    z-index: 5;
+    font-family: 'Norwester';
+    width: 40%;
+    text-align: center;
+}
+.starting-button
+{
+    z-index: 5;
+    border-radius: 50%;
+    height: 7vh;
+    width: 7vh;
+    background-image: url('../img/down.png');
+    background-size: 100% 100%;
+    position: absolute;
+    bottom: -15%;
+    transition: .5s;
+}
+
+
+/* ---------------- */
+/* ---------------- */
+/* EMPLOYER SECTION */
+/* ---------------- */
+/* ---------------- */
+
+
+.employer-box
+{
+    width: 100%; 
+    height: 80%; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center;
+}
+.employer-row
+{
+    display: flex; 
+    justify-content: center;
+}
+.employer-info
+{
+    background-image: url('../img/sample2.png');
+    height: 100px; 
+    width: 100px; 
+    border-radius: 20px;
+    margin: 2%;
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    transition: .5s;
+    cursor: pointer;
+}
+.employer-info:active
+{
+    transform: scale(0.95);
+}
+.employer-info:hover .employer-name
+{
+    display: flex;
+}
+.employer-info:hover .employer-layer
+{
+    display: block;
+}
+.employer-name
+{
+    display: none;
+    position: absolute;
+    color: var(--unilab-white);
+    font-family: 'Norwester';
+    z-index: 10;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+.employer-layer
+{
+    display: none;
+    position: absolute;
+    z-index: 4;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+}

@@ -1,0 +1,50 @@
+.job-panel
+{
+    margin-bottom: 2rem;
+}
+.company-panel
+{
+    border-right: 1px solid lightgray;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+}
+.job-info
+{
+    background-color: var(--unilab-white);
+    border-radius: 10px;
+    padding: 0 2rem 2rem 2rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+.apply-button
+{
+    color: var(--unilab-orange);
+    border: 1px solid var(--unilab-orange);
+    position: fixed;
+    right: 3rem;
+    padding: 1rem 3rem;
+    border-radius: 50px;
+    background-color: unset;
+}
+.apply-button:hover
+{
+    background-color: var(--unilab-orange);
+    color: var(--unilab-white);
+}
+.add-company
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    border-radius: 10px;
+    background-color: var(--unilab-white);
+    padding: 2%;
+}
+.add-company input
+{
+    margin: 3% 0;
+    padding: 2%;
+    background-color: var(--unilab-gray);
+    border-radius: 10px;
+}

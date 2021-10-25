@@ -1,0 +1,74 @@
+#faq
+{
+    align-items: stretch;
+    margin: 5% auto; 
+    width: 90%;
+}
+.collapsible
+{
+    margin: 5% 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.coll-title
+{
+    cursor: pointer;
+    transition: .5s;
+}
+.coll-title:hover
+{
+    opacity: .9;
+}
+.collapsible h3
+{
+    border-radius: 10px 10px 10px 10px;
+    color: var(--unilab-white);
+    background-color: var(--unilab-orange);
+    padding: 3%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+}
+.collapsible p
+{
+    width: 70%;
+}
+.coll-symbol, .coll-symbol2
+{
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.coll-first-tier, .coll-first-tier2
+{
+    display: none;
+}
+.coll-first-tier2
+{
+    font-size: 20px;
+    margin: 3% 0;
+    padding: 5%;
+    border-radius: 0 0 10px 10px;
+    background-color: var(--unilab-white);
+}
+#faq h1
+{
+    padding: 2%;
+    border-radius: 10px;
+}
+#faq h3
+{
+    margin: 3% 0;
+    margin-bottom: 0;
+}
+#faq h3 div
+{
+    font-size: 1.15em;
+}
+#faq p
+{
+    margin-top: 0;
+}
