@@ -1,0 +1,245 @@
+@media only screen and (min-width: 1030px)
+{
+    .menu-mobile, .top-nav-image, #search-text, #profile-text {display: none;}
+    .top-nav
+    {
+        height: 10vh;
+        justify-content: space-evenly;
+    }
+    #logo-img, #search-img, #profile-img, #lang-img
+    {
+        display: flex;
+    }
+    #logo-img:hover, #search-img:hover, #profile-img:hover, #lang-img:hover
+    {
+        opacity: .5;
+    }
+    #search-img, #profile-img, #lang-img, #search-icon
+    {
+        height: 5vh;
+        width: 5vh;
+    }
+    .search-cancel
+    {
+        height: 3vh;
+        width: 3vh;
+    }
+    #profile-img
+    {
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    #lang-img
+    {
+        object-fit: cover;
+        object-position: center center;
+        border-radius: 50%;
+    }
+    .top-nav-item
+    {
+        position: relative;
+        justify-content: center;
+        font-weight: bold;
+        height: 50px;
+        text-align: center;
+        z-index: 9001;
+        cursor: pointer;
+        padding: 0 2%;
+    }
+    .top-nav-container
+    {
+        display: flex; 
+        justify-content: space-evenly; 
+        align-items: center;
+        width: 70%;
+    }
+}
+@media only screen and (max-width: 1030px)
+{
+    .menu-mobile 
+    {
+        display: flex;
+        height: 5vw;
+        width: 5vw;
+    }
+    .top-nav
+    {
+        height: 10vh;
+        justify-content: space-between;
+        padding: 0 5%;
+    }
+    .top-nav-item-text
+    {
+        justify-content: left;
+        font-size: 24px;
+    }
+    .top-nav-item-text img
+    {
+        margin: 0 5%;
+    }
+    .top-nav-image
+    {
+        height: 5vh;
+        width: 5vh;
+        margin-right: 5%;
+    }
+    .top-nav-item
+    {
+        width: 55%;
+        border-radius: 10px;
+        position: relative;
+        font-weight: bold;
+        text-align: center;
+        z-index: 9001;
+        cursor: pointer;
+        padding: 2% 5%;
+        border-top: 1px solid rgba(230, 135, 41,0);
+        border-left: 1px solid rgba(230, 135, 41,0);
+        border-right: 1px solid rgba(230, 135, 41,0);
+        border-bottom: 1px solid var(--unilab-orange);
+    }
+    .top-nav-item:active
+    {
+        border: 1px solid var(--unilab-orange);
+    }
+    .top-nav-container
+    {
+        display: flex; 
+        justify-content: space-evenly;
+        flex-direction: column;
+        width: 100vw;
+        height: 90vh;
+        top: 10vh;
+        position: fixed;
+        background-color: var(--unilab-white);
+        padding: 0 5%;
+        align-items: center;
+        left: 100vw;
+        transition: .5s;
+    }
+    .top-nav-search
+    {
+        order: -1;
+    }
+    .search-cancel
+    {
+        height: 5vh;
+        width: 5vh;
+    }
+}
+@media only screen and (max-width: 800px)
+{
+    .menu-mobile 
+    {
+        height: 7.5vw;
+        width: 7.5vw;
+    }
+    .top-nav-item-text
+    {
+        font-size: 16px;
+    }
+}
+#logo-link
+{
+    height: 10vh;
+    width: 20vh;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0;
+    border-bottom: none;
+}
+#logo-img
+{
+    height: 100%;
+    width: 100%;
+}
+.top-nav-item-filler, .top-nav-item-text, .top-nav-logo, .top-nav-search, .top-nav-profile
+{
+    display: flex;
+    align-items: center;
+}
+.top-nav, .search-wrapper
+{
+    transition: .5s;
+    width: 100%;
+    background-color: var(--unilab-white);
+    top: 0;
+    position: sticky;
+    z-index: 9000;
+}
+.top-nav-item-filler
+{
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 50px;
+    background-color: var(--unilab-orange);
+    z-index: 9002;
+    border-radius: 10px;
+    transition: .5s;
+}
+.top-nav-item-text, .top-nav-image
+{
+    z-index: 9003;
+    transition: .5s;
+    color: black;
+}
+.top-nav-profile, .top-nav-search
+{
+    transition: .5s;
+}
+#profile-img, #lang-img
+{
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center center;
+}
+.top-nav-logo
+{
+    transition: .5s;
+}
+.top-nav-logo:hover
+{
+    opacity: .5;
+}
+.top-nav-profile:hover, .top-nav-search:hover
+{
+    opacity: .5;
+}
+.search-field
+{
+    display: none;
+    width: 50%;
+    height: 100%;
+    outline: none;
+    border: none;
+    margin: 0 1%;
+    z-index: 9001;
+    padding: 0;
+}
+.search-cancel
+{
+    display: none;
+    /* background-image: url('../img/cancel.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center; */
+    cursor: pointer;
+    position: relative !important;
+}
+.menu-mobile
+{
+    background-image: url('../img/linebar.png');
+    background-size: 100% 100%;
+}
+.active-item {color: var(--unilab-orange);}
+
+.search-wrapper
+{
+    height: 10vh;
+    transition: 1s;
+}
+
+#search-icon
+{
+    cursor: pointer;
+}

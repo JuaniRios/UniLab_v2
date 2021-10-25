@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block meta_and_title %}
+<title>Sign up - UniLab</title>
+<meta name="description" content="">
+{% endblock meta_and_title %}
+
+
+{% block head_css %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'css/sign.css' %}" />
+
+{% endblock head_css %}
+
+
+{% block main_content %}
+
+<main class="flex-col j-c-c a-i-c" style="height: 90vh;">
+    <h1>{% translate "Are you a student or an employer?" %}</h1>
+    <div class="flex-row j-c-s-e a-i-c w50" style="margin: 5rem 0;">
+        <a href="{% url 'signup-student' %}" class="uni-button w30 flex-col j-c-c a-i-c">{% translate "Student" %}</a>
+        <a href="{% url 'signup-employer' %}" class="uni-button w30 flex-col j-c-c a-i-c">{% translate "Employer" %}</a>
+    </div>
+    
+</main>
+
+{% endblock main_content %}
+
+
+{% block footer %}<div class="hidden"></div>{% endblock footer %}
+
+
+{% block body_js %}
+
+<script language="javascript" type="text/javascript" src="{% static 'js/profile.js' %}"></script>
+<script language="javascript" type="text/javascript" src="{% static 'js/sign.js' %}"></script>
+
+{% endblock body_js %}

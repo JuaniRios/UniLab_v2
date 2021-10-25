@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block meta_and_title %}
+<title>My Companies - UniLab</title>
+<meta name="description" content="">
+{% endblock meta_and_title %}
+
+
+{% block head_css %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/my_companies.css' %}" />
+
+{% endblock head_css %}
+
+{% block smoke_screens2 %}
+
+<div class="add-company-screen sm-screen j-c-c a-i-c">
+    
+    <form class="add-company hidden a-i-c" method="POST" enctype="multipart/form-data"
+    onsubmit="return validate_form('.name', '.description', '.video-url', '.website-url')"
+    style="height: 100%;overflow-y: scroll;border-radius: 0;z-index:9501">
+        {% csrf_token %}
+        <button class="close-button" onclick="open_add_company()" type="button"></button>
+        <h1 class="normal">Add a company</h1>
+        <input type="hidden" name="form_type" value="new_company" />
+        <input class="name" type="text" name="name" placeholder="Company Name" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+        <textarea name="description" class="description shadow" rows="10" 
+        placeholder="Company Summary" onfocus="focusin_gray(this)" onfocusout="focusout(this)"></textarea>
+        <div class="double-input-wrap">
+            <select class="video-url" type="number" name="employee_range">
+                {% for choice in employee_choices %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                {% endfor %}
+            </select>
+            <select class="video-url" type="number" name="industry">
+                {% for choice in industry_choices %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="double-input-wrap">
+            <input class="video-url" type="text" name="video_url" placeholder="Video URL" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+            <input class="website-url" type="text" name="website_url" placeholder="Website URL" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+        </div>
+        
+        <input type="file" name="image" class="shadow flex-row a-i-c j-c-c w100" style="padding:1rem 1rem 2.5rem 1rem;" />
+        
+        <div class="flex-row a-i-c j-c-s-b" style="width: 100%; margin:3% 0;">
+            <button class="uni-button" style="width: 40%;" type="button" onclick="open_add_company()">{% translate "Cancel" %}</button>
+            <button class="uni-button" style="width: 40%;" type="submit" name="submit">{% translate "Add" %}</button>
+        </div>
+    </form>
+
+</div>
+
+{% endblock smoke_screens2 %}
+
+{% block main_content %}
+
+<main class="flex-col j-c-c a-i-c">
+    <div class="gui-element w50 flex-col j-c-c a-i-c" style="margin: 3% 0;">
+        
+        <!-- Title -->
+        <div class="flex-row j-c-s-b a-i-c w95">
+            <h2 class="normal">My Companies</h2>
+            <button id="add-company-opener" class="plus-button" onclick="open_add_company()"></button>
+        </div>
+
+        <!-- Injecting companies -->
+        {% if user_companies|length == 0 %}
+        <h3 class="normal">You haven't added any companies yet...</h3>
+        {% else %}
+            {% for company in user_companies %}
+            <a href="{% url 'my-companies'%}?url={{ company.url }}" class="company-block flex-row j-c-s-b a-i-c w95">
+                <div class="flex-row a-i-c">
+                    <img class="shadow" src="{{ company.image }}" height="75" width="75" style="margin-right: 2rem;border-radius:10px;object-fit:cover;">
+                    <h3 class="normal">{{ company.name }}</h3>
+                </div>
+            </a>
+            
+            {% endfor %}
+        {% endif %}
+    </div>
+
+</main>
+
+
+{% endblock main_content %}
+
+
+{% block footer %}<div class="hidden"></div>{% endblock footer %}
+
+
+{% block body_js %}
+
+<script language="javascript" type="text/javascript" src="{% static 'js/my_companies.js' %}"></script>
+
+{% endblock body_js %}

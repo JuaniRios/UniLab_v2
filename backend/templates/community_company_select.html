@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block meta_and_title %}
+<title>Select Company - UniLab</title>
+<meta name="description" content="">
+{% endblock meta_and_title %}
+
+
+{% block head_css %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/my_companies.css' %}" />
+
+{% endblock head_css %}
+
+{% block smoke_screens2 %}
+
+<div class="add-company-screen sm-screen j-c-c a-i-c">
+
+
+</div>
+
+{% endblock smoke_screens2 %}
+
+{% block main_content %}
+
+<main class="flex-col j-c-c a-i-c">
+    <div class="gui-element w50 flex-col j-c-c a-i-c" style="margin: 3% 0;">
+        
+        <!-- Title -->
+        <div class="flex-row j-c-s-b a-i-c w95">
+            <h2 class="normal">Select a company</h2>
+        </div>
+
+        <!-- Injecting companies -->
+        {% if user_companies is None %}
+        <h3 class="normal">You haven't added any companies yet. Go to 'My companies' to add one</h3>
+        {% else %}
+            {% for company in user_companies %}
+            <form method="POST" class="w100">
+                {% csrf_token %}
+                <button name='company' value="{{ company.url }}" class="company-block flex-row j-c-s-b a-i-c w100">
+                <div class="flex-row a-i-c">
+                    <img class="shadow" src="{{ company.image }}" height="75" width="75" style="margin-right: 2rem;border-radius:10px;object-fit:cover;">
+                    <h3 class="normal">{{ company.name }}</h3>
+                </div>
+                </button>
+            </form>
+
+            
+            {% endfor %}
+        {% endif %}
+    </div>
+
+</main>
+
+
+{% endblock main_content %}
+
+
+{% block footer %}<div class="hidden"></div>{% endblock footer %}
+
+
+{% block body_js %}
+
+<script language="javascript" type="text/javascript" src="{% static 'js/my_companies.js' %}"></script>
+
+{% endblock body_js %}

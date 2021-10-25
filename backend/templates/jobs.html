@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block meta_and_title %}
+
+<title>Jobs - UniLab</title>
+<meta name="description" content="" />
+
+{% endblock meta_and_title %}
+
+
+{% block head_css %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+<link rel="stylesheet" href="{% static 'css/companies.css' %}" />
+
+{% endblock head_css %}
+
+
+{% block smoke_screens2 %}
+
+<div class="company-filter-screen sm-screen j-c-c a-i-c">
+    
+    <form class="company-filter hidden j-c-c a-i-c">
+        <button class="close-button" onclick="open_company_filter()" type="button"></button>
+        <h1 class="normal">Filter Jobs</h1>
+    </form>
+
+</div>
+
+{% endblock smoke_screens2 %}
+
+
+{% block main_content %}
+
+<main class="main-home flex-col j-c-c a-i-c">
+
+    <div class="search-container flex-col j-c-c a-i-c w100">
+
+        <div class="blackout-layer"></div>
+
+        <div class="company-search flex-col j-c-f-s a-i-c">
+
+            <h3 class="company-search-header normal">{% translate 'Search for jobs' %}</h3>
+
+            <div class="company-search-wrapper hidden w60 flex-row j-c-c a-i-c shadow" style="background-color: rgba(0,0,0,0);">
+                <img class="company-search-image" src="{% static 'img/top-nav/search.png' %}" alt="">
+                <input id="search_bar" class="company-search-input noshadow" type="text" placeholder="{% translate 'Search for jobs' %}"
+                style="background-color: rgba(0,0,0,0);" />
+                <div class="company-search-close close-button" onclick="close_company_search()"></div>
+            </div>
+            
+            <h2 class="results-header hidden" style="text-align: center;">Search Results</h2>
+
+            <div class="profile-main-loader" style="margin-bottom: 2rem;">
+                <div class="loader">
+                    <svg class="circular-loader"viewBox="25 25 50 50" >
+                        <circle id="loader1" class="loader-path" cx="50" cy="50" r="20" fill="none" stroke="rgb(230, 135, 41)" stroke-width="2" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="company-search-results hidden"></div>
+        </div>
+
+    </div>
+
+    {% if discovered_list|length != 0 %}
+    <!-- Explore Companies Block -->
+    <div class="company-wrapper shadow">
+
+        <h2 class="normal flex-row a-i-c" style="margin-left: 2%;">
+            {% translate "Discover Jobs"%}
+            <span class="filter-companies noselect" onclick="open_company_filter()">Filter</span>
+        </h2>
+
+        <div class="offer-previous" onclick="offers_action('prev')"></div>
+        <div class="offer-next" onclick="offers_action('next')"></div>
+        
+        <div class="newest-offers">
+
+            <!-- Injecting the jobs -->
+            {% for job in discovered_list %}
+            <div class="offer-item shadow" style="background-image: url('{{ job.company.image }}');background-size:cover;" 
+            onmouseover="item_hover(`{{ forloop.counter|add:'-1' }}`)" onmouseout="item_release(`{{ forloop.counter|add:'-1' }}`)">
+                <a href="{% url 'jobs' %}?url={{job.url}}" class="offer-item-rev" style="cursor: pointer;color:white;">
+                    <div class="heart-img" title="Save Job"></div>
+                    <div style="line-height: 250%;">
+                        {{ job.title }}<br>
+                        Open positions: 0<br>
+                        Salary: 1000<br>
+                        <span class="star-rating">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                    </div>
+                </a>
+
+            </div>
+            {% endfor %}
+
+            {% if discovered_list|length > 10 %}
+            <a class="more-jobs uni-button">{% translate "More Jobs"%}</a>
+            {% endif %}
+
+        </div>
+    </div>
+    {% endif %}
+    
+</main>
+
+{% endblock main_content %}
+
+{% block footer %}<div class="hidden"></div>{% endblock footer %}
+
+{% block body_js %}
+
+<script language="javascript" type="text/javascript" src="{% static 'js/companies.js' %}"></script>
+<script>
+    document.querySelector('#jobs-button').classList.add('active-item');
+</script>
+
+<script>
+    //search script//
+
+    //setup before functions
+    var typingTimer;                //timer identifier
+    var doneTypingInterval = 100;  //time in ms
+    var search = document.querySelector('#search_bar');
+    const loader = document.querySelector('.profile-main-loader');
+    const results_header = document.querySelector('.results-header');
+
+    search.addEventListener('keyup', () => {
+        // console.log('done typing..')
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(displaySearch, doneTypingInterval);
+    })
+
+    search.addEventListener('beforeinput', () => {
+        results_header.classList.remove('hidden');
+        document.querySelector('.company-search-results').classList.remove('hidden');
+        loader.style.display = "flex";
+        clearTimeout(typingTimer);
+    })
+
+    //user is "finished typing," do something
+    function displaySearch () {
+        // maybe select the div and add the documents there in a for loop?
+        const search_results = document.querySelector('.company-search-results');
+        fetch(window.location.origin + '/fetch/search_objects?slug=jobs&search=' + search.value)
+            .then(response => response.json())
+            .then(data => {
+
+                loader.style.display = "none";
+                
+                search_results.innerHTML = "";
+                if (data['result'].length == 0)
+                {
+                    search_results.innerHTML += `
+                    <p style="text-align:center;">
+                        No results were found.
+                    </p>
+                    `;
+                }
+                console.log(data['result'])
+                data['result'].forEach(function(job, index){
+                    
+                    // add them like this?
+                    search_results.innerHTML += `
+                    <a class="company-block flex-row a-i-c" href="{% url 'jobs' %}?url=${job['url']}" style="padding:1%;transition:.2s;">
+                        <img class="search-result-image shadow" src="${job['company']['image']}" />
+                        <p style="color:black;">
+                            ${job['title']}
+                        </p>
+                    </a>
+                    `;
+                })
+            })
+    }
+</script>
+{% endblock body_js %}

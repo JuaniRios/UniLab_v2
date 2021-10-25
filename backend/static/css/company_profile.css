@@ -1,0 +1,16 @@
+.single-applicant
+{
+    background-color: var(--unilab-gray);
+    border-radius: 10px;
+    padding: 2rem;
+    transition: .5s;
+    margin: 2rem;
+}
+.single-applicant a
+{
+    color: black;
+}
+.single-applicant a:hover, .basic-info-website:hover
+{
+    text-decoration: underline;
+}

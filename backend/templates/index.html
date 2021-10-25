@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block meta_and_title %}
+
+<title>UniLab - Home</title>
+<meta name="description" content="" />
+
+{% endblock meta_and_title %}
+
+
+{% block head_css %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+<link rel="stylesheet" href="{% static 'css/companies.css' %}" />
+
+{% endblock head_css %}
+
+
+{% block main_content %}
+
+<main class="main-home">
+
+    <!-- Main Starting Block -->
+    <div class="starting-block">
+        <div class="blackout-layer"></div>
+        <div class="welcome-message">
+            {% translate "Welcome to the UniLab Job Portal!"%}
+        </div>
+        <div class="sub-message">{% translate "An easier way to connect with employers in Europe"%}</div>
+        <button onclick="scrollto('explore-block')" class="starting-button uni-button"
+        style="background-color: var(--unilab-orange);color:white;"></button>
+        
+    </div>
+
+    <!-- Upper Main Content Block -->
+    <div id="explore-block" class="main-content-wrapper">
+
+
+        <div class="home-content">
+            <div class="up-content">
+                <div class="cont-img gui-element" style="position: relative; display: flex; justify-content: space-evenly; align-items:center;">
+                    <h1 style="font-size: 1.5em;z-index: 100;">{% translate "Explore"%}</h1>
+                    <div style="z-index: 100;height:80%; padding: 5%;text-align:center; display: flex; justify-content: center; align-items:center;flex-direction:column;">
+                        <p>{% translate "Join our platform with companies around the world. Search for a suitable job in your field, location and language."%}</p>
+                        <p>{% translate "Explore companies, positions and community posts to learn more about your future workplace."%}</p>
+                    </div>
+                    
+                    <a href="{% url 'signup' %}" style="z-index: 100;" class="create-account uni-button">{% translate "Create your account"%}</a>
+                </div>
+
+                <div class="cont-img gui-element">
+                    <h1 style="font-size: 1.5em;">{% translate "Top Companies"%}</h1>
+                    <div class="employer-box">
+                        {% for row in top_companies %}
+                            <div class="employer-row">
+                            {% for company in row %}
+                                    <a href="{% url 'companies' %}?url={{company.url}}" class="employer-info" style="background-image: url('{{ company.image }}');">
+                                        <div class="employer-name">{{ company.name }}<br><div class="star-rating" style="font-size: 0.90em;">&#9733; &#9733; &#9733; &#9733; &#9734;</div></div>
+                                        <div class="employer-layer"></div>
+
+                                    </a>
+                            {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a href="{% url 'companies' %}" class="uni-button">{% translate "More Companies"%}</a>
+                </div>
+            </div>
+            <!-- <div class="low-content">
+                <div class="cont-img2 gui-element"></div>
+            </div> -->
+        </div>
+
+        <!-- Announcements Block -->
+        <div class="announcements gui-element">
+            <button class="close-button hidden" onclick="hide_announcements()"></button>
+            
+            <h1>{% translate "Announcements"%}</h1>
+            
+            <div class="announcement">
+                {% translate "Title of Announcement 1: Something happened in some field."%}
+            </div>
+            <hr>
+            <div class="announcement">
+                {% translate "Title of Announcement 2: Something happened in some field."%}
+            </div>
+            <hr>
+            <div class="announcement">
+                {% translate "Title of Announcement 3: Something happened in some field."%}
+            </div>
+            <hr>
+            <div class="announcement">
+                {% translate "Title of Announcement 4: Something happened in some field."%}
+            </div>
+            <hr>
+            <div class="announcement">
+                {% translate "Title of Announcement 5: Something happened in some field."%}
+            </div>
+            
+            <div class="uni-button" style="padding: 5%; margin-top: 10%;">{% translate "More Announcements"%}</div>
+        </div>
+
+    </div>
+
+    {% if discovered_list|length != 0 %}
+    <!-- Explore Jobs Block -->
+    <div class="company-wrapper shadow">
+
+        <h2 class="normal flex-row a-i-c" style="margin-left: 2%;">
+            {% translate "Discover Jobs"%}
+            <!-- <span class="filter-companies noselect" onclick="open_company_filter()">Filter</span> -->
+        </h2>
+
+        <div class="offer-previous" onclick="offers_action('prev')"></div>
+        <div class="offer-next" onclick="offers_action('next')"></div>
+
+        <div class="newest-offers">
+
+            <!-- Injecting the jobs -->
+            {% for job in discovered_list %}
+            <div class="offer-item shadow" style="background-image: url('{{ job.company.image }}');background-size:cover;"
+            onmouseover="item_hover(`{{ forloop.counter|add:'-1' }}`)" onmouseout="item_release(`{{ forloop.counter|add:'-1' }}`)">
+                <a href="{% url 'jobs' %}?url={{job.url}}" class="offer-item-rev" style="cursor: pointer;color:white;">
+                    <div class="heart-img" title="Save Job"></div>
+                    <div style="line-height: 250%;">
+                        {{ job.title }}<br>
+                        Open positions: 0<br>
+                        Salary: 1000<br>
+                        <span class="star-rating">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                    </div>
+                </a>
+
+            </div>
+            {% endfor %}
+
+            {% if discovered_list|length > 10 %}
+            <a class="more-jobs uni-button">{% translate "More Jobs"%}</a>
+            {% endif %}
+
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- FAQ - NOT USED YET
+    <div id="faq" class="gui-element hidden">
+        <h1 style="text-align: center;">Frequently Asked Questions (FAQ)</h1>
+        <div class="curr collapsible">
+            <h3 class="coll-title" onclick="coll_function2(0)"><div>Question about UniLab? #1</div><span class="coll-symbol2">+</span></h3>
+            <p class="coll-first-tier2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
+
+            <h3 class="coll-title" onclick="coll_function2(1)"><div>Question about UniLab? #2</div><span class="coll-symbol2">+</span></h3>
+            <p class="coll-first-tier2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
+
+            <h3 class="coll-title" onclick="coll_function2(2)"><div>Question about UniLab? #3</div><span class="coll-symbol2">+</span></h3>
+            <p class="coll-first-tier2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
+
+            <h3 class="coll-title" onclick="coll_function2(3)"><div>Question about UniLab? #4</div><span class="coll-symbol2">+</span></h3>
+            <p class="coll-first-tier2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
+
+            <h3 class="coll-title" onclick="coll_function2(4)"><div>Question about UniLab? #5</div><span class="coll-symbol2">+</span></h3>
+            <p class="coll-first-tier2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+
+
+            <h3 class="coll-title" onclick="coll_function2(5)"><div>Question about UniLab? #6</div><span class="coll-symbol2">+</span></h3>
+            <p class="coll-first-tier2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </div>
+    </div> -->
+
+    
+</main>
+
+{% endblock main_content %}
+
+
+{% block body_js %}
+
+<script language="javascript" type="text/javascript" src="{% static 'js/index.js' %}"></script>
+<script language="javascript" type="text/javascript" src="{% static 'js/companies.js' %}"></script>
+<script>
+    document.querySelector('body').onload = setTimeout(function(){reveal_explore()}, 1000);
+    if (width > 1290) {window.onscroll = function(){scrollFunction2()};}
+    document.querySelector('#home-button').classList.add('active-item');
+</script>
+
+{% endblock body_js %}

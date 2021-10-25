@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block meta_and_title %}
+
+<title>Companies - UniLab</title>
+<meta name="description" content="" />
+
+{% endblock meta_and_title %}
+
+
+{% block head_css %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+
+{% endblock head_css %}
+
+
+{% block smoke_screens2 %}
+
+
+
+{% endblock smoke_screens2 %}
+
+
+{% block main_content %}
+
+<main class="main-home flex-col j-c-c a-i-c">
+
+</main>
+
+{% endblock main_content %}
+
+
+{% block body_js %}
+
+<script>
+    document.querySelector('#about-button').classList.add('active-item');
+</script>
+
+{% endblock body_js %}

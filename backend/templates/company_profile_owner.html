@@ -1,0 +1,485 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load custom_filters %}
+
+{% block meta_and_title %}
+
+<title>User - UniLab</title>
+<meta name="description" content=""/>
+
+{% endblock meta_and_title %}
+
+
+{% block head_css %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+<link rel="stylesheet" href="{% static 'css/companies.css' %}" />
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'css/company_profile.css' %}" />
+
+{% endblock head_css %}
+
+{% block smoke_screens2 %}
+
+<div class="smoke-screen-info sm-screen j-c-c a-i-c">
+
+    <!-- BASIC INFO FORM | NOT DISPLAYED -->
+    <form method="POST" id="info-form" class="post-field gui-element hidden" enctype="multipart/form-data"
+    onsubmit="return validate_form('.basic-form-name')">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="basic_info"/>
+        <button class="post-close-button close-button" onclick="close_info('#info-form', '.smoke-screen-info')" type="button"></button>
+        <h1 class="normal">{% translate "Edit your information"%}</h1>
+
+        <input class="basic-form-name shadow" name="name" type="text" placeholder="{% translate 'Name'%}" value="{{ company.name }}" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+
+        <div class="double-input-wrap flex-row j-c-s-b a-i-c" style="width:100%;">
+            <input class="basic-form-vid shadow" name="video" type="text" value="{{ company.video_url }}" placeholder="{% translate 'Video'%}" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+            <input class="basic-form-web shadow" name="website" type="text" value="{{ company.website_url }}" placeholder="{% translate 'Website'%}" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+        </div>
+
+        <textarea class="basic-form-desc post-emoji-textfield text-area shadow input" name='description' rows="4" placeholder="{% translate 'Description'%}"
+        onfocus="focusin_gray(this)" onfocusout="focusout(this)" style="resize: none;">{{ company.description }}</textarea>
+
+        <label for="image" class="w100">
+            Profile Picture
+        </label>
+        <input class="basic-form-file shadow" name="image" type="file" onfocus="focusin_image(this)" />
+
+        <div class="flex-row a-i-c j-c-s-b" style="width: 100%; margin:3% 0;">
+            <button class="uni-button" style="width: 40%;" type="button" onclick="close_info('#info-form', '.smoke-screen-info')">{% translate "Cancel" %}</button>
+            <button class="uni-button" style="width: 40%;" type="submit" name="submit">{% translate "Post" %}</button>
+        </div>
+    </form>
+
+</div>
+
+<div class="smoke-screen-edu sm-screen j-c-c a-i-c">
+
+    <!-- PICTURES FORM | NOT DISPLAYED -->
+    <form method="POST" id="edu-form" class="post-field gui-element hidden" enctype="multipart/form-data" style="height: unset;"
+    onsubmit="return validate_form('.pic-form-image', '.pic-form-desc', '.pic-form-location')">
+        {% csrf_token %}
+        <button class="post-close-button close-button" onclick="close_info('#edu-form', '.smoke-screen-edu')" type="button"></button>
+        <h1 class="normal">{% translate "Add Picture"%}</h1>
+        <input type="hidden" name="form_type" value="picture" />
+
+        <input class="pic-form-image" type="file" name='image' class="shadow flex-row a-i-c j-c-c" style="padding: 5%;" onfocus="focusin_image(this)" />
+        <input class="pic-form-desc" type="text" name='description'  placeholder="Description" class="shadow flex-row a-i-c j-c-c" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+        <input class="pic-form-location" type="text" name='location' placeholder="Location " class="shadow flex-row a-i-c j-c-c" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+
+        <div class="flex-row a-i-c j-c-s-b" style="width: 100%; margin:3% 0;">
+            <button class="uni-button" style="width: 40%;" type="button" onclick="close_info('#edu-form', '.smoke-screen-edu')">{% translate "Cancel" %}</button>
+            <button class="uni-button" style="width: 40%;" type="submit" name="submit">{% translate "Post" %}</button>
+        </div>
+    </form>
+
+</div>
+
+<div class="smoke-screen-xp sm-screen j-c-c a-i-c">
+
+    <!-- JOB POSTINGS FORM | NOT DISPLAYED -->
+    <form method="post" id="xp-form" class="post-field gui-element hidden"
+    onsubmit="return validate_form('.job-form-title', '.required-textfield', '.job-form-city', '.job-form-country', '.job-form-hours', '.job-form-salary')"
+    style="height:100%;overflow-y:scroll;border-radius:0;">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="job_posting" />
+        <button class="post-close-button close-button" onclick="close_info('#xp-form', '.smoke-screen-xp')" type="button"></button>
+        <h1 class="normal">{% translate "Add Job"%}</h1>
+
+        <input class="job-form-title" type="text" name="title" id="ex_title" placeholder="{% translate "Job Title" %}" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+
+        <div class="double-input-wrap">
+            <select class="video-url" type="number" name="category"
+            style="margin: 3% 0; padding: 2%;background-color:var(--unilab-gray);">
+                {% for choice in category_choices %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                {% endfor %}
+            </select>
+            <select class="video-url" type="number" name="type"
+            style="margin: 3% 0; padding: 2%;background-color:var(--unilab-gray);">
+                {% for choice in type_choices %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <textarea class="required-textfield shadow" name="requirements" id="ex_desc" rows="10"
+        placeholder="{% translate "Requirements" %}" onfocus="focusin_gray(this)" onfocusout="focusout(this)"></textarea>
+
+        <textarea class="job-form-desc shadow" name="we_offer" id="ex_desc" rows="10"
+        placeholder="{% translate "What we offer (Optional)" %}" onfocus="focusin_gray(this)" onfocusout="focusout(this)"></textarea>
+
+        <textarea class="job-form-desc shadow" name="you_do" id="ex_desc" rows="10"
+        placeholder="{% translate "What you will be doing (Optional)" %}" onfocus="focusin_gray(this)" onfocusout="focusout(this)"></textarea>
+
+        <textarea class="job-form-desc shadow" name="employment_details" id="ex_desc" rows="10"
+        placeholder="{% translate "Employment Details (Optional)" %}" onfocus="focusin_gray(this)" onfocusout="focusout(this)"></textarea>
+        
+        <div class="double-input-wrap">
+            <input class="job-form-city" type="text" name="city" id="ex_city" placeholder="{% translate "City" %}" onfocus="focusin_gray(this)" onfocusout="focusout(this)"/>
+            <input class="job-form-country" type="text" name="country" id="ex_country" placeholder="{% translate "Country" %}" onfocus="focusin_gray(this)" onfocusout="focusout(this)"/>
+        </div>
+        
+        <div class="double-input-wrap">
+            <input class="job-form-hours" type="number" name="hours_per_week" id="ex_hpw" placeholder="{% translate "Hours per week" %}" onfocus="focusin_gray(this)" onfocusout="focusout(this)"/>
+            <input class="job-form-salary" type="number" name="salary_per_month" id="ex_spm" placeholder="{% translate "Salary per month" %}" onfocus="focusin_gray(this)" onfocusout="focusout(this)"/>
+        </div>
+
+        <div class="flex-row a-i-c j-c-s-b" style="width: 100%; margin:3% 0;">
+            <button class="uni-button" style="width: 40%;" type="button" onclick="close_info('#xp-form', '.smoke-screen-xp')">{% translate "Cancel" %}</button>
+            <button class="uni-button" style="width: 40%;" type="submit" name="submit">{% translate "Post" %}</button>
+        </div>
+    </form>
+
+</div>
+
+<div class="smoke-screen-skill sm-screen j-c-c a-i-c">
+    <div class="frame-container" style="height: 80vh;">
+        <img class="frame-img hidden" src="" height="100%" style="border-radius: 10px;background-color:var(--unilab-white);">
+    </div>
+</div>
+
+<div class="applications-sm-screen sm-screen j-c-c a-i-c">
+
+    <div class="company-wrapper shadow">
+
+        <h2 class="normal flex-row a-i-c" style="margin-left: 2%;">
+            {% translate "List of applicants"%}
+            <button class="close-button" onclick="close_applicants()" type="button"></button>
+        </h2>
+
+        <div class="offer-previous" onclick="offers_action('prev')"></div>
+        <div class="offer-next" onclick="offers_action('next')"></div>
+        
+        <div class="newest-offers a-i-c" style="padding:0 5rem;">
+
+            <!-- Injecting the jobs -->
+            {% for job in discovered_list %}
+            <div class="offer-item shadow" style="background-image: url('{{ job.company.image }}');background-size:cover;" 
+            onmouseover="item_hover(`{{ forloop.counter|add:'-1' }}`)" onmouseout="item_release(`{{ forloop.counter|add:'-1' }}`)">
+                <a href="{% url 'jobs' %}?url={{job.url}}" class="offer-item-rev" style="cursor: pointer;color:white;">
+                    <div class="heart-img" title="{% translate "Save Job" %}"></div>
+                    <div style="line-height: 250%;">
+                        {{ job.title }}<br>
+                        {% translate "Open positions" %}: 0<br>
+                        {% translate "Monthly Salary" %}: 1000<br>
+                        <span class="star-rating">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                    </div>
+                </a>
+
+            </div>
+            {% endfor %}
+
+            {% if discovered_list|length > 10 %}
+            <a class="more-jobs uni-button">{% translate "More Jobs"%}</a>
+            {% endif %}
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock smoke_screens2 %}
+
+{% block main_content %}
+
+    <main class="main-home">
+        <div class="main-content">
+
+            <!-- BASIC INFO SECTION -->
+            <div class="profile-header gui-element section active-section">
+                <div class="profile-banner">
+                    <img class="pfp" src="{{ company.image }}" />
+                </div>
+            
+                <div class="profile-basic-info">
+                    <img id="info-opener" class="edit-image" src="{% static 'img/profile/pencil.png' %}" alt="" onclick="edit_info('#info-form', '.smoke-screen-info')">
+
+                    <h2 class="w90">
+                        {{ company.name }}
+                    </h2>
+
+                    <span class="noselect" style="font-size: 1.5em;color:var(--unilab-orange);">
+                        {% if company.rating is None %}
+                        &#9734; &#9734; &#9734; &#9734; &#9734;
+                        {% else %}
+                            {% for i in company.rating %}
+                            &#9734;
+                            {% endfor %}
+                        {% endif %}
+                    </span>
+
+                    <p style="color:rgb(97, 97, 97);">
+                        {{ company.employee_range_verbose }}
+                        &#183;
+                        {{ company.industry_verbose }}
+                    </p>
+
+                    <p style="color:rgb(97, 97, 97);">
+
+                        {% if company.video_url %}
+                            <a class="basic-info-website" style="color:blue;" href="{{ company.video_url|append_http }}">{% translate "Video" %}</a>
+                        {% endif %}
+                        &#183;
+                        {% if company.website_url %}
+                            <a class="basic-info-website" style="color:blue;" href="{{ company.website_url|append_http }}">{% translate "Website" %}</a>
+                        {% endif %}
+
+                    </p>
+
+                    <div class="bio">
+                        <h3>{% translate "Description" %}</h3>
+                        {% if company.description|length == 0 %}
+                            <h3 class="normal">{% translate "Your company has no description yet" %}</h3>
+                        {% else %}
+                            <p style="line-height: 1.5em;">
+                                {{ company.description }}
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- PICTURES SECTION -->
+            <div class="profile-content gui-element section">
+                <div class="flex-row j-c-s-b a-i-c w95">
+                    <h1 class="normal">{% translate "Pictures" %}</h1>
+                    <button id="edu-opener" class="plus-button" onclick="edit_info('#edu-form', '.smoke-screen-edu')"></button>
+                </div>
+                {% if pictures|length == 0 %}
+                    <h3 class="normal">{% translate "Your company has no pictures yet" %}</h3>
+                {% else %}
+                <div class="w100" style="display: inline-block;text-align:center;overflow:hidden;">
+                    {% for picture in pictures %}
+                    <img class="shadow" src="{{ picture.image }}" height="250"
+                    style="object-fit:contain;margin:1rem;border-radius:10px;cursor:pointer;"
+                    onclick="display_in_frame(this)">
+                    <!-- <h5>{{ picture.description }}</h5>
+                    <h5>{{ picture.location }}</h5>
+                    <button class="uni-button" onclick="object_delete('{{ picture.url }}')">Delete Image</button> -->
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- JOB POSTINGS SECTION -->
+            <div class="profile-content gui-element section">
+                <div class="flex-row j-c-s-b a-i-c w95">
+                    <h1 class="normal">{% translate 'Job Postings' %}</h1>
+                    <button id="xp-opener" class="plus-button" onclick="edit_info('#xp-form', '.smoke-screen-xp')"></button>
+                </div>
+                {% if jobs|length == 0 %}
+                    <h3 class="normal">{% translate "Your company has no job postings yet" %}</h3>
+
+                {% else %}
+                    {% for job in jobs %}
+                    <div class="company-block-no-hover flex-row j-c-s-b a-i-c w100">
+                        <div class="flex-row a-i-c">
+                            <img class="shadow" src="{{ company.image }}" alt="" height="75" width="75" 
+                            style="margin-right: 2rem;border-radius:10px;object-fit:cover;">
+                            <div>
+                                <h2 class="normal" style="margin: 0;">{{ job.title }}</h2>
+                                <div>{{ job.city }} &#183; {{ job.country }}</div>
+                            </div>
+                        </div>
+
+                        <button class="triple-dot-btn shadow" type="button" onclick="open_job_options()">
+                            <div class="dot"></div>
+                            <div class="dot-menu-down shadow">
+                                <div class="down-triangle"></div>
+                                <a class="dot-menu-item" href="{% url 'jobs' %}?url={{ job.url }}" style="color: black;">{% translate "See job" %}</a>
+                                <div class="dot-menu-item" onclick="object_delete('{{ job.url }}')">{% translate "Delete job" %}</div>
+                                <div class="dot-menu-item"
+                                {% if job.applicants|length != 0 %}
+                                onclick="get_applicants('{{ job.url }}', 1)"
+                                {% endif %}>
+                                    {{job.applicants|length}} {% translate "Applicants" %}
+                                </div>
+                            </div>
+                        </button>
+
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <!-- EMPLOYEE SECTION -->
+            <div class="profile-content gui-element section">
+                <div class="flex-row j-c-s-b a-i-c w95">
+                    <h1 class="normal">{% translate 'Employees' %}</h1>
+                    <button id="skill-opener" class="plus-button" onclick="edit_info('#skill-form', '.smoke-screen-skill')"></button>
+                </div>
+                {% if employees|length == 0 %}
+                    <h3 class="normal">{% translate "Your company has no registered employees yet" %}</h3>
+                {% else %}
+                    <h3>WIP</h3>
+                {% endif %}
+
+            </div>
+
+            <!-- POSTS SECTION -->
+            <div class="profile-content gui-element section">
+                <div class="flex-row j-c-s-b a-i-c w95">
+                    <h1 class="normal">{% translate "Posts" %}</h1>
+                </div>
+                {% if posts|length == 0 %}
+                    <h3 class="normal">{% translate "Your company has no posts yet" %}</h3>
+                {% else %}
+                    {% for post in posts %}
+                        <div class="education-item shadow" id="http://127.0.0.1:8000/api/posts/8/"
+                                style="padding:1% 3%; background-color: var(--unilab-white);border-radius: 10px; margin-bottom: 2%; justify-content: space-between;">
+
+                            <img class="education-image"
+                                    {% if post.image %}
+                                        src="{{ post.image }}"
+                                        style="height: 100px; width: 100px;object-fit:cover;"
+                                    {% else %}
+                                        style="height: 100px; width: 100px;opacity:0; display:none;"
+                                    {% endif %}/>
+
+                            <div class="education-text" style="display: inline;">
+                                <p style="height:100px;overflow:hidden;display:inline;">
+                                    {{ post.content|make_list|slice:':250'|join:'' }}
+                                </p>
+                            </div>
+
+                            <button class="uni-button-2" onclick="post_redirect('{{ post.url }}')">{% translate "See post" %}</button>
+                            <button class="uni-button-2" onclick="object_delete('{{ post.url }}')">{% translate "Delete post" %}</button>
+
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <!-- COMMENTS SECTION -->
+            <div class="profile-content gui-element section">
+                <div class="flex-row j-c-s-b a-i-c w95">
+                    <h1 class="normal">{% translate "Comments" %}</h1>
+                </div>
+                {% if comments|length == 0 %}
+                    <h3 class="normal">{% translate "Your company has not commented on anything yet" %}</h3>
+                {% else %}
+                    {% for comment in comments %}
+                        <div class="education-item shadow"
+                                style="padding:1% 3%; background-color: var(--unilab-white);border-radius: 10px; margin-bottom: 2%; justify-content: space-between;">
+
+                            <div class="education-text" style="display: inline;">
+                                <p style="height:100px;overflow:hidden;display:inline;">
+                                    {{ comment.content|make_list|slice:':250'|join:'' }}
+                                </p>
+                            </div>
+
+                            <button class="uni-button-2" onclick="post_redirect('{{ comment.post }}')">{% translate "See comment" %}</button>
+                            <button class="uni-button-2" onclick="object_delete('{{ comment.url }}')">{% translate "Delete comment" %}</button>
+
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+        </div>
+
+        <!-- SIDE MENU -->
+        <div class="main-menu noselect">
+            <div class="menu-item" onclick="change_section(0)">
+                <div class="item-text">{% translate "Basic Information" %}</div>
+                <div class="item-rect active-rect"></div>
+            </div>
+            <div class="menu-item" onclick="change_section(1)">
+                <div class="item-text">{% translate "Pictures" %}</div>
+                <div class="item-rect"></div>
+            </div>
+            <div class="menu-item" onclick="change_section(2)">
+                <div class="item-text">{% translate "Job Postings" %}</div>
+                <div class="item-rect"></div>
+            </div>
+            <div class="menu-item" onclick="change_section(3)">
+                <div class="item-text">{% translate "Employees" %}</div>
+                <div class="item-rect"></div>
+            </div>
+            <div class="menu-item" onclick="change_section(4)">
+                <div class="item-text">{% translate "Posts" %}</div>
+                <div class="item-rect"></div>
+            </div>
+            <div class="menu-item" onclick="change_section(5)">
+                <div class="item-text">{% translate "Comments" %}</div>
+                <div class="item-rect"></div>
+            </div>
+        </div>
+
+
+    </main>
+
+{% endblock main_content %}
+
+
+{% block footer %}<div class="hidden"></div>{% endblock footer %}
+
+
+{% block body_js %}
+
+    <script language="javascript" type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static 'js/profile.js' %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static 'js/company_profile.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js" integrity="sha256-0H3Nuz3aug3afVbUlsu12Puxva3CP4EhJtPExqs54Vg=" crossorigin="anonymous"></script>
+    <script>
+        function object_delete(url) {
+            fetch(window.location.origin+"/en/fetch/delete_objects", {
+                method: 'DELETE',
+                credentials: "same-origin",
+                headers: {
+                    "X-CSRFToken": Cookies.get('csrftoken')
+                },
+                body: JSON.stringify({
+                    url: url,
+                })
+            }).then(function (response) {
+                // The API call was successful!
+                console.log(response)
+                location.reload()
+            })
+        }
+        const applications_screen = document.querySelector('.applications-sm-screen');
+        const applications_wrapper = document.querySelector('.company-wrapper');
+        const applications_header = document.querySelector('.newest-offers');
+        function get_applicants(job_url, page) {
+            fetch(window.location.origin + '/en/fetch/get_job_applications?job=' + job_url + '&page=' + page)
+            .then(response => response.json())
+            .then(data => {
+                // console.log(data)
+                applications_header.innerHTML = "";
+                
+                data.forEach(function(application, index){
+
+                    // add them like this?
+                    applications_header.innerHTML += `
+                    <div class="single-applicant flex-col j-c-c a-i-c shadow">
+                        <a href="{% url 'students' %}?url=${application['user']['url']}" target="_blank">
+                            <img src="${application['user']['image']}" height="75" width="75"/>
+                        </a>
+                        <a href="{% url 'students' %}?url=${application['user']['url']}" target="_blank">
+                            <h5>${application['user']['first_name']} ${application['user']['last_name']}</h5>
+                        </a>
+                        <p class="flex-col j-c-c a-i-c" style="line-height:250%;">
+                            <a href="${application['cv']}" target="_blank">Curriculum Vitae (CV)</a>
+                            <a href="${application['motivation_letter']}" target="_blank">Motivation Letter</a>
+                        </p>
+                        
+                    </div>
+                    `;
+                })
+                applications_screen.style.display = "flex";
+            })
+        }
+
+        function post_redirect(url){
+            Cookies.set('current_company', "{{ company.url }}")
+            window.location.href = `{% url 'single-post'%}?url=${url}`
+        }
+
+    </script>
+
+{% endblock body_js %}

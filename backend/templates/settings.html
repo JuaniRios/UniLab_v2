@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block meta_and_title %}
+
+<title>Account Settings - UniLab</title>
+<meta name="description" content="" />
+
+{% endblock meta_and_title %}
+
+
+{% block head_css %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'css/settings.css' %}" />
+
+{% endblock head_css %}
+
+
+{% block head_js %}
+
+<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+
+{% endblock head_js %}
+
+
+{% block main_content %}
+
+<main class="main-home">
+    
+    <div class="settings-menu gui-element">
+        
+        <div style="display: flex; flex-direction: column; width: 20%; align-items:flex-start; height:60vh;">
+
+            <div onclick="display_form(0)" class="settings-menu-item active-settings noselect" style="display: flex;align-items:center;margin: 10% 0;">
+                <img src="{% static 'img/account.png' %}" height="30px" width="30px" style="margin: 0 10%;" />
+                <span>{% translate "Account" %}</span>
+            </div>
+            
+            <div onclick="display_form(1)" class="settings-menu-item noselect" style="display: flex;align-items:center;margin: 10% 0;">
+                <img src="{% static 'img/password.png' %}" height="30px" width="30px" style="margin: 0 10%;" />
+                <span>{% translate "Password" %}</span>
+            </div>
+
+            <!-- <div onclick="display_form(2)" class="settings-menu-item noselect" style="display: flex;align-items:center;margin: 10% 0;">
+                <img src="{% static 'img/n2.png' %}" height="30px" width="30px" style="margin: 0 10%;" />
+                <span>Notifications</span>
+            </div> -->
+
+        </div>
+        
+        <div style="border-radius: 10px;height:100vh;width:1px;background:lightgray;"></div>
+        
+
+        
+        <form class="flex-col settings-form" method="POST" enctype="multipart/form-data" onsubmit="return validate_form('.email', '.fname', '.lname')"
+              style="width: 80%; padding: 0 5%;">{% csrf_token %}
+            <h2 style="margin: 2%;">{% translate "General Info" %}</h2>
+            <div class="flex-row a-i-c" style="margin: 6% 0;">
+                <img id="avatar" style="margin: 0 2%;" src="{{ user.image }}" height="150px" width="150px" />
+                <div class="flex-col j-c-c" style="margin: 0 2%;">
+                    <h3 style="padding: 4%;">{% translate "Change Avatar" %}</h3>
+                    <input class="noshadow" type="file" name='image' accept=".png,.jpg,.webp" onchange="readURL(this);" style="width: 74%;
+                    padding: 2%; margin: 2%;" />
+                </div>
+                
+            </div>
+            <div class="flex-row">
+                <input type="hidden" name="form_type" value="account"/>
+                <input class="fname shadow" name="fname" type="text" value="{{ user.first_name }}"style="width: 35%;
+                padding: 2%; margin: 3% 2%;" onfocus="focus_in('.fname')" onfocusout="focus_out('.fname')" />
+                <input class="lname shadow" name="lname" type="text" value="{{ user.last_name }}"style="width: 35%; padding:
+                 2%; margin: 3% 2%;" onfocus="focus_in('.lname')" onfocusout="focus_out('.lname')" />
+            </div>
+            <input class="email shadow" name="email" type="email" value="{{ user.email }}"style="width: 74%; padding:
+            2%; margin: 3% 2%;" onfocus="focus_in('.email')" onfocusout="focus_out('.email')" />
+            
+            <button type="submit" class="uni-button" style="width: 20%; margin: 3% 2%;">{% translate 'Save' %}</button>
+        </form>
+
+        <form class="flex-col settings-form" method="POST" onsubmit="return validate_form('.old-pass', '.new-pass', '.new-pass-2')" style="width: 80%; padding: 0 5%;display:none;">{% csrf_token %}
+            <h2 style="margin: 2%;">{% translate 'Change Password' %}</h2>
+
+            <input type="hidden" name="form_type" value="password"/>
+            <input class="old-pass shadow" name="old_password" type="password" placeholder="{% translate 'Old Password' %}" style="width: 74%; padding: 2%; margin: 3% 2%;" onfocus="focus_in('.old-pass')" onfocusout="focus_out('.old-pass')" />
+            <input class="new-pass shadow" name="new_password" type="password" placeholder="{% translate 'New Password' %}" style="width: 74%; padding: 2%; margin: 3% 2%;" onfocus="focus_in('.new-pass')" onfocusout="focus_out('.new-pass')" />
+            <input class="new-pass-2 shadow" type="password" placeholder="{% translate 'Confirm New Password' %}" style="width: 74%; padding: 2%; margin: 3% 2%;" onfocus="focus_in('.new-pass-2')" onfocusout="focus_out('.new-pass-2')" />
+            
+            <button type="submit" class="uni-button" style="width: 20%; margin: 2%;">{% translate 'Confirm' %}</button>
+        </form>
+
+        <!-- <form class="flex-col settings-form" action="" onsubmit="validate_form_3()" style="width: 80%; padding: 0 5%;display:none;">{% csrf_token %}
+            <h2 style="margin: 2%;">Notifications Settings</h2>
+            <div class="flex-row a-i-c">
+                <label class="switch" style="margin: 5% 2%;">
+                    <input type="checkbox" checked />
+                    <span class="slider round"></span>
+                </label>
+                <h3>Push Notifications</h3>
+            </div>
+            <div class="flex-row a-i-c">
+                <label class="switch" style="margin: 5% 2%;">
+                    <input type="checkbox" checked />
+                    <span class="slider round"></span>
+                </label>
+                <h3>Email Notifications</h3>
+            </div>
+            <div class="flex-row a-i-c">
+                <label class="switch" style="margin: 5% 2%;">
+                    <input type="checkbox" checked />
+                    <span class="slider round"></span>
+                </label>
+                <h3>SMS Notifications</h3>
+            </div>
+            <button type="submit" class="uni-button" style="width: 20%; margin: 2%;">Save</button>
+        </form> -->
+
+    </div>
+
+</main>
+
+{% endblock main_content %}
+
+
+{% block footer %}<div class="hidden"></div>{% endblock footer %}
+
+
+{% block body_js %}
+
+<script language="javascript" type="text/javascript" src="{% static 'js/profile.js' %}"></script>
+<script language="javascript" type="text/javascript" src="{% static 'js/account.js' %}"></script>
+<script>
+    if (width > 1290) {window.onscroll = function(){scrollFunction2()};}
+</script>
+
+{% endblock body_js %}

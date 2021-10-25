@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block meta_and_title %}
+<title>Comapny sign up - UniLab</title>
+<meta name="description" content="">
+{% endblock meta_and_title %}
+
+
+{% block head_css %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'css/sign.css' %}" />
+
+{% endblock head_css %}
+
+
+{% block main_content %}
+
+<main class="main-home">
+    <form method="POST" class="gui-element" style="width: 30%;margin: 3% auto;" onsubmit="return validate_form_2()">{% csrf_token %}
+        <h1>{% translate 'Sign up as a company' %}</h1>
+
+        <div id="main-error-message" class="error-message">⚠</div>
+
+        <input class="fname" name="fname" type="text" placeholder="First Name" onfocus="focus_in('.fname')" onfocusout="focus_out('.fname', '.fname-error'), name_check('.fname', '.fname-error')" />
+        <div class="fname-error error-message">⚠ {% translate 'Missing field.' %}</div>
+
+        <input class="lname" name="lname" type="text" placeholder="Last Name" onfocus="focus_in('.lname')" onfocusout="focus_out('.lname', '.lname-error'), name_check('.lname', '.lname-error')" />
+        <div class="lname-error error-message">⚠ {% translate 'Missing field.' %}</div>
+
+        <input class="email" name="email" type="email" placeholder="Email Address" onfocus="focus_in('.email')" onfocusout="focus_out('.email', '.email-error')" />
+        <div class="email-error error-message">⚠ {% translate 'Missing field.' %}</div>
+
+        <input class="password" name="password" type="password" placeholder="Password" onfocus="focus_in('.password')" onfocusout="focus_out('.password', '.password-error')" />
+        <div class="password-error error-message">⚠ {% translate 'Missing field.' %}</div>
+
+        <input class="password2" name="password2" type="password" placeholder="Confirm Password" onfocus="focus_in('.password2')" onfocusout="focus_out('.password2', '.password2-error')" />
+        <div class="password2-error error-message">⚠ {% translate 'Missing field.' %}</div>
+
+        <img src="{% static 'img/sample1.png' %}" width="100%" height="75px" style="border-radius:10px;margin-top:5%;" />
+
+        <div style="margin-top:10%; padding: 0 5%;">
+            {% translate 'By clicking Sign up, you agree to the UniLab ' %}
+            <a style="color: rgb(230, 135, 41);" href="">{% translate 'User Agreement' %}</a>, 
+            <a style="color: rgb(230, 135, 41);" href="">{% translate 'Privacy Policy' %}</a>, 
+            and <a style="color: rgb(230, 135, 41);" href="">{% translate 'Cookie Policy' %}</a>.
+        </div>
+
+        <div class="signin-buttons" style="width: 100%; display:flex; justify-content: space-between; margin-top: 10%;">
+            <a class="create-acc" href="{% url 'signin' %}">Sign in instead</a>
+            <button style="width: 40%;" class="uni-button" type="submit">Sign up</button>
+        </div>
+
+    </form>
+</main>
+
+{% endblock main_content %}
+
+
+{% block footer %}<div class="hidden"></div>{% endblock footer %}
+
+
+{% block body_js %}
+
+<script language="javascript" type="text/javascript" src="{% static 'js/profile.js' %}"></script>
+<script language="javascript" type="text/javascript" src="{% static 'js/sign.js' %}"></script>
+{% if signup_error %}
+<script>
+    document.querySelector('#main-error-message').style.opacity = "1";
+    document.querySelector('#main-error-message').innerHTML = "⚠ Account with that email address already exists.";
+</script>
+{% endif %}
+{% if signup_error == 2 %}
+<script>
+    document.querySelector('#main-error-message').style.opacity = "1";
+    document.querySelector('#main-error-message').innerHTML = "⚠ An error has occurred, please try again!";
+</script>
+{% endif %}
+
+{% endblock body_js %}

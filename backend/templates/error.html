@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block meta_and_title %}
+
+<title>{Error Code} - UniLab</title>
+<meta name="description" content="" />
+
+{% endblock meta_and_title %}
+
+
+{% block head_css %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+<link rel="stylesheet" href="{% static 'css/companies.css' %}" />
+
+{% endblock head_css %}
+
+{% block main_content %}
+
+<main class="main-home flex-col j-c-c a-i-c">
+</main>
+
+{% endblock main_content %}
+
+{% block footer %}<div class="hidden"></div>{% endblock footer %}

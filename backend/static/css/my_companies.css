@@ -1,0 +1,17 @@
+.add-company
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    border-radius: 10px;
+    background-color: var(--unilab-white);
+    padding: 2%;
+}
+.add-company input, .add-company select
+{
+    margin: 3% 0;
+    padding: 2%;
+    background-color: var(--unilab-gray);
+    border-radius: 10px;
+}

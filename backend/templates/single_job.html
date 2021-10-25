@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load custom_filters %}
+
+<!-- META AND TITLE BLOCK -->
+{% block meta_and_title %}
+<title>{{ job.title | title }} - UniLab</title>
+<meta name="description" content=""/>
+{% endblock meta_and_title %}
+
+<!-- EXTERNAL CSS BLOCK -->
+{% block head_css %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/single_job.css' %}" />
+{% endblock head_css %}
+
+<!-- SMOKE SCREEN BLOCK -->
+{% block smoke_screens2 %}
+
+<div class="add-company-screen sm-screen j-c-c a-i-c">
+
+    <form class="add-company hidden j-c-c a-i-c" method="POST" enctype="multipart/form-data"
+    onsubmit="return validate_form('.', '.', '.', '.')">
+        {% csrf_token %}
+        <button class="close-button" onclick="open_add_company()" type="button"></button>
+        <h2>Apply for this job</h2>
+        <br>
+        <input type="hidden" name="job_url" value="{{ job.url }}">
+        
+        <div class="double-input-wrap">
+            <h4 class="w50" style="text-align: center;">Curriculum Vitae (CV)</h4>
+            <h4 class="w50" style="text-align: center;">Motivation Letter</h4>
+        </div>
+        <div class="double-input-wrap">
+            <input name="cv" id="cv" type="file">
+            <input name="motivation" id="motivation" type="file">
+        </div>
+        
+        <h4>
+            This company will also have access to your profile when you apply. We recommend that you finish putting your
+            profile up to date before applying.
+        </h4>
+        <div class="flex-row a-i-c j-c-s-b" style="width: 100%; margin:3% 0;">
+            <button class="uni-button" style="width: 40%;" type="button" onclick="open_add_company()">{% translate "Cancel" %}</button>
+            <button class="uni-button" style="width: 40%;" type="submit" name="submit">{% translate "Apply" %}</button>
+        </div>
+    </form>
+    
+</div>
+
+{% endblock smoke_screens2 %}
+
+<!-- MAIN CONTENT BLOCK -->
+{% block main_content %}
+<main class="flex-col j-c-c a-i-c">
+
+    <h3 class="w70"><a href="{% url 'jobs' %}" style="font-size: 1em;color:black;">&#8617; Return to jobs</a></h3>
+
+    <div class="job-panel gui-element w70 flex-col j-c-c a-i-f-s">
+        <div class="flex-row j-c-c a-i-f-s w100">
+
+            <div class="company-panel w40 flex-col j-c-c a-i-c">
+                <a href="{% url 'companies' %}?url={{ job.company.url }}">
+                    <img class="shadow" src="{{ job.company.image }}" alt="" height="75" style="border-radius: 10px;margin-bottom:1rem;">
+                </a>
+                    {#<p style="line-height: 250%;text-align:center;">#}
+                    {#<span>Company Short description</span><br>#}
+                    <span>{{ job.company.industry_verbose }}</span><br>
+                    <span>{{ job.company.employee_range_verbose }}</span>
+                </p>
+                <hr class="w100" style="color: lightgray;">
+                <h3 class="w100">About the company</h3>
+                <p class="w100" style="line-height: 175%;">{{ job.company.description }}</p>
+                <hr class="w100" style="color: lightgray;">
+                {#<h3 class="w100">What are employees saying about [Company_Name]?</h3>#}
+                {#<p style="line-height: 175%;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ipsa itaque, consectetur autem omnis earum numquam, nostrum, quis cumque sunt molestiae? Dolore eaque voluptate illum similique blanditiis dolor, praesentium dolores.</p>#}
+                {#<hr class="w100" style="color: lightgray;">#}
+                {#<h3 class="w100">UniLab's take on [Company_Name]</h3>#}
+                {#<p style="line-height: 175%;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut ipsa itaque, consectetur autem omnis earum numquam, nostrum, quis cumque sunt molestiae? Dolore eaque voluptate illum similique blanditiis dolor, praesentium dolores.</p>#}
+                {#<hr class="w100" style="color: lightgray;">#}
+                <p>{{ job.company.location }}</p>
+            </div>
+
+            <div class="job-info w60 flex-col j-c-c a-i-c">
+                <h2>{{ job.title|title }}</h2>
+                <div style="font-weight:bold;">{{ job.type_verbose }}</div>
+                <p>Published - {{ job.publish_date|time_since }}</p>
+                <p>Job Category: {{ job.category_verbose }}</p>
+                <hr class="w100" style="color: lightgray;">
+
+                <div class="flex-row j-c-s-e a-i-c w100">
+                    <div class="flex-col j-c-c a-i-c w50">
+                        <p style="color: gray;">LOCATION</p>
+                        <p>{{ job.city }}, {{ job.country }}</p>
+                    </div>
+                    <div class="flex-col j-c-c a-i-c w50">
+                        <p style="color: gray;">MONTHLY SALARY</p>
+                        <p>{{ job.salary_per_month }}</p>
+                    </div>
+                   
+                </div>
+                
+                {% if job.requirements|length > 0 %}
+                <hr class="w100" style="color: lightgray;">
+                <h3 class="w100">Requirements</h3>
+                <p class="w100">{{ job.requirements }}</p>
+                <hr class="w100" style="color: lightgray;">
+                {% endif %}
+
+                {% if job.we_offer|length > 0 %}
+                <h3 class="w100">What we offer</h3>
+                <p class="w100">{{ job.we_offer }}</p>
+                <hr class="w100" style="color: lightgray;">
+                {% endif %}
+
+                {% if job.you_do|length > 0 %}
+                <h3 class="w100">What you will do</h3>
+                <p class="w100">{{ job.you_do }}</p>
+                <hr class="w100" style="color: lightgray;">
+                {% endif %}
+
+                {% if job.employment_details|length > 0 %}
+                <h3 class="w100">Employment Details</h3>
+                <p class="w100">{{ job.employment_details }}</p>
+                <hr class="w100" style="color: lightgray;">
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+    {% if user.user_type_verbose == "Student" %}
+    <button class="apply-button uni-button noshadow" onclick="open_add_company()">Apply</button>
+    {% endif %}
+
+</main>
+{% endblock main_content %}
+
+<!-- FOOTER BLOCK -->
+{% block footer %}<div class="hidden"></div>{% endblock footer %}
+
+<!-- JAVASCRIPT BLOCK -->
+{% block body_js %}
+<script language="javascript" type="text/javascript" src="{% static 'js/my_companies.js' %}"></script>
+{% endblock body_js %}

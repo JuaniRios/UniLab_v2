@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load custom_filters %}
+
+{% block meta_and_title %}
+
+    <title>{{ student.name }} - UniLab</title>
+    <meta name="description" content=""/>
+
+{% endblock meta_and_title %}
+
+
+{% block head_css %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'css/collapsible.css' %}" />
+
+{% endblock head_css %}
+
+
+{% block main_content %}
+
+<main class="main-home">
+    <div class="main-content">
+        <!-- BASIC INFO SECTION -->
+        <div class="profile-header gui-element section active-section">
+            
+            <div class="profile-banner">
+                <img class="pfp" src="{{ student.image }}" />
+            </div>
+        
+            <div class="profile-basic-info">
+                <h2 class="w90">{{ student.first_name }} {{ student.last_name }}</h2>
+                <p style="font-size: 1.25em;">
+                    {% if student_data.occupation %}
+                    {{ student_data.occupation }}
+                    {% else %}
+                        <span style="font-size: 1em;">No Occupation</span>
+                    {% endif %}
+                </p>
+                <p style="color:rgb(97, 97, 97);">
+                    {% if student_data.location %}
+                        {{ student_data.location }} &#183;
+                    {% else %}
+                        No Location
+                    {% endif %}
+                    {% if student_data.website %}
+                        &#183;
+                        <a class="basic-info-website" style="color:blue;" href="{{ student_data.website|append_http }}">Website</a>
+                    {% endif %}
+                </p>
+                <div class="bio">
+                    <h3>About</h3>
+                    {% if student_data.biography|length == 0 %}
+                        <h3 class="normal">This student has no biography yet...</h3>
+                    {% else %}
+                        <p style="line-height: 1.5em;">
+                            {{ student_data.biography }}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- EDUCATION SECTION -->
+        <div class="profile-content gui-element section">
+            <div class="flex-row j-c-s-b a-i-c w95">
+                <h1 class="normal">Education</h1>
+            </div>
+            {% if education_data|length == 0 %}
+                <h3 class="normal">This student has no education yet...</h3>
+            {% else %}
+                {% for ed_item in education_data %}
+                    <div class="education-item">
+                        <img src="{{ ed_item.image }}" height="150" width="150" style="border-radius: 10px;">
+                        <div class="education-text">
+                            <h2>{{ ed_item.institution }}</h2>
+                            <h3>{{ ed_item.degree }}</h3>
+                            {% if ed_item.end_date is None %}
+                            <i>{{ ed_item.start_date }} - Present</i>
+                            {% else %}
+                            <i>{{ ed_item.start_date }} - {{ ed_item.end_date }}</i>
+                            {% endif %}
+                            <p>
+                                {{ ed_item.description }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- EXPERIENCE SECTION -->
+        <div class="profile-content gui-element section">
+            <div class="flex-row j-c-s-b a-i-c w95">
+                <h1 class="normal">{% translate "Experience" %}</h1>
+            </div>
+            {% if experience_data|length == 0 %}
+            <h3 class="normal">{% translate "This student has no experience yet" %}</h3>
+            {% else %}
+                {% for ex_item in experience_data %}
+                <div class="education-item">
+                    <img src="{{ ex_item.image }}" height="150" width="150" style="border-radius: 10px;">
+                    <div class="education-text">
+                        <h2>{{ ex_item.company }}</h2>
+                        <h3>{{ ex_item.title }}</h3>
+                        {% if ex_item.end_date is None %}
+                            <i>{{ ex_item.start_date }} {% translate "- Present" %}</i>
+                            {% else %}
+                            <i>{{ ex_item.start_date }} - {{ ex_item.end_date }}</i>
+                            {% endif %}
+                        <p>
+                            {{ ex_item.description }}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- SKILLS SECTION -->
+        <div class="profile-content gui-element section">
+            <div class="flex-row j-c-s-b a-i-c w95">
+                <h1 class="normal">{% translate "Skills" %}</h1>
+            </div>
+            {% if skill_data|length == 0 %}
+                <h3 class="normal">{% translate "This student has no skills yet" %}</h3>
+            {% else %}
+                {% for category, skills in skill_data.items %}
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 5%;">
+                        <ul style="line-height: 300%; width: 35%;">
+                            <h2>{{ category }}</h2>
+                            {% for skill in skills %}
+                                <li>{{ skill }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+
+        <!-- POSTS SECTION -->
+        <div class="profile-content gui-element section" id="posts_section">
+            <div class="flex-row j-c-s-b a-i-c w95">
+                <h1 class="normal">{% translate "Posts" %}</h1>
+            </div>
+            {% if posts|length == 0 %}
+                <h3 class="normal">{% translate "This student has no posts yet" %}</h3>
+            {% else %}
+                {% for post in posts %}
+            <div class="education-item shadow"
+                    style="padding:1% 3%; background-color: var(--unilab-white);border-radius: 10px; margin-bottom: 2%; justify-content: space-between;">
+
+                <img class="education-image"
+                        {% if post.image %}
+                            src="{{ post.image }}"
+                            style="height: 100px; width: 100px;object-fit:cover;"
+                        {% else %}
+                            style="height: 100px; width: 100px;opacity:0; display:none;"
+                        {% endif %}/>
+
+                <div class="education-text" style="display: inline;">
+                    <p style="height:100px;overflow:hidden;display:inline;">
+                        {{ post.content|make_list|slice:':250'|join:'' }}
+                    </p>
+                    <a href="{% url 'single-post'%}?url={{ post.url }}" style="color: var(--unilab-orange);">{% translate "See post" %}</a>
+                </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- COMMENTS SECTION -->
+        <div class="profile-content gui-element section">
+            <div class="flex-row j-c-s-b a-i-c w95">
+                <h1 class="normal">{% translate "Comments" %}</h1>
+            </div>
+            {% if comments|length == 0 %}
+                <h3 class="normal">{% translate "This student has not commented on anything yet" %}</h3>
+            {% else %}
+                {% for comment in comments %}
+                    <div class="education-item shadow"
+                            style="padding:1% 3%; background-color: var(--unilab-white);border-radius: 10px; margin-bottom: 2%; justify-content: space-between;">
+
+                        <div class="education-text" style="display: inline;">
+                            <p style="height:100px;overflow:hidden;display:inline;">
+                                {{ comment.content|make_list|slice:':250'|join:'' }}
+                            </p>
+                            <a href="{% url 'single-post'%}?url={{ comment.post }}" style="color: var(--unilab-orange);">{% translate "See comment" %}</a>
+                        </div>
+
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+
+    <!-- SIDE MENU -->
+    <div class="main-menu noselect">
+        <div class="menu-item" onclick="change_section(0)">
+            <div class="item-text">{% translate "Basic Information" %}</div>
+            <div class="item-rect active-rect"></div>
+        </div>
+        <div class="menu-item" onclick="change_section(1)">
+            <div class="item-text">{% translate "Education" %}</div>
+            <div class="item-rect"></div>
+        </div>
+        <div class="menu-item" onclick="change_section(2)">
+            <div class="item-text">{% translate "Experience" %}</div>
+            <div class="item-rect"></div>
+        </div>
+        <div class="menu-item" onclick="change_section(3)">
+            <div class="item-text">{% translate "Skills" %}</div>
+            <div class="item-rect"></div>
+        </div>
+        <div class="menu-item" onclick="change_section(4)">
+            <div class="item-text">{% translate "Posts" %}</div>
+            <div class="item-rect"></div>
+        </div>
+        <div class="menu-item" onclick="change_section(5)">
+            <div class="item-text">{% translate "Comments" %}</div>
+            <div class="item-rect"></div>
+        </div>
+    </div>
+
+
+</main>
+
+{% endblock main_content %}
+
+
+{% block footer %}<div class="hidden"></div>{% endblock footer %}
+
+
+{% block body_js %}
+
+    <script language="javascript" type="text/javascript" src="{% static 'js/profile.js' %}"></script>
+    <script>
+        if (width > 1290) {
+            window.onscroll = function () {
+                scrollFunction2()
+            };
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js" integrity="sha256-0H3Nuz3aug3afVbUlsu12Puxva3CP4EhJtPExqs54Vg=" crossorigin="anonymous"></script>
+    <script>
+        function object_delete(url) {
+            fetch("{{ request.build_absolute_uri }}", {
+                method: 'DELETE',
+                credentials: "same-origin",
+                headers: {
+                    "X-CSRFToken": Cookies.get('csrftoken')
+                },
+                body: JSON.stringify({
+                    url: url,
+                })
+            }).then(function (response) {
+                // The API call was successful!
+                console.log(response)
+                location.reload()
+            })
+        }
+
+    // for async calls    WIP
+    function get_user_posts(page){
+            fetch(`{% url 'get-posts' %}?email={{ student.email }}&page=${page}`
+
+                ).then(function(response){
+                    console.log(response)
+                    return response.json()
+
+                }).then(function(data){
+                    console.log(data)
+                    return data
+
+                })
+    }
+    // for async calls  WIP
+    function update_user_posts(page){
+            const posts = get_user_posts(page)
+
+
+
+    }
+
+
+    </script>
+
+{% endblock body_js %}

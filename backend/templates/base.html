@@ -1,0 +1,477 @@
+{% load static %}
+{% load i18n %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- META TAGS -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'img/unilab_icon.png' %}">
+
+    {% block meta_and_title %}{% endblock meta_and_title %}
+
+    {% block main_css %}
+
+    <link rel="stylesheet" href="{% static 'css/main_style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/top_nav.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/profile_menu.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/language_menu.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/chatbox.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/loader.css' %}" />
+
+    {% endblock main_css %}
+
+    {% block head_css %}{% endblock head_css %}
+    {% block head_js %}{% endblock head_js %}
+
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+        {% block smoke_screens %}
+        <!-- BLACKOUT ELEMENTS -->
+        <div class="smoke-screen sm-screen" onclick="hide_search()"></div>
+        <div class="smoke-screen-v2 sm-screen" onclick="open_profile()"></div>
+        <div class="smoke-screen-language sm-screen" onclick="open_lang()"></div>
+        <div class="system-message">
+            {% if messages %}
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}
+                style="list-style-type: none; padding:0; margin: 0;">
+                {{ message }}
+            </li>
+            {% endfor %}
+            {% endif %}
+        </div>
+        {% endblock smoke_screens %}
+
+        {% block smoke_screens2 %}{% endblock smoke_screens2 %}
+
+        {% block top_nav %}
+
+        <!-- TOP NAVIGATION BAR -->
+        <nav class="top-nav flex-row a-i-c shadow">
+
+            <!-- LOGO -->
+            <a href="{% url 'index' %}" id="logo-link" class="top-nav-item flex-row a-i-c">
+                <img id="logo-img" class="top-nav-image" src="{% static 'img/unilab_logo.png' %}" alt="UniLab Logo"
+                    title="Home">
+            </a>
+
+            <!-- MOBILE -->
+            <div class="menu-mobile" onclick="open_linebar()"></div>
+
+            <!-- MENU -->
+            <div class="top-nav-container">
+
+                <!-- HOME BUTTON -->
+                <a href="{% url 'index' %}" class="top-nav-item flex-row a-i-c" onmouseover="fill_items(0)"
+                    onmouseout="cancel_items(0)">
+                    <div class="top-nav-item-filler flex-row a-i-c"></div>
+                    <img class="top-nav-image" src="{% static 'img/top-nav/address2.png' %}" alt="Home Icon" />
+                    {# Translators: Start of Navigation bar #}
+                    <div id="home-button" class="top-nav-item-text">{% translate "Home" context "this is the navbar"%}
+                    </div>
+                </a>
+
+                <!-- COMMUNITY BUTTON -->
+                <a href="{% url 'community' %}" class="top-nav-item flex-row a-i-c" onmouseover="fill_items(1)"
+                    onmouseout="cancel_items(1)">
+                    <div class="top-nav-item-filler flex-row a-i-c"></div>
+                    <img class="top-nav-image" src="{% static 'img/top-nav/community.png' %}" alt="Community Icon" />
+                    <div id="community-button" class="top-nav-item-text">{% translate "Community"%}</div>
+                </a>
+
+                <!-- COMPANIES BUTTON -->
+                <a href="{% url 'companies' %}" class="top-nav-item flex-row a-i-c" onmouseover="fill_items(2)"
+                    onmouseout="cancel_items(2)">
+                    <div class="top-nav-item-filler flex-row a-i-c"></div>
+                    <img class="top-nav-image" src="{% static 'img/top-nav/employers.png' %}" alt="Companies Icon" />
+                    <div id="employers-button" class="top-nav-item-text">{% translate "Companies"%}</div>
+                </a>
+
+                <!-- JOBS BUTTON -->
+                <a href="{% url 'jobs' %}" class="top-nav-item flex-row a-i-c" onmouseover="fill_items(3)"
+                    onmouseout="cancel_items(3)">
+                    <div class="top-nav-item-filler flex-row a-i-c"></div>
+                    <img class="top-nav-image" src="{% static 'img/top-nav/jobs.svg' %}" alt="Jobs Icon" />
+                    <div id="jobs-button" class="top-nav-item-text">{% translate "Jobs"%}</div>
+                </a>
+
+                <!-- ABOUT BUTTON -->
+                <a href="{% url 'about' %}" class="top-nav-item flex-row a-i-c" onmouseover="fill_items(4)"
+                    onmouseout="cancel_items(4)">
+                    <div class="top-nav-item-filler flex-row a-i-c"></div>
+                    <img class="top-nav-image" src="{% static 'img/top-nav/about.png' %}" alt="About Icon" />
+                    <div id="about-button" class="top-nav-item-text">{% translate "About"%}</div>
+                </a>
+
+                <!-- PROFILE BUTTON -->
+                <a class="top-nav-item top-nav-profile flex-row a-i-c" onclick="open_profile()">
+                    {% if user is not None %}
+                    <img id="profile-img" class="top-nav-image" src="{{ user.image }}" alt="Profile Picture"
+                        title="Profile" />
+                    {% else %}
+                    <img id="profile-img" class="top-nav-image" src="{% static 'img/top-nav/profile.png' %}"
+                        alt="Profile Picture" title="Profile" />
+                    {% endif %}
+                    <div id="profile-text" class="top-nav-item-text">{% translate "Profile"%}</div>
+                </a>
+
+                <!-- SEARCH BUTTON -->
+                <a class="top-nav-item top-nav-search flex-row a-i-c" onclick="show_search()">
+                    <img id="search-img" class="top-nav-image" src="{% static 'img/top-nav/search.png' %}"
+                        alt="Magnifying Glass" title="Search" />
+                    <div id="search-text" class="top-nav-item-text">{% translate "Search"%}</div>
+                </a>
+
+                <!-- LANGUAGE BUTTON -->
+                <a class="top-nav-item flex-row a-i-c" onclick="open_lang()">
+                    <img id="lang-img" class="top-nav-image" alt="Locale Country Flag" title="Language" />
+                    {# Translators: End of navigation bar #}
+                    <div id="search-text" class="top-nav-item-text">{% translate "Language"%}</div>
+                </a>
+
+            </div>
+
+        </nav>
+
+
+        <!-- SEARCH SECTION -->
+        <form class="search-wrapper shadow flex-row a-i-c j-c-c" style="display: none;">
+
+            <img id="search-icon" src="{% static 'img/top-nav/search.png' %}" alt="Magnifying Glass" title="Search" />
+
+            <!-- Search Field -->
+            <input class="search-field noshadow" name="main-search" type="search" placeholder="Search UniLab..." />
+            <div class="search-cancel close-button" onclick="hide_search()"></div>
+
+        </form>
+
+
+        <!-- SIDE PROFILE MENU -->
+        {% if user is not None %}
+        <aside class="profile-menu shadow">
+
+            <button class="profile-close-button close-button" onclick="open_profile()"></button>
+            <a href="{% url 'profile' %}"><img id="profile-picture" src="{{ user.image }}" alt="Profile Picture" /></a>
+            <div style="font-size: 1.25em; text-align:center; width:80%;font-weight:bold;">{{ user.first_name }} {{
+                user.last_name }}</div>
+
+            <div>
+                {{ user.user_type_verbose }}
+            </div>
+
+            {% if user.user_type_verbose == 'Student' %}
+            <a href="{% url 'profile' %}" class="uni-button settings-button">
+                <div id="prof-picture"></div>
+                {# Translators: Start of side profile menu #}
+                <h3>{% translate "My Profile"%}</h3>
+            </a>
+            {% else %}
+            <a href="{% url 'my-companies' %}" class="uni-button settings-button">
+                <div id="prof-picture"></div>
+                {# Translators: Start of side profile menu #}
+                <h3>{% translate "My Companies"%}</h3>
+            </a>
+            {% endif %}
+
+
+            <a href="{% url 'settings' %}" class="uni-button settings-button">
+                <div id="settings-picture"></div>
+                <h3>{% translate "Account Settings"%}</h3>
+            </a>
+
+            <a href="{% url 'signout' %}" class="uni-button settings-button">
+                <div id="logout-picture"></div>
+                {# Translators: End of side profile menu #}
+                <h3 style="width: 80%;">{% translate "Sign Out"%}</h3>
+            </a>
+
+        </aside>
+        {% endif %}
+
+
+        <!-- SIDE LANGUAGE MENU -->
+        <aside class="language-menu shadow">
+
+            <button class="language-close-button close-button" onclick="open_lang()"></button>
+
+            <h2>{% translate "Select Language"%}</h2>
+
+            <a class="language-links" onclick="set_lang_cookie('en')" href="../en">
+                <img src="{% static 'img/languages/en.webp' %}" alt="English Flag" />
+                <p>{% translate "English"%}</p>
+            </a>
+
+            <a class="language-links" onclick="set_lang_cookie('de')" href="../de">
+                <img src="{% static 'img/languages/de.webp' %}" alt="German Flag" />
+                <p>{% translate "German"%}</p>
+            </a>
+
+            <a class="language-links" onclick="set_lang_cookie('fr')" href="../fr">
+                <img src="{% static 'img/languages/fr.webp' %}" alt="French Flag" />
+                <p>{% translate "French"%}</p>
+            </a>
+
+            <a class="language-links" onclick="set_lang_cookie('es')" href="../es">
+                <img src="{% static 'img/languages/es.webp' %}" alt="Spanish Flag" />
+                <p>{% translate "Spanish"%}</p>
+            </a>
+
+            <a class="language-links" onclick="set_lang_cookie('ru')" href="../ru">
+                <img src="{% static 'img/languages/ru.webp' %}" alt="Russian Flag" />
+                <p>{% translate "Russian"%}</p>
+            </a>
+
+        </aside>
+
+
+        <!-- FIXED CHAT BOX -->
+        <div class="chats-wrapper noselect hidden">
+
+            <h2 class="chats-header" onclick="open_chats(this)">Chats</h2>
+
+            <div class="chats gui-element">
+
+                <div class="chat-box flex-row a-i-c">
+                    <img style="margin: 0 5%;" src="{% static 'img/profile.png' %}" />
+                    <div class="flex-col">
+                        <h4 class="chat-name">Firstname Lastname</h4>
+                        <div>You: last message sent &#xb7; 2w</div>
+                    </div>
+                    <div class="chat-options shadow j-c-c a-i-c" onclick="open_chat_menu(this, 0)">
+                        &#xb7;&#xb7;&#xb7;
+                    </div>
+                    <div class="chat-options-menu shadow">
+                        <div>View Profile</div>
+                        <hr>
+                        <div>Delete Chat</div>
+                    </div>
+                    <svg class="triangle" height="20" width="20">
+                        <polygon points="10,0 20,20 0,20" style="fill:var(--unilab-white);" />
+                    </svg>
+                </div>
+
+                <div class="chat-box flex-row a-i-c">
+                    <img style="margin: 0 5%;" src="{% static 'img/profile.png' %}" />
+                    <div class="flex-col">
+                        <h4 class="chat-name">Firstname Lastname</h4>
+                        <div>You: last message sent &#xb7; 2w</div>
+                    </div>
+                    <div class="chat-options shadow j-c-c a-i-c" onclick="open_chat_menu(this, 1)">
+                        &#xb7;&#xb7;&#xb7;
+                    </div>
+                    <div class="chat-options-menu shadow">
+                        <div>View Profile</div>
+                        <hr>
+                        <div>Delete Chat</div>
+                    </div>
+                    <svg class="triangle" height="20" width="20">
+                        <polygon points="10,0 20,20 0,20" style="fill:var(--unilab-white);" />
+                    </svg>
+                </div>
+
+                <div class="chat-box flex-row a-i-c">
+                    <img style="margin: 0 5%;" src="{% static 'img/profile.png' %}" />
+                    <div class="flex-col">
+                        <h4 class="chat-name">Firstname Lastname</h4>
+                        <div>You: last message sent &#xb7; 2w</div>
+                    </div>
+                    <div class="chat-options shadow j-c-c a-i-c" onclick="open_chat_menu(this, 2)">
+                        &#xb7;&#xb7;&#xb7;
+                    </div>
+                    <div class="chat-options-menu shadow">
+                        <div>View Profile</div>
+                        <hr>
+                        <div>Delete Chat</div>
+                    </div>
+                    <svg class="triangle" height="20" width="20">
+                        <polygon points="10,0 20,20 0,20" style="fill:var(--unilab-white);" />
+                    </svg>
+                </div>
+
+                <div class="chat-box flex-row a-i-c">
+                    <img style="margin: 0 5%;" src="{% static 'img/profile.png' %}" />
+                    <div class="flex-col">
+                        <h4 class="chat-name">Firstname Lastname</h4>
+                        <div>You: last message sent &#xb7; 2w</div>
+                    </div>
+                    <div class="chat-options shadow j-c-c a-i-c" onclick="open_chat_menu(this, 3)">
+                        &#xb7;&#xb7;&#xb7;
+                    </div>
+                    <div class="chat-options-menu shadow">
+                        <div>View Profile</div>
+                        <hr>
+                        <div>Delete Chat</div>
+                    </div>
+                    <svg class="triangle" height="20" width="20">
+                        <polygon points="10,0 20,20 0,20" style="fill:var(--unilab-white);" />
+                    </svg>
+                </div>
+
+                <div class="chat-box flex-row a-i-c">
+                    <img style="margin: 0 5%;" src="{% static 'img/profile.png' %}" />
+                    <div class="flex-col">
+                        <h4 class="chat-name">Firstname Lastname</h4>
+                        <div>You: last message sent &#xb7; 2w</div>
+                    </div>
+                    <div class="chat-options shadow j-c-c a-i-c" onclick="open_chat_menu(this, 4)">
+                        &#xb7;&#xb7;&#xb7;
+                    </div>
+                    <div class="chat-options-menu shadow">
+                        <div>View Profile</div>
+                        <hr>
+                        <div>Delete Chat</div>
+                    </div>
+                    <svg class="triangle" height="20" width="20">
+                        <polygon points="10,0 20,20 0,20" style="fill:var(--unilab-white);" />
+                    </svg>
+                </div>
+
+                <div class="chat-box flex-row a-i-c">
+                    <img style="margin: 0 5%;" src="{% static 'img/profile.png' %}" />
+                    <div class="flex-col">
+                        <h4 class="chat-name">Firstname Lastname</h4>
+                        <div>You: last message sent &#xb7; 2w</div>
+                    </div>
+                    <div class="chat-options shadow j-c-c a-i-c" onclick="open_chat_menu(this, 5)">
+                        &#xb7;&#xb7;&#xb7;
+                    </div>
+                    <div class="chat-options-menu shadow">
+                        <div>View Profile</div>
+                        <hr>
+                        <div>Delete Chat</div>
+                    </div>
+                    <svg class="triangle" height="20" width="20">
+                        <polygon points="10,0 20,20 0,20" style="fill:var(--unilab-white);" />
+                    </svg>
+                </div>
+
+            </div>
+        </div>
+
+        {% endblock top_nav %}
+
+        {% block main_content %}{% endblock main_content %}
+
+        {% block footer %}
+        <!-- PAGE FOOTER -->
+        <footer class="footer shadow">
+
+            <!-- Upper Footer Bar -->
+            <div class="footer-upper shadow">
+                <div class="footer-upper-block">
+                    <h2>
+                        {# Translators: Start of Footer #}
+                        {% translate "Project Coordinated"%}<br>{% translate "by"%}
+                    </h2>
+                    <img class="eucen-img" src="{% static 'img/footer/eucen.png' %}" alt="Eucen Logo" />
+                    <div class="footer-upper-contact">
+                        <img class="address-img footer-details-images" src="{% static 'img/footer/address.png' %}"
+                            alt="Home Address Icon" />
+                        <div class="footer-upper-contact-text">
+                            {% translate "eucen Secretariat | Balmes 132 | 08008 Barcelona (ES)"%}
+                        </div>
+                    </div>
+                    <div class="footer-upper-contact">
+                        <img class="phone-img footer-details-images" src="{% static 'img/footer/phone.png' %}"
+                            alt="Phone Icon" />
+                        <div class="footer-upper-contact-text">
+                            {% translate "+34 93 5421825"%}
+                        </div>
+                    </div>
+                    <div class="footer-upper-contact">
+                        <img class="enail-img footer-details-images" src="{% static 'img/footer/email.png' %}"
+                            alt="Mail Icon" />
+                        <div class="footer-upper-contact-text">
+                            {% translate "unilab@eucen.eu"%}
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-upper-block">
+                    <h2>
+                        {% translate "Project co-funded"%}<br>{% translate "by"%}
+                    </h2>
+                    <img class="erasmus-img" src="{% static 'img/footer/erasmus.png' %}" alt="Erasmus Funding" />
+                </div>
+                <div class="footer-upper-block">
+                    <p class="footer-disclaimer">
+                        {{ long_texts.1 }}
+                    </p>
+                </div>
+                <div class="footer-upper-block">
+                    <h2>
+                        {% translate "Partners' area"%}
+                    </h2>
+                    <button class="partners-login uni-button" type="button"
+                        style="background-color: var(--unilab-orange);color:white;">
+                        {% translate "LOG IN"%}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lower Footer Bar -->
+            <div class="footer-lower shadow">
+                <div class="footer-lower-text">
+                    {# Translators: End of footer #}
+                    {% translate "© Copyright UniLab 2021"%}
+
+                </div>
+                <div class="footer-lower-social">
+                    <a id="soc-img-1" href="#" target="blank_"></a>
+                    <a id="soc-img-2" href="#" target="blank_"></a>
+                    <a id="soc-img-3" href="#" target="blank_"></a>
+                    <a id="soc-img-4" href="#" target="blank_"></a>
+                </div>
+            </div>
+
+        </footer>
+        {% endblock footer %}
+
+    </div>
+
+    {% block main_js %}
+
+    <script language="javascript" type="text/javascript" src="{% static 'js/main.js' %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static 'js/top_nav.js' %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static 'js/chatbox.js' %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static 'js/ajax.js' %}"></script>
+
+    {% get_current_language as lang %}
+    <script>
+        document.querySelector('#lang-img').src = `/static/img/languages/{{lang}}.webp`;
+        document.querySelector('body').onload = setTimeout(function () { reveal_chats(); }, 1000);
+        // if (width > 1290) {window.onscroll = function(){scrollFunction2()};}
+
+        function set_lang_cookie(lang) {
+            document.cookie = `django_language=${lang}`
+        }
+    </script>
+
+    {% if messages %}
+    <script>
+        document.querySelector('.system-message').style.bottom = "5%";
+        setTimeout(
+            function () {
+                document.querySelector('.system-message').style.bottom = "-25%";
+            },
+            3000
+        )
+    </script>
+    {% endif %}
+
+    {% endblock main_js %}
+
+    {% block body_js %}{% endblock body_js %}
+
+</body>
+
+</html>

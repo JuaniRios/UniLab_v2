@@ -1,0 +1,429 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load custom_filters %}
+
+{% block meta_and_title %}
+
+    <title>{{ user.email }} - UniLab</title>
+    <meta name="description" content=""/>
+
+{% endblock meta_and_title %}
+
+
+{% block head_css %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+<link rel="stylesheet" href="{% static 'css/collapsible.css' %}" />
+
+{% endblock head_css %}
+
+{% block smoke_screens2 %}
+
+<!-- BASIC INFO FORM | NOT DISPLAYED -->
+<div class="smoke-screen-info sm-screen j-c-c a-i-c">
+    
+    <form method="POST" id="info-form" class="post-field gui-element hidden" enctype="multipart/form-data"
+    onsubmit="return validate_form('.first_name', '.last_name')">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="bio"/>
+        <button class="post-close-button close-button" onclick="close_info('#info-form', '.smoke-screen-info')" type="button"></button>
+        <h1 class="normal">{% translate "Edit your information"%}</h1>
+
+        <div class="double-input-wrap">
+            <input class="shadow first_name" name="first_name" type="text" placeholder="{% translate 'First Name'%}" value="{{ user.first_name }}" maxlength="30" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+            <input class="shadow last_name" name="last_name" type="text" placeholder="{% translate 'Last Name'%}" value="{{ user.last_name }}" maxlength="30" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+        </div>
+        
+        <input class="shadow" type="text" name="occupation" value="{{ user_data.occupation }}" placeholder="{% translate 'Occupation'%}" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+
+        <div class="double-input-wrap">
+            <input class="shadow" name="location" type="text" value="{{ user_data.location }}" placeholder="{% translate 'Location'%}" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+            <input class="shadow" name="website" type="text" value="{{ user_data.website }}" placeholder="{% translate 'Website'%}" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+        </div>
+
+        <textarea class="post-emoji-textfield text-area shadow input" name='biography' rows="6" placeholder="{% translate 'Bio'%}"
+        onfocus="focusin_gray(this)" onfocusout="focusout(this)" style="resize: none;">{{ user_data.biography }}</textarea>
+
+        <div class="flex-row a-i-c j-c-s-b" style="width: 100%; margin:3% 0;">
+            <button class="uni-button" style="width: 40%;" type="button" onclick="close_info('#info-form', '.smoke-screen-info')">{% translate "Cancel" %}</button>
+            <button class="uni-button" style="width: 40%;" type="submit" name="submit">{% translate "Post" %}</button>
+        </div>
+    </form>
+
+</div>
+
+<!-- EDUCATION FORM | NOT DISPLAYED -->
+<div class="smoke-screen-edu sm-screen j-c-c a-i-c">
+
+    <form method="post" id="edu-form" class="post-field gui-element hidden" style="height: unset;"
+    onsubmit="return validate_form('.edu_inst', '.edu_degree', '.edu_start', '.edu_desc')">
+        {% csrf_token %}
+        <button class="post-close-button close-button" onclick="close_info('#edu-form', '.smoke-screen-edu')" type="button"></button>
+        <h1 class="normal">{% translate "Add Education"%}</h1>
+        <input type="hidden" name="form_type" value="education_data" />
+
+        <input type="text" name="institution" id="ed_inst" class="edu_inst" placeholder="{% translate "Institution"%}" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+        <input type="text" name="degree" id="ed_degree" class="edu_degree" placeholder="{% translate "Degree" %}" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+
+        <div class="double-input-wrap">
+            <div class="flex-col j-c-c a-i-c">
+                <label for="ed_start_date" class="w100">{% translate "Start Date" %}</label>
+                <input type="date" name="start_date" id="ed_start_date" class="edu_start w100" style="padding: 4%; margin:6% 0;" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+            </div>
+            <div class="flex-col j-c-c a-i-c">
+                <label for="ed_end_date" class="w100">{% translate "End Date" %}</label>
+                <input type="date" name="end_date" id="ed_end_date" class="edu_end w100" style="padding: 4%; margin:6% 0;" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+            </div>
+        </div>
+
+        <textarea name="description" id="ed_desc" class="edu_desc" rows="5" placeholder="{% translate "Description" %}"
+        onfocus="focusin_gray(this)" onfocusout="focusout(this)"></textarea>
+        
+        <div class="flex-row a-i-c j-c-s-b" style="width: 100%; margin:3% 0;">
+            <button class="uni-button" style="width: 40%;" type="button" onclick="close_info('#edu-form', '.smoke-screen-edu')">{% translate "Cancel" %}</button>
+            <button class="uni-button" style="width: 40%;" type="submit" name="submit">{% translate "Post" %}</button>
+        </div>
+    </form>
+
+</div>
+
+<!-- EXPERIENCE FORM | NOT DISPLAYED -->
+<div class="smoke-screen-xp sm-screen j-c-c a-i-c">
+
+    <form method="post" id="xp-form" class="post-field gui-element hidden"
+    onsubmit="return validate_form('.exp_company', '.exp_title', '.exp_start', '.exp_desc')">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="experience_data" />
+        <button class="post-close-button close-button" onclick="close_info('#xp-form', '.smoke-screen-xp')" type="button"></button>
+        <h1 class="normal">{% translate "Add Experience"%}</h1>
+        <input type="text" name="company" id="ex_comp" class="exp_company" placeholder="{% translate "Company" %}" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+        <input type="text" name="title" id="ex_title" class="exp_title" placeholder="{% translate "Job Title" %}" onfocus="focusin_gray(this)" onfocusout="focusout(this)" />
+
+        <div class="double-input-wrap">
+            <div class="flex-col j-c-c a-i-c">
+                <label for="ex_start_date" class="w100">{% translate "Start Date" %}</label>
+                <input type="date" name="start_date" id="ex_start_date" class="exp_start w100" style="padding: 4%; margin:6% 0;" onfocus="focusin_gray(this)" onfocusout="focusout(this)"/>
+            </div>
+            <div class="flex-col j-c-c a-i-c">
+                <label for="ex_end_date" class="w100">{% translate "End Date" %}</label>
+                <input type="date" name="end_date" id="ex_end_date" class="exp_end w100" style="padding: 4%; margin:6% 0;" onfocus="focusin_gray(this)" onfocusout="focusout(this)"/>
+            </div>
+        </div>
+
+        <textarea name="description" id="ex_desc" class="exp_desc" rows="5" placeholder="Description" 
+        onfocus="focusin_gray(this)" onfocusout="focusout(this)"></textarea>
+
+        <div class="flex-row a-i-c j-c-s-b" style="width: 100%; margin:3% 0;">
+            <button class="uni-button" style="width: 40%;" type="button" onclick="close_info('#xp-form', '.smoke-screen-xp')">{% translate "Cancel" %}</button>
+            <button class="uni-button" style="width: 40%;" type="submit" name="submit">{% translate "Post" %}</button>
+        </div>
+    </form>
+
+</div>
+
+<!-- SKILL FORM | NOT DISPLAYED -->
+<div class="smoke-screen-skill sm-screen j-c-c a-i-c">
+
+    <form method="post" id="skill-form" class="post-field gui-element hidden"
+    onsubmit="return validate_form('.category', '.skill')">
+        {% csrf_token %}
+        <input type="hidden" name="form_type" value="skill_data"/>
+        <button class="post-close-button close-button" onclick="close_info('#skill-form', '.smoke-screen-skill')" type="button"></button>
+        <h1 class="normal">{% translate "Add Skill" %}</h1>
+
+        <input type="text" name="category" class="category" placeholder="Category" onfocus="focusin_gray(this)" onfocusout="focusout(this)"/>
+        <input type="text" name="skill" class="skill" placeholder="Skill" onfocus="focusin_gray(this)" onfocusout="focusout(this)"/>
+
+        <div class="flex-row a-i-c j-c-s-b" style="width: 100%; margin:3% 0;">
+            <button class="uni-button" style="width: 40%;" type="button" onclick="close_info('#skill-form', '.smoke-screen-skill')">{% translate "Cancel" %}</button>
+            <button class="uni-button" style="width: 40%;" type="submit" name="submit">{% translate "Post" %}</button>
+        </div>
+    </form>
+
+</div>
+
+{% endblock smoke_screens2 %}
+
+{% block main_content %}
+
+<main class="main-home">
+    <div class="main-content">
+        <!-- BASIC INFO SECTION -->
+        <div class="profile-header gui-element section active-section">
+            
+            <div class="profile-banner">
+                <img class="pfp" src="{{ user.image }}" />
+            </div>
+        
+            <div class="profile-basic-info">
+                <img id="info-opener" class="edit-image" src="{% static 'img/profile/pencil.png' %}" alt="" onclick="edit_info('#info-form', '.smoke-screen-info')">
+                <h2 class="w90">{{ user.first_name }} {{ user.last_name }}</h2>
+                <p style="font-size: 1.25em;">
+                    {% if user_data.occupation %}
+                    {{ user_data.occupation }}
+                    {% else %}
+                        <span style="font-size: 1em;">{% translate "No Occupation" %}</span>
+                    {% endif %}
+                </p>
+                <p style="color:rgb(97, 97, 97);">
+                    {% if user_data.location %}
+                        {{ user_data.location }} &#183;
+                    {% else %}
+                        {% translate "No Location" %}
+                    {% endif %}
+                    {% if user_data.website %}
+                        &#183;
+                        <a class="basic-info-website" style="color:blue;" href="{{ user_data.website|append_http }}">{% translate "Website" %}</a>
+                    {% endif %}
+                </p>
+                <div class="bio">
+                    <h3>{% translate "About" %}</h3>
+                    {% if user_data.biography|length == 0 %}
+                        <h3 class="normal">{% translate "This user has no biography yet..." %}</h3>
+                    {% else %}
+                        <p style="line-height: 1.5em;">
+                            {{ user_data.biography }}
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- EDUCATION SECTION -->
+        <div class="profile-content gui-element section">
+            <div class="flex-row j-c-s-b a-i-c w95">
+                <h1 class="normal">{% translate "Education" %}</h1>
+                <button id="edu-opener" class="plus-button" onclick="edit_info('#edu-form', '.smoke-screen-edu')"></button>
+            </div>
+            {% if education_data|length == 0 %}
+                <h3 class="normal">{% translate "This user has no education yet..." %}</h3>
+            {% else %}
+                {% for ed_item in education_data %}
+                    <div class="education-item">
+                        <img src="{{ ed_item.image }}" height="150" width="150" style="border-radius: 10px;">
+                        <div class="education-text">
+                            <h2>{{ ed_item.institution }}</h2>
+                            <h3>{{ ed_item.degree }}</h3>
+                            {% if ed_item.end_date is None %}
+                            <i>{{ ed_item.start_date }} {% translate "- Present" %}</i>
+                            {% else %}
+                            <i>{{ ed_item.start_date }} - {{ ed_item.end_date }}</i>
+                            {% endif %}
+                            <p>
+                                {{ ed_item.description }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- EXPERIENCE SECTION -->
+        <div class="profile-content gui-element section">
+            <div class="flex-row j-c-s-b a-i-c w95">
+                <h1 class="normal">{% translate "Experience" %}</h1>
+                <button id="xp-opener" class="plus-button" onclick="edit_info('#xp-form', '.smoke-screen-xp')"></button>
+            </div>
+            {% if experience_data|length == 0 %}
+            <h3 class="normal">{% translate "This user has no experience yet..." %}</h3>
+            {% else %}
+                {% for ex_item in experience_data %}
+                <div class="education-item">
+                    <img src="{{ ex_item.image }}" height="150" width="150" style="border-radius: 10px;">
+                    <div class="education-text">
+                        <h2>{{ ex_item.company }}</h2>
+                        <h3>{{ ex_item.title }}</h3>
+                        {% if ex_item.end_date is None %}
+                            <i>{{ ex_item.start_date }} {% translate " - Present" %}</i>
+                            {% else %}
+                            <i>{{ ex_item.start_date }} - {{ ex_item.end_date }}</i>
+                            {% endif %}
+                        <p>
+                            {{ ex_item.description }}
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- SKILLS SECTION -->
+        <div class="profile-content gui-element section">
+            <div class="flex-row j-c-s-b a-i-c w95">
+                <h1 class="normal">{% translate "Skills" %}</h1>
+                <button id="skill-opener" class="plus-button" onclick="edit_info('#skill-form', '.smoke-screen-skill')"></button>
+            </div>
+            {% if skill_data|length == 0 %}
+                <h3 class="normal">{% translate "This user has no skills yet..." %}</h3>
+            {% else %}
+                {% for category, skills in skill_data.items %}
+                    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 5%;">
+                        <ul style="line-height: 300%; width: 35%;">
+                            <h2>{{ category }}</h2>
+                            {% for skill in skills %}
+                                <li>{{ skill }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+        </div>
+
+        <!-- POSTS SECTION -->
+        <div class="profile-content gui-element section" id="posts_section">
+            <div class="flex-row j-c-s-b a-i-c w95">
+                <h1 class="normal">Posts</h1>
+            </div>
+            {% if posts|length == 0 %}
+                <h3 class="normal">{% translate "This user has no posts yet" %}</h3>
+            {% else %}
+                {% for post in posts %}
+            <div class="education-item shadow"
+                    style="padding:1% 3%; background-color: var(--unilab-white);border-radius: 10px; margin-bottom: 2%; justify-content: space-between;">
+
+                <img class="education-image"
+                        {% if post.image %}
+                            src="{{ post.image }}"
+                            style="height: 100px; width: 100px;object-fit:cover;"
+                        {% else %}
+                            style="height: 100px; width: 100px;opacity:0; display:none;"
+                        {% endif %}/>
+
+                <div class="education-text" style="display: inline;">
+                    <p style="height:100px;overflow:hidden;display:inline;">
+                        {{ post.content|make_list|slice:':250'|join:'' }}
+                    </p>
+                    <a href="{% url 'single-post'%}?url={{ post.url }}" style="color: var(--unilab-orange);">{% translate "See post" %} </a>
+                </div>
+
+                <button class="uni-button" onclick="object_delete('{{ post.url }}')">{% translate "Delete post" %}</button>
+
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- COMMENTS SECTION -->
+        <div class="profile-content gui-element section">
+            <div class="flex-row j-c-s-b a-i-c w95">
+                <h1 class="normal">{% translate "Comments" %}</h1>
+            </div>
+            {% if comments|length == 0 %}
+                <h3 class="normal">{% translate "This user has not commented on anything yet..." %}</h3>
+            {% else %}
+                {% for comment in comments %}
+                    <div class="education-item shadow"
+                            style="padding:1% 3%; background-color: var(--unilab-white);border-radius: 10px; margin-bottom: 2%; justify-content: space-between;">
+
+                        <div class="education-text" style="display: inline;">
+                            <p style="height:100px;overflow:hidden;display:inline;">
+                                {{ comment.content|make_list|slice:':250'|join:'' }}
+                            </p>
+                            <a href="{% url 'single-post'%}?url={{ comment.post }}" style="color: var(--unilab-orange);">{% translate "See comment" %}</a>
+                        </div>
+
+                        <button class="uni-button" onclick="object_delete('{{ comment.post }}')">{% translate "Delete comment" %}</button>
+
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+
+    <!-- SIDE MENU -->
+    <div class="main-menu noselect">
+        <div class="menu-item" onclick="change_section(0)">
+            <div class="item-text">{% translate "Basic Information" %}</div>
+            <div class="item-rect active-rect"></div>
+        </div>
+        <div class="menu-item" onclick="change_section(1)">
+            <div class="item-text">{% translate "Education" %}</div>
+            <div class="item-rect"></div>
+        </div>
+        <div class="menu-item" onclick="change_section(2)">
+            <div class="item-text">{% translate "Experience" %}</div>
+            <div class="item-rect"></div>
+        </div>
+        <div class="menu-item" onclick="change_section(3)">
+            <div class="item-text">{% translate "Skills" %}</div>
+            <div class="item-rect"></div>
+        </div>
+        <div class="menu-item" onclick="change_section(4)">
+            <div class="item-text">{% translate "Posts" %}</div>
+            <div class="item-rect"></div>
+        </div>
+        <div class="menu-item" onclick="change_section(5)">
+            <div class="item-text">{% translate "Comments" %}</div>
+            <div class="item-rect"></div>
+        </div>
+    </div>
+
+
+</main>
+
+{% endblock main_content %}
+
+
+{% block footer %}<div class="hidden"></div>{% endblock footer %}
+
+
+{% block body_js %}
+
+    <script language="javascript" type="text/javascript" src="{% static 'js/profile.js' %}"></script>
+    <script>
+        if (width > 1290) {
+            window.onscroll = function () {
+                scrollFunction2()
+            };
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js" integrity="sha256-0H3Nuz3aug3afVbUlsu12Puxva3CP4EhJtPExqs54Vg=" crossorigin="anonymous"></script>
+    <script>
+        function object_delete(url) {
+            fetch("{{ request.build_absolute_uri }}", {
+                method: 'DELETE',
+                credentials: "same-origin",
+                headers: {
+                    "X-CSRFToken": Cookies.get('csrftoken')
+                },
+                body: JSON.stringify({
+                    url: url,
+                })
+            }).then(function (response) {
+                // The API call was successful!
+                console.log(response)
+                location.reload()
+            })
+        }
+
+    // for async calls    WIP
+    function get_user_posts(page){
+            fetch(`{% url 'get-posts' %}?email={{ user.email }}&page=${page}`
+
+                ).then(function(response){
+                    console.log(response)
+                    return response.json()
+
+                }).then(function(data){
+                    console.log(data)
+                    return data
+
+                })
+    }
+    // for async calls  WIP
+    function update_user_posts(page){
+            const posts = get_user_posts(page)
+
+
+
+    }
+
+
+    </script>
+
+{% endblock body_js %}

@@ -1,0 +1,1114 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-19 16:13+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\UniLab\general_settings.py:135 .\templates\base.html:197
+msgid "English"
+msgstr ""
+
+#: .\UniLab\general_settings.py:136 .\templates\base.html:212
+msgid "Spanish"
+msgstr ""
+
+#: .\UniLab\general_settings.py:137 .\templates\base.html:207
+msgid "French"
+msgstr ""
+
+#: .\UniLab\general_settings.py:138 .\templates\base.html:202
+msgid "German"
+msgstr ""
+
+#: .\UniLab\general_settings.py:139 .\templates\base.html:217
+msgid "Russian"
+msgstr ""
+
+#: .\api\managers.py:17
+msgid "The Email must be set"
+msgstr ""
+
+#: .\api\managers.py:19
+msgid "User type can only be 1 (Admin), 2 (Company), or 3 (Student)."
+msgstr ""
+
+#: .\api\models.py:12
+msgid "post"
+msgstr ""
+
+#: .\api\models.py:13
+msgid "posts"
+msgstr ""
+
+#: .\api\models.py:24
+msgid "user"
+msgstr ""
+
+#: .\api\models.py:25
+msgid "users"
+msgstr ""
+
+#: .\api\models.py:27
+msgid "email address"
+msgstr ""
+
+#: .\api\models.py:33
+msgid "Admin"
+msgstr ""
+
+#: .\api\models.py:34 .\templates\signup.html:25
+msgid "Employer"
+msgstr ""
+
+#: .\api\models.py:35 .\templates\signup.html:24
+msgid "Student"
+msgstr ""
+
+#: .\api\models.py:69
+msgid "user data"
+msgstr ""
+
+#: .\api\models.py:70
+msgid "users data"
+msgstr ""
+
+#: .\api\models.py:81 .\api\models.py:82
+msgid "education data"
+msgstr ""
+
+#: .\api\models.py:95 .\api\models.py:96
+msgid "experience data"
+msgstr ""
+
+#: .\api\models.py:110 .\api\models.py:111
+msgid "skill data"
+msgstr ""
+
+#: .\api\models.py:120
+msgid "company"
+msgstr ""
+
+#: .\api\models.py:121
+msgid "companies"
+msgstr ""
+
+#: .\api\models.py:133
+msgid "1-20 employees"
+msgstr ""
+
+#: .\api\models.py:134
+msgid "21-100 employees"
+msgstr ""
+
+#: .\api\models.py:135
+msgid "101-200 employees"
+msgstr ""
+
+#: .\api\models.py:136
+msgid "201-500 employees"
+msgstr ""
+
+#: .\api\models.py:137
+msgid "501+ employees"
+msgstr ""
+
+#: .\api\models.py:142
+msgid "Energy, Utilities and Resources"
+msgstr ""
+
+#: .\api\models.py:143
+msgid "Government and Public Sector"
+msgstr ""
+
+#: .\api\models.py:144
+msgid "Pharmaceuticals and Life Sciences"
+msgstr ""
+
+#: .\api\models.py:145
+msgid "Real Estate"
+msgstr ""
+
+#: .\api\models.py:146
+msgid "Sports Business Advisory"
+msgstr ""
+
+#: .\api\models.py:147
+msgid "Financial Services"
+msgstr ""
+
+#: .\api\models.py:148
+msgid "Health Services"
+msgstr ""
+
+#: .\api\models.py:149
+msgid "Industrial Manufacturing"
+msgstr ""
+
+#: .\api\models.py:150
+msgid "Retail and Consumer Goods"
+msgstr ""
+
+#: .\api\models.py:151
+msgid "Technology, Media, and Telecommunications"
+msgstr ""
+
+#: .\api\models.py:152 .\api\models.py:226
+msgid "Other"
+msgstr ""
+
+#: .\api\models.py:165
+msgid "vote"
+msgstr ""
+
+#: .\api\models.py:166
+msgid "votes"
+msgstr ""
+
+#: .\api\models.py:174
+msgid "Upvote"
+msgstr ""
+
+#: .\api\models.py:175
+msgid "Downvote"
+msgstr ""
+
+#: .\api\models.py:182
+msgid "company picture"
+msgstr ""
+
+#: .\api\models.py:183
+msgid "company pictures"
+msgstr ""
+
+#: .\api\models.py:193
+msgid "job"
+msgstr ""
+
+#: .\api\models.py:194
+msgid "jobs"
+msgstr ""
+
+#: .\api\models.py:210
+msgid "Administrative"
+msgstr ""
+
+#: .\api\models.py:211
+msgid "Arts & Design"
+msgstr ""
+
+#: .\api\models.py:212
+msgid "Business"
+msgstr ""
+
+#: .\api\models.py:213
+msgid "Consulting"
+msgstr ""
+
+#: .\api\models.py:214
+msgid "Customer Services & Support"
+msgstr ""
+
+#: .\api\models.py:215 .\templates\student_profile_owner.html:198
+#: .\templates\student_profile_owner.html:345
+#: .\templates\student_profile_public.html:210
+msgid "Education"
+msgstr ""
+
+#: .\api\models.py:216
+msgid "Engineering"
+msgstr ""
+
+#: .\api\models.py:217
+msgid "Finance & Accounting"
+msgstr ""
+
+#: .\api\models.py:218
+msgid "Healthcare"
+msgstr ""
+
+#: .\api\models.py:219
+msgid "Human Resources"
+msgstr ""
+
+#: .\api\models.py:220
+msgid "Information Technology"
+msgstr ""
+
+#: .\api\models.py:221
+msgid "Legal"
+msgstr ""
+
+#: .\api\models.py:222
+msgid "Marketing"
+msgstr ""
+
+#: .\api\models.py:223
+msgid "Media & Communications"
+msgstr ""
+
+#: .\api\models.py:224
+msgid "Military & Protective Services"
+msgstr ""
+
+#: .\api\models.py:225
+msgid "Operations"
+msgstr ""
+
+#: .\api\models.py:227
+msgid "Product & Project Management"
+msgstr ""
+
+#: .\api\models.py:228
+msgid "Research & Science"
+msgstr ""
+
+#: .\api\models.py:229
+msgid "Retail & Food Services"
+msgstr ""
+
+#: .\api\models.py:230
+msgid "Sales"
+msgstr ""
+
+#: .\api\models.py:231
+msgid "Skilled Labor & Manufacturing"
+msgstr ""
+
+#: .\api\models.py:232
+msgid "Transportation"
+msgstr ""
+
+#: .\api\models.py:237
+msgid "Full-time"
+msgstr ""
+
+#: .\api\models.py:238
+msgid "Part-time"
+msgstr ""
+
+#: .\api\models.py:239
+msgid "Contract"
+msgstr ""
+
+#: .\api\models.py:240
+msgid "Temporary"
+msgstr ""
+
+#: .\api\models.py:241
+msgid "Internship"
+msgstr ""
+
+#: .\api\models.py:254
+msgid "application"
+msgstr ""
+
+#: .\api\models.py:255
+msgid "applications"
+msgstr ""
+
+#: .\api\models.py:265
+msgid "comment"
+msgstr ""
+
+#: .\api\models.py:266 .\templates\community.html:263
+msgid "comments"
+msgstr ""
+
+#: .\api\models.py:277
+msgid "post report"
+msgstr ""
+
+#: .\api\models.py:278
+msgid "post reports"
+msgstr ""
+
+#: .\api\models.py:284
+msgid "Spam"
+msgstr ""
+
+#: .\api\models.py:285
+msgid "Offensive"
+msgstr ""
+
+#: .\api\models.py:286
+msgid "Misleading"
+msgstr ""
+
+#. Translators: Start of Navigation bar
+#: .\templates\base.html:75
+msgctxt "this is the navbar"
+msgid "Home"
+msgstr ""
+
+#: .\templates\base.html:82
+msgid "Community"
+msgstr ""
+
+#: .\templates\base.html:89
+msgid "Companies"
+msgstr ""
+
+#: .\templates\base.html:96
+msgid "Jobs"
+msgstr ""
+
+#: .\templates\base.html:103 .\templates\student_profile_owner.html:182
+msgid "About"
+msgstr ""
+
+#: .\templates\base.html:113
+msgid "Profile"
+msgstr ""
+
+#: .\templates\base.html:119
+msgid "Search"
+msgstr ""
+
+#. Translators: End of navigation bar
+#: .\templates\base.html:126
+msgid "Language"
+msgstr ""
+
+#. Translators: Start of side profile menu
+#: .\templates\base.html:162
+msgid "My Profile"
+msgstr ""
+
+#. Translators: Start of side profile menu
+#: .\templates\base.html:168
+msgid "My Companies"
+msgstr ""
+
+#: .\templates\base.html:175
+msgid "Account Settings"
+msgstr ""
+
+#. Translators: End of side profile menu
+#: .\templates\base.html:181
+msgid "Sign Out"
+msgstr ""
+
+#: .\templates\base.html:193
+msgid "Select Language"
+msgstr ""
+
+#. Translators: Start of Footer
+#: .\templates\base.html:360
+msgid "Project Coordinated"
+msgstr ""
+
+#: .\templates\base.html:360 .\templates\base.html:384
+msgid "by"
+msgstr ""
+
+#: .\templates\base.html:366
+msgid "eucen Secretariat | Balmes 132 | 08008 Barcelona (ES)"
+msgstr ""
+
+#: .\templates\base.html:372
+msgid "+34 93 5421825"
+msgstr ""
+
+#: .\templates\base.html:378
+msgid "unilab@eucen.eu"
+msgstr ""
+
+#: .\templates\base.html:384
+msgid "Project co-funded"
+msgstr ""
+
+#: .\templates\base.html:395
+msgid "Partners' area"
+msgstr ""
+
+#: .\templates\base.html:398
+msgid "LOG IN"
+msgstr ""
+
+#. Translators: End of footer
+#: .\templates\base.html:407
+msgid "© Copyright UniLab 2021"
+msgstr ""
+
+#: .\templates\community.html:105
+msgid "Create a new post"
+msgstr ""
+
+#: .\templates\community.html:119
+msgid "Text"
+msgstr ""
+
+#: .\templates\community.html:123
+msgid "Attach an image"
+msgstr ""
+
+#: .\templates\community.html:128 .\templates\company_profile_owner.html:52
+#: .\templates\company_profile_owner.html:74
+#: .\templates\company_profile_owner.html:132 .\templates\my_companies.html:51
+#: .\templates\single_job.html:45 .\templates\student_profile_owner.html:50
+#: .\templates\student_profile_owner.html:85
+#: .\templates\student_profile_owner.html:119
+#: .\templates\student_profile_owner.html:140
+msgid "Cancel"
+msgstr ""
+
+#: .\templates\community.html:129 .\templates\company_profile_owner.html:53
+#: .\templates\company_profile_owner.html:75
+#: .\templates\company_profile_owner.html:133
+#: .\templates\student_profile_owner.html:51
+#: .\templates\student_profile_owner.html:86
+#: .\templates\student_profile_owner.html:120
+#: .\templates\student_profile_owner.html:141
+msgid "Post"
+msgstr ""
+
+#: .\templates\community.html:135
+msgid "Change Company"
+msgstr ""
+
+#: .\templates\community.html:150
+msgid "Create a post"
+msgstr ""
+
+#: .\templates\community.html:155
+msgid "Newest"
+msgstr ""
+
+#: .\templates\community.html:156
+msgid "Oldest"
+msgstr ""
+
+#: .\templates\community.html:157
+msgid "Hot"
+msgstr ""
+
+#: .\templates\community.html:158
+msgid "Top"
+msgstr ""
+
+#: .\templates\community.html:159
+msgid "Today"
+msgstr ""
+
+#: .\templates\community.html:268
+msgid "Hide"
+msgstr ""
+
+#: .\templates\community.html:273
+msgid "Report"
+msgstr ""
+
+#: .\templates\companies.html:46 .\templates\companies.html:50
+msgid "Search for companies"
+msgstr ""
+
+#: .\templates\companies.html:55
+msgid "Search Results"
+msgstr ""
+
+#: .\templates\companies.html:74
+msgid "Discover Companies"
+msgstr ""
+
+#: .\templates\companies.html:102 .\templates\index.html:95
+msgid "More Companies"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:34
+#: .\templates\student_profile_owner.html:32
+msgid "Edit your information"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:36
+msgid "Name"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:39
+#: .\templates\company_profile_owner.html:224
+msgid "Video"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:40
+#: .\templates\company_profile_owner.html:228
+#: .\templates\student_profile_owner.html:43
+#: .\templates\student_profile_owner.html:178
+msgid "Website"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:43
+#: .\templates\company_profile_owner.html:234
+#: .\templates\company_profile_public.html:78
+#: .\templates\student_profile_owner.html:81
+msgid "Description"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:66
+msgid "Add Picture"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:90
+msgid "Add Job"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:92
+#: .\templates\student_profile_owner.html:102
+msgid "Job Title"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:110
+msgid "Requirements"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:113
+msgid "What we offer (Optional)"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:116
+msgid "What you will be doing (Optional)"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:119
+msgid "Employment Details (Optional)"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:122
+msgid "City"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:123
+msgid "Country"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:127
+msgid "Hours per week"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:128
+msgid "Salary per month"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:150
+msgid "List of applicants"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:164
+msgid "Save Job"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:167
+msgid "Open positions"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:168
+msgid "Monthly Salary"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:177 .\templates\jobs.html:101
+msgid "More Jobs"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:236
+msgid "Your company has no description yet"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:249
+#: .\templates\company_profile_owner.html:392
+#: .\templates\company_profile_public.html:93
+#: .\templates\company_profile_public.html:217
+msgid "Pictures"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:253
+msgid "Your company has no pictures yet"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:271
+#: .\templates\company_profile_owner.html:396
+#: .\templates\company_profile_public.html:114
+#: .\templates\company_profile_public.html:221
+msgid "Job Postings"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:275
+msgid "Your company has no job postings yet"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:293
+msgid "See job"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:294
+msgid "Delete job"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:299
+msgid "Applicants"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:312
+#: .\templates\company_profile_owner.html:400
+#: .\templates\company_profile_public.html:140
+#: .\templates\company_profile_public.html:225
+msgid "Employees"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:316
+msgid "Your company has no registered employees yet"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:326
+#: .\templates\company_profile_owner.html:404
+#: .\templates\company_profile_public.html:153
+#: .\templates\company_profile_public.html:229
+#: .\templates\student_profile_owner.html:357
+#: .\templates\student_profile_public.html:149
+#: .\templates\student_profile_public.html:222
+msgid "Posts"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:329
+msgid "Your company has no posts yet"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:349
+#: .\templates\company_profile_public.html:174
+#: .\templates\student_profile_owner.html:300
+#: .\templates\student_profile_public.html:170
+msgid "See post"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:350
+#: .\templates\student_profile_owner.html:303
+msgid "Delete post"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:360
+#: .\templates\company_profile_owner.html:408
+#: .\templates\company_profile_public.html:186
+#: .\templates\company_profile_public.html:233
+#: .\templates\student_profile_owner.html:313
+#: .\templates\student_profile_owner.html:361
+#: .\templates\student_profile_public.html:180
+#: .\templates\student_profile_public.html:226
+msgid "Comments"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:363
+msgid "Your company has not commented on anything yet"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:375
+#: .\templates\company_profile_public.html:199
+#: .\templates\student_profile_owner.html:326
+#: .\templates\student_profile_public.html:193
+msgid "See comment"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:376
+#: .\templates\student_profile_owner.html:329
+msgid "Delete comment"
+msgstr ""
+
+#: .\templates\company_profile_owner.html:388
+#: .\templates\company_profile_public.html:213
+#: .\templates\student_profile_owner.html:341
+#: .\templates\student_profile_public.html:206
+msgid "Basic Information"
+msgstr ""
+
+#: .\templates\company_profile_public.html:96
+msgid "This company has no pictures yet"
+msgstr ""
+
+#: .\templates\company_profile_public.html:117
+msgid "This company has no job postings yet"
+msgstr ""
+
+#: .\templates\company_profile_public.html:143
+msgid "This company has no registered employees yet"
+msgstr ""
+
+#: .\templates\company_profile_public.html:156
+msgid "This company has no posts yet"
+msgstr ""
+
+#: .\templates\company_profile_public.html:189
+msgid "This company has not commented on anything yet"
+msgstr ""
+
+#: .\templates\index.html:29
+msgid "Welcome to the UniLab Job Portal!"
+msgstr ""
+
+#: .\templates\index.html:31
+msgid "An easier way to connect with employers in Europe"
+msgstr ""
+
+#: .\templates\index.html:44
+msgid "Explore"
+msgstr ""
+
+#: .\templates\index.html:46
+msgid ""
+"Join our platform with companies around the world. Search for a suitable job "
+"in your field, location and language."
+msgstr ""
+
+#: .\templates\index.html:47
+msgid ""
+"Explore companies, positions and community posts to learn more about your "
+"future workplace."
+msgstr ""
+
+#: .\templates\index.html:50
+msgid "Create your account"
+msgstr ""
+
+#: .\templates\index.html:53
+msgid "Top Companies"
+msgstr ""
+
+#: .\templates\index.html:107
+msgid "Announcements"
+msgstr ""
+
+#: .\templates\index.html:110
+msgid "Title of Announcement 1: Something happened in some field."
+msgstr ""
+
+#: .\templates\index.html:114
+msgid "Title of Announcement 2: Something happened in some field."
+msgstr ""
+
+#: .\templates\index.html:118
+msgid "Title of Announcement 3: Something happened in some field."
+msgstr ""
+
+#: .\templates\index.html:122
+msgid "Title of Announcement 4: Something happened in some field."
+msgstr ""
+
+#: .\templates\index.html:126
+msgid "Title of Announcement 5: Something happened in some field."
+msgstr ""
+
+#: .\templates\index.html:129
+msgid "More Announcements"
+msgstr ""
+
+#: .\templates\index.html:137
+msgid "Newest Job Offers"
+msgstr ""
+
+#: .\templates\index.html:168
+msgid "More Job Offers"
+msgstr ""
+
+#: .\templates\jobs.html:46 .\templates\jobs.html:50
+msgid "Search for jobs"
+msgstr ""
+
+#: .\templates\jobs.html:74
+msgid "Discover Jobs"
+msgstr ""
+
+#: .\templates\my_companies.html:52
+msgid "Add"
+msgstr ""
+
+#: .\templates\settings.html:40
+msgid "Account"
+msgstr ""
+
+#: .\templates\settings.html:45 .\templates\signin.html:31
+msgid "Password"
+msgstr ""
+
+#: .\templates\settings.html:61
+msgid "General Info"
+msgstr ""
+
+#: .\templates\settings.html:65
+msgid "Change Avatar"
+msgstr ""
+
+#: .\templates\settings.html:81
+msgid "Save"
+msgstr ""
+
+#: .\templates\settings.html:85
+msgid "Change Password"
+msgstr ""
+
+#: .\templates\settings.html:88
+msgid "Old Password"
+msgstr ""
+
+#: .\templates\settings.html:89
+msgid "New Password"
+msgstr ""
+
+#: .\templates\settings.html:90
+msgid "Confirm New Password"
+msgstr ""
+
+#: .\templates\settings.html:92
+msgid "Confirm"
+msgstr ""
+
+#: .\templates\signin.html:5
+msgid "Sign in - UniLab"
+msgstr ""
+
+#: .\templates\signin.html:23 .\templates\signin.html:39
+msgid "Sign in"
+msgstr ""
+
+#: .\templates\signin.html:25
+msgid "⚠ Invalid email or password."
+msgstr ""
+
+#: .\templates\signin.html:27
+msgid "Email Address"
+msgstr ""
+
+#: .\templates\signin.html:29
+msgid "⚠ Email is missing."
+msgstr ""
+
+#: .\templates\signin.html:33
+msgid "⚠ Password is missing."
+msgstr ""
+
+#: .\templates\signin.html:38
+msgid "Create Account"
+msgstr ""
+
+#: .\templates\signin.html:42
+msgid "Forgot your password?"
+msgstr ""
+
+#: .\templates\signup.html:22
+msgid "Are you a student or an employer?"
+msgstr ""
+
+#: .\templates\signup_company.html:23
+msgid "Sign up as a company"
+msgstr ""
+
+#: .\templates\signup_company.html:28 .\templates\signup_company.html:31
+#: .\templates\signup_company.html:34 .\templates\signup_company.html:37
+#: .\templates\signup_company.html:40 .\templates\signup_student.html:28
+#: .\templates\signup_student.html:31 .\templates\signup_student.html:34
+#: .\templates\signup_student.html:37 .\templates\signup_student.html:40
+msgid "Missing field."
+msgstr ""
+
+#: .\templates\signup_company.html:45 .\templates\signup_student.html:45
+msgid "By clicking Sign up, you agree to the UniLab "
+msgstr ""
+
+#: .\templates\signup_company.html:46 .\templates\signup_student.html:46
+msgid "User Agreement"
+msgstr ""
+
+#: .\templates\signup_company.html:47 .\templates\signup_student.html:47
+msgid "Privacy Policy"
+msgstr ""
+
+#: .\templates\signup_company.html:48 .\templates\signup_student.html:48
+msgid "Cookie Policy"
+msgstr ""
+
+#: .\templates\signup_student.html:23
+msgid "Sign up as a student"
+msgstr ""
+
+#: .\templates\single_job.html:46
+msgid "Apply"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:35
+msgid "First Name"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:36
+msgid "Last Name"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:39
+msgid "Occupation"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:42
+msgid "Location"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:46
+msgid "Bio"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:64
+msgid "Add Education"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:67
+msgid "Institution"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:68
+msgid "Degree"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:72
+#: .\templates\student_profile_owner.html:106
+msgid "Start Date"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:76
+#: .\templates\student_profile_owner.html:110
+msgid "End Date"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:100
+msgid "Add Experience"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:101
+msgid "Company"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:134
+msgid "Add Skill"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:167
+msgid "No Occupation"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:174
+msgid "No Location"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:184
+msgid "This user has no biography yet..."
+msgstr ""
+
+#: .\templates\student_profile_owner.html:202
+msgid "This user has no education yet..."
+msgstr ""
+
+#: .\templates\student_profile_owner.html:211
+#: .\templates\student_profile_public.html:111
+msgid "- Present"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:227
+#: .\templates\student_profile_owner.html:349
+#: .\templates\student_profile_public.html:99
+#: .\templates\student_profile_public.html:214
+msgid "Experience"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:231
+msgid "This user has no experience yet..."
+msgstr ""
+
+#: .\templates\student_profile_owner.html:240
+msgid " - Present"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:256
+#: .\templates\student_profile_owner.html:353
+#: .\templates\student_profile_public.html:127
+#: .\templates\student_profile_public.html:218
+msgid "Skills"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:260
+msgid "This user has no skills yet..."
+msgstr ""
+
+#: .\templates\student_profile_owner.html:282
+msgid "This user has no posts yet"
+msgstr ""
+
+#: .\templates\student_profile_owner.html:316
+msgid "This user has not commented on anything yet..."
+msgstr ""
+
+#: .\templates\student_profile_public.html:102
+msgid "This student has no experience yet"
+msgstr ""
+
+#: .\templates\student_profile_public.html:130
+msgid "This student has no skills yet"
+msgstr ""
+
+#: .\templates\student_profile_public.html:152
+msgid "This student has no posts yet"
+msgstr ""
+
+#: .\templates\student_profile_public.html:183
+msgid "This student has not commented on anything yet"
+msgstr ""
+
+#: .\website\templatetags\custom_filters.py:17
+msgid "today"
+msgstr ""
+
+#: .\website\templatetags\custom_filters.py:20
+msgid "day"
+msgstr ""
+
+#: .\website\templatetags\custom_filters.py:20
+msgid "days"
+msgstr ""
+
+#: .\website\templatetags\custom_filters.py:24
+msgid "week"
+msgstr ""
+
+#: .\website\templatetags\custom_filters.py:24
+msgid "weeks"
+msgstr ""
+
+#: .\website\templatetags\custom_filters.py:28
+msgid "month"
+msgstr ""
+
+#: .\website\templatetags\custom_filters.py:28
+msgid "months"
+msgstr ""
+
+#: .\website\templatetags\custom_filters.py:32
+msgid "year"
+msgstr ""
+
+#: .\website\templatetags\custom_filters.py:32
+msgid "years"
+msgstr ""
+
+#: .\website\views.py:23
+msgid ""
+"The European Commission support for the production of this website does not "
+"constitute an endorsement of the contents which reflects the views only of "
+"the authors, and the Commission cannot be held responsible for any use which "
+"may be made of the information contained therein."
+msgstr ""

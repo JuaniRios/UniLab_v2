@@ -1,0 +1,356 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load custom_filters %}
+
+{% block meta_and_title %}
+
+<title>Community - UniLab</title>
+<meta name="description" content="" />
+
+{% endblock meta_and_title %}
+
+
+{% block head_css %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}" />
+<link rel="stylesheet" href="{% static 'css/collapsible.css' %}" />
+<link rel="stylesheet" href="{% static 'css/community.css' %}" />
+<link rel="stylesheet" href="{% static 'css/emojis.css' %}" />
+<link rel="stylesheet" href="{% static 'css/emojis2.css' %}" />
+
+{% endblock head_css %}
+
+
+{% block smoke_screens2 %}
+
+<div class="smoke-screen-v3 sm-screen" onclick="close_postfield()"></div>
+<div class="smoke-screen-picture-frame j-c-c a-i-c" onclick="close_image()">
+    <img src="" class="picture-frame" />
+</div>
+
+{% endblock smoke_screens2 %}
+
+
+{% block main_content %}
+
+<main class="main-home flex-col j-c-c a-i-c">
+
+    <style>
+        .basic-upvote, .active-upvote, .basic-downvote, .active-downvote
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5em;
+            height: 50px;
+            width: 50px;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            background: none;
+        }
+        .basic-upvote, .basic-downvote
+        {
+            color: gray;
+        }
+        .active-upvote
+        {
+            color: limegreen;
+        }
+        .active-downvote
+        {
+            color: red;
+        }
+        .basic-downvote, .active-downvote
+        {
+            transform: rotate(180deg);
+        }
+        .basic-upvote:hover, .active-upvote:hover {color: limegreen;}
+        .basic-downvote:hover, .active-downvote:hover {color: red;}
+    </style>
+
+
+    <div class="profile-main-loader">
+        <div class="loader">
+            <svg class="circular-loader"viewBox="25 25 50 50" >
+                <circle id="loader1" class="loader-path" cx="50" cy="50" r="20" fill="none" stroke="rgb(230, 135, 41)" stroke-width="2" />
+            </svg>
+        </div>
+    </div>
+
+    <div class="profile-main-loader">
+        <div class="loader">
+            <svg class="circular-loader"viewBox="25 25 50 50" >
+                <circle id="loader2" class="loader-path" cx="50" cy="50" r="20" fill="none" stroke="black" stroke-width="2" />
+            </svg>
+        </div>
+    </div>
+
+    <div class="profile-main-loader">
+        <div class="loader">
+            <svg class="circular-loader"viewBox="25 25 50 50" >
+                <circle id="loader3" class="loader-path" cx="50" cy="50" r="20" fill="none" stroke="gray" stroke-width="2" />
+            </svg>
+        </div>
+    </div>
+
+    <div class="posts">
+
+
+        <!-- INJECTING POST -->
+        <div id="post{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}}" class="education-item shadow gui-element"
+        style="border-radius: 10px; margin: 3% 0;position:relative;padding:2% 0;">
+
+            <!-- VOTE CONTAINER -->
+            <div class="vote-container flex-col j-c-c a-i-c">
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ post.url }}" name="post_url"/>
+                    <input type="hidden" name="form_type" value="vote"/>
+
+                    <!-- Display empty or filled upvote button-->
+                    {% if post.user_vote == "Upvote" %}
+                        <input type="hidden" value="delete" name="upvote_method">
+{#                        <!-- <input type="image" name="upvote" class="vote-img upvote" src="{% static 'img/community/voteup2.png' %}" /> -->#}
+                        <button class="active-upvote noselect" type="submit" name="vote_type" value="upvote">&#8679;</button>
+                    {% else %}
+                        <input type="hidden" value="post" name="upvote_method">
+{#                        <!-- <input type="image" name="upvote" class="vote-img upvote" src="{% static 'img/community/voteup.png' %}" /> -->#}
+                        <button class="basic-upvote noselect" type="submit" name="vote_type" value="upvote">&#8679;</button>
+                    {% endif %}
+
+                    <h3 class="total-points" style="margin: .5em;">{{ post.score}}</h3>
+
+                    <!-- Display empty downvote button, or filled upvote image -->
+                    {% if post.user_vote == "Downvote" %}
+                        <input type="hidden" value="delete" name="downvote_method">
+{#                        <!-- <input type="image" name="downvote" class="vote-img downvote" src="{% static 'img/community/votedown2.png' %}" /> -->#}
+                        <button class="active-downvote noselect" type="submit" name="vote_type" value="downvote">&#8679;</button>
+                    {% else %}
+                        <input type="hidden" value="post" name="downvote_method">
+{#                        <!-- <input type="image" name="downvote" class="vote-img downvote" src="{% static 'img/community/votedown.png' %}" /> -->#}
+                        <button class="basic-downvote noselect" type="submit" name="vote_type" value="downvote">&#8679;</button>
+                    {% endif %}
+                </form>
+            </div>
+
+            <!-- POST CONTENT -->
+            <div class="education-text flex-col j-c-c" style="width: 90%;">
+
+                <!-- <p onload="timeSince('{{post.publish_date}}', this)"></p>
+                {{post.publish_date|make_list|slice:'8:'|join:''}}
+                {{post.publish_date|make_list|slice:'5:'|join:''|slice:'-3'}}
+                {{post.publish_date|make_list|slice:':4'|join:''}} -->
+
+                <!-- OWNER OF POST DETAILS -->
+                <div class="post-details flex-row a-i-c">
+                    {% if post.company %}
+                    <a href="{% url 'companies' %}?url={{ post.company.url }}" class="post-details-link">
+
+                            <img class="post-details-img" src="{{post.company.image}}" alt="Post Owner"
+                            title="{{ post.company.name }}" />
+                    </a>
+                    <div class="post-details-text">
+                        <a href="{% url 'companies' %}?url={{ post.company.url }}" class="details-text text0" style="font-weight: bold;">
+                            {{ post.company.name|make_list|slice:':35'|join:'' }}
+                            {% if post.company.name|length > 34 %}
+                            ...
+                            {% endif %}
+                        </a>
+                        <div class="details-text">Company</div>
+                        <div class="details-text">{{ post.publish_date|time_since }}</div>
+                    </div>
+
+                    {% else %}
+                    <a href="{% url 'students' %}?url={{ post.owner.url }}" class="post-details-link">
+                        <img class="post-details-img" src="{{post.owner.image}}" alt="Post Owner"
+                        title="{{ post.owner.first_name }} {{ post.owner.last_name }}" />
+                    </a>
+                    <div class="post-details-text">
+                        <a href="{% url 'students' %}?url={{ post.owner.url }}" class="details-text text0" style="font-weight: bold;">
+                            {{ post.owner.first_name|add:' '|add:post.owner.last_name|make_list|slice:':35'|join:'' }}
+                            {% if post.owner.first_name|length > 34 %}
+                            ...
+                            {% endif %}
+                        </a>
+                        <div class="details-text">Occupation</div>
+                        <div class="details-text">{{ post.publish_date|time_since }}</div>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <p>{{ post.content }}</p>
+
+            </div>
+
+            <!-- IMAGE CONTENT -->
+            {% if post.image is not None %}
+            <img class="post-image" src="{{ post.image }}" alt="Post Image" onclick="open_image(this)" />
+            {% endif %}
+
+            <hr class="hr90">
+
+            <!-- POST OPTION MENU -->
+            <div class="post-option-menu flex-row j-c-s-b a-i-c">
+                <div class="post-option flex-row j-c-c a-i-c noselect" onclick="show_comments('{{post.url}}')">
+                    <img src="{% static 'img/community/comment.png' %}" alt="Comment Icon" />
+                    <div>{{ post.comments|length}} comments</div>
+                </div>
+
+                <div class="post-option flex-row j-c-c a-i-c noselect" onclick="hide_post('{{post.url}}')">
+                    <img src="{% static 'img/community/hide.png' %}" alt="Crossed Eye" />
+                    <div>Hide</div>
+                </div>
+
+                <div class="post-option flex-row j-c-c a-i-c noselect">
+                    <img src="{% static 'img/community/report.png' %}" alt="Report Flag" />
+                    <div>Report</div>
+                </div>
+            </div>
+
+            <!-- COMMENT SECTION -->
+            <div id="commentsection{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}}" class="comment-section flex-col hidden">
+
+                <hr class="hr100">
+
+                <!-- COMMENT FORM -->
+                <form method="POST"
+                class="post-comment-form comm-form{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}} flex-row a-i-c j-c-s-b"
+                name="comment_form" enctype="multipart/form-data"
+                onsubmit="return validate_form(`.emoji-textfield{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}}`)">
+                    {% csrf_token %}
+                    {% if company is not None%}
+                    <input type="hidden" name="form_type" value="comment">
+                    <img src="{{ company.image }}" alt="Profile Picture" title="{{ company.name }}" />
+                    <input class="emoji-textfield{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}} noshadow" type="text" name='content'
+                    placeholder="Write a comment..." onclick="focus_comment(this)" />
+                    <input type="hidden" name="post_url" value="{{ post.url }}"/>
+
+                    {% else %}
+                    <input type="hidden" name="form_type" value="comment">
+                    <img src="{{ user.image }}" alt="Profile Picture" title="{{ user.first_name }} {{ user.last_name }}" />
+                    <input class="emoji-textfield{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}} noshadow" type="text" name='content'
+                    placeholder="Write a comment..." onclick="focus_comment(this)" />
+                    <input type="hidden" name="post_url" value="{{ post.url }}"/>
+                    {% endif %}
+
+
+                    <!-- EMOJI SECTION -->
+
+                    <button class="emoji-button emoji-button{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}}" type="button"
+                    onclick="inject_emojis(`.emoji-container{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}}`,
+                    `.emoji-textfield{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}}`,
+                    `.emoji-triangle{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}}`,
+                    `{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}}`)">
+                        <img class="emoji-image emoji-image{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}}"
+                        src="{% static 'img/emoji.png' %}" alt="Emoji" />
+                    </button>
+
+                        <div class="emoji-container emoji-container{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}} j-c-c a-i-c shadow"
+                        style="display: none;"></div>
+
+                        <svg class="emoji-triangle emoji-triangle{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}}" height="20" width="20">
+                            <polygon points="0,0 20,0 10,20" style="fill:var(--unilab-white);" />
+                        </svg>
+
+                    <script>
+                        window.addEventListener('click',
+                        function(e)
+                        {
+                            var key = "{{post.url|make_list|slice:'32:'|join:''|slice:'-1'}}";
+                            var button1 = document.querySelector(`.emoji-button${key}`);
+                            var container1 = document.querySelector(`.emoji-container${key}`);
+
+                            if ( !button1.contains(e.target) && !container1.contains(e.target) )
+                            {
+                                // Click outside element
+                                close_emoji_container( `.emoji-container${key}` , `.emoji-triangle${key}` , e.target );
+                            }
+                        });
+                    </script>
+
+                </form>
+
+                {% if post.comments|length == 0 %}
+                <div style="text-align: center; margin:5% 0;">Be the first to comment on this post...</div>
+                {% endif %}
+
+                <!-- INJECTING COMMENTS -->
+                {% for comment in post.comments %}
+                    <div class="comment flex-row j-c-s-b">
+                        <div class="comment-details flex-row j-c-c a-i-c">
+                            <div class="comment-date">
+                                {{ comment.publish_date|time_since }}
+                            </div>
+                            <div class="comment-options noselect">
+                                &#xb7;&#xb7;&#xb7;
+                            </div>
+                        </div>
+                            {% if comment.company is not None %}
+                            <a href="/profile">
+                            <img src="{{ comment.company.image }}" alt="Profile Picture" title="{{ company.name }}" />
+                            </a>
+                            <div class="comment-content">
+                                <p style="font-weight: bold;">
+                                    <a href="/profile" style="color: black;">
+                                        {{ comment.company.name|make_list|slice:':30'|join:'' }}
+                                        {% if comment.company.name|length > 34 %}
+                                        ...
+                                        {% endif %}
+                                    </a>
+                                </p>
+                                <p>{{ comment.content }}</p>
+                            </div>
+
+                            {% else %}
+                            <a href="/profile">
+                            <img src="{{ comment.owner.image }}" alt="Profile Picture" title="{{ user.first_name }} {{ user.last_name }}" />
+                            </a>
+                            <div class="comment-content">
+                                <p style="font-weight: bold;">
+                                    <a href="/profile" style="color: black;">
+                                        {{ comment.owner.first_name|add:' '|add:comment.owner.last_name|make_list|slice:':30'|join:'' }}...
+                                    </a>
+                                </p>
+                                <p>{{ comment.content }}</p>
+                            </div>
+                            {% endif %}
+
+
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+{% endblock main_content %}
+
+
+{% block body_js %}
+
+<script language="javascript" type="text/javascript" src="{% static 'js/community.js' %}"></script>
+<script language="javascript" type="text/javascript" src="{% static 'js/emojis.js' %}"></script>
+<script>
+    if (width > 1290) {window.onscroll = function(){scrollFunction2()};}
+    document.querySelector('#community-button').classList.add('active-item');
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+    var x = getCookie('token');
+</script>
+
+{% endblock body_js %}
