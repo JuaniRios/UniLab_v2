@@ -1,17 +1,43 @@
+import requests
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from rest_framework import filters
 from rest_framework import generics, status
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.exceptions import TokenError, InvalidToken
 from rest_framework_simplejwt.views import TokenObtainPairView
-from django_filters.rest_framework import DjangoFilterBackend
 
 from .permissions import *
 from .serializers import *
 
 User = get_user_model()
+
+
+@csrf_exempt
+def get_user(request):
+    if request.method == 'POST':
+        token = request.POST.get('token')
+        if not token:
+            return JsonResponse({'response': None, 'error': "no token given"})
+
+        """Returns: the user object serialized from a token"""
+        try:
+            validated_token = JWTAuthentication().get_validated_token(token)
+            user_object = JWTAuthentication().get_user(validated_token)
+            response = requests.get(
+                f"http://{api_url}:{port}/api/users/{user_object.id}",
+                headers={"Authorization": f"Bearer {token}"},
+            )
+            user_json = response.json()
+        except Exception as ex:
+            print(ex)
+            return JsonResponse({'response': None, "error": ex})
+
+        return JsonResponse({'response': user_json})
 
 
 class AccessTokenView(TokenObtainPairView):
@@ -352,6 +378,3 @@ class VoteList(generics.ListCreateAPIView):
             Vote.objects.filter(user=user, post=post).delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
-
