@@ -2,11 +2,10 @@ import React, { Component } from "react";
 import {
     Route,
     NavLink,
-    HashRouter,
-
+    HashRouter
 } from "react-router-dom";
 import Home from "./Home";
-// import Navbar from "./components/navbar";
+import Navbar from "./components/navbar/NavBar";
 
 
 import "./css/main_style.css";
@@ -43,8 +42,8 @@ class Main extends Component {
                         {/*<Route exact path="/" component={Home}/>*/}
                         Unilab Website
                     </div>
-
                 </div>
+                <Navbar></Navbar>
             </HashRouter>
         );
     }
@@ -52,6 +51,6 @@ class Main extends Component {
 
 export default Main;
 
-function get_user(){
+function get_user() {
 
 }
