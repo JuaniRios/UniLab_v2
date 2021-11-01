@@ -1,7 +1,7 @@
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework.urlpatterns import format_suffix_patterns
-from rest_framework_simplejwt.views import  TokenRefreshView, TokenVerifyView, TokenObtainPairView
+from rest_framework_simplejwt.views import TokenRefreshView, TokenVerifyView, TokenObtainPairView
 
 from . import views
 
@@ -12,9 +12,10 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    path('api/token/', views.AccessTokenView.as_view(), name='token_obtain'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/token/validate/', TokenVerifyView.as_view(), name='token_verify')
+    path('api/token', views.AccessTokenView.as_view(), name='token_obtain'),
+    path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/validate', TokenVerifyView.as_view(), name='token_verify'),
+    path('api/token/get-user', views.get_user, name='get-user')
 ]
 
 urlpatterns += [
