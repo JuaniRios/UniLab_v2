@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Redirect,
@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom';
 import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
-import {useAuthDispatch, ContextProvider, useAuthState} from "./Context";
-import {read_token} from "./Context/actions";
+import { useAuthDispatch, ContextProvider, useAuthState } from "./Context";
+import { read_token } from "./Context/actions";
 
 function App() {
     return (
@@ -16,10 +16,10 @@ function App() {
             <Router>
                 <Switch>
                     <Route exact path='/'>
-                        <Login/>
+                        <Login />
                     </Route>
                     <PrivateRoute exact path='/dashboard'>
-                        <Dashboard/>
+                        <Dashboard />
                     </PrivateRoute>
                 </Switch>
             </Router>
@@ -29,7 +29,7 @@ function App() {
 
 // A wrapper for <Route> that redirects to the login
 // screen if you're not yet authenticated.
-function PrivateRoute({children, userType, ...rest}) {
+function PrivateRoute({ children, userType, ...rest }) {
     const dispatch = useAuthDispatch();
     const state = useAuthState();
 
@@ -43,11 +43,13 @@ function PrivateRoute({children, userType, ...rest}) {
         )
 
 
-    } else { return(
-    <Route {...rest} render={({location}) => !state.errorMessage ? (children) :
-        (<Redirect to={{pathname: "/", state: {from: location}}}/>)}
-    />
-    )}
+    } else {
+        return (
+            <Route {...rest} render={({ location }) => !state.errorMessage ? (children) :
+                (<Redirect to={{ pathname: "/", state: { from: location } }} />)}
+            />
+        )
+    }
 
 
 
