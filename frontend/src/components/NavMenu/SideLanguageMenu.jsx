@@ -17,31 +17,31 @@ function SideLanguageMenu(props) {
     return (
         <aside className="language-menu shadow">
 
-            <button className="language-close-button close-button" onclick="open_lang()"></button>
+            <button className="language-close-button close-button" onClick="open_lang()"></button>
 
             <h2>Select Language</h2>
 
-            <a className="language-links" onclick="set_lang_cookie('en')" href="../en">
+            <a className="language-links" onClick="set_lang_cookie('en')" href="../en">
                 <img src={english_icon} alt="English Flag" />
                 <p>English</p>
             </a>
 
-            <a className="language-links" onclick="set_lang_cookie('de')" href="../de">
+            <a className="language-links" onClick="set_lang_cookie('de')" href="../de">
                 <img src={german_icon} alt="German Flag" />
                 <p>German</p>
             </a>
 
-            <a className="language-links" onclick="set_lang_cookie('fr')" href="../fr">
+            <a className="language-links" onClick="set_lang_cookie('fr')" href="../fr">
                 <img src={french_icon} alt="French Flag" />
                 <p>French</p>
             </a>
 
-            <a className="language-links" onclick="set_lang_cookie('es')" href="../es">
+            <a className="language-links" onClick="set_lang_cookie('es')" href="../es">
                 <img src={spanish_icon} alt="Spanish Flag" />
                 <p>Spanish</p>
             </a>
 
-            <a className="language-links" onclick="set_lang_cookie('ru')" href="../ru">
+            <a className="language-links" onClick="set_lang_cookie('ru')" href="../ru">
                 <img src={russian_icon} alt="Russian Flag" />
                 <p>Russian</p>
             </a>

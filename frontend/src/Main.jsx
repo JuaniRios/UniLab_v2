@@ -5,7 +5,7 @@ import {
     HashRouter
 } from "react-router-dom";
 import Home from "./Home";
-import Navbar from "./components/navbar/NavBar";
+import Navbar from "./components/NavMenu/TopNav";
 
 
 import "./css/main_style.css";
