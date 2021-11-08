@@ -1,28 +1,39 @@
 // Pages/Login/index.js
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
-import styles from './login.module.css';
+import styles from './';
 import {loginUser, useAuthDispatch, useAuthState} from "../../Context";
+import {Redirect, useHistory} from "react-router-dom";
 
 function Login(props) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    let history = useHistory();
     const dispatch = useAuthDispatch()
-    const { loading, errorMessage} = useAuthState()
+    const state = useAuthState()
+
+    useEffect( () => {
+        dispatch({type: "LOGOUT"})
+    }, [])
 
     const handleLogin = async (e)  => {
         e.preventDefault()
         let payload = {email, password}
         try {
-            let response = await loginUser(dispatch, payload)
-            if (!response){
-                props.history.push('/dashboard')
+            const success = await loginUser(dispatch, payload)
+            if (success){
+                history.push("/dashboard")
             }
         } catch (error) {
             console.log(error)
         }
+    }
+
+    if (state.token){
+        return (
+            <h1>Logging you out...</h1>
+        )
     }
 
     return (
@@ -43,7 +54,7 @@ function Login(props) {
                                    onChange={(e) => setPassword(e.target.value)} />
                         </div>
                     </div>
-                    <button onClick={handleLogin} disabled={loading}>login</button>
+                    <button onClick={handleLogin}>login</button>
                 </form>
             </div>
         </div>
