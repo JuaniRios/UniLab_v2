@@ -100,3 +100,10 @@
     right: unset !important;
     left: 2% !important;
 }
+.profile-names
+{
+    font-size: 1.25em; 
+    text-align:center; 
+    width:80%;
+    font-weight:bold;
+}
