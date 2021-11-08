@@ -1,14 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
     BrowserRouter as Router,
     Redirect,
     Route,
     Switch
 } from 'react-router-dom';
-import routes from './Config/routes';
 import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
-import {ContextProvider, useAuthDispatch} from "./Context";
+import {useAuthDispatch, ContextProvider, useAuthState} from "./Context";
 import {read_token} from "./Context/actions";
 
 function App() {
@@ -30,28 +29,28 @@ function App() {
 
 // A wrapper for <Route> that redirects to the login
 // screen if you're not yet authenticated.
-function PrivateRoute({ children, userType, ...rest }) {
+function PrivateRoute({children, userType, ...rest}) {
     const dispatch = useAuthDispatch();
-    const [loggedIn, setLoggedIn] = useState(0)
-    useEffect( () => {
-        if (loggedIn) {
-            hasValidToken(setLoggedIn);
-        }
-    })
+    const state = useAuthState();
 
-    async function hasValidToken(setLoggedIn){
-        // read the token in localStorage. If token is valid, log in by updating context.
-        // return true if token is valid and context updated. return false otherwise
-        const res = await read_token(dispatch)
-        setLoggedIn(res)
-    }
+    useEffect(() => {
+        read_token(dispatch)
+    }, [])
+
+    if (!state.token && !state.errorMessage) {
+        return (
+            <h1>Checking for authentication...</h1>
+        )
 
 
-    return (
-        <Route {...rest} render={({ location }) => loggedIn ? (children) :
-            (<Redirect to={{pathname: "/", state: { from: location }}}/>)}
-        />
-  );
+    } else { return(
+    <Route {...rest} render={({location}) => !state.errorMessage ? (children) :
+        (<Redirect to={{pathname: "/", state: {from: location}}}/>)}
+    />
+    )}
+
+
+
 }
 
 export default App;

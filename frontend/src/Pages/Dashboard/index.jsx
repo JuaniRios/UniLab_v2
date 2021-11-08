@@ -3,14 +3,16 @@
 import React from 'react'
 import styles from './dashboard.module.css'
 import {logout, useAuthDispatch, useAuthState} from "../../Context";
+import {useHistory} from "react-router-dom";
 
 function Dashboard(props) {
     const dispatch = useAuthDispatch()
-    const userData = useAuthState()
+    const {userData} = useAuthState()
+    let history = useHistory();
 
-    const handeLogout = () => {
+    const handleLogout = () => {
         logout(dispatch)
-        props.history.push('/login')
+        history.push('/')
     }
 
     return (
@@ -19,9 +21,9 @@ function Dashboard(props) {
                 <h1>
                     Dashboard
                 </h1>
-                <button className={styles.logoutBtn} onClick={handeLogout}>Logout</button>
+                <button className={styles.logoutBtn} onClick={handleLogout}>Logout</button>
             </div>
-            <p>Welcome {userData.email}</p>
+            <p>Welcome {userData.first_name}</p>
         </div>
     )
 }

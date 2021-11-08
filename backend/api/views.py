@@ -1,3 +1,5 @@
+import json
+
 import requests
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_protect, csrf_exempt
@@ -20,7 +22,8 @@ User = get_user_model()
 @csrf_exempt
 def get_user(request):
     if request.method == 'POST':
-        token = request.POST.get('token')
+        data = json.loads(request.body)
+        token = data.get('token')
         if not token:
             return JsonResponse({'response': None, 'error': "no token given"})
 
@@ -33,9 +36,13 @@ def get_user(request):
                 headers={"Authorization": f"Bearer {token}"},
             )
             user_json = response.json()
+        except InvalidToken as ex:
+            print(ex)
+            return JsonResponse({'response': None, "error": ex.detail["detail"]})
+
         except Exception as ex:
             print(ex)
-            return JsonResponse({'response': None, "error": ex})
+            return JsonResponse({'response': None, "error": "Unknown. Check server console."})
 
         return JsonResponse({'response': user_json})
 
