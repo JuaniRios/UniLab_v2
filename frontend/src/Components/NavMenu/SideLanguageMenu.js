@@ -4,14 +4,16 @@ import {
     NavLink,
     HashRouter
 } from "react-router-dom";
-
-import "../../scripts/main.jsx";
+// SCRIPTS
+import "../../Assets/scripts/main.jsx";
+// STYLES
+import "./SideLanguageMenu.css";
 // IMAGES
-import english_icon from "../../img/languages/en.webp";
-import spanish_icon from "../../img/languages/es.webp";
-import german_icon from "../../img/languages/de.webp";
-import russian_icon from "../../img/languages/ru.webp";
-import french_icon from "../../img/languages/fr.webp";
+import english_icon from "../../Assets/img/languages/en.webp";
+import spanish_icon from "../../Assets/img/languages/es.webp";
+import german_icon from "../../Assets/img/languages/de.webp";
+import russian_icon from "../../Assets/img/languages/ru.webp";
+import french_icon from "../../Assets/img/languages/fr.webp";
 
 function SideLanguageMenu(props) {
     return (

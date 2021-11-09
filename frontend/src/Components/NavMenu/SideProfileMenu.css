@@ -45,23 +45,23 @@
     transition: .5s;
     box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1), 0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
 }
-#profile-picture
+.profile-picture
 {
     height: 25vh;
     width: 25vh;
     border-radius: 50%;
     object-fit:cover;
 }
-#settings-picture, #logout-picture, #prof-picture
+.settings-picture, .logout-picture, .prof-picture
 {
     height: 3vh;
     width: 3vh;
     margin: 0 5%;
     background-size: 100% 100%;
 }
-#prof-picture {background-image: url('../img/profile.png');}
-#settings-picture {background-image: url('../img/settings2.png');}
-#logout-picture {background-image: url('../img/logout2.png');}
+.prof-picture {background-image: url('../../Assets/img/profile.png');}
+.settings-picture {background-image: url('../../Assets/img/settings2.png');}
+.logout-picture {background-image: url('../../Assets/img/logout2.png');}
 .settings-button
 {
     display: flex;
@@ -78,23 +78,9 @@
     color: var(--unilab-white);
     box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1), 0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
 }
-.settings-button:hover #prof-picture {background-image: url('../img/profile-white.png');}
-.settings-button:hover #settings-picture {background-image: url('../img/settings.png');}
-.settings-button:hover #logout-picture {background-image: url('../img/logout.png');}
-/* .profile-close-button
-{
-    position: absolute;
-    top: 1%;
-    left: 3%;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    font-weight: bold;
-    background-color: var(--unilab-white);
-    color: var(--unilab-orange);
-    background-image: url('../img/cancel.png');
-    background-size: 100% 100%;
-} */
+.settings-button:hover .prof-picture {background-image: url('../../Assets/img/profile-white.png');}
+.settings-button:hover .settings-picture {background-image: url('../../Assets/img/settings.png');}
+.settings-button:hover .logout-picture {background-image: url('../../Assets/img/logout.png');}
 .profile-close-button
 {
     right: unset !important;

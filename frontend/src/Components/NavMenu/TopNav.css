@@ -46,6 +46,18 @@
         cursor: pointer;
         padding: 0 2%;
     }
+    .top-nav-item:hover .top-nav-item-filler
+    {
+        width: 100%;
+        box-shadow: 
+        0px 0px 0px 0.5px rgba(50, 50, 93, 0.1), 
+        0px 2px 5px 0px rgba(50, 50, 93, 0.1), 
+        0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+    }
+    .top-nav-item:hover .top-nav-item-text
+    {
+        color: var(--unilab-white);
+    }
     .top-nav-container
     {
         display: flex; 
@@ -219,7 +231,7 @@
 .search-cancel
 {
     display: none;
-    /* background-image: url('../img/cancel.png');
+    /* background-image: url('../../Assets/img/cancel.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center center; */
@@ -228,7 +240,7 @@
 }
 .menu-mobile
 {
-    background-image: url('../img/linebar.png');
+    background-image: url('../../Assets/img/linebar.png');
     background-size: 100% 100%;
 }
 .active-item {color: var(--unilab-orange);}

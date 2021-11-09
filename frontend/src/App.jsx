@@ -5,8 +5,13 @@ import {
     Route,
     Switch
 } from 'react-router-dom';
+// STYLES
+import "./main_style.css";
+// PAGES
+import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
+// OTHER
 import { useAuthDispatch, ContextProvider, useAuthState } from "./Context";
 import { read_token } from "./Context/actions";
 
@@ -16,6 +21,9 @@ function App() {
             <Router>
                 <Switch>
                     <Route exact path='/'>
+                        <Home />
+                    </Route>
+                    <Route exact path='/login'>
                         <Login />
                     </Route>
                     <PrivateRoute exact path='/dashboard'>

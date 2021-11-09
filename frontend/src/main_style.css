@@ -1,35 +1,35 @@
 @font-face
 {
     font-family: 'Roboto';
-    src: url('../fonts/roboto/Roboto-Regular.ttf') format('truetype');
+    src: url('./Assets/fonts/roboto/Roboto-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 @font-face
 {
     font-family: 'Glacial';
-    src: url('../fonts/glacial/GlacialIndifference-Regular.otf');
+    src: url('./Assets/fonts/glacial/GlacialIndifference-Regular.otf');
     font-weight: normal;
     font-style: normal;
 }
 @font-face
 {
     font-family: 'Norwester';
-    src: url('../fonts/norwester/norwester.otf');
+    src: url('./Assets/fonts/norwester/norwester.otf');
     font-weight: normal;
     font-style: normal;
 }
 @font-face
 {
     font-family: 'Montserrat';
-    src: url('../fonts/montserrat/Montserrat-Regular.ttf') format('truetype');
+    src: url('./Assets/fonts/montserrat/Montserrat-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 @font-face
 {
     font-family: 'Algerian';
-    src: url('../fonts/algerian/Algerian\ Regular.ttf') format('truetype');
+    src: url('./Assets/fonts/algerian/Algerian\ Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }

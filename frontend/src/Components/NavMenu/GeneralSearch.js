@@ -5,11 +5,13 @@ import {
     HashRouter
 } from "react-router-dom";
 
-import "../../scripts/main.jsx";
+import "../../Assets/scripts/main.jsx";
+// STYLES
+import "./GeneralSearch.css";
 // IMAGES
-import search_icon from "../../img/top-nav/search.png";
+import search_icon from "../../Assets/img/top-nav/search.png";
 
-function Navbar(props) {
+function GeneralSearch(props) {
     const user = props.user
     return (
         <form className="search-wrapper shadow flex-row a-i-c j-c-c hidden">
@@ -24,4 +26,4 @@ function Navbar(props) {
     )
 }
 
-export default Navbar;
+export default GeneralSearch;

@@ -4,20 +4,22 @@ import {
     NavLink,
     HashRouter
 } from "react-router-dom";
-
-import "../../scripts/main.jsx";
-import * as top_nav from "../../scripts/top_nav.jsx";
+// SCRIPTS
+import "../../Assets/scripts/main.jsx";
+import top_nav from "../../Assets/scripts/top_nav.jsx";
+// STYLES
+import "./TopNav.css";
 // IMAGES
-import logo from "../../img/unilab_logo.png";
-import home_icon from "../../img/top-nav/address2.png";
-import community_icon from "../../img/top-nav/community.png";
-import companies_icon from "../../img/top-nav/employers.png";
-import jobs_icon from "../../img/top-nav/jobs.svg";
-import about_icon from "../../img/top-nav/about.png";
-import profile_icon from "../../img/top-nav/profile.png";
-import search_icon from "../../img/top-nav/search.png";
+import logo from "../../Assets/img/unilab_logo.png";
+import home_icon from "../../Assets/img/top-nav/address2.png";
+import community_icon from "../../Assets/img/top-nav/community.png";
+import companies_icon from "../../Assets/img/top-nav/employers.png";
+import jobs_icon from "../../Assets/img/top-nav/jobs.svg";
+import about_icon from "../../Assets/img/top-nav/about.png";
+import profile_icon from "../../Assets/img/top-nav/profile.png";
+import search_icon from "../../Assets/img/top-nav/search.png";
 
-function Navbar(props) {
+function TopNav(props) {
     const user = props.user
     return (
         <nav className="top-nav flex-row a-i-c shadow">
@@ -35,8 +37,7 @@ function Navbar(props) {
             <div className="top-nav-container">
 
                 {/*HOME BUTTON*/}
-                <NavLink to="/" className="top-nav-item flex-row a-i-c" onMouseOver={() => top_nav.fill_items(0)}
-                    onMouseOut={() => top_nav.cancel_items(0)}>
+                <NavLink to="/" className="top-nav-item flex-row a-i-c">
                     <div className="top-nav-item-filler flex-row a-i-c" />
                     <img className="top-nav-image" src={home_icon} alt="Home Icon" />
                     {/*{# Translators: Start of Navigation bar #}*/}
@@ -47,8 +48,7 @@ function Navbar(props) {
                 </NavLink>
 
                 {/*COMMUNITY BUTTON*/}
-                <NavLink to="/community" className="top-nav-item flex-row a-i-c" onMouseOver={() => top_nav.fill_items(1)}
-                    onMouseOut={() => top_nav.cancel_items(1)}>
+                <NavLink to="/community" className="top-nav-item flex-row a-i-c">
                     <div className="top-nav-item-filler flex-row a-i-c" />
                     <img className="top-nav-image" src={community_icon} alt="Community Icon" />
                     <div id="community-button" className="top-nav-item-text">
@@ -58,8 +58,7 @@ function Navbar(props) {
                 </NavLink>
 
                 {/*COMPANIES BUTTON*/}
-                <NavLink to="/companies" className="top-nav-item flex-row a-i-c" onMouseOver={() => top_nav.fill_items(2)}
-                    onMouseOut={() => top_nav.cancel_items(2)}>
+                <NavLink to="/companies" className="top-nav-item flex-row a-i-c">
                     <div className="top-nav-item-filler flex-row a-i-c" />
                     <img className="top-nav-image" src={companies_icon} alt="Companies Icon" />
                     <div id="employers-button" className="top-nav-item-text">
@@ -69,8 +68,7 @@ function Navbar(props) {
                 </NavLink>
 
                 {/*JOBS BUTTON*/}
-                <NavLink to="/jobs" className="top-nav-item flex-row a-i-c" onMouseOver={() => top_nav.fill_items(3)}
-                    onMouseOut={() => top_nav.cancel_items(3)}>
+                <NavLink to="/jobs" className="top-nav-item flex-row a-i-c">
                     <div className="top-nav-item-filler flex-row a-i-c" />
                     <img className="top-nav-image" src={jobs_icon} alt="Jobs Icon" />
                     <div id="jobs-button" className="top-nav-item-text">
@@ -81,8 +79,7 @@ function Navbar(props) {
                 </NavLink>
 
                 {/*ABOUT BUTTON*/}
-                <NavLink to="/about" className="top-nav-item flex-row a-i-c" onMouseOver={() => top_nav.fill_items(4)}
-                    onMouseOut={() => top_nav.cancel_items(4)}>
+                <NavLink to="/about" className="top-nav-item flex-row a-i-c">
                     <div className="top-nav-item-filler flex-row a-i-c" />
                     <img className="top-nav-image" src={about_icon} alt="About Icon" />
                     <div id="about-button" className="top-nav-item-text">
@@ -126,4 +123,4 @@ function Navbar(props) {
     )
 }
 
-export default Navbar;
+export default TopNav;
