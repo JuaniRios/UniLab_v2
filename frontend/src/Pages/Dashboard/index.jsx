@@ -11,9 +11,10 @@ function Dashboard(props) {
 
     const handleLogout = () => {
         logout(dispatch)
-        history.push('/')
+        history.push('/login')
     }
-
+    // TODO: Remove
+    console.log(userData)
     return (
         <div style={{ padding: 10 }}>
             <div className="dashboardPage" >
