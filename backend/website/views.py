@@ -258,7 +258,7 @@ def get_posts(request):
     json_response = json.dumps(posts["results"])
     return HttpResponse(json_response)
 
-
+# ported
 def get_user(token):
     """Returns: the user object serialized from a token"""
     try:

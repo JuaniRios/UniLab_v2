@@ -11,6 +11,7 @@ import "./main_style.css";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
+import {CommunityPosts} from "./Components/CommunityPosts.js"
 // OTHER
 import { useAuthDispatch, ContextProvider, useAuthState } from "./Context";
 import { read_token } from "./Context/actions";
@@ -28,6 +29,9 @@ function App() {
                     </Route>
                     <PrivateRoute exact path='/dashboard'>
                         <Dashboard />
+                    </PrivateRoute>
+                    <PrivateRoute exact path='/community'>
+                        <CommunityPosts/>
                     </PrivateRoute>
                 </Switch>
             </Router>
