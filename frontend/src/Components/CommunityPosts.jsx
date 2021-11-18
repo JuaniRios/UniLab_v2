@@ -9,14 +9,6 @@ export function CommunityPosts(props) {
     const [page, setPage] = useState(1)
     const api_url = config.django_api
 
-    // function getPosts(initialState, page) {
-    //     let postsReturned;
-    //
-    //     //     .then(() => {
-    //     //     return postsReturned;
-    //     // })
-    // }
-
     async function fetch_posts(page) {
         const requestOptions = {
             method: 'GET',
@@ -31,8 +23,6 @@ export function CommunityPosts(props) {
 
         return await response.json()
     }
-
-
 
     useEffect( () => {
         fetch_posts(page).then(data => {

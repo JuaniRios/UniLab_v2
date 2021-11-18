@@ -3,8 +3,11 @@ import TopNav from "../../Components/NavMenu/TopNav";
 import GeneralSearch from "../../Components/NavMenu/GeneralSearch";
 import SideLanguageMenu from "../../Components/NavMenu/SideLanguageMenu";
 import SideProfileMenu from "../../Components/NavMenu/SideProfileMenu";
+import {useAuthState} from "../../Context";
 
 function NavMenu(props) {
+    const state = useAuthState()
+    const userData = state.userData
 
     // OPEN AND CLOSE SIDE PROFILE MENU
     function changeProfileClasses(initState) {
