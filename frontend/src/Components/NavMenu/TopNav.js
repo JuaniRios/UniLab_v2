@@ -1,12 +1,4 @@
-import React, { useState, useEffect } from "react";
-import {
-    Route,
-    NavLink,
-    HashRouter
-} from "react-router-dom";
-// SCRIPTS
-import "../../Assets/scripts/main.jsx";
-import top_nav from "../../Assets/scripts/top_nav.jsx";
+import React, { useState, useEffect, useReducer } from "react";
 // STYLES
 import "./TopNav.css";
 // IMAGES
@@ -20,24 +12,51 @@ import profile_icon from "../../Assets/img/top-nav/profile.png";
 import search_icon from "../../Assets/img/top-nav/search.png";
 
 function TopNav(props) {
-    const user = props.user
+    const height = document.documentElement.clientHeight;
+    const width = document.documentElement.clientWidth;
+
+    const user = props.user;
+
+    const setProfileClasses = props.setProfileClasses;
+    const setLanguageClasses = props.setLanguageClasses;
+    const setSearchClasses = props.setSearchClasses;
+
+    // OPEN AND CLOSE MOBILE MENU
+    function changeMobileClasses(initState) {
+        if (initState[0] === "linebar-inactive") {
+            return ["linebar-toggled", "container-opened"];
+        }
+        else {
+            return ["linebar-inactive", "container-closed"];
+        }
+    }
+    const initMobileClasses = ["linebar-inactive", "container-closed"];
+    const [mobileClasses, setMobileClasses] = useReducer(changeMobileClasses, initMobileClasses);
+    const [linebarClass, containerClass] = mobileClasses;
+
+    let linebar;
+    if (width < 1030) {
+        linebar = <div className={`linebar-btn ${linebarClass}`} onClick={setMobileClasses} />;
+    }
+    else {
+        linebar = <></>;
+    }
     return (
         <nav className="top-nav flex-row a-i-c shadow">
 
             {/*LOGO*/}
-            <NavLink to='/' id="logo-link" className="top-nav-item flex-row a-i-c">
-                <img id="logo-img" className="top-nav-image" src={logo} alt="UniLab Logo"
-                    title="Home" />
-            </NavLink>
+            <a href='/' id="logo-link" className="top-nav-item flex-row a-i-c">
+                <img id="logo-img" className="top-nav-image" src={logo} alt="UniLab Logo" title="Home" />
+            </a>
 
             {/*MOBILE*/}
-            <div className="menu-mobile" onClick={top_nav.open_linebar} />
+            {linebar}
 
             {/*MENU*/}
-            <div className="top-nav-container">
+            <div className={`top-nav-container ${containerClass}`}>
 
                 {/*HOME BUTTON*/}
-                <NavLink to="/" className="top-nav-item flex-row a-i-c">
+                <a href="/" className="top-nav-item flex-row a-i-c">
                     <div className="top-nav-item-filler flex-row a-i-c" />
                     <img className="top-nav-image" src={home_icon} alt="Home Icon" />
                     {/*{# Translators: Start of Navigation bar #}*/}
@@ -45,30 +64,30 @@ function TopNav(props) {
                         {/*{% translate "Home" context "this is the navbar"%}*/}
                         Home
                     </div>
-                </NavLink>
+                </a>
 
                 {/*COMMUNITY BUTTON*/}
-                <NavLink to="/community" className="top-nav-item flex-row a-i-c">
+                <a href="/community" className="top-nav-item flex-row a-i-c">
                     <div className="top-nav-item-filler flex-row a-i-c" />
                     <img className="top-nav-image" src={community_icon} alt="Community Icon" />
                     <div id="community-button" className="top-nav-item-text">
                         {/*{% translate "Community"%}*/}
                         Community
                     </div>
-                </NavLink>
+                </a>
 
                 {/*COMPANIES BUTTON*/}
-                <NavLink to="/companies" className="top-nav-item flex-row a-i-c">
+                <a href="/companies" className="top-nav-item flex-row a-i-c">
                     <div className="top-nav-item-filler flex-row a-i-c" />
                     <img className="top-nav-image" src={companies_icon} alt="Companies Icon" />
                     <div id="employers-button" className="top-nav-item-text">
                         {/*{% translate "Companies"%}*/}
                         Companies
                     </div>
-                </NavLink>
+                </a>
 
                 {/*JOBS BUTTON*/}
-                <NavLink to="/jobs" className="top-nav-item flex-row a-i-c">
+                <a href="/jobs" className="top-nav-item flex-row a-i-c">
                     <div className="top-nav-item-filler flex-row a-i-c" />
                     <img className="top-nav-image" src={jobs_icon} alt="Jobs Icon" />
                     <div id="jobs-button" className="top-nav-item-text">
@@ -76,20 +95,20 @@ function TopNav(props) {
                         Jobs
                     </div>
 
-                </NavLink>
+                </a>
 
                 {/*ABOUT BUTTON*/}
-                <NavLink to="/about" className="top-nav-item flex-row a-i-c">
+                <a href="/about" className="top-nav-item flex-row a-i-c">
                     <div className="top-nav-item-filler flex-row a-i-c" />
                     <img className="top-nav-image" src={about_icon} alt="About Icon" />
                     <div id="about-button" className="top-nav-item-text">
                         {/*{% translate "About"%}*/}
                         About
                     </div>
-                </NavLink>
+                </a>
 
                 {/*PROFILE BUTTON*/}
-                <a className="top-nav-item top-nav-profile flex-row a-i-c" onClick={top_nav.open_profile}>
+                <a className="top-nav-item top-nav-profile flex-row a-i-c" onClick={setProfileClasses}>
                     <img id="profile-img" className="top-nav-image" src={user ? user['image'] : profile_icon}
                         alt="Profile Picture" title="Profile" />
 
@@ -100,9 +119,8 @@ function TopNav(props) {
                 </a>
 
                 {/*SEARCH BUTTON*/}
-                <a className="top-nav-item top-nav-search flex-row a-i-c" onClick={top_nav.show_search}>
-                    <img id="search-img" className="top-nav-image" src={search_icon}
-                        alt="Magnifying Glass" title="Search" />
+                <a className="top-nav-item top-nav-search flex-row a-i-c" onClick={setSearchClasses}>
+                    <img id="search-img" className="top-nav-image" src={search_icon} alt="Magnifying Glass" title="Search" />
                     <div id="search-text" className="top-nav-item-text">
                         {/*{% translate "Search"%}*/}
                         Search
@@ -110,8 +128,8 @@ function TopNav(props) {
                 </a>
 
                 {/*LANGUAGE BUTTON*/}
-                <a className="top-nav-item flex-row a-i-c" onClick={top_nav.open_lang}>
-                    <img id="lang-img" className="top-nav-image" alt="Locale Country Flag" title="Language" />
+                <a className="top-nav-item flex-row a-i-c" onClick={setLanguageClasses}>
+                    <img id="lang-img" className="top-nav-image" alt="Locale Flag" title="Language" />
                     {/*{# Translators: End of navigation bar #}*/}
                     <div id="search-text" className="top-nav-item-text">
                         {/*{% translate "Language"%}*/}

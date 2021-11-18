@@ -3,12 +3,20 @@
     .language-menu
     {
         width: 25vw;
-        right: -25vw;
+        
     }
     .language-close-button
     {
         height: 3vh;
         width: 3vh;
+    }
+    .language-menu-closed
+    {
+        right: -25vw;
+    }
+    .language-menu-opened
+    {
+        right: 0;
     }
 }
 @media only screen and (max-width: 1030px)
@@ -23,12 +31,13 @@
         height: 5vw;
         width: 5vw;
     }
-}
-@media only screen and (max-width: 800px)
-{
-    .top-nav-item-text
+    .language-menu-closed
     {
-        font-size: 16px;
+        left: 100vw;
+    }
+    .language-menu-opened
+    {
+        left: 0;
     }
 }
 .language-menu

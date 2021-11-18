@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from "react";
-import {
-    Route,
-    NavLink,
-    HashRouter
-} from "react-router-dom";
-
-import "../../Assets/scripts/main.jsx";
 // STYLES
 import "./GeneralSearch.css";
 // IMAGES
 import search_icon from "../../Assets/img/top-nav/search.png";
 
 function GeneralSearch(props) {
-    const user = props.user
+    const user = props.user;
+    const [searchClass, overlayClass] = props.searchClasses;
+    const setSearchClasses = props.setSearchClasses;
     return (
-        <form className="search-wrapper shadow flex-row a-i-c j-c-c hidden">
+        <>
+            <div className={`overlay ${overlayClass}`} onClick={setSearchClasses}></div>
 
-            <img id="search-icon" src={search_icon} alt="Magnifying Glass" title="Search" />
+            <form className={`search-wrapper ${searchClass} shadow flex-row a-i-c j-c-c`}>
 
-            {/* <!-- Search Field --> */}
-            <input className="search-field noshadow" name="main-search" type="search" placeholder="Search UniLab..." />
-            <div className="search-cancel close-button" onclick="hide_search()"></div>
+                <img id="search-icon" src={search_icon} alt="Magnifying Glass" title="Search" />
 
-        </form>
+                {/* <!-- Search Field --> */}
+                <input className="search-field noshadow" name="main-search" type="search" placeholder="Search UniLab..." />
+                <div className="search-cancel close-button" onClick={setSearchClasses}></div>
+
+            </form>
+        </>
     )
 }
 

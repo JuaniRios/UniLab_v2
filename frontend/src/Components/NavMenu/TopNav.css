@@ -1,6 +1,6 @@
 @media only screen and (min-width: 1030px)
 {
-    .menu-mobile, .top-nav-image, #search-text, #profile-text {display: none;}
+    .top-nav-image, #search-text, #profile-text {display: none;}
     .top-nav
     {
         height: 10vh;
@@ -14,15 +14,10 @@
     {
         opacity: .5;
     }
-    #search-img, #profile-img, #lang-img, #search-icon
+    #search-img, #profile-img, #lang-img
     {
         height: 5vh;
         width: 5vh;
-    }
-    .search-cancel
-    {
-        height: 3vh;
-        width: 3vh;
     }
     #profile-img
     {
@@ -68,12 +63,6 @@
 }
 @media only screen and (max-width: 1030px)
 {
-    .menu-mobile 
-    {
-        display: flex;
-        height: 5vw;
-        width: 5vw;
-    }
     .top-nav
     {
         height: 10vh;
@@ -93,7 +82,6 @@
     {
         height: 5vh;
         width: 5vh;
-        margin-right: 5%;
     }
     .top-nav-item
     {
@@ -126,26 +114,23 @@
         background-color: var(--unilab-white);
         padding: 0 5%;
         align-items: center;
-        left: 100vw;
         transition: .5s;
+    }
+    .container-closed
+    {
+        left: 100vw;
+    }
+    .container-opened
+    {
+        left: 0;
     }
     .top-nav-search
     {
         order: -1;
     }
-    .search-cancel
-    {
-        height: 5vh;
-        width: 5vh;
-    }
 }
 @media only screen and (max-width: 800px)
 {
-    .menu-mobile 
-    {
-        height: 7.5vw;
-        width: 7.5vw;
-    }
     .top-nav-item-text
     {
         font-size: 16px;
@@ -153,8 +138,8 @@
 }
 #logo-link
 {
-    height: 10vh;
-    width: 20vh;
+    height: 8vh;
+    width: unset !important;
     background-color: rgba(0, 0, 0, 0);
     padding: 0;
     border-bottom: none;
@@ -169,7 +154,7 @@
     display: flex;
     align-items: center;
 }
-.top-nav, .search-wrapper
+.top-nav
 {
     transition: .5s;
     width: 100%;
@@ -217,41 +202,4 @@
 {
     opacity: .5;
 }
-.search-field
-{
-    display: none;
-    width: 50%;
-    height: 100%;
-    outline: none;
-    border: none;
-    margin: 0 1%;
-    z-index: 9001;
-    padding: 0;
-}
-.search-cancel
-{
-    display: none;
-    /* background-image: url('../../Assets/img/cancel.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    background-position: center center; */
-    cursor: pointer;
-    position: relative !important;
-}
-.menu-mobile
-{
-    background-image: url('../../Assets/img/linebar.png');
-    background-size: 100% 100%;
-}
 .active-item {color: var(--unilab-orange);}
-
-.search-wrapper
-{
-    height: 10vh;
-    transition: 1s;
-}
-
-#search-icon
-{
-    cursor: pointer;
-}

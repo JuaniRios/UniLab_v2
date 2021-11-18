@@ -1,22 +1,13 @@
 import React from "react";
-import TopNav from "../../Components/NavMenu/TopNav";
-import GeneralSearch from "../../Components/NavMenu/GeneralSearch";
-import SideLanguageMenu from "../../Components/NavMenu/SideLanguageMenu";
-import SideProfileMenu from "../../Components/NavMenu/SideProfileMenu";
+import NavMenu from "../../Components/NavMenu";
+// SCRIPTS
+import "../../Assets/scripts/main.jsx";
+
 function Home(props) {
+    document.title = "UniLab - Home";
     return (
         <>
-            {/* Navigation Menu */}
-            <>
-                <TopNav />
-                <GeneralSearch />
-                <SideProfileMenu />
-                <SideLanguageMenu />
-            </>
-            {/* Main Section */}
-            <>
-
-            </>
+            <NavMenu />
         </>
     );
 }

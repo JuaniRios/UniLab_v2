@@ -1,0 +1,73 @@
+@media only screen and (min-width: 1030px)
+{
+    #search-icon
+    {
+        height: 5vh;
+        width: 5vh;
+    }
+    .search-cancel
+    {
+        height: 3vh;
+        width: 3vh;
+    }
+}
+@media only screen and (max-width: 1030px)
+{
+    .search-cancel
+    {
+        height: 5vh;
+        width: 5vh;
+    }
+}
+.search-wrapper
+{
+    height: 10vh;
+    width: 100%;
+    background-color: var(--unilab-white);
+    top: 0;
+    position: fixed;
+    z-index: 10000;
+    transition: 1s;
+    padding-left: 50%;
+}
+.search-menu-opened
+{
+    display: flex !important;
+    -webkit-animation: slide 1s forwards;
+    -webkit-animation-delay: 0s;
+    animation: slide 1s forwards;
+    animation-delay: 0s;
+}
+@-webkit-keyframes slide {
+    100% { padding-left: 0; }
+}
+@keyframes slide {
+    100% { padding-left: 0; }
+}
+.search-menu-closed
+{
+    display: none !important;
+}
+#search-icon
+{
+    cursor: pointer;
+}
+.search-field
+{
+    width: 50%;
+    height: 100%;
+    outline: none;
+    border: none;
+    margin: 0 1%;
+    z-index: 9001;
+    padding: 0;
+}
+.search-cancel
+{
+    /* background-image: url('../../Assets/img/cancel.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center center; */
+    cursor: pointer;
+    position: relative !important;
+}
