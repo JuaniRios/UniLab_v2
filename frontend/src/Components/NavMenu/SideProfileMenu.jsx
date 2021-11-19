@@ -3,12 +3,83 @@ import React, { useState, useEffect } from "react";
 import "./SideProfileMenu.css";
 // IMAGES
 import profile_icon from "../../Assets/img/top-nav/profile.png";
+import { useAuthState } from "../../Context";
+import { NavLink } from "react-router-dom";
 
 function SideProfileMenu(props) {
-
-    const user = props.user;
+    const state = useAuthState();
+    const userData = state.userData;
     const [profileClass, overlayClass] = props.profileClasses;
     const setProfileClasses = props.setProfileClasses;
+
+    const profileButton =
+        <NavLink to="/profile" className="settings-button">
+            <div className="prof-picture"></div>
+            <p className="w80">My Profile</p>
+        </NavLink>;
+
+    const myCompaniesButton =
+        <NavLink to="my-companies" className="settings-button">
+            <div className="prof-picture"></div>
+            <p className="w80">My Companies</p>
+        </NavLink>;
+
+    let signedInButtons =
+        <>
+            <NavLink to="/settings" className="settings-button">
+                <div className="settings-picture"></div>
+                <p className="w80">Account Settings</p>
+            </NavLink>
+
+            <NavLink to="/signout" className="settings-button">
+                <div className="logout-picture"></div>
+                <p className="w80">Sign Out</p>
+            </NavLink>
+        </>;
+
+    let userHTML;
+    if (userData.user_type_verbose === "Student") {
+        userHTML = <>
+            {profileButton}
+            {signedInButtons}
+        </>
+    } else if (userData.user_type_verbose === "Employer") {
+        userHTML = <>
+            {myCompaniesButton}
+            {signedInButtons}
+        </>
+    }
+
+    const notSignedInButtons =
+        <>
+            <NavLink to="/login" className="settings-button">
+                <div className="logout-picture" />
+                {/* {# Translators: End of side profile menu #} */}
+                <h3 className="w80">Sign In</h3>
+            </NavLink>
+        </>;
+
+    const signedInUserData =
+        <>
+            <NavLink to="/profile">
+                <img className="profile-picture" src={userData ? userData['image'] : profile_icon} alt="Profile Picture" />
+            </NavLink>
+
+            <div className="profile-names">{userData.first_name} {userData.last_name}</div>
+
+            <div>{userData.user_type_verbose}</div>
+        </>;
+
+    const notSignedInMessage =
+        <>
+            <NavLink to="/profile">
+                <img className="profile-picture" src={userData ? userData['image'] : profile_icon} alt="Profile Picture" />
+            </NavLink>
+
+            <div className="profile-names">Guest User</div>
+
+            <div>You are currently not signed in.</div>
+        </>;
 
     return (
         <>
@@ -16,35 +87,15 @@ function SideProfileMenu(props) {
 
             <aside className={`profile-menu ${profileClass} shadow`}>
 
-                <button className="profile-close-button close-button" onClick={setProfileClasses}></button>
-                <a href="{% url 'profile' %}"><img className="profile-picture" src={user ? user['image'] : profile_icon} alt="Profile Picture" /></a>
-                <div className="profile-names">user.first_name user.last_name</div>
+                <button className="profile-close-button close-button" onClick={setProfileClasses} />
 
-                <div>user.user_type_verbose</div>
+                {userData && signedInUserData}
+                {!userData && notSignedInMessage}
 
                 {/* MENU BUTTONS */}
                 <div className="profile-menu-btn-holder w100">
-
-                    <a href="{% url 'profile' %}" className="settings-button">
-                        <div className="prof-picture"></div>
-                        <p className="w80">My Profile</p>
-                    </a>
-
-                    {/* <a href="{% url 'my-companies' %}" className="settings-button">
-                        <div className="prof-picture"></div>
-                        <p className="w80">My Companies</p>
-                    </a> */}
-
-                    <a href="{% url 'settings' %}" className="settings-button">
-                        <div className="settings-picture"></div>
-                        <p className="w80">Account Settings</p>
-                    </a>
-
-                    <a href="{% url 'signout' %}" className="settings-button">
-                        <div className="logout-picture"></div>
-                        <p className="w80">Sign Out</p>
-                    </a>
-
+                    {userData && userHTML}
+                    {!userData && notSignedInButtons}
                 </div>
 
             </aside>
