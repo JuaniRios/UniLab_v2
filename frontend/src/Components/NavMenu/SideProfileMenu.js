@@ -3,50 +3,85 @@ import React, { useState, useEffect } from "react";
 import "./SideProfileMenu.css";
 // IMAGES
 import profile_icon from "../../Assets/img/top-nav/profile.png";
+import {useAuthState} from "../../Context";
+import {NavLink} from "react-router-dom";
 
 function SideProfileMenu(props) {
-
-    const user = props.user;
+    const state = useAuthState()
+    const userData = state.userData;
     const [profileClass, overlayClass] = props.profileClasses;
     const setProfileClasses = props.setProfileClasses;
 
+    const studentHTML = <>
+        <NavLink to="/profile" className="uni-button settings-button">
+            <div className="prof-picture"/>
+            {/* {# Translators: Start of side profile menu #} */}
+            <h3>My Profile</h3>
+        </NavLink>
+    </>
+
+    const employerHTML = <>
+        <NavLink to="/my-companies" className="uni-button settings-button">
+            <div className="prof-picture"/>
+            {/* {# Translators: Start of side profile menu #} */}
+            <h3>My Companies</h3>
+        </NavLink>
+    </>
+
+    let signedInHTML = <>
+        <NavLink to="/settings" className="uni-button settings-button">
+                    <div className="settings-picture"/>
+                    <h3>Account Settings</h3>
+                </NavLink>
+
+        <NavLink to="/signout" className="uni-button settings-button">
+            <div className="logout-picture"/>
+            {/* {# Translators: End of side profile menu #} */}
+            <h3 className="w80">Sign Out</h3>
+        </NavLink>
+    </>;
+
+    let userHTML;
+    if (userData.user_type_verbose === "Student"){
+        userHTML = <>
+            {studentHTML}
+            {signedInHTML}
+        </>
+    } else if (userData.user_type_verbose === "Employer"){
+        userHTML = <>
+            {employerHTML}
+            {signedInHTML}
+        </>
+    }
+
+    const notSignedInHTML = <>
+         <NavLink to="/login" className="uni-button settings-button">
+            <div className="logout-picture"/>
+            {/* {# Translators: End of side profile menu #} */}
+            <h3 className="w80">Sign In</h3>
+        </NavLink>
+    </>
+
+
+
+
     return (
         <>
-            <div className={`overlay ${overlayClass}`} onClick={setProfileClasses}></div>
+            <div className={`overlay ${overlayClass}`} onClick={setProfileClasses}/>
 
             <aside className={`profile-menu ${profileClass} shadow`}>
 
-                <button className="profile-close-button close-button" onClick={setProfileClasses}></button>
-                <a href="{% url 'profile' %}"><img className="profile-picture" src={user ? user['image'] : profile_icon} alt="Profile Picture" /></a>
-                <div className="profile-names">user.first_name user.last_name</div>
+                <button className="profile-close-button close-button" onClick={setProfileClasses}/>
+                <NavLink to="/profile"><img className="profile-picture" src={userData ? userData['image'] : profile_icon} alt="Profile Picture" /></NavLink>
+                <div className="profile-names">{userData.first_name} {userData.last_name}</div>
 
-                <div>user.user_type_verbose</div>
+                <div>{userData.user_type_verbose}</div>
 
-                {/* {% if user.user_type_verbose == 'Student' %} */}
-                <a href="{% url 'profile' %}" className="uni-button settings-button">
-                    <div className="prof-picture"></div>
-                    {/* {# Translators: Start of side profile menu #} */}
-                    <h3>My Profile</h3>
-                </a>
-                {/* {% else %} */}
-                <a href="{% url 'my-companies' %}" className="uni-button settings-button">
-                    <div className="prof-picture"></div>
-                    {/* {# Translators: Start of side profile menu #} */}
-                    <h3>My Companies</h3>
-                </a>
-                {/* {% endif %} */}
+                {/*conditional rendering using feature that bool && component returns component if true*/}
+                {userData && userHTML}
+                {!userData && notSignedInHTML}
 
 
-                <a href="{% url 'settings' %}" className="uni-button settings-button">
-                    <div className="settings-picture"></div>
-                    <h3>Account Settings</h3>
-                </a>
-
-                <a href="{% url 'signout' %}" className="uni-button settings-button">
-                    <div className="logout-picture"></div>
-                    {/* {# Translators: End of side profile menu #} */}
-                    <h3 className="w80">Sign Out</h3>
-                </a>
 
             </aside>
         </>
