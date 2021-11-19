@@ -10,7 +10,9 @@ import "./main_style.css";
 // PAGES
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
+import LogOut from "./Pages/LogOut";
 import Dashboard from "./Pages/Dashboard";
+
 import { CommunityPosts } from "./Components/CommunityPosts.jsx"
 // OTHER
 import { useAuthDispatch, ContextProvider, useAuthState } from "./Context";
@@ -27,12 +29,16 @@ function App() {
                     <Route exact path='/login'>
                         <Login />
                     </Route>
+                    <Route exact path='/logout'>
+                        <LogOut/>
+                    </Route>
                     <PrivateRoute exact path='/dashboard'>
                         <Dashboard />
                     </PrivateRoute>
                     <PrivateRoute exact path='/community'>
                         <CommunityPosts />
                     </PrivateRoute>
+
                 </Switch>
             </Router>
         </ContextProvider>
@@ -51,9 +57,7 @@ function PrivateRoute({ children, userType, optional=false, ...rest }) {
 
     console.log(state)
     if (!state.token && !state.errorMessage) {
-        return (
-            <h1>Checking for authentication...</h1>
-        )
+        return null
 
 
     } else {
