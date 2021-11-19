@@ -60,26 +60,30 @@ function SideProfileMenu(props) {
         </>;
 
     const signedInUserData =
-        <>
+        <div className="w100 flex-col j-c-c a-i-c">
+
             <NavLink to="/profile">
                 <img className="profile-picture" src={userData ? userData['image'] : profile_icon} alt="Profile Picture" />
             </NavLink>
 
             <div className="profile-names">{userData.first_name} {userData.last_name}</div>
 
-            <div>{userData.user_type_verbose}</div>
-        </>;
+            <div className="verbose">{userData.user_type_verbose}</div>
+
+        </div>;
 
     const notSignedInMessage =
-        <>
+        <div className="w100 flex-col j-c-c a-i-c">
+
             <NavLink to="/profile">
                 <img className="profile-picture" src={userData ? userData['image'] : profile_icon} alt="Profile Picture" />
             </NavLink>
 
             <div className="profile-names">Guest User</div>
 
-            <div>You are currently not signed in.</div>
-        </>;
+            <div className="verbose">You are currently not signed in.</div>
+
+        </div>;
 
     return (
         <>
