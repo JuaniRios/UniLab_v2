@@ -1,7 +1,7 @@
 // Pages/Dashboard/index.js
 
 import React from 'react';
-import { logout, useAuthDispatch, useAuthState } from "../../Context";
+import { logout, useAuthDispatch, useAuthState } from "../Context";
 import { useHistory } from "react-router-dom";
 
 function Dashboard(props) {

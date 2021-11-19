@@ -1,10 +1,10 @@
 // Pages/Login/index.js
 
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
-import styles from './';
-import {loginUser, useAuthDispatch, useAuthState} from "../../Context";
-import {Redirect, useHistory} from "react-router-dom";
+import styles from '../Assets/css/sign.css';
+import { loginUser, useAuthDispatch, useAuthState } from "../Context";
+import { Redirect, useHistory } from "react-router-dom";
 
 function Login(props) {
     const [email, setEmail] = useState('')
@@ -13,16 +13,16 @@ function Login(props) {
     const dispatch = useAuthDispatch()
     const state = useAuthState()
 
-    useEffect( () => {
-        dispatch({type: "LOGOUT"})
+    useEffect(() => {
+        dispatch({ type: "LOGOUT" })
     }, [])
 
-    const handleLogin = async (e)  => {
+    const handleLogin = async (e) => {
         e.preventDefault()
-        let payload = {email, password}
+        let payload = { email, password }
         try {
             const success = await loginUser(dispatch, payload)
-            if (success){
+            if (success) {
                 history.push("/dashboard")
             }
         } catch (error) {
@@ -30,7 +30,7 @@ function Login(props) {
         }
     }
 
-    if (state.token){
+    if (state.token) {
         return (
             <h1>Logging you out...</h1>
         )
@@ -46,12 +46,12 @@ function Login(props) {
                         <div className={styles.loginFormItem}>
                             <label htmlFor='email'>Username</label>
                             <input type='text' id='email' value={email}
-                                   onChange={(e) => setEmail(e.target.value)} />
+                                onChange={(e) => setEmail(e.target.value)} />
                         </div>
                         <div className={styles.loginFormItem}>
                             <label htmlFor='password'>Password</label>
                             <input type='password' id='password' value={password}
-                                   onChange={(e) => setPassword(e.target.value)} />
+                                onChange={(e) => setPassword(e.target.value)} />
                         </div>
                     </div>
                     <button onClick={handleLogin}>login</button>

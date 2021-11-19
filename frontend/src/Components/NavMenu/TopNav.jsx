@@ -11,6 +11,12 @@ import about_icon from "../../Assets/img/top-nav/about.png";
 import profile_icon from "../../Assets/img/top-nav/profile.png";
 import search_icon from "../../Assets/img/top-nav/search.png";
 
+import english_icon from "../../Assets/img/languages/en.webp";
+import spanish_icon from "../../Assets/img/languages/es.webp";
+import german_icon from "../../Assets/img/languages/de.webp";
+import russian_icon from "../../Assets/img/languages/ru.webp";
+import french_icon from "../../Assets/img/languages/fr.webp";
+
 function TopNav(props) {
     const height = document.documentElement.clientHeight;
     const width = document.documentElement.clientWidth;
@@ -129,7 +135,7 @@ function TopNav(props) {
 
                 {/*LANGUAGE BUTTON*/}
                 <a className="top-nav-item flex-row a-i-c" onClick={setLanguageClasses}>
-                    <img id="lang-img" className="top-nav-image" alt="Locale Flag" title="Language" />
+                    <img id="lang-img" className="top-nav-image" src={english_icon} alt="Locale Flag" title="Language" />
                     {/*{# Translators: End of navigation bar #}*/}
                     <div id="search-text" className="top-nav-item-text">
                         {/*{% translate "Language"%}*/}

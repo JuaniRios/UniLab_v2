@@ -1,9 +1,10 @@
+// NAVIGATION MENU FRAME
 import React, { useReducer } from "react";
-import TopNav from "../../Components/NavMenu/TopNav";
-import GeneralSearch from "../../Components/NavMenu/GeneralSearch";
-import SideLanguageMenu from "../../Components/NavMenu/SideLanguageMenu";
-import SideProfileMenu from "../../Components/NavMenu/SideProfileMenu";
-import {useAuthState} from "../../Context";
+import TopNav from "./TopNav";
+import GeneralSearch from "./GeneralSearch";
+import SideLanguageMenu from "./SideLanguageMenu";
+import SideProfileMenu from "./SideProfileMenu";
+import { useAuthState } from "../../Context";
 
 function NavMenu(props) {
     const state = useAuthState()
@@ -76,19 +77,6 @@ function NavMenu(props) {
                 languageClasses={languageClasses}
                 setLanguageClasses={setLanguageClasses}
             />
-
-            <h1>TEST1</h1>
-            <h1>TEST2</h1>
-            <h1>TEST3</h1>
-            <h1>TEST4</h1>
-            <h1>TEST5</h1>
-            <h1>TEST6</h1>
-            <h1>TEST7</h1>
-            <h1>TEST8</h1>
-            <h1>TEST9</h1>
-            <h1>TEST10</h1>
-            <h1>TEST11</h1>
-
         </>
     );
 }

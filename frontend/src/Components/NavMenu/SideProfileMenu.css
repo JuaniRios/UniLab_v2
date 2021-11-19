@@ -3,7 +3,6 @@
     .profile-menu
     {
         width: 25vw;
-        
     }
     .profile-close-button
     {
@@ -13,10 +12,12 @@
     .profile-menu-closed
     {
         right: -25vw;
+        padding-top: 0rem;
     }
     .profile-menu-opened
     {
         right: 0;
+        padding-top: 3rem;
     }
 }
 @media only screen and (max-width: 1030px)
@@ -42,17 +43,16 @@
 }
 .profile-menu
 {
-    position: fixed;
     display: flex;
+    position: fixed;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     z-index: 9501;
     height: 100vh;
     top: 0;
     background-color: var(--unilab-white);
-    transition: .5s;
-    box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1), 0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+    transition: all .4s linear;
 }
 .profile-picture
 {
@@ -65,7 +65,7 @@
 {
     height: 3vh;
     width: 3vh;
-    margin: 0 5%;
+    margin: 0 3%;
     background-size: 100% 100%;
 }
 .prof-picture {background-image: url('../../Assets/img/profile.png');}
@@ -75,22 +75,15 @@
 {
     display: flex;
     align-items: center;
-    padding: 0 5%;
-    width: 65%;
+    padding: 3% 5%;
     background-color: rgba(0,0,0,0);
     color: var(--unilab-orange);
-    border-bottom: 1px solid var(--unilab-orange);
+    transition: .1s;
 }
 .settings-button:hover
 {
-    background-color: var(--unilab-orange);
-    color: var(--unilab-white);
-    box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1), 0px 2px 5px 0px rgba(50, 50, 93, 0.1), 0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
-}
-.settings-button:hover .prof-picture {background-image: url('../../Assets/img/profile-white.png');}
-.settings-button:hover .settings-picture {background-image: url('../../Assets/img/settings.png');}
-.settings-button:hover .logout-picture {background-image: url('../../Assets/img/logout.png');}
-.profile-close-button
+    background-color: rgba(0, 0, 0, 0.1);
+}.profile-close-button
 {
     right: unset !important;
     left: 2% !important;
@@ -101,4 +94,8 @@
     text-align:center; 
     width:80%;
     font-weight:bold;
+}
+.profile-menu-btn-holder
+{
+    font-weight: bold;
 }
