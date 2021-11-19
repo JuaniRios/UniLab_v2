@@ -21,9 +21,9 @@ function App() {
         <ContextProvider>
             <Router>
                 <Switch>
-                    <Route exact path='/'>
+                    <PrivateRoute optional={true} exact path='/'>
                         <Home />
-                    </Route>
+                    </PrivateRoute>
                     <Route exact path='/login'>
                         <Login />
                     </Route>
@@ -41,7 +41,7 @@ function App() {
 
 // A wrapper for <Route> that redirects to the login
 // screen if you're not yet authenticated.
-function PrivateRoute({ children, userType, ...rest }) {
+function PrivateRoute({ children, userType, optional=false, ...rest }) {
     const dispatch = useAuthDispatch();
     const state = useAuthState();
 
@@ -49,6 +49,7 @@ function PrivateRoute({ children, userType, ...rest }) {
         read_token(dispatch)
     }, [])
 
+    console.log(state)
     if (!state.token && !state.errorMessage) {
         return (
             <h1>Checking for authentication...</h1>
@@ -56,11 +57,15 @@ function PrivateRoute({ children, userType, ...rest }) {
 
 
     } else {
-        return (
-            <Route {...rest} render={({ location }) => !state.errorMessage ? (children) :
-                (<Redirect to={{ pathname: "/", state: { from: location } }} />)}
-            />
-        )
+        if (optional){
+            return <Route {...rest} render={({location}) => children}/>
+        } else {
+            return (
+                <Route {...rest} render={({ location }) => !state.errorMessage ? (children) :
+                    (<Redirect to={{ pathname: "/login", state: { from: location } }} />)}/>
+            )
+        }
+
     }
 }
 

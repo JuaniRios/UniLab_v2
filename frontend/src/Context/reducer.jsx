@@ -31,7 +31,7 @@ export const AuthReducer = (initialState, action) => {
         case "LOGIN_ERROR":
             return {
                 ...initialState,
-                errorMessage: action.error,
+                errorMessage: action.error
             }
         default:
             throw new Error(`Unhandled action type: ${action.type}`)

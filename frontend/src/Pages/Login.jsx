@@ -23,7 +23,7 @@ function Login(props) {
         try {
             const success = await loginUser(dispatch, payload)
             if (success) {
-                history.push("/dashboard")
+                history.push("/")
             }
         } catch (error) {
             console.log(error)
