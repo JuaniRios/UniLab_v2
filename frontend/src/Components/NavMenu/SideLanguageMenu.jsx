@@ -19,32 +19,32 @@ function SideLanguageMenu(props) {
 
             <aside className={`language-menu ${languageClass} shadow`}>
 
-                <button className="language-close-button close-button" onClick={setLanguageClasses}></button>
+                <button className={`language-close-button close-button`} onClick={setLanguageClasses}></button>
 
                 <h2>Select Language</h2>
 
-                <div className="lang-menu-btn-holder w100">
-                    <a className="language-links" href="../en">
+                <div className={`lang-menu-btn-holder w100`}>
+                    <a className={`language-links`} href="../en">
                         <img src={english_icon} alt="English Flag" />
                         <p>English</p>
                     </a>
 
-                    <a className="language-links" href="../de">
+                    <a className={`language-links`} href="../de">
                         <img src={german_icon} alt="German Flag" />
                         <p>German</p>
                     </a>
 
-                    <a className="language-links" href="../fr">
+                    <a className={`language-links`} href="../fr">
                         <img src={french_icon} alt="French Flag" />
                         <p>French</p>
                     </a>
 
-                    <a className="language-links" href="../es">
+                    <a className={`language-links`} href="../es">
                         <img src={spanish_icon} alt="Spanish Flag" />
                         <p>Spanish</p>
                     </a>
 
-                    <a className="language-links" href="../ru">
+                    <a className={`language-links`} href="../ru">
                         <img src={russian_icon} alt="Russian Flag" />
                         <p>Russian</p>
                     </a>

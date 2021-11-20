@@ -11,7 +11,7 @@ import "./main_style.css";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Dashboard from "./Pages/Dashboard";
-import { CommunityPosts } from "./Components/CommunityPosts.jsx"
+import { CommunityPosts } from "./Components/CommunityPosts"
 // OTHER
 import { useAuthDispatch, ContextProvider, useAuthState } from "./Context";
 import { read_token } from "./Context/actions";
@@ -41,7 +41,7 @@ function App() {
 
 // A wrapper for <Route> that redirects to the login
 // screen if you're not yet authenticated.
-function PrivateRoute({ children, userType, optional=false, ...rest }) {
+function PrivateRoute({ children, userType, optional = false, ...rest }) {
     const dispatch = useAuthDispatch();
     const state = useAuthState();
 
@@ -57,12 +57,12 @@ function PrivateRoute({ children, userType, optional=false, ...rest }) {
 
 
     } else {
-        if (optional){
-            return <Route {...rest} render={({location}) => children}/>
+        if (optional) {
+            return <Route {...rest} render={({ location }) => children} />
         } else {
             return (
                 <Route {...rest} render={({ location }) => !state.errorMessage ? (children) :
-                    (<Redirect to={{ pathname: "/login", state: { from: location } }} />)}/>
+                    (<Redirect to={{ pathname: "/login", state: { from: location } }} />)} />
             )
         }
 
