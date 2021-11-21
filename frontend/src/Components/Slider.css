@@ -82,9 +82,10 @@
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    transition: .2s;
+    transition: .3s;
+    backface-visibility: hidden;
 }
-.slider-item p,h1,h2,h3
+.slider-item p, .slider-item h1, .slider-item h2, .slider-item h3
 {
     margin: .1rem 0;
 }
@@ -107,8 +108,9 @@
 }
 .slider-icon
 {
-    height: 100%;
+    height: 75%;
     object-fit: cover;
+    border-radius: 10px;
 }
 .slider-info-holder
 {
@@ -118,10 +120,8 @@
 }
 .slider-item:hover
 {
-    box-shadow: 
-    0px 0px 0px 0.5px rgba(50, 50, 93, 0.1), 
-    0px 2px 5px 0px rgba(50, 50, 93, 0.1), 
-    0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
+    -webkit-font-smoothing: subpixel-antialiased;
+    transform: scale(1.1); 
 }
 .slider-item:hover .link-text
 {
