@@ -11,7 +11,7 @@ function HomeCover(props) {
     const homePolygon = useRef(null);
 
     useEffect(() => {
-        var timer1 = 10;
+        var timer1 = 1;
         var i = 1;
         while (i <= 75) {
             (function () {    // create a closure (new scope)
@@ -21,8 +21,8 @@ function HomeCover(props) {
                     homePolygon.current.setAttribute("points", `${_i},0 100,0 100,101 ${_i - 25},101`);
                 }, timer2);
             })();
-            i = i + 1;
-            timer1 = timer1 + 20;
+            i = i + 0.1;
+            timer1 = timer1 + 2;
         }
     });
 
