@@ -49,7 +49,7 @@ function Slider(props) {
         <div className={`slider-wrapper`}>
 
             <div className={`slider-title normal flex-row a-i-c j-c-s-b`}>
-                <h2>Discover Jobs</h2>
+                <h2>Discover Jobs/Companies</h2>
                 <span className={`filter-btn noselect`}>Filter</span>
             </div>
 
@@ -66,14 +66,18 @@ function Slider(props) {
 
                     <div className={`slider-info-holder`}>
                         <NavLink to="/">
-                            <h3 className={`link-text`}>Job Title</h3>
+                            <h3 className={`link-text`}>Job / Company Name</h3>
                         </NavLink>
 
-                        <p className={`gray-text`}>Company Name</p>
-                        <p className={`gray-text`}>City, District, Country</p>
+                        <p className={`gray-text`}>Company Name / Field of Operations</p>
+                        <p className={`gray-text`}>Location(City, District, Country)</p>
                         <p>
                             <span className={`gray-text smaller-text`}>2 weeks ago</span>
                             <span className={`middle-dot-span orange-text smaller-text`}>4 applicants</span>
+                        </p>
+                        <p>
+                            <span className={`gray-text smaller-text`}>Num of employees</span>
+                            <span className={`middle-dot-span orange-text smaller-text`}>Rating</span>
                         </p>
                     </div>
 
@@ -99,15 +103,6 @@ function Slider(props) {
                     </div>
 
                 </div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
 
 
                 <button className={`more-jobs uni-button`} ref={moreBtn}>More Jobs</button>

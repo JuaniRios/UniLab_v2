@@ -24,7 +24,7 @@ function HomeCover(props) {
                 }, timer2);
             })();
             i = i + 0.01;
-            timer1 = timer1 + 0.2;
+            timer1 = timer1 + 0.1;
         }
         homeMessage.current.style.bottom = "0";
     });
