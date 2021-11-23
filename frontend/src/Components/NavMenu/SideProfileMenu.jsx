@@ -31,7 +31,7 @@ function SideProfileMenu(props) {
                 <p className={`w80`}>Account Settings</p>
             </NavLink>
 
-            <NavLink to="/signout" className={`settings-button`}>
+            <NavLink to="/logout" className={`settings-button`}>
                 <div className={`logout-picture`}/>
                 <p className={`w80`}>Sign Out</p>
             </NavLink>

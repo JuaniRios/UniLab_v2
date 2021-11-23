@@ -8,10 +8,9 @@ import {
 // STYLES
 import "./main_style.css";
 // PAGES
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import LogOut from "./Pages/LogOut";
-import Dashboard from "./Pages/Dashboard";
+import Home from "./Pages/Home.jsx";
+import Login from "./Pages/Login.jsx";
+import LogOut from "./Pages/LogOut.jsx";
 
 import { CommunityPosts } from "./Components/CommunityPosts.jsx"
 // OTHER
@@ -32,9 +31,6 @@ function App() {
                     <Route exact path='/logout'>
                         <LogOut/>
                     </Route>
-                    <PrivateRoute exact path='/dashboard'>
-                        <Dashboard />
-                    </PrivateRoute>
                     <PrivateRoute exact path='/community'>
                         <CommunityPosts />
                     </PrivateRoute>

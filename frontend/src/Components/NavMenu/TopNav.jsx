@@ -17,12 +17,14 @@ import german_icon from "../../Assets/img/languages/de.webp";
 import russian_icon from "../../Assets/img/languages/ru.webp";
 import french_icon from "../../Assets/img/languages/fr.webp";
 import {NavLink} from "react-router-dom";
+import {useAuthState} from "../../Context";
 
 function TopNav(props) {
     const height = document.documentElement.clientHeight;
     const width = document.documentElement.clientWidth;
 
-    const user = props.user;
+    const state = useAuthState()
+    const userData = state.userData;
 
     const setProfileClasses = props.setProfileClasses;
     const setLanguageClasses = props.setLanguageClasses;
@@ -116,7 +118,7 @@ function TopNav(props) {
 
                 {/*PROFILE BUTTON*/}
                 <a className={`top-nav-item top-nav-profile flex-row a-i-c`} onClick={setProfileClasses}>
-                    <img id="profile-img" className={`top-nav-image`} src={user ? user['image'] : profile_icon}
+                    <img id="profile-img" className={`top-nav-image`} src={userData ? userData['image'] : profile_icon}
                         alt="Profile Picture" title="Profile" />
 
                     <div id="profile-text" className={`top-nav-item-text`}>
