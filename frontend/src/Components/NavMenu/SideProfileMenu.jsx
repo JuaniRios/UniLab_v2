@@ -13,27 +13,27 @@ function SideProfileMenu(props) {
     const setProfileClasses = props.setProfileClasses;
 
     const profileButton =
-        <NavLink to="/profile" className="settings-button">
-            <div className="prof-picture"/>
-            <p className="w80">My Profile</p>
+        <NavLink to="/profile" className={`settings-button`}>
+            <div className={`prof-picture`}/>
+            <p className={`w80`}>My Profile</p>
         </NavLink>;
 
     const myCompaniesButton =
-        <NavLink to="my-companies" className="settings-button">
-            <div className="prof-picture"/>
-            <p className="w80">My Companies</p>
+        <NavLink to="my-companies" className={`settings-button`}>
+            <div className={`prof-picture`}/>
+            <p className={`w80`}>My Companies</p>
         </NavLink>;
 
     let signedInButtons =
         <>
-            <NavLink to="/settings" className="settings-button">
-                <div className="settings-picture"/>
-                <p className="w80">Account Settings</p>
+            <NavLink to="/settings" className={`settings-button`}>
+                <div className={`settings-picture`}/>
+                <p className={`w80`}>Account Settings</p>
             </NavLink>
 
-            <NavLink to="/logout" className="settings-button">
-                <div className="logout-picture"/>
-                <p className="w80">Log Out</p>
+            <NavLink to="/signout" className={`settings-button`}>
+                <div className={`logout-picture`}/>
+                <p className={`w80`}>Sign Out</p>
             </NavLink>
         </>;
 
@@ -52,34 +52,38 @@ function SideProfileMenu(props) {
 
     const notSignedInButtons =
         <>
-            <NavLink to="/login" className="settings-button">
-                <div className="logout-picture" />
+            <NavLink to="/login" className={`settings-button`}>
+                <div className={`logout-picture`} />
                 {/* {# Translators: End of side profile menu #} */}
-                <h3 className="w80">Sign In</h3>
+                <h3 className={`w80`}>Sign In</h3>
             </NavLink>
         </>;
 
     const signedInUserData =
-        <>
+        <div className={`w100 flex-col j-c-c a-i-c`}>
+
             <NavLink to="/profile">
-                <img className="profile-picture" src={userData ? userData['image'] : profile_icon} alt="Profile Picture" />
+                <img className={`profile-picture`} src={userData ? userData['image'] : profile_icon} alt="Profile Picture" />
             </NavLink>
 
-            <div className="profile-names">{userData.first_name} {userData.last_name}</div>
+            <div className={`profile-names`}>{userData.first_name} {userData.last_name}</div>
 
-            <div>{userData.user_type_verbose}</div>
-        </>;
+            <div className={`verbose`}>{userData.user_type_verbose}</div>
+
+        </div>;
 
     const notSignedInMessage =
-        <>
+        <div className={`w100 flex-col j-c-c a-i-c`}>
+
             <NavLink to="/profile">
-                <img className="profile-picture" src={userData ? userData['image'] : profile_icon} alt="Profile Picture" />
+                <img className={`profile-picture`} src={userData ? userData['image'] : profile_icon} alt="Profile Picture" />
             </NavLink>
 
-            <div className="profile-names">Guest User</div>
+            <div className={`profile-names`}>Guest User</div>
 
-            <div>You are currently not signed in.</div>
-        </>;
+            <div className={`verbose`}>You are currently not signed in.</div>
+
+        </div>;
 
     return (
         <>
@@ -87,13 +91,13 @@ function SideProfileMenu(props) {
 
             <aside className={`profile-menu ${profileClass} shadow`}>
 
-                <button className="profile-close-button close-button" onClick={setProfileClasses} />
+                <button className={`profile-close-button close-button`} onClick={setProfileClasses} />
 
                 {userData && signedInUserData}
                 {!userData && notSignedInMessage}
 
                 {/* MENU BUTTONS */}
-                <div className="profile-menu-btn-holder w100">
+                <div className={`profile-menu-btn-holder w100`}>
                     {userData && userHTML}
                     {!userData && notSignedInButtons}
                 </div>

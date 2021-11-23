@@ -60,6 +60,7 @@
     width: 25vh;
     border-radius: 50%;
     object-fit:cover;
+    margin-bottom: 2rem;
 }
 .settings-picture, .logout-picture, .prof-picture
 {
@@ -94,8 +95,13 @@
     text-align:center; 
     width:80%;
     font-weight:bold;
+    margin-bottom: 2rem;
 }
 .profile-menu-btn-holder
 {
     font-weight: bold;
+}
+.verbose
+{
+    margin-bottom: 2rem;
 }

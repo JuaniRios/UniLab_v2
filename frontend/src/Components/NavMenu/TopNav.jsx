@@ -48,11 +48,11 @@ function TopNav(props) {
         linebar = <></>;
     }
     return (
-        <nav className="top-nav flex-row a-i-c shadow">
+        <nav className={`top-nav flex-row a-i-c shadow`}>
 
             {/*LOGO*/}
-            <a href='/' id="logo-link" className="top-nav-item flex-row a-i-c">
-                <img id="logo-img" className="top-nav-image" src={logo} alt="UniLab Logo" title="Home" />
+            <a href='/' id="logo-link" className={`top-nav-item flex-row a-i-c`}>
+                <img id="logo-img" className={`top-nav-image`} src={logo} alt="UniLab Logo" title="Home" />
             </a>
 
             {/*MOBILE*/}
@@ -62,41 +62,41 @@ function TopNav(props) {
             <div className={`top-nav-container ${containerClass}`}>
 
                 {/*HOME BUTTON*/}
-                <a href="/" className="top-nav-item flex-row a-i-c">
-                    <div className="top-nav-item-filler flex-row a-i-c" />
-                    <img className="top-nav-image" src={home_icon} alt="Home Icon" />
+                <a href="/" className={`top-nav-item flex-row a-i-c`}>
+                    <div className={`top-nav-item-filler flex-row a-i-c`} />
+                    <img className={`top-nav-image`} src={home_icon} alt="Home Icon" />
                     {/*{# Translators: Start of Navigation bar #}*/}
-                    <div id="home-button" className="top-nav-item-text">
+                    <div id="home-button" className={`top-nav-item-text`}>
                         {/*{% translate "Home" context "this is the navbar"%}*/}
                         Home
                     </div>
                 </a>
 
                 {/*COMMUNITY BUTTON*/}
-                <a href="/community" className="top-nav-item flex-row a-i-c">
-                    <div className="top-nav-item-filler flex-row a-i-c" />
-                    <img className="top-nav-image" src={community_icon} alt="Community Icon" />
-                    <div id="community-button" className="top-nav-item-text">
+                <a href="/community" className={`top-nav-item flex-row a-i-c`}>
+                    <div className={`top-nav-item-filler flex-row a-i-c`} />
+                    <img className={`top-nav-image`} src={community_icon} alt="Community Icon" />
+                    <div id="community-button" className={`top-nav-item-text`}>
                         {/*{% translate "Community"%}*/}
                         Community
                     </div>
                 </a>
 
                 {/*COMPANIES BUTTON*/}
-                <a href="/companies" className="top-nav-item flex-row a-i-c">
-                    <div className="top-nav-item-filler flex-row a-i-c" />
-                    <img className="top-nav-image" src={companies_icon} alt="Companies Icon" />
-                    <div id="employers-button" className="top-nav-item-text">
+                <a href="/companies" className={`top-nav-item flex-row a-i-c`}>
+                    <div className={`top-nav-item-filler flex-row a-i-c`} />
+                    <img className={`top-nav-image`} src={companies_icon} alt="Companies Icon" />
+                    <div id="employers-button" className={`top-nav-item-text`}>
                         {/*{% translate "Companies"%}*/}
                         Companies
                     </div>
                 </a>
 
                 {/*JOBS BUTTON*/}
-                <a href="/jobs" className="top-nav-item flex-row a-i-c">
-                    <div className="top-nav-item-filler flex-row a-i-c" />
-                    <img className="top-nav-image" src={jobs_icon} alt="Jobs Icon" />
-                    <div id="jobs-button" className="top-nav-item-text">
+                <a href="/jobs" className={`top-nav-item flex-row a-i-c`}>
+                    <div className={`top-nav-item-filler flex-row a-i-c`} />
+                    <img className={`top-nav-image`} src={jobs_icon} alt="Jobs Icon" />
+                    <div id="jobs-button" className={`top-nav-item-text`}>
                         {/*{% translate "Jobs"%}*/}
                         Jobs
                     </div>
@@ -104,40 +104,40 @@ function TopNav(props) {
                 </a>
 
                 {/*ABOUT BUTTON*/}
-                <a href="/about" className="top-nav-item flex-row a-i-c">
-                    <div className="top-nav-item-filler flex-row a-i-c" />
-                    <img className="top-nav-image" src={about_icon} alt="About Icon" />
-                    <div id="about-button" className="top-nav-item-text">
+                <a href="/about" className={`top-nav-item flex-row a-i-c`}>
+                    <div className={`top-nav-item-filler flex-row a-i-c`} />
+                    <img className={`top-nav-image`} src={about_icon} alt="About Icon" />
+                    <div id="about-button" className={`top-nav-item-text`}>
                         {/*{% translate "About"%}*/}
                         About
                     </div>
                 </a>
 
                 {/*PROFILE BUTTON*/}
-                <a className="top-nav-item top-nav-profile flex-row a-i-c" onClick={setProfileClasses}>
-                    <img id="profile-img" className="top-nav-image" src={user ? user['image'] : profile_icon}
+                <a className={`top-nav-item top-nav-profile flex-row a-i-c`} onClick={setProfileClasses}>
+                    <img id="profile-img" className={`top-nav-image`} src={user ? user['image'] : profile_icon}
                         alt="Profile Picture" title="Profile" />
 
-                    <div id="profile-text" className="top-nav-item-text">
+                    <div id="profile-text" className={`top-nav-item-text`}>
                         {/*{% translate "Profile"%}*/}
                         Profile
                     </div>
                 </a>
 
                 {/*SEARCH BUTTON*/}
-                <a className="top-nav-item top-nav-search flex-row a-i-c" onClick={setSearchClasses}>
-                    <img id="search-img" className="top-nav-image" src={search_icon} alt="Magnifying Glass" title="Search" />
-                    <div id="search-text" className="top-nav-item-text">
+                <a className={`top-nav-item top-nav-search flex-row a-i-c`} onClick={setSearchClasses}>
+                    <img id="search-img" className={`top-nav-image`} src={search_icon} alt="Magnifying Glass" title="Search" />
+                    <div id="search-text" className={`top-nav-item-text`}>
                         {/*{% translate "Search"%}*/}
                         Search
                     </div>
                 </a>
 
                 {/*LANGUAGE BUTTON*/}
-                <a className="top-nav-item flex-row a-i-c" onClick={setLanguageClasses}>
-                    <img id="lang-img" className="top-nav-image" src={english_icon} alt="Locale Flag" title="Language" />
+                <a className={`top-nav-item flex-row a-i-c`} onClick={setLanguageClasses}>
+                    <img id="lang-img" className={`top-nav-image`} src={english_icon} alt="Locale Flag" title="Language" />
                     {/*{# Translators: End of navigation bar #}*/}
-                    <div id="search-text" className="top-nav-item-text">
+                    <div id="search-text" className={`top-nav-item-text`}>
                         {/*{% translate "Language"%}*/}
                         Language
                     </div>

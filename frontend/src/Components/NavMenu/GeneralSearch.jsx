@@ -17,8 +17,8 @@ function GeneralSearch(props) {
                 <img id="search-icon" src={search_icon} alt="Magnifying Glass" title="Search" />
 
                 {/* <!-- Search Field --> */}
-                <input className="search-field noshadow" name="main-search" type="search" placeholder="Search UniLab..." />
-                <div className="search-cancel close-button" onClick={setSearchClasses}></div>
+                <input className={`search-field noshadow`} name="main-search" type="search" placeholder="Search UniLab..." />
+                <div className={`search-cancel close-button`} onClick={setSearchClasses}></div>
 
             </form>
         </>

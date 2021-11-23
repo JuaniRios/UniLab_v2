@@ -1,6 +1,8 @@
 import React from "react";
 import NavMenu from "../Components/NavMenu";
 import Footer from "../Components/Footer";
+import HomeCover from "../Components/HomeCover";
+import Slider from "../Components/Slider";
 // SCRIPTS
 import "../Assets/scripts/main.jsx";
 
@@ -9,17 +11,8 @@ function Home(props) {
     return (
         <>
             <NavMenu />
-            <h1>TEST1</h1>
-            <h1>TEST2</h1>
-            <h1>TEST3</h1>
-            <h1>TEST4</h1>
-            <h1>TEST5</h1>
-            <h1>TEST6</h1>
-            <h1>TEST7</h1>
-            <h1>TEST8</h1>
-            <h1>TEST9</h1>
-            <h1>TEST10</h1>
-            <h1>TEST11</h1>
+            <HomeCover />
+            <Slider />
             <Footer />
         </>
     );

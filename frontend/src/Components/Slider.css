@@ -1,0 +1,140 @@
+.slider-wrapper
+{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+.arrow-btn
+{
+    position: absolute;
+    background-color: var(--unilab-orange);
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: .2s linear;
+    cursor: pointer;
+    z-index: 5;
+    bottom: 35%;
+}
+.arrow-btn:active {transform: scale(0.90);}
+.arrow-btn::before, .arrow-btn::after
+{
+    content: '';
+    display: block;
+    height: 2px;
+    width: 1rem;
+    margin: 0.25rem;
+    border-radius: 50px;
+    background-color: var(--unilab-white);
+}
+
+.arrow-prev::before {transform: rotate(-45deg);}
+.arrow-prev::after {transform: rotate(45deg);}
+.arrow-next::before {transform: rotate(45deg);}
+.arrow-next::after {transform: rotate(-45deg);}
+
+.arrow-prev
+{
+    left: -5%;
+}
+.arrow-next
+{
+    right: -5%;
+}
+.slider-title
+{
+    padding: 2rem 2rem 1rem 2rem;
+}
+.slider-title h2
+{
+    margin: 0;
+}
+.slider
+{
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    transition: .7s;
+}
+.slider-wrapper:hover .arrow-prev
+{
+    left: 2rem;
+}
+.slider-wrapper:hover .arrow-next
+{
+    right: 2rem;
+}
+.slider-item
+{
+    height: 18rem;
+    width: 18rem;
+    margin-right: 2rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    transition: .3s;
+    backface-visibility: hidden;
+}
+.slider-item p, .slider-item h1, .slider-item h2, .slider-item h3
+{
+    margin: .1rem 0;
+}
+.filter-btn
+{
+    color: var(--unilab-orange);
+}
+.filter-btn:hover
+{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.slider-icon-holder
+{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slider-icon
+{
+    height: 75%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.slider-info-holder
+{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.slider-item:hover
+{
+    -webkit-font-smoothing: subpixel-antialiased;
+    transform: scale(1.1); 
+}
+.slider-item:hover .link-text
+{
+    text-decoration: underline;
+}
+.middle-dot-span::before
+{
+    content: "";
+    background-color: rgb(100, 100, 100);
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 4px;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+}

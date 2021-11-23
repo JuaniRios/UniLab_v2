@@ -241,15 +241,15 @@ h4 {font-size: 1em;}
     color: var(--unilab-orange);
     outline: none;
     border: none;
-    transition: .5s;
+    transition: .3s;
     cursor: pointer;
     border-radius: 50px;
-    padding: 2.5vh;
+    padding: 1rem 2rem;
     border: 1px solid var(--unilab-orange);
 }
 .uni-button-disabled
 {
-    cursor: default !important;;
+    cursor: default !important;
 }
 .uni-button:hover, .uni-button-2:hover
 {
@@ -498,4 +498,20 @@ tr:nth-child(even)
     margin: 2% 0;
     border-radius: 10px;
     color: black;
+}
+.gray-text
+{
+    color: rgb(100, 100, 100);
+}
+.link-text
+{
+    color: #0084ff;
+}
+.orange-text
+{
+    color: var(--unilab-orange);
+}
+.smaller-text
+{
+    font-size: 0.80rem;
 }
