@@ -14,25 +14,25 @@ function SideProfileMenu(props) {
 
     const profileButton =
         <NavLink to="/profile" className={`settings-button`}>
-            <div className={`prof-picture`}></div>
+            <div className={`prof-picture`}/>
             <p className={`w80`}>My Profile</p>
         </NavLink>;
 
     const myCompaniesButton =
         <NavLink to="my-companies" className={`settings-button`}>
-            <div className={`prof-picture`}></div>
+            <div className={`prof-picture`}/>
             <p className={`w80`}>My Companies</p>
         </NavLink>;
 
     let signedInButtons =
         <>
             <NavLink to="/settings" className={`settings-button`}>
-                <div className={`settings-picture`}></div>
+                <div className={`settings-picture`}/>
                 <p className={`w80`}>Account Settings</p>
             </NavLink>
 
-            <NavLink to="/signout" className={`settings-button`}>
-                <div className={`logout-picture`}></div>
+            <NavLink to="/logout" className={`settings-button`}>
+                <div className={`logout-picture`}/>
                 <p className={`w80`}>Sign Out</p>
             </NavLink>
         </>;
@@ -87,7 +87,7 @@ function SideProfileMenu(props) {
 
     return (
         <>
-            <div className={`overlay ${overlayClass}`} onClick={setProfileClasses}></div>
+            <div className={`overlay ${overlayClass}`} onClick={setProfileClasses}/>
 
             <aside className={`profile-menu ${profileClass} shadow`}>
 

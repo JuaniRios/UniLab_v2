@@ -8,10 +8,11 @@ import {
 // STYLES
 import "./main_style.css";
 // PAGES
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import Dashboard from "./Pages/Dashboard";
-import { CommunityPosts } from "./Components/CommunityPosts"
+import Home from "./Pages/Home.jsx";
+import Login from "./Pages/Login.jsx";
+import LogOut from "./Pages/LogOut.jsx";
+
+import { CommunityPosts } from "./Components/CommunityPosts.jsx"
 // OTHER
 import { useAuthDispatch, ContextProvider, useAuthState } from "./Context";
 import { read_token } from "./Context/actions";
@@ -27,12 +28,13 @@ function App() {
                     <Route exact path='/login'>
                         <Login />
                     </Route>
-                    <PrivateRoute exact path='/dashboard'>
-                        <Dashboard />
-                    </PrivateRoute>
+                    <Route exact path='/logout'>
+                        <LogOut/>
+                    </Route>
                     <PrivateRoute exact path='/community'>
                         <CommunityPosts />
                     </PrivateRoute>
+
                 </Switch>
             </Router>
         </ContextProvider>
@@ -51,9 +53,7 @@ function PrivateRoute({ children, userType, optional = false, ...rest }) {
 
     console.log(state)
     if (!state.token && !state.errorMessage) {
-        return (
-            <h1>Checking for authentication...</h1>
-        )
+        return null
 
 
     } else {

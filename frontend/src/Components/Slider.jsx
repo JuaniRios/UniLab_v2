@@ -16,10 +16,10 @@ function Slider(props) {
         var sliderChildren = (slider.current.childElementCount - 1);
         var maxSlides = parseInt(sliderChildren / 4);
         var maxWidth = maxSlides * 80;
-        if (sliderChildren % 4 == 0) {
+        if (sliderChildren % 4 === 0) {
             maxSlides = maxSlides - 1;
         }
-        if (direction == "prev") {
+        if (direction === "prev") {
             if (currentLeft >= 0) {
                 return 0;
             }
@@ -53,8 +53,8 @@ function Slider(props) {
                 <span className={`filter-btn noselect`}>Filter</span>
             </div>
 
-            <button className={`arrow-btn arrow-prev`} onClick={() => toggleSlide("prev")}></button>
-            <button className={`arrow-btn arrow-next`} onClick={() => toggleSlide("next")}></button>
+            <button className={`arrow-btn arrow-prev`} onClick={() => toggleSlide("prev")}/>
+            <button className={`arrow-btn arrow-next`} onClick={() => toggleSlide("next")}/>
 
             <div className={`slider`} ref={slider}>
 
