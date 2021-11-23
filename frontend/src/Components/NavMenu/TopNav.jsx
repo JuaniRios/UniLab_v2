@@ -16,6 +16,7 @@ import spanish_icon from "../../Assets/img/languages/es.webp";
 import german_icon from "../../Assets/img/languages/de.webp";
 import russian_icon from "../../Assets/img/languages/ru.webp";
 import french_icon from "../../Assets/img/languages/fr.webp";
+import {NavLink} from "react-router-dom";
 
 function TopNav(props) {
     const height = document.documentElement.clientHeight;
@@ -51,9 +52,9 @@ function TopNav(props) {
         <nav className={`top-nav flex-row a-i-c shadow`}>
 
             {/*LOGO*/}
-            <a href='/' id="logo-link" className={`top-nav-item flex-row a-i-c`}>
+            <NavLink to='/' id="logo-link" className={`top-nav-item flex-row a-i-c`}>
                 <img id="logo-img" className={`top-nav-image`} src={logo} alt="UniLab Logo" title="Home" />
-            </a>
+            </NavLink>
 
             {/*MOBILE*/}
             {linebar}
@@ -62,7 +63,7 @@ function TopNav(props) {
             <div className={`top-nav-container ${containerClass}`}>
 
                 {/*HOME BUTTON*/}
-                <a href="/" className={`top-nav-item flex-row a-i-c`}>
+                <NavLink to="/" className={`top-nav-item flex-row a-i-c`}>
                     <div className={`top-nav-item-filler flex-row a-i-c`} />
                     <img className={`top-nav-image`} src={home_icon} alt="Home Icon" />
                     {/*{# Translators: Start of Navigation bar #}*/}
@@ -70,30 +71,30 @@ function TopNav(props) {
                         {/*{% translate "Home" context "this is the navbar"%}*/}
                         Home
                     </div>
-                </a>
+                </NavLink>
 
                 {/*COMMUNITY BUTTON*/}
-                <a href="/community" className={`top-nav-item flex-row a-i-c`}>
+                <NavLink to="/community" className={`top-nav-item flex-row a-i-c`}>
                     <div className={`top-nav-item-filler flex-row a-i-c`} />
                     <img className={`top-nav-image`} src={community_icon} alt="Community Icon" />
                     <div id="community-button" className={`top-nav-item-text`}>
                         {/*{% translate "Community"%}*/}
                         Community
                     </div>
-                </a>
+                </NavLink>
 
                 {/*COMPANIES BUTTON*/}
-                <a href="/companies" className={`top-nav-item flex-row a-i-c`}>
+                <NavLink to="/companies" className={`top-nav-item flex-row a-i-c`}>
                     <div className={`top-nav-item-filler flex-row a-i-c`} />
                     <img className={`top-nav-image`} src={companies_icon} alt="Companies Icon" />
                     <div id="employers-button" className={`top-nav-item-text`}>
                         {/*{% translate "Companies"%}*/}
                         Companies
                     </div>
-                </a>
+                </NavLink>
 
                 {/*JOBS BUTTON*/}
-                <a href="/jobs" className={`top-nav-item flex-row a-i-c`}>
+                <NavLink to="/jobs" className={`top-nav-item flex-row a-i-c`}>
                     <div className={`top-nav-item-filler flex-row a-i-c`} />
                     <img className={`top-nav-image`} src={jobs_icon} alt="Jobs Icon" />
                     <div id="jobs-button" className={`top-nav-item-text`}>
@@ -101,17 +102,17 @@ function TopNav(props) {
                         Jobs
                     </div>
 
-                </a>
+                </NavLink>
 
                 {/*ABOUT BUTTON*/}
-                <a href="/about" className={`top-nav-item flex-row a-i-c`}>
+                <NavLink to="/about" className={`top-nav-item flex-row a-i-c`}>
                     <div className={`top-nav-item-filler flex-row a-i-c`} />
                     <img className={`top-nav-image`} src={about_icon} alt="About Icon" />
                     <div id="about-button" className={`top-nav-item-text`}>
                         {/*{% translate "About"%}*/}
                         About
                     </div>
-                </a>
+                </NavLink>
 
                 {/*PROFILE BUTTON*/}
                 <a className={`top-nav-item top-nav-profile flex-row a-i-c`} onClick={setProfileClasses}>
