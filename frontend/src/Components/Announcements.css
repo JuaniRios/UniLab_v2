@@ -1,0 +1,50 @@
+.announcements
+{
+    position: relative;
+    width: 20vw;
+    margin: 10% 0 10% 0;
+    border-radius: 10px 0 0 10px;
+    padding: 0 0 3% 0;
+}
+.announcements hr
+{
+    width: 100%;
+    opacity: 0;
+}
+.announcements h1
+{
+    background-color: var(--unilab-orange);
+    color: var(--unilab-white);
+    border-radius: 10px 0 0 0;
+    width: 100%; 
+    padding: 7% 0; 
+    margin: 0 0 7% 0;
+    top: 0; 
+    left: 0;
+    text-align: center;
+}
+.announcement
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 100%;
+    cursor: pointer;
+    transition: .5s;
+    padding: 7%;
+    margin: 0;
+    border-bottom: 1px solid rgba(230, 135, 41, 0);
+    border-left: 1px solid rgba(230, 135, 41, 0);
+    border-right: 1px solid rgba(230, 135, 41, 0);
+
+}
+.announcement:hover
+{
+    border-bottom: 1px solid rgba(230, 135, 41, 1);
+}
+.announcement-body
+{
+    padding: 5%;
+}

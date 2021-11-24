@@ -3,8 +3,6 @@ import { NavLink } from "react-router-dom";
 // STYLES
 import "./HomeCover.css";
 // IMAGES
-import microsoft_icon from "../Assets/img/ms.jpg";
-import google_icon from "../Assets/img/google-logo.webp";
 
 function HomeCover(props) {
 
@@ -24,7 +22,7 @@ function HomeCover(props) {
                 }, timer2);
             })();
             i = i + 0.01;
-            timer1 = timer1 + 0.2;
+            timer1 = timer1 + 0.1;
         }
         homeMessage.current.style.bottom = "0";
     });
