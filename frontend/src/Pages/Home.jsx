@@ -12,7 +12,7 @@ function Home(props) {
         <>
             <NavMenu />
             <HomeCover />
-            <Slider />
+            <Slider contentType={'jobs'} />
             <Footer />
         </>
     );

@@ -1,15 +1,21 @@
 import React, { useState, useEffect, useReducer, useRef } from "react";
 import { NavLink } from "react-router-dom";
+import {config} from "../Config/config";
 // STYLES
 import "./Slider.css";
 // IMAGES
 import microsoft_icon from "../Assets/img/ms.jpg";
 import google_icon from "../Assets/img/google-logo.webp";
+import SliderCard from "./SliderCard";
+import {useAuthState} from "../Context";
 
 function Slider(props) {
-
+    const authState = useAuthState()
+    const contentType = props.contentType
     const slider = useRef(null);
     const moreBtn = useRef(null);
+    const [cards, setCards] = useState([])
+    const [page, setPage] = useState(1)
 
     function toggleSlide(direction) {
         var currentLeft = parseInt(slider.current.style.left);
@@ -33,6 +39,21 @@ function Slider(props) {
         slider.current.style.left = `${newLeft}rem`;
     }
 
+    async function fetch_content(_contentType, page){
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "Authorization": `Bearer ${authState.token}`
+            }
+        };
+
+        const url = config.django_api + _contentType + `?page=${page}`
+
+        const response = await fetch(url, requestOptions);
+        return await response.json()
+    }
+
     useEffect(() => {
         if ((slider.current.childElementCount - 1) < 10) {
             moreBtn.current.classList.add('hidden');
@@ -45,6 +66,22 @@ function Slider(props) {
         slider.current.style.left = "0rem";
     });
 
+    useEffect( () => {
+        fetch_content(contentType, page).then(data => {
+            const items = data.results
+            let newCards = []
+            console.log(data)
+            for (let i=0;i<items.length;i++){
+                let icard = <SliderCard contentType={contentType} content={items[i]}/>
+                console.log(icard)
+                newCards.push(icard)
+            }
+            setCards(oldCards => oldCards.concat(newCards))
+        })
+    }, [page])
+
+    console.log(cards)
+    // TODO: Pagination
     return (
         <div className={`slider-wrapper`}>
 
@@ -58,57 +95,7 @@ function Slider(props) {
 
             <div className={`slider`} ref={slider}>
 
-                <div className={`slider-item shadow`}>
-
-                    <div className={`slider-icon-holder`}>
-                        <img className={`slider-icon`} src={microsoft_icon} alt="" />
-                    </div>
-
-                    <div className={`slider-info-holder`}>
-                        <NavLink to="/">
-                            <h3 className={`link-text`}>Job Title</h3>
-                        </NavLink>
-
-                        <p className={`gray-text`}>Company Name</p>
-                        <p className={`gray-text`}>City, District, Country</p>
-                        <p>
-                            <span className={`gray-text smaller-text`}>2 weeks ago</span>
-                            <span className={`middle-dot-span orange-text smaller-text`}>4 applicants</span>
-                        </p>
-                    </div>
-
-                </div>
-
-                <div className={`slider-item shadow`}>
-
-                    <div className={`slider-icon-holder`}>
-                        <img className={`slider-icon`} src={google_icon} alt="" />
-                    </div>
-
-                    <div className={`slider-info-holder`}>
-                        <NavLink to="/">
-                            <h3 className={`link-text`}>Job Title</h3>
-                        </NavLink>
-
-                        <p className={`gray-text`}>Company Name</p>
-                        <p className={`gray-text`}>City, District, Country</p>
-                        <p>
-                            <span className={`gray-text smaller-text`}>2 weeks ago</span>
-                            <span className={`middle-dot-span orange-text smaller-text`}>4 applicants</span>
-                        </p>
-                    </div>
-
-                </div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-
+                {cards}
 
                 <button className={`more-jobs uni-button`} ref={moreBtn}>More Jobs</button>
 
