@@ -42,7 +42,6 @@
     background-position: center center;
     transition: .5s;
     cursor: pointer;
-    background-image: url("../../Assets/img/ms.jpg");
     background-size: cover;
     background-position: center center;
 }

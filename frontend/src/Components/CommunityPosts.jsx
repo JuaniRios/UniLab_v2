@@ -1,7 +1,7 @@
 import {useAuthState} from "../Context";
 import {useEffect, useReducer, useState} from "react";
 import {config} from "../Config/config"
-import {Post} from "./Post"
+import Post from "./Post"
 export function CommunityPosts(props) {
     const state = useAuthState()
     const userData = state.userData

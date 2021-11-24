@@ -4,6 +4,7 @@ import HomeBlock from "./HomeBlock";
 // STYLES
 import "./HomePrimary.css";
 // IMAGES
+import BoxGrid from "./BoxGrid";
 
 function HomePrimary(props) {
 
@@ -30,71 +31,7 @@ function HomePrimary(props) {
             </HomeBlock>
 
             <HomeBlock headerValue="Top Companies" btnValue="More Companies">
-                <div className={`employer-box`}>
-                    <a className={`employer-item shadow`}>
-                        <div className={`employer-name noselect`}>
-                            <div className={`w90`}>{companyName}</div>
-                            <div className={`employer-stars`}>&#9733; &#9733; &#9733; &#9733; &#9734;</div>
-                        </div>
-                        <div className={`employer-overlay`}></div>
-                    </a>
-
-                    <a className={`employer-item shadow`}>
-                        <div className={`employer-name noselect`}>
-                            <div className={`w90`}>{companyName}</div>
-                            <div className={`employer-stars`}>&#9733; &#9733; &#9733; &#9733; &#9734;</div>
-                        </div>
-                        <div className={`employer-overlay`}></div>
-                    </a>
-
-                    <a className={`employer-item shadow`}>
-                        <div className={`employer-name noselect`}>
-                            <div className={`w90`}>{companyName}</div>
-                            <div className={`employer-stars`}>&#9733; &#9733; &#9733; &#9733; &#9734;</div>
-                        </div>
-                        <div className={`employer-overlay`}></div>
-                    </a>
-
-                    <a className={`employer-item shadow`}>
-                        <div className={`employer-name noselect`}>
-                            <div className={`w90`}>{companyName}</div>
-                            <div className={`employer-stars`}>&#9733; &#9733; &#9733; &#9733; &#9734;</div>
-                        </div>
-                        <div className={`employer-overlay`}></div>
-                    </a>
-
-                    <a className={`employer-item shadow`}>
-                        <div className={`employer-name noselect`}>
-                            <div className={`w90`}>{companyName}</div>
-                            <div className={`employer-stars`}>&#9733; &#9733; &#9733; &#9733; &#9734;</div>
-                        </div>
-                        <div className={`employer-overlay`}></div>
-                    </a>
-
-                    <a className={`employer-item shadow`}>
-                        <div className={`employer-name noselect`}>
-                            <div className={`w90`}>{companyName}</div>
-                            <div className={`employer-stars`}>&#9733; &#9733; &#9733; &#9733; &#9734;</div>
-                        </div>
-                        <div className={`employer-overlay`}></div>
-                    </a>
-
-                    <a className={`employer-item shadow`}>
-                        <div className={`employer-name noselect`}>
-                            <div className={`w90`}>{companyName}</div>
-                            <div className={`employer-stars`}>&#9733; &#9733; &#9733; &#9733; &#9734;</div>
-                        </div>
-                        <div className={`employer-overlay`}></div>
-                    </a>
-
-                    <a className={`employer-item shadow`}>
-                        <div className={`employer-name noselect`}>
-                            <div className={`w90`}>{companyName}</div>
-                            <div className={`employer-stars`}>&#9733; &#9733; &#9733; &#9733; &#9734;</div>
-                        </div>
-                        <div className={`employer-overlay`}></div>
-                    </a>
-                </div>
+                <BoxGrid contentType={"companies"}/>
             </HomeBlock>
 
         </div>

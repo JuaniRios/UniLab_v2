@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useReducer, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import {config} from "../Config/config";
+import fetchContent from "./HelperFunctions/fetchContent";
 // STYLES
 import "./Slider.css";
 // IMAGES
 import microsoft_icon from "../Assets/img/ms.jpg";
 import google_icon from "../Assets/img/google-logo.webp";
 import SliderCard from "./SliderCard";
+import BoxGrid from "./HomeComponents/BoxGrid";
 import {useAuthState} from "../Context";
 
 function Slider(props) {
@@ -39,20 +41,7 @@ function Slider(props) {
         slider.current.style.left = `${newLeft}rem`;
     }
 
-    async function fetch_content(_contentType, page){
-        const requestOptions = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                "Authorization": `Bearer ${authState.token}`
-            }
-        };
 
-        const url = config.django_api + _contentType + `?page=${page}`
-
-        const response = await fetch(url, requestOptions);
-        return await response.json()
-    }
 
     useEffect(() => {
         if ((slider.current.childElementCount - 1) < 10) {
@@ -67,20 +56,18 @@ function Slider(props) {
     });
 
     useEffect( () => {
-        fetch_content(contentType, page).then(data => {
+        fetchContent(contentType, page, authState.token).then(data => {
             const items = data.results
             let newCards = []
-            console.log(data)
+            console.log(items)
             for (let i=0;i<items.length;i++){
-                let icard = <SliderCard contentType={contentType} content={items[i]}/>
-                console.log(icard)
+                let icard = <SliderCard key={i} contentType={contentType} content={items[i]}/>
                 newCards.push(icard)
             }
             setCards(oldCards => oldCards.concat(newCards))
         })
     }, [page])
 
-    console.log(cards)
     // TODO: Pagination
     return (
         <div className={`slider-wrapper`}>

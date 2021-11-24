@@ -1,4 +1,4 @@
-export function Post(props) {
+export default function Post(props) {
     return(
         <>
         <h5>id for this post is {props.url}</h5>
