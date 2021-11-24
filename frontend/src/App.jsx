@@ -8,9 +8,10 @@ import {
 // STYLES
 import "./main_style.css";
 // PAGES
-import Home from "./Pages/Home.jsx";
-import Login from "./Pages/Login.jsx";
-import LogOut from "./Pages/LogOut.jsx";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import LogOut from "./Pages/LogOut";
+import NotFound from "./Pages/PageNotFound";
 
 import { CommunityPosts } from "./Components/CommunityPosts.jsx"
 // OTHER
@@ -38,6 +39,8 @@ function App() {
                     <PrivateRoute exact path='/community'>
                         <CommunityPosts />
                     </PrivateRoute>
+
+                    <Route component={NotFound} />
 
                 </Switch>
             </Router>

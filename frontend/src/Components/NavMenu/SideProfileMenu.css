@@ -62,16 +62,22 @@
     object-fit:cover;
     margin-bottom: 2rem;
 }
-.settings-picture, .logout-picture, .prof-picture
+.settings-picture, .logout-picture, .prof-picture, .login-picture
 {
     height: 3vh;
     width: 3vh;
     margin: 0 3%;
-    background-size: 100% 100%;
+    background-size: cover;
+    background-position: center center;
 }
 .prof-picture {background-image: url('../../Assets/img/profile.png');}
 .settings-picture {background-image: url('../../Assets/img/settings2.png');}
 .logout-picture {background-image: url('../../Assets/img/logout2.png');}
+.login-picture 
+{
+    background-image: url('../../Assets/img/logout2.png');
+    transform: rotate(180deg);
+}
 .settings-button
 {
     display: flex;

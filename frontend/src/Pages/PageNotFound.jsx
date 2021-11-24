@@ -1,13 +1,10 @@
 // Pages/PageNotFound/index.js
 
 import React from 'react';
-import styles from './pagenotfound.module.css';
 
 function NotFound(props) {
     return (
-        <div className={styles.container}>
-            <h1>Page not found</h1>
-        </div>
+        <h1>Error 404: Page not found</h1>
     );
 }
 
