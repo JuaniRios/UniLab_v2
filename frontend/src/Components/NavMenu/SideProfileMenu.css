@@ -76,15 +76,24 @@
 {
     display: flex;
     align-items: center;
+    cursor: pointer;
     padding: 3% 5%;
     background-color: rgba(0,0,0,0);
     color: var(--unilab-orange);
     transition: .1s;
+    width: 100%;
+    outline: none;
+    border: none;
 }
 .settings-button:hover
 {
     background-color: rgba(0, 0, 0, 0.1);
-}.profile-close-button
+}
+.settings-button h3
+{
+    text-align: start;
+}
+.profile-close-button
 {
     right: unset !important;
     left: 2% !important;

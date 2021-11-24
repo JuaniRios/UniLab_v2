@@ -26,18 +26,17 @@
 
 .employer-box
 {
-    width: 100%;
     display: flex; 
     flex-flow: row wrap; 
     justify-content: center;
-    padding: 2%;
+    row-gap: 1rem;
+    column-gap: 1rem;
 }
 .employer-item
 {
     height: 100px; 
     width: 100px; 
     border-radius: 20px;
-    margin: 2%;
     position: relative;
     background-size: cover;
     background-position: center center;

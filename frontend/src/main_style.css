@@ -74,6 +74,10 @@ body {margin: 0;}
     z-index: 9500;
     transition: all 1s;
 }
+.overlay-10k
+{
+    z-index: 10000 !important;
+}
 
 /* TO BE REMOVED */
 .smoke-screen {z-index: 8995;}
@@ -121,8 +125,8 @@ input, .input, select
 {
     outline: none;
     border: 3px solid rgba(0,0,0,0);
-    padding: 5%;
-    margin: 5% 0;
+    padding: 1rem;
+    margin: 1rem 0;
     border-radius: 10px;
     width: 100%;
     transition: 0s;
@@ -297,6 +301,12 @@ h4 {font-size: 1em;}
     border-radius: 50px;
     padding: 1rem 2rem;
     border: 1px solid var(--unilab-orange);
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 .uni-button-disabled
 {
@@ -565,4 +575,17 @@ tr:nth-child(even)
 .smaller-text
 {
     font-size: 0.80rem;
+}
+.error-message
+{
+    width: 100%;
+    padding: 0 5%;
+    color:red;
+    opacity: 0;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }

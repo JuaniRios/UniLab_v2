@@ -11,28 +11,29 @@ function SideProfileMenu(props) {
     const userData = state.userData;
     const [profileClass, overlayClass] = props.profileClasses;
     const setProfileClasses = props.setProfileClasses;
+    const setLoginClasses = props.setLoginClasses;
 
     const profileButton =
         <NavLink to="/profile" className={`settings-button`}>
-            <div className={`prof-picture`}/>
+            <div className={`prof-picture`} />
             <p className={`w80`}>My Profile</p>
         </NavLink>;
 
     const myCompaniesButton =
         <NavLink to="my-companies" className={`settings-button`}>
-            <div className={`prof-picture`}/>
+            <div className={`prof-picture`} />
             <p className={`w80`}>My Companies</p>
         </NavLink>;
 
     let signedInButtons =
         <>
             <NavLink to="/settings" className={`settings-button`}>
-                <div className={`settings-picture`}/>
+                <div className={`settings-picture`} />
                 <p className={`w80`}>Account Settings</p>
             </NavLink>
 
             <NavLink to="/logout" className={`settings-button`}>
-                <div className={`logout-picture`}/>
+                <div className={`logout-picture`} />
                 <p className={`w80`}>Sign Out</p>
             </NavLink>
         </>;
@@ -52,11 +53,11 @@ function SideProfileMenu(props) {
 
     const notSignedInButtons =
         <>
-            <NavLink to="/login" className={`settings-button`}>
+            <button onClick={setLoginClasses} className={`settings-button`}>
                 <div className={`logout-picture`} />
                 {/* {# Translators: End of side profile menu #} */}
                 <h3 className={`w80`}>Sign In</h3>
-            </NavLink>
+            </button>
         </>;
 
     const signedInUserData =
@@ -87,7 +88,7 @@ function SideProfileMenu(props) {
 
     return (
         <>
-            <div className={`overlay ${overlayClass}`} onClick={setProfileClasses}/>
+            <div className={`overlay ${overlayClass}`} onClick={setProfileClasses} />
 
             <aside className={`profile-menu ${profileClass} shadow`}>
 

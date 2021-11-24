@@ -4,11 +4,12 @@ import TopNav from "./TopNav";
 import GeneralSearch from "./GeneralSearch";
 import SideLanguageMenu from "./SideLanguageMenu";
 import SideProfileMenu from "./SideProfileMenu";
+import Login from "./Login";
 import { useAuthState } from "../../Context";
 
 function NavMenu(props) {
-    const state = useAuthState()
-    const userData = state.userData
+    const state = useAuthState();
+    const userData = state.userData;
 
     // OPEN AND CLOSE SIDE PROFILE MENU
     function changeProfileClasses(initState) {
@@ -58,6 +59,18 @@ function NavMenu(props) {
     const initSearchClasses = ["search-menu-closed", "hidden"];
     const [searchClasses, setSearchClasses] = useReducer(changeSearchClasses, initSearchClasses);
 
+    // OPEN AND CLOSE LOGIN FORM
+    function changeLoginClasses(initState) {
+        if (initState[0] === "login-form-closed") {
+            return ["login-form-opened", "shown"];
+        }
+        else {
+            return ["login-form-closed", "hidden"];
+        }
+    }
+    const initLoginClasses = ["login-form-closed", "hidden"];
+    const [loginClasses, setLoginClasses] = useReducer(changeLoginClasses, initLoginClasses);
+
     return (
         <>
             <TopNav
@@ -72,10 +85,16 @@ function NavMenu(props) {
             <SideProfileMenu
                 profileClasses={profileClasses}
                 setProfileClasses={setProfileClasses}
+
+                setLoginClasses={setLoginClasses}
             />
             <SideLanguageMenu
                 languageClasses={languageClasses}
                 setLanguageClasses={setLanguageClasses}
+            />
+            <Login
+                loginClasses={loginClasses}
+                setLoginClasses={setLoginClasses}
             />
         </>
     );
