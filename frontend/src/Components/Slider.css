@@ -5,6 +5,7 @@
     justify-content: center;
     flex-direction: column;
     overflow: hidden;
+    background-color: var(--unilab-light-gray);
 }
 .arrow-btn
 {
@@ -84,6 +85,7 @@
     border-radius: 10px;
     transition: .3s;
     backface-visibility: hidden;
+    background-color: var(--unilab-white);
 }
 .slider-item p, .slider-item h1, .slider-item h2, .slider-item h3
 {

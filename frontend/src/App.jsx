@@ -22,15 +22,19 @@ function App() {
         <ContextProvider>
             <Router>
                 <Switch>
+
                     <PrivateRoute optional={true} exact path='/'>
                         <Home />
                     </PrivateRoute>
+
                     <Route exact path='/login'>
                         <Login />
                     </Route>
+
                     <Route exact path='/logout'>
-                        <LogOut/>
+                        <LogOut />
                     </Route>
+
                     <PrivateRoute exact path='/community'>
                         <CommunityPosts />
                     </PrivateRoute>

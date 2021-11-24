@@ -6,7 +6,7 @@
     align-items: center;
     height: 90vh;
     width: 100%;
-    background-image: url('../Assets/img/vienna.jpg');
+    background-image: url('../../Assets/img/vienna.jpg');
     background-size: cover;
     overflow: hidden;
 }

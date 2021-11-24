@@ -46,15 +46,15 @@ function Slider(props) {
     });
 
     return (
-        <div className={`slider-wrapper`}>
+        <div className={`slider-wrapper shadow`}>
 
             <div className={`slider-title normal flex-row a-i-c j-c-s-b`}>
                 <h2>Discover Jobs/Companies</h2>
                 <span className={`filter-btn noselect`}>Filter</span>
             </div>
 
-            <button className={`arrow-btn arrow-prev`} onClick={() => toggleSlide("prev")}/>
-            <button className={`arrow-btn arrow-next`} onClick={() => toggleSlide("next")}/>
+            <button className={`arrow-btn arrow-prev`} onClick={() => toggleSlide("prev")} />
+            <button className={`arrow-btn arrow-next`} onClick={() => toggleSlide("next")} />
 
             <div className={`slider`} ref={slider}>
 

@@ -3,8 +3,6 @@ import { NavLink } from "react-router-dom";
 // STYLES
 import "./HomeCover.css";
 // IMAGES
-import microsoft_icon from "../Assets/img/ms.jpg";
-import google_icon from "../Assets/img/google-logo.webp";
 
 function HomeCover(props) {
 
