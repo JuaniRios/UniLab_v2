@@ -26,12 +26,13 @@ export default function BoxGrid(props){
     const [boxes, setBoxes] = useState([])
 
     useEffect( () => {
-        fetchContent(props.contentType, 1, authState.token).then(data => {
+        fetchContent(props.contentType, 1).then(data => {
+            console.log(data)
             const items = data.results
             const newBoxes = []
             console.log(items)
             for (let i=0;i<items.length;i++){
-                let ibox = <Box contentType={props.contentType} content = {items[i]}/>
+                let ibox = <Box key={i} contentType={props.contentType} content = {items[i]}/>
                 newBoxes.push(ibox)
             }
             setBoxes(oldBoxes => oldBoxes.concat(newBoxes))

@@ -42,17 +42,18 @@ class IsCompanyOrReadOnly(permissions.BasePermission):
     """
 
     def has_permission(self, request, view):
-        if not request.user.is_authenticated:
-            return False
-
-        elif request.user.is_superuser:
+        if request.method in permissions.SAFE_METHODS:
             return True
 
-        elif request.method in permissions.SAFE_METHODS:
-            return True
+        else:
+            if request.user.is_superuser:
+                return True
 
-        elif request.user.is_company:
-            return True
+            elif request.user.is_company:
+                return True
+
+            else:
+                return False
 
 
 class IsAdminOrReadOnly(permissions.BasePermission):
@@ -64,6 +65,7 @@ class IsAdminOrReadOnly(permissions.BasePermission):
 
 
 class CompanyOwner(permissions.BasePermission):
+    """"Check that the company creating the job is owned by the user"""
     def has_permission(self, request, view):
         if request.user.is_superuser:
             return True
