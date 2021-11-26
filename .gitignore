@@ -17,7 +17,8 @@ backend/website/migrations
 /backend/UniLab/__pycache__
 
 /backend/test_content
-/backend/media
+/backend/media/*
+!/backend/media/defaults/
 /backend/static/bin
 /backend/z_random_files
 
