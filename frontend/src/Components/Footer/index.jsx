@@ -82,10 +82,10 @@ function Footer(props) {
                     © Copyright UniLab 2021
                 </div>
                 <div className="footer-lower-social">
-                    <a id="soc-img-1" href="#" target="blank_"></a>
-                    <a id="soc-img-2" href="#" target="blank_"></a>
-                    <a id="soc-img-3" href="#" target="blank_"></a>
-                    <a id="soc-img-4" href="#" target="blank_"></a>
+                    <a id="soc-img-1" href="#" target="blank_" aria-label="Twitter"></a>
+                    <a id="soc-img-2" href="#" target="blank_" aria-label="Facebook"></a>
+                    <a id="soc-img-3" href="#" target="blank_" aria-label="LinkedIn"></a>
+                    <a id="soc-img-4" href="#" target="blank_" aria-label="Instagram"></a>
                 </div>
             </div>
 

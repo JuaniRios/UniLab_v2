@@ -22,8 +22,12 @@ function Signup(props) {
 
             </div>
 
-            <input className={`signup-email shadow`} name="email" type="email" placeholder='Email Address' />
-            <div className={`signup-email-error error-message`}>⚠ Email is missing.</div>
+            <div className={`w100 flex col-wrap j-c-s-b a-i-c`}>
+
+                <input className={`signup-email shadow`} name="email" type="email" placeholder='Email Address' />
+                <div className={`signup-email-error error-message`}>⚠ Email is missing.</div>
+
+            </div>
 
             <div className={`double-input-wrap w100 flex row-wrap j-c-s-b a-i-c`}>
 

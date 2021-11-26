@@ -1,7 +1,7 @@
-import {useAuthState} from "../Context";
-import {useEffect, useReducer, useState} from "react";
-import {config} from "../Config/config"
-import Post from "./Post"
+import { useAuthState } from "../Context";
+import { useEffect, useState } from "react";
+import { config } from "../Config/config";
+import Post from "./Post";
 export function CommunityPosts(props) {
     const state = useAuthState()
     const userData = state.userData
@@ -24,23 +24,23 @@ export function CommunityPosts(props) {
         return await response.json()
     }
 
-    useEffect( () => {
+    useEffect(() => {
         fetch_posts(page).then(data => {
             setPosts(data.results)
         })
     }, [page])
 
 
-    if (posts){
-        return(
+    if (posts) {
+        return (
             <>
-            {posts.map(post => <Post {...post}/>)}
+                {posts.map(post => <Post {...post} />)}
             </>
         )
     }
 
-    else{
-        return(
+    else {
+        return (
             <h4>Loading...</h4>
         )
     }
