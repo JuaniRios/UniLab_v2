@@ -16,8 +16,8 @@ import spanish_icon from "../../Assets/img/languages/es.webp";
 import german_icon from "../../Assets/img/languages/de.webp";
 import russian_icon from "../../Assets/img/languages/ru.webp";
 import french_icon from "../../Assets/img/languages/fr.webp";
-import {NavLink} from "react-router-dom";
-import {useAuthState} from "../../Context";
+import { NavLink } from "react-router-dom";
+import { useAuthState } from "../../Context";
 
 function TopNav(props) {
     const height = document.documentElement.clientHeight;
@@ -43,13 +43,6 @@ function TopNav(props) {
     const [mobileClasses, setMobileClasses] = useReducer(changeMobileClasses, initMobileClasses);
     const [linebarClass, containerClass] = mobileClasses;
 
-    let linebar;
-    if (width < 1030) {
-        linebar = <div className={`linebar-btn ${linebarClass}`} onClick={setMobileClasses} />;
-    }
-    else {
-        linebar = <></>;
-    }
     return (
         <nav className={`top-nav flex-row a-i-c shadow`}>
 
@@ -59,7 +52,7 @@ function TopNav(props) {
             </NavLink>
 
             {/*MOBILE*/}
-            {linebar}
+            <div className={`linebar-btn ${linebarClass}`} onClick={setMobileClasses} />
 
             {/*MENU*/}
             <div className={`top-nav-container ${containerClass}`}>
