@@ -32,7 +32,7 @@ function Announcements(props) {
                 Title of Announcement 5: Something happened in some field.
             </div>
 
-            <div className={`uni-button`}>More Announcements</div>
+            <div className={`announcements-btn uni-button`}>More Announcements</div>
         </div>
     )
 }

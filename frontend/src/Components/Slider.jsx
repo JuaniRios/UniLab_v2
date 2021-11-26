@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer, useRef } from "react";
 import { NavLink } from "react-router-dom";
-import {config} from "../Config/config";
+import { config } from "../Config/config";
 import fetchContent from "./HelperFunctions/fetchContent";
 // STYLES
 import "./Slider.css";
@@ -9,7 +9,7 @@ import microsoft_icon from "../Assets/img/ms.jpg";
 import google_icon from "../Assets/img/google-logo.webp";
 import SliderCard from "./SliderCard";
 import BoxGrid from "./HomeComponents/BoxGrid";
-import {useAuthState} from "../Context";
+import { useAuthState } from "../Context";
 
 function Slider(props) {
     const authState = useAuthState()
@@ -41,8 +41,6 @@ function Slider(props) {
         slider.current.style.left = `${newLeft}rem`;
     }
 
-
-
     useEffect(() => {
         if ((slider.current.childElementCount - 1) < 10) {
             moreBtn.current.classList.add('hidden');
@@ -55,16 +53,16 @@ function Slider(props) {
         slider.current.style.left = "0rem";
     });
 
-    useEffect( () => {
+    useEffect(() => {
         fetchContent(contentType, page, authState.token).then(data => {
-            const items = data.results
-            let newCards = []
-            console.log(items)
-            for (let i=0;i<items.length;i++){
-                let icard = <SliderCard key={i} contentType={contentType} content={items[i]}/>
-                newCards.push(icard)
+            const items = data.results;
+            let newCards = [];
+            console.log(items);
+            for (let i = 0; i < items.length; i++) {
+                let icard = <SliderCard key={i} contentType={contentType} content={items[i]} />;
+                newCards.push(icard);
             }
-            setCards(oldCards => oldCards.concat(newCards))
+            setCards(oldCards => oldCards.concat(newCards));
         })
     }, [page])
 
@@ -77,8 +75,8 @@ function Slider(props) {
                 <span className={`filter-btn noselect`}>Filter</span>
             </div>
 
-            <button className={`arrow-btn arrow-prev`} onClick={() => toggleSlide("prev")}/>
-            <button className={`arrow-btn arrow-next`} onClick={() => toggleSlide("next")}/>
+            <button className={`arrow-btn arrow-prev`} onClick={() => toggleSlide("prev")} />
+            <button className={`arrow-btn arrow-next`} onClick={() => toggleSlide("next")} />
 
             <div className={`slider`} ref={slider}>
 

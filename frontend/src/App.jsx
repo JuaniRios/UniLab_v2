@@ -11,6 +11,7 @@ import "./main_style.css";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import LogOut from "./Pages/LogOut";
+import Register from "./Pages/Register";
 import NotFound from "./Pages/PageNotFound";
 
 import { CommunityPosts } from "./Components/CommunityPosts.jsx"
@@ -34,6 +35,10 @@ function App() {
 
                     <Route exact path='/logout'>
                         <LogOut />
+                    </Route>
+
+                    <Route exact path='/sign-up'>
+                        <Register />
                     </Route>
 
                     <PrivateRoute exact path='/community'>
