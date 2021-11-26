@@ -59,7 +59,7 @@ function SideProfileMenu(props) {
                 <h3 className={`w80`}>Sign In</h3>
             </button>
             <NavLink to="/sign-up" className={`settings-button`}>
-                <div className={`logout-picture`} />
+                <div className={`signup-picture`} />
                 {/* {# Translators: End of side profile menu #} */}
                 <h3 className={`w80`}>Sign Up</h3>
             </NavLink>

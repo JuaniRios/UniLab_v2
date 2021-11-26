@@ -35,7 +35,7 @@ function HomeCover(props) {
             <div className={`home-cover-message w30`} ref={homeMessage}>
                 <h1 className={`welcome-msg`}>Welcome to UniLab!</h1>
                 <h2>An easier way to connect with employers in Europe</h2>
-                <button className={`uni-button`}>Get Started</button>
+                <button className={`uni-button-3`}>Get Started</button>
             </div>
         </div>
     )
