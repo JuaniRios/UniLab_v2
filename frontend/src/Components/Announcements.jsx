@@ -7,7 +7,7 @@ import "./Announcements.css";
 function Announcements(props) {
 
     return (
-        <div className={`announcements gui-element`}>
+        <div className={`announcements gui-element shadow`}>
             <button className={`close-button hidden`}></button>
 
             <h1>Announcements</h1>

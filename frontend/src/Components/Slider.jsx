@@ -1,15 +1,12 @@
 import React, { useState, useEffect, useReducer, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { config } from "../Config/config";
+import { useAuthState } from "../Context";
 import fetchContent from "./HelperFunctions/fetchContent";
+import SliderCard from "./SliderCard";
 // STYLES
 import "./Slider.css";
-// IMAGES
-import microsoft_icon from "../Assets/img/ms.jpg";
-import google_icon from "../Assets/img/google-logo.webp";
-import SliderCard from "./SliderCard";
-import BoxGrid from "./HomeComponents/BoxGrid";
-import { useAuthState } from "../Context";
+
 
 function Slider(props) {
     const authState = useAuthState()
@@ -68,7 +65,7 @@ function Slider(props) {
 
     // TODO: Pagination
     return (
-        <div className={`slider-wrapper`}>
+        <div className={`slider-wrapper shadow`}>
 
             <div className={`slider-title normal flex-row a-i-c j-c-s-b`}>
                 <h2>Discover Jobs</h2>

@@ -5,7 +5,7 @@
     justify-content: center;
     flex-direction: column;
     overflow: hidden;
-    background-color: var(--unilab-light-gray);
+    background-color: var(--unilab-gray);
 }
 .arrow-btn
 {
