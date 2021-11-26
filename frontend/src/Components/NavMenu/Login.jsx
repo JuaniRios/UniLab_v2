@@ -17,19 +17,22 @@ function Login(props) {
 
                 <button className={`login-close-button close-button`} onClick={setLoginClasses} />
 
-                <h1 className={`sign-in`}>Sign In</h1>
+                <h1 className={`sign-in`}>Sign in</h1>
 
                 <div id="main-error-message" className={`error-message`}>⚠ Invalid email or password.</div>
 
-                <input className={`login-email`} name="email" type="email" placeholder='Email Address' />
+                <input className={`login-email shadow`} name="email" type="email" placeholder='Email Address' />
+
                 <div className={`login-email-error error-message`}>⚠ Email is missing.</div>
 
-                <input className={`login-password`} name="password" type="password" placeholder='Password' />
+                <input className={`login-password shadow`} name="password" type="password" placeholder='Password' />
+
                 <div className={`password-error error-message`}>⚠ Password is missing.</div>
 
                 <button className={`login-btn uni-button w100`} type="submit">Sign in</button>
 
-                <NavLink to="#" className={`forgot-pass`}>Forgot your password?</NavLink>
+                <NavLink to="#" className={`forgot-pass blue-link`}>Forgot your password?</NavLink>
+
             </aside>
         </>
     )

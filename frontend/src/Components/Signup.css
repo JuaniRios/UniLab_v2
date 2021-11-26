@@ -1,32 +1,20 @@
-.login-form-closed
+.signup-form
 {
-    display: none;
-}
-.login-form-opened
-{
-    display: flex;
-}
-.login-form
-{
-    z-index: 10500 !important;
-    position: absolute;
     align-items: center;
     flex-direction: column;
-    width: 30vw;
+    width: 40rem;
     background-color: var(--unilab-white);
     overflow-y: auto;
     border-radius: 10px;
     padding: 3rem;
-    left: 0; 
-    right: 0;
-    margin: auto;
+    margin: 3rem auto;
 }
-.login-email, .login-password
+.signup-email, .signup-password, .signup-password-confirm, .signup-fname, .signup-lname
 {
     background-color: var(--unilab-gray);
     transition: .1s ease-out;
 }
-.login-email:focus, .login-password:focus
+.signup-email:focus, .signup-password:focus, .signup-password-confirm:focus, .signup-fname:focus, .signup-lname:focus
 {
     border-bottom: 3px solid var(--unilab-orange);
 }
@@ -35,15 +23,21 @@
     display: flex;
     justify-content: space-between;
 }
-.sign-in
+.sign-up
 {
-    margin-bottom: 3rem;
+    margin: 0 0 3rem 0;
+    text-align: center;
 }
 .forgot-pass
 {
     margin-top: 3rem;
 }
-.login-btn
+.signup-btn
 {
     margin-top: 3rem;
+}
+.signup-agreements
+{
+    margin-top:10%; 
+    padding: 0 5%;
 }

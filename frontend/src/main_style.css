@@ -535,6 +535,8 @@ h4 {font-size: 1em;}
 .w10 {width: 10% !important;}
 .w0 {width: 0 !important;}
 
+.w47{width: 47% !important;}
+
 .normal {font-weight: normal;}
 
 table 
@@ -555,14 +557,11 @@ tr:nth-child(even)
 {
     background-color: #dddddd;
 }
-.orange-link
-{
-    color: var(--unilab-orange);
-}
-.orange-link:hover
-{
-    text-decoration: underline;
-}
+.orange-link {color: var(--unilab-orange);}
+.blue-link {color: #0084ff;}
+.orange-link:hover, .blue-link:hover
+{text-decoration: underline;}
+
 .company-block
 {
     transition: .5s;
@@ -605,7 +604,7 @@ tr:nth-child(even)
 .error-message
 {
     width: 100%;
-    padding: 0 5%;
+    padding: 0 1rem;
     color:red;
     opacity: 0;
     -webkit-touch-callout: none; /* iOS Safari */
@@ -614,4 +613,11 @@ tr:nth-child(even)
     -moz-user-select: none; /* Old versions of Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+.main-content
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

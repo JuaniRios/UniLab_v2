@@ -1,38 +1,41 @@
 import HomeBlock from "./HomeBlock";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import fetchContent from "../HelperFunctions/fetchContent";
 import SliderCard from "../SliderCard";
-import {useAuthState} from "../../Context";
+import { useAuthState } from "../../Context";
 
-function Box(props){
+function Box(props) {
     if (props.contentType === "companies") {
+        if (props.content.name.length > 20) {
+            props.content.name = props.content.name.slice(0, 20) + "...";
+        }
         return (
-        <>
-        <a className={`employer-item shadow`} style={{backgroundImage: `url(${props.content.image})`}}>
-            <div className={`employer-name noselect`}>
-                <div className={`w90`}>{props.content.name}</div>
-                <div className={`employer-stars`}>{`rating: ${props.content.rating}`}</div>
-            </div>
-            <div className={`employer-overlay`} />
-        </a>
-        </>
+            <>
+                <a className={`employer-item shadow`} style={{ backgroundImage: `url(${props.content.image})` }}>
+                    <div className={`employer-name noselect`}>
+                        <div className={`w90`}>{props.content.name}</div>
+                        <div className={`employer-stars`}>{`rating: ${props.content.rating}`}</div>
+                    </div>
+                    <div className={`employer-overlay`} />
+                </a>
+            </>
 
-    )
+        )
     }
 
 }
-export default function BoxGrid(props){
+export default function BoxGrid(props) {
     const authState = useAuthState()
     const [boxes, setBoxes] = useState([])
 
-    useEffect( () => {
+    useEffect(() => {
         fetchContent(props.contentType, 1).then(data => {
             console.log(data)
             const items = data.results
             const newBoxes = []
             console.log(items)
-            for (let i=0;i<items.length;i++){
-                let ibox = <Box key={i} contentType={props.contentType} content = {items[i]}/>
+            for (let i = 0; i < items.length; i++) {
+                let ibox = <Box key={i} contentType={props.contentType} content={items[i]} />
                 newBoxes.push(ibox)
             }
             setBoxes(oldBoxes => oldBoxes.concat(newBoxes))
@@ -41,10 +44,10 @@ export default function BoxGrid(props){
 
     return (
         <>
-        <div className={`employer-box`}>
-            {boxes}
-        </div>
+            <div className={`employer-box`}>
+                {boxes}
+            </div>
         </>
-        )
+    )
 
 }
