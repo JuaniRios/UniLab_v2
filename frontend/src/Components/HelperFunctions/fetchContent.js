@@ -1,4 +1,4 @@
-import {config} from "../../Config/config";
+import { config } from "../../Config/config";
 
 export default async function fetchContent(_contentType, page, token) {
     const requestOptions = {

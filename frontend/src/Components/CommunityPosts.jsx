@@ -24,23 +24,23 @@ export function CommunityPosts(props) {
         return await response.json()
     }
 
-    useEffect( () => {
+    useEffect(() => {
         fetch_posts(page).then(data => {
             setPosts(data.results)
         })
     }, [page])
 
 
-    if (posts){
-        return(
+    if (posts) {
+        return (
             <>
-            {posts.map(post => <Post {...post}/>)}
+                {posts.map(post => <Post {...post} />)}
             </>
         )
     }
 
-    else{
-        return(
+    else {
+        return (
             <h4>Loading...</h4>
         )
     }

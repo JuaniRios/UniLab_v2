@@ -606,7 +606,7 @@ tr:nth-child(even)
     width: 100%;
     padding: 0 1rem;
     color:red;
-    opacity: 0;
+    opacity: 1;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */

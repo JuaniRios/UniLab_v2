@@ -9,7 +9,7 @@ function HomeCover(props) {
     const homePolygon = useRef(null);
     const homeMessage = useRef(null);
 
-    useEffect(() => {
+    async function revealHome() {
         var timer1 = 1;
         var i = 1;
         homeMessage.current.style.bottom = "-100%";
@@ -25,6 +25,10 @@ function HomeCover(props) {
             timer1 = timer1 + 0.1;
         }
         homeMessage.current.style.bottom = "0";
+    }
+
+    useEffect(() => {
+        revealHome();
     });
 
     return (
