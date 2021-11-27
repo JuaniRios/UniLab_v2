@@ -95,6 +95,7 @@ function NavMenu(props) {
             <Login
                 loginClasses={loginClasses}
                 setLoginClasses={setLoginClasses}
+                setProfileClasses={setProfileClasses}
             />
         </>
     );

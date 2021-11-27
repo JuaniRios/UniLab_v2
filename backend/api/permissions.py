@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AnonymousUser
 from rest_framework import permissions
 
 from .data_converters import *
@@ -8,6 +9,9 @@ class IsOwner(permissions.BasePermission):
     """
     Custom permission to only allow owners and super-admins of an object to edit it.
     """
+    # makes POST requests valid for unauthenticated users
+    def has_permission(self, request, view):
+        return True
 
     def has_object_permission(self, request, view, obj):
         if request.method in permissions.SAFE_METHODS:
@@ -46,6 +50,9 @@ class IsCompanyOrReadOnly(permissions.BasePermission):
             return True
 
         else:
+            if isinstance(request.user, AnonymousUser):
+                return False
+
             if request.user.is_superuser:
                 return True
 
@@ -62,6 +69,8 @@ class IsAdminOrReadOnly(permissions.BasePermission):
             return request.user.is_authenticated
         else:
             return request.user.is_superuser
+
+
 
 
 class CompanyOwner(permissions.BasePermission):

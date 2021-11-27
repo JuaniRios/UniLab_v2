@@ -51,10 +51,9 @@ function Slider(props) {
     });
 
     useEffect(() => {
-        fetchContent(contentType, page, authState.token).then(data => {
+        fetchContent(contentType, page).then(data => {
             const items = data.results;
             let newCards = [];
-            console.log(items);
             for (let i = 0; i < items.length; i++) {
                 let icard = <SliderCard key={i} contentType={contentType} content={items[i]} />;
                 newCards.push(icard);

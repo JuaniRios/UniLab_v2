@@ -2,12 +2,33 @@ import React, { useState, useEffect } from "react";
 // STYLES
 import "./Login.css";
 // IMAGES
-import { NavLink } from "react-router-dom";
+import {NavLink, Redirect, useHistory} from "react-router-dom";
+import {loginUser, useAuthDispatch, useAuthState} from "../../Context";
 
 function Login(props) {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    let history = useHistory();
+    const dispatch = useAuthDispatch()
 
     const [loginClass, overlayClass] = props.loginClasses;
     const setLoginClasses = props.setLoginClasses;
+
+
+    const handleLogin = async (e) => {
+        e.preventDefault()
+        let payload = { email, password }
+        try {
+            const success = await loginUser(dispatch, payload)
+            if (success) {
+                props.setLoginClasses()
+                props.setProfileClasses()
+                // return (<Redirect to={'/'}/>)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <>
@@ -21,15 +42,17 @@ function Login(props) {
 
                 <div id="main-error-message" className={`error-message`}>⚠ Invalid email or password.</div>
 
-                <input className={`login-email shadow`} name="email" type="email" placeholder='Email Address' />
+                <input className={`login-email shadow`} name="email" type="email" placeholder='Email Address'
+                    value={email} onChange={e => setEmail(e.target.value)}/>
 
                 <div className={`login-email-error error-message`}>⚠ Email is missing.</div>
 
-                <input className={`login-password shadow`} name="password" type="password" placeholder='Password' />
+                <input className={`login-password shadow`} name="password" type="password" placeholder='Password'
+                    value={password} onChange={e => setPassword(e.target.value)}/>
 
                 <div className={`password-error error-message`}>⚠ Password is missing.</div>
 
-                <button className={`login-btn uni-button w100`} type="submit">Sign in</button>
+                <button className={`login-btn uni-button w100`} type="submit" onClick={handleLogin}>Sign in</button>
 
                 <NavLink to="#" className={`forgot-pass blue-link`}>Forgot your password?</NavLink>
 

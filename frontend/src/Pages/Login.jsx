@@ -23,7 +23,8 @@ function Login(props) {
         try {
             const success = await loginUser(dispatch, payload)
             if (success) {
-                history.push("/")
+                // window.location.reload()
+
             }
         } catch (error) {
             console.log(error)

@@ -61,9 +61,8 @@ function PrivateRoute({ children, userType, optional = false, ...rest }) {
 
     useEffect(() => {
         read_token(dispatch)
-    }, [])
+    }, [dispatch])
 
-    console.log(state)
     if (!state.token && !state.errorMessage) {
         return null
 

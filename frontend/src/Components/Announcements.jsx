@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useReducer, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
 // STYLES
 import "./Announcements.css";
 // IMAGES

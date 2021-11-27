@@ -12,7 +12,7 @@ UserModel = get_user_model()
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='user-detail')
-    companies = serializers.HyperlinkedRelatedField(many=True, view_name='company-detail', queryset=Company.objects.all())
+    companies = serializers.HyperlinkedRelatedField(many=True, view_name='company-detail', queryset=Company.objects.all(), required=False)
     password = serializers.CharField(write_only=True)
     user_data = serializers.HyperlinkedRelatedField(many=False, view_name='userdata-detail', read_only=True)
     user_type_verbose = serializers.SerializerMethodField()

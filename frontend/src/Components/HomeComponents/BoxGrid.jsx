@@ -1,7 +1,5 @@
-import HomeBlock from "./HomeBlock";
 import React, { useEffect, useState } from "react";
 import fetchContent from "../HelperFunctions/fetchContent";
-import SliderCard from "../SliderCard";
 import { useAuthState } from "../../Context";
 
 function Box(props) {
@@ -30,10 +28,8 @@ export default function BoxGrid(props) {
 
     useEffect(() => {
         fetchContent(props.contentType, 1).then(data => {
-            console.log(data)
             const items = data.results
             const newBoxes = []
-            console.log(items)
             for (let i = 0; i < items.length; i++) {
                 let ibox = <Box key={i} contentType={props.contentType} content={items[i]} />
                 newBoxes.push(ibox)
