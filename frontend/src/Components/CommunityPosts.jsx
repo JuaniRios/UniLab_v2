@@ -1,12 +1,12 @@
-import { useAuthState } from "../Context";
-import { useEffect, useState } from "react";
-import { config } from "../Config/config";
-import Post from "./Post";
+import {useAuthState} from "../Context";
+import {useEffect, useState} from "react";
+import {config} from "../Config/config"
+import Post from "./Post"
 export function CommunityPosts(props) {
     const state = useAuthState()
     const userData = state.userData
     const [posts, setPosts] = useState()
-    const [page, setPage] = useState(1)
+    const {page} = useState(1)
     const api_url = config.django_api
 
     async function fetch_posts(page) {

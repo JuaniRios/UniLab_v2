@@ -341,7 +341,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [IsOwner]
 
 
 class VoteDetail(generics.RetrieveUpdateDestroyAPIView):

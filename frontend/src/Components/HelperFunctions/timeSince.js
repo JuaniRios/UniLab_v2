@@ -47,5 +47,3 @@ export default function timeSince(value){
     return `${deltaDays/365>>0} ${timeStr}`
 
 }
-
-console.log(timeSince("2021-11-08"))
