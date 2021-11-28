@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import "./SignupForm.css";
 // IMAGES
 import { NavLink, Redirect, useHistory } from "react-router-dom";
-import { config } from "../Config/config";
-import { loginUser, useAuthDispatch, useAuthState } from "../Context";
-import { useMessage } from "../Context/context";
+import { config } from "../../Config/config";
+import { loginUser, useAuthDispatch, useAuthState } from "../../Context";
+import { useMessage } from "../../Context/context";
 
 function SignupForm(props) {
     const [email, setEmail] = useState()
