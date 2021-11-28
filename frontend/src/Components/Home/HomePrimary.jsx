@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useReducer, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
 import HomeBlock from "./HomeBlock";
+import BoxGrid from "./BoxGrid";
 // STYLES
 import "./HomePrimary.css";
-// IMAGES
-import BoxGrid from "./BoxGrid";
 
 function HomePrimary(props) {
 
@@ -31,7 +29,7 @@ function HomePrimary(props) {
             </HomeBlock>
 
             <HomeBlock headerValue="Top Companies" btnValue="More Companies">
-                <BoxGrid contentType={"companies"}/>
+                <BoxGrid contentType={"companies"} />
             </HomeBlock>
 
         </div>

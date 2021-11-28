@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import fetchContent from "../HelperFunctions/fetchContent";
 import SliderCard from "../SliderCard";
 import { useAuthState } from "../../Context";
-
+import Loader from "../Loader";
 function Box(props) {
     if (props.contentType === "companies") {
         if (props.content.name.length > 20) {
@@ -25,25 +25,29 @@ function Box(props) {
 
 }
 export default function BoxGrid(props) {
-    const authState = useAuthState()
-    const [boxes, setBoxes] = useState([])
+    const authState = useAuthState();
+    const [boxes, setBoxes] = useState([]);
+    const [loaderState, setLoaderState] = useState("shown");
 
     useEffect(() => {
         fetchContent(props.contentType, 1).then(data => {
             console.log(data)
             const items = data.results
             const newBoxes = []
-            console.log(items)
+            console.log(items);
             for (let i = 0; i < items.length; i++) {
                 let ibox = <Box key={i} contentType={props.contentType} content={items[i]} />
                 newBoxes.push(ibox)
             }
-            setBoxes(oldBoxes => oldBoxes.concat(newBoxes))
-        })
+            setLoaderState("hidden");
+            setBoxes(oldBoxes => oldBoxes.concat(newBoxes));
+        });
+
     }, [])
 
     return (
         <>
+            <Loader color="orange" size="4" state={loaderState} />
             <div className={`employer-box`}>
                 {boxes}
             </div>

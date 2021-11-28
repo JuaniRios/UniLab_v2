@@ -1,8 +1,8 @@
 import React from "react";
-import NavMenu from "../Components/NavMenu";
-import Signup from "../Components/Signup";
+import NavMenu from "../NavMenu";
+import SignupForm from "./SignupForm";
 
-function Register(props) {
+function SignUp(props) {
     document.title = "Sign up - UniLab";
     document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
     document.body.classList.remove("noscroll");
@@ -10,10 +10,10 @@ function Register(props) {
         <>
             <NavMenu />
             <main className={`main-content`}>
-                <Signup />
+                <SignupForm />
             </main>
         </>
     );
 }
 
-export default Register;
+export default SignUp;

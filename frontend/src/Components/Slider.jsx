@@ -4,17 +4,19 @@ import { config } from "../Config/config";
 import { useAuthState } from "../Context";
 import fetchContent from "./HelperFunctions/fetchContent";
 import SliderCard from "./SliderCard";
+import Loader from "./Loader";
 // STYLES
 import "./Slider.css";
 
 
 function Slider(props) {
-    const authState = useAuthState()
-    const contentType = props.contentType
+    const authState = useAuthState();
+    const contentType = props.contentType;
     const slider = useRef(null);
     const moreBtn = useRef(null);
-    const [cards, setCards] = useState([])
-    const [page, setPage] = useState(1)
+    const [cards, setCards] = useState([]);
+    const [page, setPage] = useState(1);
+    const [loaderState, setLoaderState] = useState("shown");
 
     function toggleSlide(direction) {
         var currentLeft = parseInt(slider.current.style.left);
@@ -59,13 +61,14 @@ function Slider(props) {
                 let icard = <SliderCard key={i} contentType={contentType} content={items[i]} />;
                 newCards.push(icard);
             }
+            setLoaderState("hidden");
             setCards(oldCards => oldCards.concat(newCards));
         })
     }, [page])
 
     // TODO: Pagination
     return (
-        <div className={`slider-wrapper shadow`}>
+        <div className={`slider-wrapper shadow w100`}>
 
             <div className={`slider-title normal flex-row a-i-c j-c-s-b`}>
                 <h2>Discover Jobs</h2>
@@ -74,8 +77,9 @@ function Slider(props) {
 
             <button className={`arrow-btn arrow-prev`} onClick={() => toggleSlide("prev")} />
             <button className={`arrow-btn arrow-next`} onClick={() => toggleSlide("next")} />
-
+            <Loader color="orange" size="4" state={loaderState} />
             <div className={`slider`} ref={slider}>
+
 
                 {cards}
 

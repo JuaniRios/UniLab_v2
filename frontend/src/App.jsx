@@ -8,10 +8,14 @@ import {
 // STYLES
 import "./main_style.css";
 // PAGES
-import Home from "./Pages/Home";
+import Home from "./Components/Home";
+import Community from "./Components/Community";
+
 import Login from "./Pages/Login";
-import LogOut from "./Pages/LogOut";
-import Register from "./Pages/Register";
+import SignOut from "./Components/SignOut";
+
+import SignUp from "./Components/SignUp";
+
 import NotFound from "./Pages/PageNotFound";
 
 import { CommunityPosts } from "./Components/CommunityPosts.jsx"
@@ -34,15 +38,15 @@ function App() {
                     </Route>
 
                     <Route exact path='/logout'>
-                        <LogOut />
+                        <SignOut />
                     </Route>
 
                     <Route exact path='/sign-up'>
-                        <Register />
+                        <SignUp />
                     </Route>
 
                     <PrivateRoute exact path='/community'>
-                        <CommunityPosts />
+                        <Community />
                     </PrivateRoute>
 
                     <Route component={NotFound} />

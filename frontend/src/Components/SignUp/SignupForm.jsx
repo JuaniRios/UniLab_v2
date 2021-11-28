@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 // STYLES
-import "./Signup.css";
+import "./SignupForm.css";
 // IMAGES
 import { NavLink } from "react-router-dom";
 
-function Signup(props) {
+function SignupForm(props) {
 
     return (
         <aside className={`signup-form shadow`}>
@@ -52,4 +52,4 @@ function Signup(props) {
     )
 }
 
-export default Signup;
+export default SignupForm;

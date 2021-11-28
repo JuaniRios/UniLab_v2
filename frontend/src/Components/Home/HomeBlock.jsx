@@ -2,7 +2,7 @@ import React, { useState, useEffect, useReducer, useRef } from "react";
 import { NavLink } from "react-router-dom";
 // STYLES
 import "./HomeBlock.css";
-// IMAGES
+import Loader from "../Loader";
 
 function HomeBlock(props) {
 

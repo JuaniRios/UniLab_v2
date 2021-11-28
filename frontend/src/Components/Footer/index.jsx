@@ -1,7 +1,7 @@
 // FOOTER FRAME
 import React from "react";
 // STYLES
-import "./Footer.css";
+import "./index.css";
 // ICONS
 import eucen_icon from "../../Assets/img/footer/eucen.png";
 import address_icon from "../../Assets/img/footer/address.png";

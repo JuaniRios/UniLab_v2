@@ -292,6 +292,7 @@ h4 {font-size: 1em;}
 /* UNI BUTTON */
 .uni-button, .uni-button-2, .uni-button-disabled
 {
+    position: relative;
     background-color: unset;
     color: var(--unilab-white);
     background-color: var(--unilab-orange);
@@ -311,6 +312,7 @@ h4 {font-size: 1em;}
 }
 .uni-button-3
 {
+    position: relative;
     color: var(--unilab-orange);
     background-color: unset;
     outline: none;
