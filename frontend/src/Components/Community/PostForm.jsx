@@ -50,8 +50,8 @@ function PostForm(props) {
 
                 <h1 className={`post-title`}>Create a post</h1>
 
-                <textarea className={`post-textfield shadow input`} name='content' placeholder="Text..." value={content}
-                    onChange={e => {setContent(e.target.value)}}/>
+                <textarea className={`post-textfield shadow input`} name='content' placeholder="Text..." rows={"13"}
+                    value={content} onChange={e => {setContent(e.target.value)}}/>
 
                 <label className={`custom-file-upload file-upload shadow`}>
                     <input ref={attachmentRef} type="file" onChange={() => getFileData(attachmentRef.current)} />

@@ -9,7 +9,7 @@ function CreatePost(props) {
     const setPostFormClasses = props.setPostFormClasses;
 
     return (
-        <div className={`create-post flex-row a-i-c j-c-s-e w40 shadow`}>
+        <div className={`create-post flex-row a-i-c w40 shadow`}>
 
             <NavLink className={`post-pfp shadow`} to="/profile"></NavLink>
 

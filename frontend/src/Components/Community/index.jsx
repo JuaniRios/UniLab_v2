@@ -5,6 +5,7 @@ import CreatePost from "./CreatePost";
 import PostForm from "./PostForm";
 import SortingMenu from "./SortingMenu";
 import {CommunityPosts} from "./CommunityPosts";
+import PostContainer from "./PostContainer";
 
 function Community(props) {
     document.title = "Community - UniLab";
@@ -33,6 +34,7 @@ function Community(props) {
                 <CreatePost setPostFormClasses={setPostFormClasses} />
                 <SortingMenu />
                 <CommunityPosts/>
+                <PostContainer />
             </div>
             <Footer />
         </>
