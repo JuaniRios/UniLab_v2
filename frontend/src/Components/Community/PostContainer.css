@@ -1,7 +1,76 @@
 .post-container
 {
     border-radius: 10px; 
-    margin: 3% 0;
+    margin-bottom: 3rem;
     position: relative;
-    padding: 2% 0;
+    padding: 2rem 0;
+}
+.vote-container
+{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: -4rem;
+    top: 0;
+}
+.upvote-btn, .downvote-btn
+{
+    background-color: unset;
+    border: none;
+    outline: none;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .1s;
+    border-radius: 10px;
+    padding: 0 .5rem;
+}
+.upvote-btn:hover, .downvote-btn:hover
+{
+    background-color: var(--gray-hover);
+}
+.downvote-btn
+{
+    transform: rotate(180deg);
+}
+.total-points
+{
+    text-align: center;
+}
+.post-details-img
+{
+    height: 50px;
+    object-fit: cover;
+    object-position: center center;
+    margin-right: 1rem;
+}
+.post-details
+{
+    margin-bottom: 2rem;
+}
+.post-body
+{
+    margin-bottom: 2rem;
+}
+.post-image
+{
+    margin-bottom: 2rem;
+}
+.post-option
+{
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 1rem;
+    width: 32%;
+}
+.post-option:hover
+{
+    background-color: var(--gray-hover);
+}
+.post-option-img
+{
+    height: 25px;
+    object-fit: cover;
+    object-position: center center;
+    margin-right: .5rem;
 }

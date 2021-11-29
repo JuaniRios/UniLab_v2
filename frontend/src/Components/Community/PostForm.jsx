@@ -33,7 +33,7 @@ function PostForm(props) {
 
                 <h1 className={`post-title`}>Create a post</h1>
 
-                <textarea className={`post-textfield shadow input`} name='content' placeholder="Text..."></textarea>
+                <textarea className={`post-textfield shadow input`} rows="13" name='content' placeholder="Text..."></textarea>
 
                 <label className={`custom-file-upload file-upload shadow`}>
                     <input ref={attachmentRef} type="file" onChange={() => getFileData(attachmentRef.current)} />
