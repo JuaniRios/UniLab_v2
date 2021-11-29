@@ -1,5 +1,5 @@
 // NAVIGATION MENU FRAME
-import React, { useReducer } from "react";
+import React, {useEffect, useReducer} from "react";
 import TopNav from "./TopNav";
 import GeneralSearch from "./GeneralSearch";
 import SideLanguageMenu from "./SideLanguageMenu";
@@ -71,6 +71,11 @@ function NavMenu(props) {
     const initLoginClasses = ["login-form-closed", "hidden"];
     const [loginClasses, setLoginClasses] = useReducer(changeLoginClasses, initLoginClasses);
 
+    useEffect(() => {
+        if (props.redirected) {
+            setLoginClasses()
+        }
+    }, [])
     return (
         <>
             <TopNav

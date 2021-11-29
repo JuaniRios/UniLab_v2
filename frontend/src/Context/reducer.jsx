@@ -19,7 +19,8 @@ export const AuthReducer = (initialState, action) => {
             return {
                 ...initialState,
                 userData: action.payload.userData,
-                token: action.payload.token
+                token: action.payload.token,
+                errorMessage: null
             };
         case "LOGOUT":
             return {

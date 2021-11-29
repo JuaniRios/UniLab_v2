@@ -23,7 +23,6 @@ function Login(props) {
             if (success) {
                 props.setLoginClasses()
                 props.setProfileClasses()
-                // return (<Redirect to={'/'}/>)
             }
         } catch (error) {
             console.log(error)

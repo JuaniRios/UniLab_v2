@@ -60,8 +60,6 @@ function SignupForm(props) {
             } catch (e) {
                 console.log(e)
             }
-
-
         }
 
         if (dataIsValid()) {

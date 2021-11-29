@@ -18,7 +18,6 @@ import SignUp from "./Components/SignUp";
 
 import NotFound from "./Pages/PageNotFound";
 
-import { CommunityPosts } from "./Components/CommunityPosts.jsx"
 // OTHER
 import { useAuthDispatch, ContextProvider, useAuthState } from "./Context";
 import { read_token } from "./Context/actions";
@@ -77,7 +76,7 @@ function PrivateRoute({ children, userType, optional = false, ...rest }) {
         } else {
             return (
                 <Route {...rest} render={({ location }) => !state.errorMessage ? (children) :
-                    (<Redirect to={{ pathname: "/login", state: { from: location } }} />)} />
+                    (<Redirect to={{ pathname: "/", state: { redirected:true } }} />)} />
             )
         }
 
