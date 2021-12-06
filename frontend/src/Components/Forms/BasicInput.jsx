@@ -16,20 +16,29 @@ function BasicInput(props) {
     const input = useRef(null);
     const error = useRef(null);
 
+    // FOR ERROR MESSAGE
     let errorBlock = <></>;
     if (errorMsg) {
         errorBlock = <div ref={error} className={`error-message noselect`}>⚠ {errorMsg}</div>;
     }
+
+    // FOR PASSWORD INPUT
+    const [opacity, setOpacityShown] = useState("transparent");
     const [passwordShown, setPasswordShown] = useState(false);
     const togglePasswordVisiblity = () => {
         setPasswordShown(passwordShown ? false : true);
+        if (opacity == "transparent") {
+            setOpacityShown("opaque");
+        }
+        else {
+            setOpacityShown("transparent");
+        }
     };
     let eyeIcon = <></>;
     if (type === "password") {
-        eyeIcon = <i onClick={togglePasswordVisiblity}>{eye}</i>;
+        eyeIcon = <i className={opacity} onClick={togglePasswordVisiblity}>{eye}</i>;
         type = passwordShown ? "text" : "password";
     }
-
 
     function emptyCheck() {
         if (input.current.value == 0) {
@@ -39,9 +48,6 @@ function BasicInput(props) {
     function removeError() {
         error.current.style.opacity = "0";
     }
-
-
-
 
     return (
         <div className={`input-container`} style={{ width: width }}>
