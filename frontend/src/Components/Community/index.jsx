@@ -4,7 +4,7 @@ import Footer from "../Footer";
 import CreatePost from "./CreatePost";
 import PostForm from "./PostForm";
 import SortingMenu from "./SortingMenu";
-import {CommunityPosts} from "./CommunityPosts";
+import { CommunityPosts } from "./CommunityPosts";
 import PostContainer from "./PostContainer";
 
 function Community(props) {
@@ -33,7 +33,7 @@ function Community(props) {
                 <PostForm postFormClasses={postFormClasses} setPostFormClasses={setPostFormClasses} />
                 <CreatePost setPostFormClasses={setPostFormClasses} />
                 <SortingMenu />
-                <CommunityPosts/>
+                <CommunityPosts />
                 <PostContainer />
             </div>
             <Footer />

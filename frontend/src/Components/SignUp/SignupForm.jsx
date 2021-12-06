@@ -6,16 +6,18 @@ import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { config } from "../../Config/config";
 import { loginUser, useAuthDispatch, useAuthState } from "../../Context";
 import { useMessage } from "../../Context/context";
+// OTHER COMPONENTS
+import BasicInput from "../Forms/BasicInput";
 
 function SignupForm(props) {
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
-    const [firstName, setFirstName] = useState()
-    const [lastName, setLastName] = useState()
-    const { token } = useAuthState()
-    let history = useHistory()
-    const dispatch = useAuthDispatch()
-    const [feedbackMessage, setFeedbackMessage] = useMessage()
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const [firstName, setFirstName] = useState();
+    const [lastName, setLastName] = useState();
+    const { token } = useAuthState();
+    let history = useHistory();
+    const dispatch = useAuthDispatch();
+    const [feedbackMessage, setFeedbackMessage] = useMessage();
 
     useEffect(() => {
         dispatch({ type: "LOGOUT" })
@@ -78,38 +80,34 @@ function SignupForm(props) {
 
             <h1 className={`sign-up`}>Sign up</h1>
 
-            <div id="main-error-message" className={`error-message`}>⚠ An error has occurred, please try again.</div>
+            <div id="main-error-message" className={`error-message noselect`}>⚠ An error has occurred, please try again.</div>
 
             <div className={`double-input-wrap w100 flex row-wrap j-c-s-b a-i-c`}>
-
-                <input className={`signup-fname shadow`} name="first_name" type="text" placeholder='First Name'
+                <BasicInput name="signup-first-name" type="text" width="47%" label="First Name" errorMsg="First Name Missing!" />
+                <BasicInput name="signup-last-name" type="text" width="47%" label="Last Name" errorMsg="Last Name Missing!" />
+                {/* <input className={`signup-fname shadow`} name="first_name" type="text" placeholder='First Name'
                     value={firstName} onChange={e => setFirstName(e.target.value)} />
                 <input className={`signup-lname shadow`} name="password" type="text" placeholder='Last Name'
-                    value={lastName} onChange={e => setLastName(e.target.value)} />
-                <div className={`signup-fname-error error-message w47`}>⚠ First Name is missing.</div>
-                <div className={`password-lname error-message w47`}>⚠ Last Name is missing.</div>
-
+                    value={lastName} onChange={e => setLastName(e.target.value)} /> */}
             </div>
 
-            <div className={`w100 flex col-wrap j-c-s-b a-i-c`}>
-                <input className={`signup-email shadow`} name="email" type="email" placeholder='Email Address'
+            <BasicInput name="signup-email2" type="text" width="100%" label="Email Address" errorMsg="Email Address Missing!" />
+            {/* <input className={`signup-email shadow`} name="email" type="email" placeholder='Email Address'
                     value={email} onChange={e => setEmail(e.target.value)} />
-                <div className={`signup-email-error error-message`}>⚠ Email is missing.</div>
-            </div>
+                <div className={`signup-email-error error-message`}>⚠ Email is missing.</div> */}
+
             <div className={`double-input-wrap w100 flex row-wrap j-c-s-b a-i-c`}>
-
-
-                <input className={`signup-password shadow`} name="password" type="password" placeholder='Password' />
+                <BasicInput name="signup-password" type="password" width="47%" label="Password" errorMsg="Password Missing!" />
+                <BasicInput name="signup-password-confirm" type="password" width="47%" label="Confirm Password" errorMsg="Passwords do NOT match!" />
+                {/* <input className={`signup-password shadow`} name="password" type="password" placeholder='Password' />
                 <input className={`signup-password-confirm shadow`} name="password" type="password" placeholder='Confirm Password'
                     value={password} onChange={e => setPassword(e.target.value)} />
                 <div className={`password-error error-message w47`}>⚠ Password is missing.</div>
-                <div className={`password-confirm-error error-message w47`}>⚠ Passwords do NOT match.</div>
-
+                <div className={`password-confirm-error error-message w47`}>⚠ Passwords do NOT match.</div> */}
             </div>
 
-
             <div className={`signup-agreements`}>
-                By clicking Sign up, you agree to the UniLab's
+                By clicking "Sign up", you agree to the UniLab's
                 <NavLink to="#" className={`orange-link`}> User Agreement</NavLink>,
                 <NavLink to="#" className={`orange-link`}> Privacy Policy</NavLink>,
                 and <NavLink to="#" className={`orange-link`}>Cookie Policy</NavLink>.

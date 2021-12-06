@@ -112,7 +112,7 @@ function TopNav(props) {
                 {/*PROFILE BUTTON*/}
                 <a className={`top-nav-item top-nav-profile flex-row a-i-c`} onClick={setProfileClasses}>
                     <img id="profile-img" className={`top-nav-image`} src={userData ? userData['image'] : profile_icon}
-                        alt="Profile Picture" title="Profile" />
+                        alt="Profile Icon" title="Profile" />
 
                     <div id="profile-text" className={`top-nav-item-text`}>
                         {/*{% translate "Profile"%}*/}
@@ -122,7 +122,7 @@ function TopNav(props) {
 
                 {/*SEARCH BUTTON*/}
                 <a className={`top-nav-item top-nav-search flex-row a-i-c`} onClick={setSearchClasses}>
-                    <img id="search-img" className={`top-nav-image`} src={search_icon} alt="Magnifying Glass" title="Search" />
+                    <img id="search-img" className={`top-nav-image`} src={search_icon} alt="Search Icon" title="Search" />
                     <div id="search-text" className={`top-nav-item-text`}>
                         {/*{% translate "Search"%}*/}
                         Search

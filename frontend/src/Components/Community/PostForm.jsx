@@ -6,9 +6,11 @@ import { NavLink, Redirect, useHistory } from "react-router-dom";
 import { loginUser, useAuthDispatch, useAuthState } from "../../Context";
 import profile_icon from "../../Assets/img/attach.png";
 import postContent from "../HelperFunctions/postContent";
+// OTHER COMPONENTS
+import EmoteMenu from "../EmoteMenu";
 
 function PostForm(props) {
-    const {token} = useAuthState()
+    const { token } = useAuthState()
     const setPostFormClasses = props.setPostFormClasses;
     const [postFormClass, overlayClass] = props.postFormClasses;
 
@@ -30,12 +32,12 @@ function PostForm(props) {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        let payload = {content: content}
+        let payload = { content: content }
         if (image) {
             payload["image"] = image
         }
         console.log(payload)
-        postContent("posts", token, {content: content, image: image}).then(response => {
+        postContent("posts", token, { content: content, image: image }).then(response => {
             console.log(response)
         })
     }
@@ -44,14 +46,25 @@ function PostForm(props) {
         <>
             <div className={`overlay overlay-10k ${overlayClass}`} onClick={setPostFormClasses} />
 
-            <aside className={`post-form ${postFormClass} shadow`}>
+            <aside className={`post-form ${postFormClass} shadow custom-scroll`}>
 
                 <button className={`post-form-close-button close-button`} onClick={setPostFormClasses} />
 
                 <h1 className={`post-title`}>Create a post</h1>
+                <div className={`post-textfield-wrapper shadow`}>
+                    <div contenteditable="true" className={`post-textfield  input custom-scroll`}
+                        name='content' placeholder="Text..." rows={"13"}
+                        value={content} onChange={e => { setContent(e.target.value) }}>
+                        <EmoteMenu />
+                    </div>
+                </div>
 
-                <textarea className={`post-textfield shadow input`} name='content' placeholder="Text..." rows={"13"}
-                    value={content} onChange={e => {setContent(e.target.value)}}/>
+                <div className={`input-container w50`}>
+                    <input type="text" required />
+                    <label htmlFor="">Put Your Text Here</label>
+                    <span></span>
+                </div>
+
 
                 <label className={`custom-file-upload file-upload shadow`}>
                     <input ref={attachmentRef} type="file" onChange={() => getFileData(attachmentRef.current)} />

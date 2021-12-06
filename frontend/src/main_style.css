@@ -120,7 +120,7 @@ body {margin: 0;}
 }
 
 /* FORMS */
-input, .input, select
+/* input, .input, select
 {
     outline: none;
     border: 3px solid rgba(0,0,0,0);
@@ -129,7 +129,16 @@ input, .input, select
     border-radius: 10px;
     width: 100%;
     transition: 0s;
-}
+} */
+
+
+
+
+
+
+
+
+
 select
 {
     cursor: pointer;
@@ -559,6 +568,10 @@ tr:nth-child(even)
     background-color: #dddddd;
 }
 .orange-link {color: var(--unilab-orange);}
+.orange-link::selection
+{
+    color: var(--unilab-white);
+}
 .blue-link {color: #0084ff;}
 .orange-link:hover, .blue-link:hover
 {text-decoration: underline;}
@@ -602,19 +615,6 @@ tr:nth-child(even)
 {
     font-size: 0.80rem;
 }
-.error-message
-{
-    width: 100%;
-    padding: 0 1rem;
-    color:red;
-    opacity: 1;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
-}
 .main-content
 {
     display: flex;
@@ -651,3 +651,25 @@ input[type="file"]
     margin-top: 3rem;
     border-radius: 10px;
 }
+.custom-scroll
+{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-color: lightgray rgba(0,0,0,0);
+    scrollbar-width: thin;
+}
+/* width */
+.custom-scroll::-webkit-scrollbar {width: 10px;}
+/* Track */
+.custom-scroll::-webkit-scrollbar-track {background: rgba(0, 0, 0, 0);}   
+/* Handle */
+.custom-scroll::-webkit-scrollbar-thumb 
+{
+    background: lightgray;
+    border-radius: 50px;
+}
+/* Handle on hover */
+.custom-scroll::-webkit-scrollbar-thumb:hover 
+{
+    background: #555;
+} 
