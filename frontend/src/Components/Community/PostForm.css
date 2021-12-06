@@ -33,31 +33,3 @@
 {
     margin: 0;
 }
-.post-textfield-wrapper
-{
-    margin: 3rem 0 0 0;
-    width: 100%;
-    padding: 1rem;
-    border-radius: 10px;
-    resize: vertical;
-}
-.post-textfield
-{
-    width: 100%;
-    height: 200px;
-    margin: 0;
-    padding: 0;
-    
-    
-    transition: .1s;
-    background-color: unset;
-    position: relative;
-}
-.post-textfield-wrapper:focus
-{
-    border-bottom: 3px solid var(--unilab-orange);
-}
-.post-textfield:focus .post-textfield-wrapper
-{
-    border-bottom: 3px solid var(--unilab-orange);
-}

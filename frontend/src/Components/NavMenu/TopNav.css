@@ -139,7 +139,7 @@
 #logo-link
 {
     height: 7vh;
-    width: unset !important;
+    width: calc(7vh*2.155448717948718);
     background-color: rgba(0, 0, 0, 0);
     padding: 0;
     border-bottom: none;

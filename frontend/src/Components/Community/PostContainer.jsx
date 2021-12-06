@@ -60,19 +60,19 @@ function PostContainer(props) {
             </div>
 
             {/* <!-- IMAGE CONTENT --> */}
-            <img className="post-image w100" src={sample_img} alt="Post Image" onclick="open_image(this)" />
+            <img className="post-image w100" src={sample_img} alt="Post Image" />
 
             <hr className="hr90" />
 
             {/* <!-- POST OPTION MENU --> */}
             <div className="post-option-menu flex-row j-c-s-b a-i-c w90">
 
-                <div className="post-option flex-row j-c-c a-i-c noselect" onclick="show_comments('{{post.url}}')">
+                <div className="post-option flex-row j-c-c a-i-c noselect">
                     <img className={`post-option-img`} src={comment} alt="Comment Icon" />
                     <div>0 comments</div>
                 </div>
 
-                <div className="post-option flex-row j-c-c a-i-c noselect" onclick="hide_post('{{post.url}}')">
+                <div className="post-option flex-row j-c-c a-i-c noselect">
                     <img className={`post-option-img`} src={hide} alt="Crossed Eye" />
                     <div>Hide</div>
                 </div>

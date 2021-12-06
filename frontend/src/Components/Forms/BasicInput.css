@@ -34,7 +34,7 @@
     margin: 0 0 .5rem 0;
     border-radius: 10px;
 }
-.input-field span
+.input-field .bottom-line
 {
     position: absolute;
     bottom: 0;
@@ -45,7 +45,7 @@
     height: 2px;
     border-radius: 10px;
 }
-.input-field span::before
+.input-field .bottom-line::before
 {
     content: "";
     position: absolute;
@@ -60,8 +60,8 @@
     transition: transform 0.5s ease-in-out;
     border-radius: 10px;
 }
-.input-field input:focus ~ span:before,
-.input-field input:valid ~ span:before
+.input-field input:focus ~ .bottom-line:before,
+.input-field input:valid ~ .bottom-line:before
 {
     transform: scaleX(1);
     transform-origin: left;

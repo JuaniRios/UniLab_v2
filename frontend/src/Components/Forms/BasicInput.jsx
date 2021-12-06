@@ -58,7 +58,7 @@ function BasicInput(props) {
                 {eyeIcon}
                 <input ref={input} type={type} name={name} required onFocus={removeError} onBlur={emptyCheck} />
                 <label className={`noselect`}>{label}</label>
-                <span className={errorCheck}></span>
+                <span className={`${errorCheck} bottom-line`}></span>
             </div>
             {errorBlock}
         </div>

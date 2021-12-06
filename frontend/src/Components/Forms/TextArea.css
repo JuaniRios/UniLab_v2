@@ -1,0 +1,93 @@
+.textarea-field
+{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 3rem 0 0 0;
+}
+.text-area
+{
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    transition: 0s;
+    background-color: var(--unilab-gray);
+    margin: 0;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    transition: .1s;
+    background-color: unset;
+    position: relative;
+    margin: 0 0 .5rem 0;
+    resize: vertical;
+}
+.textarea-field label
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    display: block;
+    transition: .5s;
+    color: gray;
+    width: 100%;
+    padding: 1rem;
+    margin: 0 0 .5rem 0;
+    z-index: 4;
+}
+.text-area:focus + label,
+.text-area:valid + label
+{
+    transform: translateY(-35px);
+    font-size: 0.95rem;
+    color: black;
+}
+.textarea-container:focus
+{
+    border-bottom: 3px solid var(--unilab-orange);
+}
+.text-area:focus .textarea-container
+{
+    border-bottom: 3px solid var(--unilab-orange);
+}
+.textarea-field .bottom-line
+{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: block;
+    background-color: var(--unilab-gray);
+    width: 100%;
+    height: 2px;
+    border-radius: 10px;
+}
+.textarea-field .bottom-line::before
+{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    background-color: var(--unilab-orange);
+    width: 100%;
+    height: 100%;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s ease-in-out;
+    border-radius: 10px;
+}
+.text-area:focus ~ .bottom-line:before,
+.text-area:valid ~ .bottom-line:before
+{
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform 0.5s ease-in-out;
+}
+.red-line
+{
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform 0.5s ease-in-out;
+    background-color: red !important;
+}

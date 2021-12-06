@@ -43,6 +43,7 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     word-wrap: break-word;
+    background-repeat: no-repeat;
 }
 body {margin: 0;}
 ::selection, ::-moz-selection {background: rgba(230, 135, 41, 0.8);}
@@ -621,35 +622,6 @@ tr:nth-child(even)
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-input[type="file"] 
-{
-    position: absolute; 
-    left: -99999rem;
-}
-.custom-file-upload 
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    padding: 1rem;
-    cursor: pointer;
-}
-.custom-file-upload-img
-{
-    height: 1.5rem;
-    margin-right: .5rem;
-    object-fit: cover;
-    object-position: center center;
-}
-.img-preview
-{
-    height: 10rem;
-    align-self: start;
-    margin-top: 3rem;
-    border-radius: 10px;
 }
 .custom-scroll
 {
