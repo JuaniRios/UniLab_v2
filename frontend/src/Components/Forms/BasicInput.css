@@ -113,3 +113,11 @@
 }
 .opaque::before{opacity: 1;}
 .transparent::before{opacity: 0;}
+
+.red-line
+{
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform 0.5s ease-in-out;
+    background-color: red !important;
+}

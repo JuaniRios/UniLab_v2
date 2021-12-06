@@ -40,14 +40,17 @@ function BasicInput(props) {
         type = passwordShown ? "text" : "password";
     }
 
+    const [errorCheck, setErrorCheck] = useState("no-line");
+
     function emptyCheck() {
-        if (input.current.value == 0) {
-            error.current.style.opacity = "1";
+        if (input.current.value.length == 0) {
+            setErrorCheck("red-line");
         }
     }
     function removeError() {
-        error.current.style.opacity = "0";
+        setErrorCheck("no-line");
     }
+
 
     return (
         <div className={`input-container`} style={{ width: width }}>
@@ -55,7 +58,7 @@ function BasicInput(props) {
                 {eyeIcon}
                 <input ref={input} type={type} name={name} required onFocus={removeError} onBlur={emptyCheck} />
                 <label className={`noselect`}>{label}</label>
-                <span></span>
+                <span className={errorCheck}></span>
             </div>
             {errorBlock}
         </div>
