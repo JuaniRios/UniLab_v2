@@ -1,7 +1,6 @@
 import {config} from "../../Config/config";
-import {useMessage} from "../../Context/context";
 
-export default async function postContent(_contentType, token, payload) {
+export default async function deleteContent(_contentType, token, payload) {
     function getFormData(object) {
         const formData = new FormData();
         Object.keys(object).forEach(key => {
@@ -12,7 +11,7 @@ export default async function postContent(_contentType, token, payload) {
     }
 
     const requestOptions = {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
             // 'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
             // 'Accept': 'application/json',

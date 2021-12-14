@@ -33,8 +33,7 @@ function Community(props) {
                 <PostForm postFormClasses={postFormClasses} setPostFormClasses={setPostFormClasses} />
                 <CreatePost setPostFormClasses={setPostFormClasses} />
                 <SortingMenu />
-                <CommunityPosts />
-                <PostContainer />
+                <CommunityPosts/>
             </div>
             <Footer />
         </>
