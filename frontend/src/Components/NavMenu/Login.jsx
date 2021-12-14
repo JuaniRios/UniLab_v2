@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 // STYLES
 import "./Login.css";
 // IMAGES
-import {NavLink, Redirect, useHistory} from "react-router-dom";
-import {loginUser, useAuthDispatch, useAuthState} from "../../Context";
+import { NavLink, Redirect, useHistory } from "react-router-dom";
+import { loginUser, useAuthDispatch, useAuthState } from "../../Context";
+import BasicInput from "../Forms/BasicInput";
 
 function Login(props) {
     const [email, setEmail] = useState('')
@@ -41,13 +42,16 @@ function Login(props) {
 
                 <div id="main-error-message" className={`error-message`}>⚠ Invalid email or password.</div>
 
+                <BasicInput name="login-email" type="text" width="100%" label="Email Address" errorMsg="Email Address Missing!" />
+                <BasicInput name="login-password" type="password" width="100%" label="Password" errorMsg="Password Missing!" />
+
                 <input className={`login-email shadow`} name="email" type="email" placeholder='Email Address'
-                    value={email} onChange={e => setEmail(e.target.value)}/>
+                    value={email} onChange={e => setEmail(e.target.value)} />
 
                 <div className={`login-email-error error-message`}>⚠ Email is missing.</div>
 
                 <input className={`login-password shadow`} name="password" type="password" placeholder='Password'
-                    value={password} onChange={e => setPassword(e.target.value)}/>
+                    value={password} onChange={e => setPassword(e.target.value)} />
 
                 <div className={`password-error error-message`}>⚠ Password is missing.</div>
 

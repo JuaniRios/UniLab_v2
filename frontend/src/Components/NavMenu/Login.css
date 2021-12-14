@@ -19,16 +19,9 @@
     padding: 3rem;
     left: 0; 
     right: 0;
+    top: 0;
+    bottom: 0;
     margin: auto;
-}
-.login-email, .login-password
-{
-    background-color: var(--unilab-gray);
-    transition: .1s ease-out;
-}
-.login-email:focus, .login-password:focus
-{
-    border-bottom: 3px solid var(--unilab-orange);
 }
 .signin-buttons
 {
