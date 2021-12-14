@@ -1,0 +1,44 @@
+.comment-container
+{
+    display: flex;
+    align-items: flex-start;
+    margin: 2rem auto 0 auto;
+}
+.comment-container-img
+{
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    object-position: center center;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+.comment-content
+{
+    width: calc(100% - 40px - 1rem);
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    background-color: var(--unilab-white);
+    border-radius: 0 10px 10px 10px;
+    padding: .6rem 1.5rem;
+}
+.comment-owner
+{
+    width: 70%;
+}
+.comment-date
+{
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.8rem;
+    width: 30%;
+}
+.comment-body
+{
+    width: 100%;
+}
+.comment-owner, .comment-body
+{
+    margin: .6rem 0;
+}

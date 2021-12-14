@@ -1,8 +1,8 @@
 .textarea-field
 {
     display: flex;
-    flex-direction: column;
     position: relative;
+    align-items: flex-start;
     margin: 3rem 0 0 0;
 }
 .text-area
@@ -15,7 +15,7 @@
     transition: 0s;
     background-color: var(--unilab-gray);
     margin: 0;
-    padding: 1rem 1.5rem 1rem 1.5rem;
+    padding: 1rem;
     transition: .1s;
     background-color: unset;
     position: relative;

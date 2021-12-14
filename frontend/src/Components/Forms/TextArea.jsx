@@ -14,7 +14,7 @@ function TextArea(props) {
     const [cursorPosition, setCursorPosition] = useState("");
     const handleChange = e => {
         setMessage(e.target.value);
-    }
+    };
     useEffect(() => {
         textarea.current.selectionEnd = cursorPosition;
     }, [cursorPosition])
@@ -35,10 +35,7 @@ function TextArea(props) {
 
             <div className={`textarea-field`}>
 
-                <EmoteMenu message={message}
-                    setMessage={setMessage}
-                    textarea={textarea}
-                    setCursorPosition={setCursorPosition} />
+
 
                 <textarea
                     ref={textarea}
@@ -49,6 +46,14 @@ function TextArea(props) {
                     value={message}
                     onChange={handleChange}>
                 </textarea>
+
+                <EmoteMenu message={message}
+                    setMessage={setMessage}
+                    textarea={textarea}
+                    setCursorPosition={setCursorPosition}
+                    menuWidth="40%"
+                    menuTop="10%"
+                    menuRight="0" />
 
                 <span className={`${errorCheck} bottom-line`}></span>
 

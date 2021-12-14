@@ -9,6 +9,11 @@ import "./EmoteMenu.css";
 
 function EmoteMenu(props) {
 
+    const menuWidth = props.menuWidth;
+    const menuTop = props.menuTop;
+    const menuBottom = props.menuBottom;
+    const menuLeft = props.menuLeft;
+    const menuRight = props.menuRight;
     const [chosenEmoji, setChosenEmoji] = useState(null);
 
     const [emoteBtnClass, setEmoteBtnClass] = useState("emote-btn-default");
@@ -68,8 +73,9 @@ function EmoteMenu(props) {
 
     return (
         <>
-            <button ref={btnRef} className={`emote-btn ${emoteBtnClass}`} onClick={toggleEmoteBtnClass}>&#128513;</button>
-            <div ref={fieldRef} className={`emote-field ${emoteFieldClass}`}>
+            <button type="button" ref={btnRef} className={`emote-btn ${emoteBtnClass}`} onClick={toggleEmoteBtnClass}>&#128513;</button>
+            <div ref={fieldRef} className={`emote-field ${emoteFieldClass}`}
+                style={{ width: menuWidth, top: menuTop, bottom: menuBottom, left: menuLeft, right: menuRight }}>
                 <Picker onEmojiClick={onEmojiClick} native={true} />
             </div>
         </>

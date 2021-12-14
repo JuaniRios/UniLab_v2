@@ -549,6 +549,7 @@ h4 {font-size: 1em;}
 .w47{width: 47% !important;}
 
 .normal {font-weight: normal;}
+.bold {font-weight: bold;}
 
 table 
 {
@@ -569,13 +570,12 @@ tr:nth-child(even)
     background-color: #dddddd;
 }
 .orange-link {color: var(--unilab-orange);}
-.orange-link::selection
-{
-    color: var(--unilab-white);
-}
+.orange-link::selection {color: var(--unilab-white);}
+
+.black-link {color: var(--unilab-black);}
+
 .blue-link {color: #0084ff;}
-.orange-link:hover, .blue-link:hover
-{text-decoration: underline;}
+.orange-link:hover, .blue-link:hover, .black-link:hover {text-decoration: underline;}
 
 .company-block
 {

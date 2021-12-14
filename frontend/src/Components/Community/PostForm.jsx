@@ -43,8 +43,7 @@ function PostForm(props) {
                 <AttachImage />
 
                 <div className={`double-input-wrap post-btns`}>
-                    <button className={`uni-button w47`} type="button" onClick={setPostFormClasses}>Cancel</button>
-                    <button className={`uni-button w47`} type="submit" name="submit" value="post" onClick={handleSubmit}>Post</button>
+                    <button className={`uni-button w100`} type="submit" name="submit" value="post" onClick={handleSubmit}>Post</button>
                 </div>
 
             </aside>

@@ -1,12 +1,10 @@
 .emote-btn
 {
-    position: absolute;
     outline: none;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     transition: .1s;
-    margin: 1rem .5rem;
     z-index: 5;
     right: 0;
     padding: 0;
@@ -25,10 +23,7 @@
 {
     position: absolute;
     display: inline-block;
-    right: 0;
-    top: 20%;
     z-index: 5;
-    width: 40%;
     height: 25rem;
 }
 .content-wrapper::before

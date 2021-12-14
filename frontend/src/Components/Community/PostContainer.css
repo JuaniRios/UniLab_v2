@@ -25,8 +25,18 @@
     border-radius: 10px;
     padding: 0 .5rem;
 }
-.upvote-btn:hover, .downvote-btn:hover
+.upvote-btn::before, .downvote-btn::before
 {
+    content: "\21E7";
+}
+.upvote-btn:hover
+{
+    color: green;
+    background-color: var(--gray-hover);
+}
+.downvote-btn:hover
+{
+    color: red;
     background-color: var(--gray-hover);
 }
 .downvote-btn
@@ -34,10 +44,12 @@
     transform: rotate(180deg);
 }
 .Upvoted {
-    background-color: forestgreen;
+    color: green;
+    background-color: var(--gray-hover);
 }
 .Downvoted {
-    background-color: red;
+    color: red;
+    background-color: var(--gray-hover);
 }
 .total-points
 {
@@ -79,4 +91,9 @@
     object-fit: cover;
     object-position: center center;
     margin-right: .5rem;
+}
+.comment-section-container
+{
+    display: flex;
+    flex-direction: column;
 }

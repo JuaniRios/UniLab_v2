@@ -1,31 +1,34 @@
-import {useAuthState} from "../../Context";
-import {useEffect, useState} from "react";
+import { useAuthState } from "../../Context";
+import { useEffect, useState } from "react";
 import Post from "./Post"
 import fetchContent from "../HelperFunctions/fetchContent"
 import PostContainer from "./PostContainer";
+import Loader from "../Loader";
 
 export function CommunityPosts(props) {
-    const state = useAuthState()
-    const [posts, setPosts] = useState([])
-    const [page, setPage] = useState(1)
+    const state = useAuthState();
+    const [posts, setPosts] = useState([]);
+    const [page, setPage] = useState(1);
+    const [loaderState, setLoaderState] = useState("shown");
 
     useEffect(() => {
         fetchContent("posts", page, state.token).then(data => {
             let appending = [];
             console.log(data)
-            for (let i = 0; i<data.results.length; i++) {
-                appending.push(<PostContainer {...data.results[i]} key={i}/>)
+            for (let i = 0; i < data.results.length; i++) {
+                appending.push(<PostContainer {...data.results[i]} key={i} />)
             }
-            setPosts(prev => prev.concat(appending))
+            setPosts(prev => prev.concat(appending));
+            setLoaderState("hidden");
         })
     }, [page])
 
-
     if (posts) {
         return (
-            <>
+            <div className={`w40`} style={{ position: "relative", marginBottom: "3rem" }}>
+                <Loader color="orange" size="4" state={loaderState} />
                 {posts}
-            </>
+            </div>
         )
     }
 
@@ -34,6 +37,4 @@ export function CommunityPosts(props) {
             <h4>Loading...</h4>
         )
     }
-
-
 }
