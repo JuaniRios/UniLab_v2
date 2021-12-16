@@ -135,6 +135,7 @@ class CompanyList(generics.ListCreateAPIView):
     permission_classes = [IsCompanyOrReadOnly]
     filter_backends = [filters.SearchFilter]
     search_fields = ['name']
+    ordering = ['-id']
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -227,6 +228,7 @@ class JobList(generics.ListCreateAPIView):
     permission_classes = [IsCompanyOrReadOnly, CompanyOwner]
     filter_backends = [filters.SearchFilter]
     search_fields = ['title']
+    ordering = ['-id']
 
     def get_queryset(self):
         queryset = Job.objects.all()

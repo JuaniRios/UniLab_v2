@@ -16,9 +16,12 @@ function Login(props) {
     const setLoginClasses = props.setLoginClasses;
 
 
+
     const handleLogin = async (e) => {
         e.preventDefault()
         let payload = { email, password }
+        const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
+
         try {
             const success = await loginUser(dispatch, payload)
             if (success) {
@@ -42,18 +45,10 @@ function Login(props) {
 
                 <div id="main-error-message" className={`error-message`}>⚠ Invalid email or password.</div>
 
-                <BasicInput name="login-email" type="text" width="100%" label="Email Address" errorMsg="Email Address Missing!" />
-                <BasicInput name="login-password" type="password" width="100%" label="Password" errorMsg="Password Missing!" />
-
-                <input className={`login-email shadow`} name="email" type="email" placeholder='Email Address'
-                    value={email} onChange={e => setEmail(e.target.value)} />
-
-                <div className={`login-email-error error-message`}>⚠ Email is missing.</div>
-
-                <input className={`login-password shadow`} name="password" type="password" placeholder='Password'
-                    value={password} onChange={e => setPassword(e.target.value)} />
-
-                <div className={`password-error error-message`}>⚠ Password is missing.</div>
+                <BasicInput name="login-email" type="text" width="100%" label="Email Address" errorMsg="Email Address Missing!"
+                    setter={setEmail} value={email}/>
+                <BasicInput name="login-password" type="password" width="100%" label="Password" errorMsg="Password Missing!"
+                    setter={setPassword} value={password}/>
 
                 <button className={`login-btn uni-button w100`} type="submit" onClick={handleLogin}>Sign in</button>
 

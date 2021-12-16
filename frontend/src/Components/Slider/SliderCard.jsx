@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import "./Slider.css";
 import "./SliderCard.css";
-import timeSince from "./HelperFunctions/timeSince.js";
+import timeSince from "../HelperFunctions/timeSince.js";
 
 export default function SliderCard(props) {
     const content = props.content;

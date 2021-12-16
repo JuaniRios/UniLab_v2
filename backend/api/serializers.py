@@ -120,6 +120,7 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
         model = Job
         fields = '__all__'
 
+
     def get_company(self, job):
         result = CompanySerializer(job.owner, context={'request': self.context['request']}).data
         return result

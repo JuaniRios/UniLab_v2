@@ -11,12 +11,11 @@ import "./main_style.css";
 import Home from "./Components/Home";
 import Community from "./Components/Community";
 
-import Login from "./Pages/Login";
 import SignOut from "./Components/SignOut";
 
 import SignUp from "./Components/SignUp";
 
-import NotFound from "./Pages/PageNotFound";
+import NotFound from "./Components/PageNotFound";
 
 // OTHER
 import { useAuthDispatch, ContextProvider, useAuthState } from "./Context";
@@ -33,7 +32,7 @@ function App() {
                     </PrivateRoute>
 
                     <Route exact path='/login'>
-                        <Login />
+                        <Home/>
                     </Route>
 
                     <Route exact path='/logout'>

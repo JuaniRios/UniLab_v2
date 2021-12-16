@@ -3,9 +3,9 @@ import Home from '../Pages/Home';
 import Community from '../Pages/Community';
 import Jobs from '../Pages/Jobs';
 import Companies from '../Pages/Companies';
-import Login from '../Pages/Login';
+import Login from '../Components/Login';
 import Dashboard from "../Pages/Dashboard";
-import PageNotFound from '../Pages/PageNotFound';
+import PageNotFound from '../Components/PageNotFound';
 
 const routes = [
     {

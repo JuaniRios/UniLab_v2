@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useReducer, useRef } from "react";
 import { NavLink } from "react-router-dom";
-import { config } from "../Config/config";
-import { useAuthState } from "../Context";
-import fetchContent from "./HelperFunctions/fetchContent";
+import { config } from "../../Config/config";
+import { useAuthState } from "../../Context";
+import fetchContent from "../HelperFunctions/fetchContent";
 import SliderCard from "./SliderCard";
-import Loader from "./Loader";
+import Loader from "../Loader";
 // STYLES
 import "./Slider.css";
 

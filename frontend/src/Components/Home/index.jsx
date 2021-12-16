@@ -1,7 +1,7 @@
 import React from "react";
 import NavMenu from "../NavMenu";
-import Announcements from "../Announcements";
-import Slider from "../Slider";
+import Announcements from "./Announcements";
+import Slider from "../Slider/Slider";
 import Footer from "../Footer";
 
 import HomePrimary from "./HomePrimary";
