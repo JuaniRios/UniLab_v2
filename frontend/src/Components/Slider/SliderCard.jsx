@@ -21,8 +21,8 @@ export default function SliderCard(props) {
                 </div>
 
                 <div className={`slider-info-holder`}>
-                    <NavLink to="/" className={`w80`}>
-                        <h3 className={`link-text slider-item-title`}>{content.title}</h3>
+                    <NavLink to="/" className={`w90`}>
+                        <p className={`link-text slider-item-title`}>{content.title}</p>
                     </NavLink>
 
                     <p className={`gray-text`}>{content.company.name}</p>
@@ -48,8 +48,8 @@ export default function SliderCard(props) {
                 </div>
 
                 <div className={`slider-info-holder`}>
-                    <NavLink to="/" className={`w80`}>
-                        <h3 className={`link-text slider-item-title`}>{content.name}</h3>
+                    <NavLink to="/" className={`w90`}>
+                        <p className={`link-text slider-item-title`}>{content.name}</p>
                     </NavLink>
 
                     <p className={`gray-text`}>{content.industry_verbose}</p>

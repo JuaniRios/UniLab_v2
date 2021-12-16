@@ -17,6 +17,7 @@ function Slider(props) {
     const [cards, setCards] = useState([]);
     const [page, setPage] = useState(1);
     const [loaderState, setLoaderState] = useState("shown");
+    const header = (contentType === "companies") ? "Companies" : "Jobs";
 
     function toggleSlide(direction) {
         var currentLeft = parseInt(slider.current.style.left);
@@ -70,7 +71,7 @@ function Slider(props) {
         <div className={`slider-wrapper shadow w100`}>
 
             <div className={`slider-title normal flex-row a-i-c j-c-s-b`}>
-                <h2>Discover Jobs</h2>
+                <h3>Discover {header}</h3>
                 <span className={`filter-btn noselect`}>Filter</span>
             </div>
 

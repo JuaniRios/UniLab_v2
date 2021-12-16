@@ -1,14 +1,14 @@
 import React from "react";
 import NavMenu from "../NavMenu";
 import Announcements from "./Announcements";
-import Slider from "../Slider/Slider";
+import Slider from "../Slider";
 import Footer from "../Footer";
 
 import HomePrimary from "./HomePrimary";
 import HomeCover from "./HomeCover";
 // STYLES
 import "./index.css";
-import {useLocation} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function Home(props) {
     document.title = "UniLab - Home";
@@ -22,14 +22,14 @@ function Home(props) {
 
     return (
         <>
-            <NavMenu redirected={redirected}/>
-            <HomeCover/>
+            <NavMenu redirected={redirected} />
+            <HomeCover />
             <div className={`home-content`}>
-                <HomePrimary/>
-                <Announcements/>
+                <HomePrimary />
+                <Announcements />
             </div>
-            <Slider contentType={'jobs'}/>
-            <Footer/>
+            <Slider contentType={'jobs'} />
+            <Footer />
         </>
     );
 }

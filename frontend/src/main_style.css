@@ -59,6 +59,8 @@ body {margin: 0;}
     
     --unilab-black: rgba(0, 0, 0, 1);
     --gray-hover: rgba(0, 0, 0, 0.1);
+
+    --topnav-height: 10vh;
 }
 
 /* SMOKE SCREENS */
@@ -277,10 +279,10 @@ textarea
 
 /* TITLE SIZES */
 a {text-decoration: none;}
-h1 {font-size: 2em;}
-h2 {font-size: 1.5em;}
-h3 {font-size: 1.15em;}
-h4 {font-size: 1em;}
+h1 {font-size: 2rem;}
+h2 {font-size: 1.5rem;}
+h3 {font-size: 1.25rem;}
+h4 {font-size: 1.15rem;}
 
 /* HORIZONTAL LINES */
 .hr10 {width: 10%;}
@@ -603,6 +605,7 @@ tr:nth-child(even)
 .gray-text
 {
     color: rgb(100, 100, 100);
+    text-align: center;
 }
 .link-text
 {
@@ -622,6 +625,14 @@ tr:nth-child(even)
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+.main-content-fixed
+{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    height: calc(100vh - var(--topnav-height));
 }
 .custom-scroll
 {

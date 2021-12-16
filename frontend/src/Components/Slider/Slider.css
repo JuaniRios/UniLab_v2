@@ -14,16 +14,18 @@
     outline: none;
     border: none;
     border-radius: 50%;
-    height: 3rem;
-    width: 3rem;
+    height: 2.5rem;
+    width: 2.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    transition: .2s linear;
+    transition: .1s linear;
     cursor: pointer;
     z-index: 5;
     bottom: 35%;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 .arrow-btn:active {transform: scale(0.90);}
 .arrow-btn::before, .arrow-btn::after
@@ -31,30 +33,32 @@
     content: '';
     display: block;
     height: 2px;
-    width: 1rem;
-    margin: 0.25rem;
-    border-radius: 50px;
+    width: 35%;
+    margin: 0 !important;
+    padding: 0 !important;
     background-color: var(--unilab-white);
+    position: absolute; 
 }
-
+.arrow-btn::before
+{
+    top: 35%;
+}
+.arrow-btn::after
+{
+    bottom: 35%;
+}
+.arrow-prev {left: -5%;}
+.arrow-next {right: -5%;}
 .arrow-prev::before {transform: rotate(-45deg);}
 .arrow-prev::after {transform: rotate(45deg);}
 .arrow-next::before {transform: rotate(45deg);}
 .arrow-next::after {transform: rotate(-45deg);}
 
-.arrow-prev
-{
-    left: -5%;
-}
-.arrow-next
-{
-    right: -5%;
-}
 .slider-title
 {
-    padding: 2rem 2rem 1rem 2rem;
+    padding: 1rem 1rem .5rem 1rem;
 }
-.slider-title h2
+.slider-title h3
 {
     margin: 0;
 }
@@ -63,22 +67,22 @@
     position: relative;
     display: flex;
     align-items: center;
-    padding: 2rem;
+    padding: 1rem;
     transition: .7s;
 }
 .slider-wrapper:hover .arrow-prev
 {
-    left: 2rem;
+    left: 1rem;
 }
 .slider-wrapper:hover .arrow-next
 {
-    right: 2rem;
+    right: 1rem;
 }
 .slider-item
 {
-    height: 18rem;
-    width: 18rem;
-    margin-right: 2rem;
+    height: 13rem;
+    width: 13rem;
+    margin-right: 1rem;
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -102,7 +106,7 @@
 }
 .slider-icon-holder
 {
-    height: 50%;
+    height: 30%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -123,7 +127,7 @@
 .slider-item:hover
 {
     -webkit-font-smoothing: subpixel-antialiased;
-    transform: scale(1.1); 
+    transform: scale(1.05); 
 }
 .slider-item:hover .link-text
 {

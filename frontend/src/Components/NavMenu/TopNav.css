@@ -3,7 +3,7 @@
     .linebar-btn, .top-nav-image, #search-text, #profile-text {display: none;}
     .top-nav
     {
-        height: 10vh;
+        height: var(--topnav-height);
         justify-content: space-evenly;
     }
     #logo-img, #search-img, #profile-img, #lang-img
@@ -65,7 +65,7 @@
 {
     .top-nav
     {
-        height: 10vh;
+        height: var(--topnav-height);
         justify-content: space-between;
         padding: 0 5%;
     }
@@ -109,7 +109,7 @@
         flex-direction: column;
         width: 100vw;
         height: 90vh;
-        top: 10vh;
+        top: var(--topnav-height);
         position: fixed;
         background-color: var(--unilab-white);
         padding: 0 5%;
