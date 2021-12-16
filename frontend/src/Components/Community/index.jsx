@@ -8,6 +8,7 @@ import { CommunityPosts } from "./CommunityPosts";
 import PostContainer from "./PostContainer";
 
 function Community(props) {
+
     document.title = "Community - UniLab";
 
     // OPEN AND CLOSE SIDE PROFILE MENU

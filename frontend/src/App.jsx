@@ -10,6 +10,8 @@ import "./main_style.css";
 // PAGES
 import Home from "./Components/Home";
 import Community from "./Components/Community";
+import Companies from "./Components/Companies";
+import Jobs from "./Components/Jobs";
 
 import SignOut from "./Components/SignOut";
 
@@ -47,6 +49,14 @@ function App() {
                         <Community />
                     </PrivateRoute>
 
+                    <PrivateRoute exact path='/companies'>
+                        <Companies />
+                    </PrivateRoute>
+
+                    <PrivateRoute exact path='/jobs'>
+                        <Jobs />
+                    </PrivateRoute>
+
                     <Route component={NotFound} />
 
                 </Switch>
@@ -75,7 +85,7 @@ function PrivateRoute({ children, userType, optional = false, ...rest }) {
         } else {
             return (
                 <Route {...rest} render={({ location }) => !state.errorMessage ? (children) :
-                    (<Redirect to={{ pathname: "/", state: { redirected:true } }} />)} />
+                    (<Redirect to={{ pathname: "/", state: { redirected: true } }} />)} />
             )
         }
 
