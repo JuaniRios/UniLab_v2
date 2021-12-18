@@ -32,12 +32,10 @@
 .upvote-btn:hover
 {
     color: green;
-    background-color: var(--gray-hover);
 }
 .downvote-btn:hover
 {
     color: red;
-    background-color: var(--gray-hover);
 }
 .downvote-btn
 {
@@ -45,11 +43,11 @@
 }
 .Upvoted {
     color: green;
-    background-color: var(--gray-hover);
+    /*background-color: var(--gray-hover);*/
 }
 .Downvoted {
     color: red;
-    background-color: var(--gray-hover);
+    /*background-color: var(--gray-hover);*/
 }
 .total-points
 {

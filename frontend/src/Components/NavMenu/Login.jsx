@@ -15,6 +15,7 @@ function Login(props) {
     const [loginClass, overlayClass] = props.loginClasses;
     const setLoginClasses = props.setLoginClasses;
 
+    const loginErrorMessage = <></>
 
 
     const handleLogin = async (e) => {
@@ -27,11 +28,14 @@ function Login(props) {
             if (success) {
                 props.setLoginClasses()
                 props.setProfileClasses()
+            } else {
+                const loginErrorMessage = <><div id="main-error-message" className={`error-message`}>⚠ "No active account found with the given credentials."</div></>
             }
         } catch (error) {
             console.log(error)
         }
     }
+
 
     return (
         <>
@@ -43,12 +47,16 @@ function Login(props) {
 
                 <h1 className={`sign-in`}>Sign in</h1>
 
-                <div id="main-error-message" className={`error-message`}>⚠ Invalid email or password.</div>
+
 
                 <BasicInput name="login-email" type="text" width="100%" label="Email Address" errorMsg="Email Address Missing!"
-                    setter={setEmail} value={email}/>
+                    setter={setEmail} value={email} />
                 <BasicInput name="login-password" type="password" width="100%" label="Password" errorMsg="Password Missing!"
                     setter={setPassword} value={password}/>
+
+                {loginErrorMessage}
+
+
 
                 <button className={`login-btn uni-button w100`} type="submit" onClick={handleLogin}>Sign in</button>
 

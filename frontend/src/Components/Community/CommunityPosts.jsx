@@ -1,6 +1,5 @@
 import { useAuthState } from "../../Context";
 import { useEffect, useState } from "react";
-import Post from "./Post"
 import fetchContent from "../HelperFunctions/fetchContent"
 import PostContainer from "./PostContainer";
 import Loader from "../Loader";
