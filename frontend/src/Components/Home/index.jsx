@@ -11,13 +11,17 @@ import "./index.css";
 import { useLocation } from "react-router-dom";
 
 function Home(props) {
+
     document.title = "UniLab - Home";
+    document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
+    document.body.classList.remove("noscroll");
+
     const location = useLocation();
     let redirected;
     try {
-        redirected = location.state.redirected
+        redirected = location.state.redirected;
     } catch (e) {
-        redirected = false
+        redirected = false;
     }
 
     return (

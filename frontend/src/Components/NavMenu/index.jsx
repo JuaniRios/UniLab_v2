@@ -1,5 +1,5 @@
 // NAVIGATION MENU FRAME
-import React, {useEffect, useReducer} from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import TopNav from "./TopNav";
 import GeneralSearch from "./GeneralSearch";
 import SideLanguageMenu from "./SideLanguageMenu";
@@ -10,6 +10,7 @@ import { useAuthState } from "../../Context";
 function NavMenu(props) {
     const state = useAuthState();
     const userData = state.userData;
+    const [redirected, setRedirected] = useState(props.redirected);
 
     // OPEN AND CLOSE SIDE PROFILE MENU
     function changeProfileClasses(initState) {
@@ -62,9 +63,13 @@ function NavMenu(props) {
     // OPEN AND CLOSE LOGIN FORM
     function changeLoginClasses(initState) {
         if (initState[0] === "login-form-closed") {
+            document.getElementsByTagName("HTML")[0].classList.add("y-scroll");
+            document.body.classList.add("noscroll");
             return ["login-form-opened", "shown"];
         }
         else {
+            document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
+            document.body.classList.remove("noscroll");
             return ["login-form-closed", "hidden"];
         }
     }
@@ -72,10 +77,12 @@ function NavMenu(props) {
     const [loginClasses, setLoginClasses] = useReducer(changeLoginClasses, initLoginClasses);
 
     useEffect(() => {
-        if (props.redirected) {
-            setLoginClasses()
+        if (redirected) {
+            setLoginClasses();
+            setRedirected(false);
         }
     }, [])
+
     return (
         <>
             <TopNav

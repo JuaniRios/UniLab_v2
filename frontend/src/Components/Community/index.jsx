@@ -10,6 +10,8 @@ import PostContainer from "./PostContainer";
 function Community(props) {
 
     document.title = "Community - UniLab";
+    document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
+    document.body.classList.remove("noscroll");
 
     // OPEN AND CLOSE SIDE PROFILE MENU
     function changePostFormClasses(initState) {

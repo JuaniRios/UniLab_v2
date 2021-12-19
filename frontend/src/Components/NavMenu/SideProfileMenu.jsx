@@ -29,7 +29,7 @@ function SideProfileMenu(props) {
         <>
             <NavLink to="/settings" className={`settings-button`}>
                 <div className={`settings-picture`} />
-                <p className={`w80`}>Account Settings</p>
+                <p className={`w80`}>Settings</p>
             </NavLink>
 
             <NavLink to="/logout" className={`settings-button`}>

@@ -19,10 +19,44 @@ input[type="file"]
     object-fit: cover;
     object-position: center center;
 }
+.custom-file-upload-img-avatar
+{
+    height: 1.5rem;
+    width: 1.5rem;
+    margin-right: .5rem;
+    object-fit: cover;
+    object-position: center center;
+}
 .img-preview
 {
     height: 10rem;
     align-self: start;
     margin-top: 3rem;
     border-radius: 10px;
+}
+
+
+
+
+
+.avatar-upload-wrapper
+{
+    display: flex;
+    align-items: center;
+    margin: 5rem 0;
+    flex-flow: row wrap;
+}
+.img-preview-avatar
+{
+    height: 10rem;
+    width: 10rem;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center center;
+    margin-right: 3rem;
+    border: 2px solid var(--unilab-gray);
+}
+.avatar-upload-btn, .avatar-upload-title
+{
+    margin: 1rem 0;
 }

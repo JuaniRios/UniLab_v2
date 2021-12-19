@@ -7,8 +7,8 @@ import { loginUser, useAuthDispatch, useAuthState } from "../../Context";
 import BasicInput from "../Forms/BasicInput";
 
 function Login(props) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     let history = useHistory();
     const dispatch = useAuthDispatch()
 
@@ -46,9 +46,9 @@ function Login(props) {
                 <div id="main-error-message" className={`error-message`}>⚠ Invalid email or password.</div>
 
                 <BasicInput name="login-email" type="text" width="100%" label="Email Address" errorMsg="Email Address Missing!"
-                    setter={setEmail} value={email}/>
+                    setter={setEmail} value={email} />
                 <BasicInput name="login-password" type="password" width="100%" label="Password" errorMsg="Password Missing!"
-                    setter={setPassword} value={password}/>
+                    setter={setPassword} value={password} />
 
                 <button className={`login-btn uni-button w100`} type="submit" onClick={handleLogin}>Sign in</button>
 

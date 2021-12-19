@@ -40,7 +40,7 @@ function PostForm(props) {
 
                 <TextArea width="100%" label="Write a post" />
 
-                <AttachImage />
+                <AttachImage avatar={false} />
 
                 <div className={`double-input-wrap post-btns`}>
                     <button className={`uni-button w100`} type="submit" name="submit" value="post" onClick={handleSubmit}>Post</button>

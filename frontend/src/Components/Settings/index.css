@@ -1,0 +1,63 @@
+.settings-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 10px;
+    margin: 3rem 0;
+    padding: 2rem;
+    width: 90%;
+}
+.settings-content
+{
+    padding: 2rem 5rem;
+    border-left: 2px solid var(--unilab-gray);
+    width: 80%;
+}
+.settings-content-title
+{
+    margin: 0;
+}
+.settings-menu
+{
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 20%;
+}
+.settings-menu-item
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    transition: .3s;
+    border-bottom: 1px solid transparent;
+    border-radius: 10px;
+    margin: 1rem 0;
+    width: 100%;
+    cursor: pointer;
+}
+.settings-menu-item:hover
+{
+    border-bottom: 1px solid var(--unilab-orange);
+}
+.settings-menu-item span
+{
+    width: calc(100% - 3rem);
+}
+.settings-menu-img
+{
+    height: 2rem;
+    margin-right: 1rem;
+}
+.active-settings-item
+{
+    border-bottom: 1px solid var(--unilab-orange);
+}
+.save-btn
+{
+    margin-top: 3rem;
+}

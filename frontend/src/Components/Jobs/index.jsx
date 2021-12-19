@@ -8,6 +8,8 @@ import mainBackground from "../../Assets/img/vienna.jpg";
 function Jobs(props) {
 
     document.title = "Jobs - UniLab";
+    document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
+    document.body.classList.remove("noscroll");
 
     var mainFrameStyle = {
         background: `linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url(${mainBackground})`,

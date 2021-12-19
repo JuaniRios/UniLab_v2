@@ -13,14 +13,13 @@ function BasicInput(props) {
     const label = props.label;
     let type = props.type;
     const errorMsg = props.errorMsg;
-    const error = useRef(null);
     const setInput = props.setter;
-    const input = props.value;
+    const inputValue = props.value;
 
     // FOR ERROR MESSAGE
     let errorBlock = <></>;
     if (errorMsg) {
-        errorBlock = <div ref={error} className={`error-message noselect`}>⚠ {errorMsg}</div>;
+        errorBlock = <div className={`error-message noselect`}>⚠ {errorMsg}</div>;
     }
 
     // FOR PASSWORD INPUT
@@ -43,8 +42,8 @@ function BasicInput(props) {
 
     const [errorCheck, setErrorCheck] = useState("no-line");
 
-    function emptyCheck() {
-        if (input.length === 0) {
+    function emptyCheck(e) {
+        if (e === "") {
             setErrorCheck("red-line");
         }
     }
@@ -57,9 +56,13 @@ function BasicInput(props) {
         <div className={`input-container`} style={{ width: width }}>
             <div className={`input-field`}>
                 {eyeIcon}
-                <input value={input} onChange={e => setInput(e.target.value)} type={type} name={name} required onFocus={removeError} onBlur={emptyCheck} />
+                <input value={inputValue} type={type} name={name} required
+                    onFocus={removeError}
+                    onBlur={e => emptyCheck(e.target.value)}
+                    onChange={e => setInput(e.target.value)}
+                />
                 <label className={`noselect`}>{label}</label>
-                <span className={`${errorCheck} bottom-line`}/>
+                <span className={`${errorCheck} bottom-line`} />
             </div>
             {errorBlock}
         </div>
