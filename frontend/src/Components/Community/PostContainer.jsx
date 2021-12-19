@@ -20,8 +20,6 @@ import CommentContainer from "./CommentContainer";
 
 function PostContainer(props) {
     const { token, userData } = useAuthState();
-    const [upVoted, setUpVoted] = useState(false);
-    const [downVoted, setDownVoted] = useState(false);
     const [voteCount, setVoteCount] = useState(props.votes.upvotes.length - props.votes.downvotes.length);
     const [userVote, setUserVote] = useState(props.user_vote);
 
@@ -35,27 +33,6 @@ function PostContainer(props) {
         }
     };
 
-
-    function setPostVote(vote) {
-        switch (vote) {
-            case "Upvote":
-                setDownVoted(false)
-                setUpVoted(current => !current)
-                break
-            case "Downvote":
-                setDownVoted(current => !current)
-                setUpVoted(false)
-                break
-
-            default:
-                break
-        }
-    }
-
-    useEffect(() => {
-        setPostVote(userVote)
-    }, [])
-
     async function handleVote(e) {
         e.preventDefault()
         const voteType = e.target.value
@@ -65,7 +42,6 @@ function PostContainer(props) {
             type: typeConverter[voteType],
             user: userData.url
         }
-        setPostVote(voteType)
         if (userVote === voteType) {
             // post already voted, so delete the vote.
             deleteContent("vote", token, payload)
@@ -78,13 +54,22 @@ function PostContainer(props) {
                 let response = await apiCall("vote", token,
                     { method: "POST", payload: payload })
                 console.log(response)
-                if (voteType === "Upvote") setVoteCount(count => count + 1)
-                if (voteType === "Downvote") setVoteCount(count => count - 1)
+                if (voteType === "Upvote") {
+                    let votes = 1
+                    if (userVote === "Downvote") votes++
+                    setVoteCount(count => count + votes)
+                }
+                if (voteType === "Downvote") {
+                    let votes = 1
+                    if (userVote === "Upvote") votes++
+                    setVoteCount(count => count - votes)
+                }
                 setUserVote(voteType)
 
             } catch (e) {
                 console.log(e)
             }
+        setUserVote(voteType)
         }
 
     }
@@ -102,18 +87,22 @@ function PostContainer(props) {
         imageContent = <></>
     }
 
+    const upvoteState = userVote === "Upvote" ? "Upvoted" : ""
+    const downvoteState = userVote === "Downvote" ? "Downvoted" : ""
+
+
     return (
         <div id="post-" className={`post-container education-item shadow gui-element w100`} >
 
             {/*  VOTE CONTAINER  */}
             <div className="vote-container flex-col j-c-c a-i-c">
-                <button className={`upvote-btn noselect ${upVoted ? 'Upvoted' : ''}`} type="submit" name="vote_type"
-                    value="Upvote" onClick={handleVote}></button>
+                <button className={`upvote-btn noselect ${upvoteState}`} type="submit" name="vote_type"
+                    value="Upvote" onClick={handleVote}/>
 
                 <h3 className="total-points">{voteCount} </h3>
 
-                <button className={`downvote-btn noselect ${downVoted ? 'Downvoted' : ''}`} type="submit" name="vote_type"
-                    value="Downvote" onClick={handleVote}></button>
+                <button className={`downvote-btn noselect ${downvoteState}`} type="submit" name="vote_type"
+                    value="Downvote" onClick={handleVote}/>
             </div>
 
             {/* POST CONTENT  */}

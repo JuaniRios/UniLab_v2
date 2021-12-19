@@ -2,7 +2,7 @@ import re
 
 
 def url_to_pk(url):
-    pk_match = re.search(r'/(\d+)(/|.json|.json/)$', url)
+    pk_match = re.search(r'/(\d+)( *|/|.json|.json/)$', url)
     return pk_match[1]
 
 
