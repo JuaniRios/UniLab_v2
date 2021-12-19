@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 // STYLES
 import "./AttachImage.css";
 
@@ -9,19 +9,33 @@ function AttachImage(props) {
 
     const avatar = props.avatar;
     const [spanText, setSpanText] = useState("Attach an image");
-    const [imgPreviewClass, setImgPreviewClass] = useState("hidden");
-    const [imgPreviewSrc, setImgPreviewSrc] = useState("#");
+    const [imgPreviewClass, setImgPreviewClass] = useState("shown");
+    const [image, setImage] = [props.image, props.setImage]
     const [avatarPreviewSrc, setAvatarPreviewSrc] = useState(profile_icon);
+    // const imgPreviewClass = {true: "shown", false: "hidden"}
+    useEffect( () => {
+        if (imgPreviewClass === "hidden") {
+            setImgPreviewClass("shown")
+        } else {
+            setImgPreviewClass("hidden")
+        }
+    }, [image])
+
     function getFileData(event) {
-        var file = event.files[0];
-        setSpanText(file.name);
+        let file = event.files[0];
         if (avatar) {
             setAvatarPreviewSrc(URL.createObjectURL(file));
         }
         else {
-            setImgPreviewSrc(URL.createObjectURL(file));
-            setImgPreviewClass("shown");
+            setImage(file);
         }
+    }
+
+    let imgUrl
+    if (typeof(image) == "string") {
+        imgUrl = ""
+    } else {
+        imgUrl = URL.createObjectURL(image)
     }
 
     if (!avatar) {
@@ -32,7 +46,7 @@ function AttachImage(props) {
                     <img className={`custom-file-upload-img noselect`} src={attach_icon} alt="" />
                     <span>{spanText}</span>
                 </label>
-                <img src={imgPreviewSrc} className={`img-preview shadow noselect ${imgPreviewClass}`} alt="" />
+                <img src={imgUrl} className={`img-preview shadow noselect ${imgPreviewClass}`} alt="" />
             </>
         )
     }

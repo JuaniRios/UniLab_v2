@@ -4,28 +4,28 @@ import { NavLink } from "react-router-dom";
 import "./CommentContainer.css";
 // ICONS
 import profile_icon from "../../Assets/img/profile.png";
+import timeSince from "../HelperFunctions/timeSince";
 
 function CommentContainer(props) {
+    let owner;
+    if (props.company) {
+        owner = props.company
+    } else {
+        owner = props.owner
+        owner['name'] = owner.first_name + " " + owner.last_name
+    }
     return (
         <div className={`comment-container w90`}>
-            <img className={`comment-container-img`} src={profile_icon} alt={`Your profile picture`} title={`Post Owner`} />
+            <img className={`comment-container-img`} src={owner.image} alt={`Your profile picture`} title={`Post Owner`} />
             <div className={`comment-content`}>
-                <NavLink to={"#"} className={"comment-owner black-link bold"}>
-                    Testing Everything with long af names DSADASSDADASDASDAS
+                <NavLink to={"/profile?url="+props.url} className={"comment-owner black-link bold"}>
+                    {owner.name}
                 </NavLink>
                 <span className="comment-date">
-                    2 months ago
+                    {timeSince(props.publish_date)}
                 </span>
                 <div className={`comment-body`}>
-                    TBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMEN
-                    TBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODY
-                    COMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENT
-                    BODYCOMMENTBODYCOMMENTBODYCOMMENTBODY
-                    COMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENT
-                    COMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENT
-                    COMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENT
-                    COMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENT
-                    COMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENTBODYCOMMENT
+                    {props.content}
                 </div>
             </div>
         </div>

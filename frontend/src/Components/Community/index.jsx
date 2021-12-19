@@ -1,14 +1,13 @@
-import React, { useReducer } from "react";
+import React, {useReducer, useState} from "react";
 import NavMenu from "../NavMenu";
 import Footer from "../Footer";
 import CreatePost from "./CreatePost";
 import PostForm from "./PostForm";
 import SortingMenu from "./SortingMenu";
 import { CommunityPosts } from "./CommunityPosts";
-import PostContainer from "./PostContainer";
 
 function Community(props) {
-
+    const [posts, setPosts] = useState([]);
     document.title = "Community - UniLab";
     document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
     document.body.classList.remove("noscroll");
@@ -33,10 +32,10 @@ function Community(props) {
         <>
             <NavMenu />
             <div className={`main-content`}>
-                <PostForm postFormClasses={postFormClasses} setPostFormClasses={setPostFormClasses} />
+                <PostForm postFormClasses={postFormClasses} setPostFormClasses={setPostFormClasses} setPosts={setPosts}/>
                 <CreatePost setPostFormClasses={setPostFormClasses} />
                 <SortingMenu />
-                <CommunityPosts />
+                <CommunityPosts posts={posts} setPosts={setPosts} />
             </div>
             <Footer />
         </>

@@ -22,7 +22,7 @@ function PostContainer(props) {
     const { token, userData } = useAuthState();
     const [voteCount, setVoteCount] = useState(props.votes.upvotes.length - props.votes.downvotes.length);
     const [userVote, setUserVote] = useState(props.user_vote);
-
+    const [commentList, setCommentList] = useState()
     const [commentSection, setCommentSection] = useState("hidden");
     const toggleCommentSection = () => {
         if (commentSection === "hidden") {
@@ -90,6 +90,13 @@ function PostContainer(props) {
     const upvoteState = userVote === "Upvote" ? "Upvoted" : ""
     const downvoteState = userVote === "Downvote" ? "Downvoted" : ""
 
+    useEffect( () => {
+        let commentList = []
+        props.comments.forEach( comment => {
+            commentList.push(<CommentContainer {...comment}/>)
+        })
+        setCommentList(commentList)
+    }, [props.comments])
 
     return (
         <div id="post-" className={`post-container education-item shadow gui-element w100`} >
@@ -142,7 +149,7 @@ function PostContainer(props) {
 
                 <div className="post-option flex-row j-c-c a-i-c noselect" onClick={toggleCommentSection}>
                     <img className={`post-option-img`} src={comment} alt="Comment Icon" />
-                    <div>0 comments</div>
+                    <div>{props.comments.length} comments</div>
                 </div>
 
                 <div className="post-option flex-row j-c-c a-i-c noselect" >
@@ -161,10 +168,8 @@ function PostContainer(props) {
                 <hr className="hr90" />
 
                 <CommentForm />
-
                 {/* THIS HAS TO BE GENERATED IN A LOOP */}
-                <CommentContainer />
-
+                {commentList}
                 <div className="w90" style={{ margin: "3rem auto 1rem auto", textAlign: "center" }}>
                     Be the first to comment on this post...
                 </div>

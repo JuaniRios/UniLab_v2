@@ -262,7 +262,7 @@ class PostList(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     filter_backends = [filters.OrderingFilter]
     ordering_filters = ['publish_date, score']
-    ordering = ['-publish_date']
+    ordering = ['-id']
 
     def perform_create(self, serializer):
         user = self.request.user

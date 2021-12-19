@@ -10,7 +10,7 @@ function TextArea(props) {
     const textarea = useRef(null);
 
 
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = [props.message, props.setMessage]
     const [cursorPosition, setCursorPosition] = useState("");
     const handleChange = e => {
         setMessage(e.target.value);

@@ -1,24 +1,24 @@
 import {config} from "../../Config/config";
-import {useMessage} from "../../Context/context";
 
 export default async function postContent(_contentType, token, payload) {
     function getFormData(object) {
         const formData = new FormData();
         Object.keys(object).forEach(key => {
-          if (typeof object[key] !== 'object') formData.append(key, object[key])
-          else formData.append(key, JSON.stringify(object[key]))
+            if (typeof object[key] !== 'object') formData.append(key, object[key])
+            else formData.append(key, JSON.stringify(object[key]))
         })
         return formData;
     }
 
+    let body = new FormData
+    body.append("image", payload["image"])
+    body.append("content", payload["content"])
+    console.log("image is" + payload["image"])
+
     const requestOptions = {
         method: 'POST',
-        headers: {
-            // 'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW',
-            // 'Accept': 'application/json',
-
-        },
-        body: getFormData(payload)
+        body: body,
+        headers: {}
     };
 
     if (token) {
@@ -38,4 +38,4 @@ export default async function postContent(_contentType, token, payload) {
     } catch (e) {
         console.log(e)
     }
-    }
+}

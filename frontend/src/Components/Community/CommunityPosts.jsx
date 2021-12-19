@@ -6,7 +6,8 @@ import Loader from "../Loader";
 
 export function CommunityPosts(props) {
     const state = useAuthState();
-    const [posts, setPosts] = useState([]);
+    const posts = props.posts
+    const setPosts = props.setPosts
     const [page, setPage] = useState(1);
     const [loaderState, setLoaderState] = useState("shown");
 
