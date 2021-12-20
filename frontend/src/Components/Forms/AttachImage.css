@@ -43,13 +43,13 @@ input[type="file"]
 {
     display: flex;
     align-items: center;
-    margin: 5rem 0;
+    margin: 3rem 0;
     flex-flow: row wrap;
 }
 .img-preview-avatar
 {
-    height: 10rem;
-    width: 10rem;
+    height: 9rem;
+    width: 9rem;
     border-radius: 50%;
     object-fit: cover;
     object-position: center center;
