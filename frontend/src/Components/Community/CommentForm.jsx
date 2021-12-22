@@ -40,7 +40,7 @@ function CommentForm(props) {
         return () => {
             document.removeEventListener("keyup", handleEnter)
         }
-    }, [])
+    }, [focused])
 
     async function handleSubmit() {
         let payload = { content: message }
@@ -67,7 +67,7 @@ function CommentForm(props) {
     }
 
     function handleEnter(event) {
-        if (event.key === "Enter") handleSubmit()
+        if (event.key === "Enter") handleSubmit().catch(e => console.log)
     }
 
     return (
