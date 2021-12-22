@@ -31,14 +31,18 @@ function CommentForm(props) {
     }, [cursorPosition])
 
     useEffect(() => {
-        document.addEventListener("keyup", handleEnter)
+        if (focused) {
+            document.addEventListener("keyup", handleEnter)
+        } else {
+            document.removeEventListener("keyup", handleEnter)
+        }
 
         return () => {
             document.removeEventListener("keyup", handleEnter)
         }
     }, [])
 
-    async function handleSubmit(e) {
+    async function handleSubmit() {
         let payload = { content: message }
         try {
             const commentInfo = await postContent("comments", authState.token, payload)
@@ -63,7 +67,7 @@ function CommentForm(props) {
     }
 
     function handleEnter(event) {
-        if (event.key === "Enter") console.log("Enter pressed")
+        if (event.key === "Enter") handleSubmit()
     }
 
     return (
@@ -71,7 +75,7 @@ function CommentForm(props) {
             <img className={`comment-form-img`} src={profile_icon} alt={`Your profile picture`} title={`Post Owner`} />
             <div className={`comment-input-container`}>
                 <textarea ref={textarea} className="custom-scroll" placeholder="Write a comment..."
-                    onInput={autoGrow} value={message} onChange={handleChange} onFocus={() => handleFocus(true)} onBlur={() => handleFocus(false)} />
+                    onInput={autoGrow} value={message} onChange={handleChange} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)} />
                 <EmoteMenu menuWidth="60%" menuTop="100%" menuRight="0"
                     message={message}
                     setMessage={setMessage}
