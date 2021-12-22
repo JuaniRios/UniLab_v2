@@ -180,7 +180,7 @@ function PostContainer(props) {
             <div className={`comment-section-container ${commentSection} w100`}>
                 <hr className="hr90" />
 
-                <CommentForm />
+                <CommentForm setCommentList={setCommentList} />
                 {/* THIS HAS TO BE GENERATED IN A LOOP */}
                 {commentList}
                 <div className="w90" style={{ margin: "3rem auto 1rem auto", textAlign: "center" }}>
