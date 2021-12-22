@@ -43,6 +43,7 @@ function CommentForm(props) {
     }, [focused])
 
     async function handleSubmit() {
+        if (message.length < 1) return false
         let payload = { content: message }
         try {
             const commentInfo = await postContent("comments", authState.token, payload)
@@ -59,11 +60,6 @@ function CommentForm(props) {
         }
 
 
-    }
-
-    function handleFocus(val) {
-        setFocused(val);
-        console.log(focused);
     }
 
     function handleEnter(event) {
