@@ -120,7 +120,6 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
         model = Job
         fields = '__all__'
 
-
     def get_company(self, job):
         result = CompanySerializer(job.owner, context={'request': self.context['request']}).data
         return result
@@ -268,3 +267,13 @@ class ApplicationSerializer(serializers.HyperlinkedModelSerializer):
         previous_vote.delete()
 
         return super().create(validated_data)
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    model = User
+
+    """
+    Serializer for password change endpoint.
+    """
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)

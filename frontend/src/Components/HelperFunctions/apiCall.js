@@ -1,40 +1,44 @@
 import { config } from "../../Config/config";
 
-export default async function apiCall(_contentType, token, params) {
-    function getFormData(object) {
-        const formData = new FormData();
-        Object.keys(object).forEach(key => {
-          if (typeof object[key] !== 'object') formData.append(key, object[key])
-          else formData.append(key, JSON.stringify(object[key]))
-        })
-        return formData;
+export default async function apiCall(resource, token, params) {
+    let body = new FormData
+    for (const [key, val] of Object.entries(params.payload)) {
+        body.append(key, val)
     }
 
     let requestOptions = {
         method: params.method,
-        headers: {
-            'Content-Type': 'application/json',
-            "Accept": "application/json"
-        }
+        headers: {}
     }
     if (token) requestOptions.headers["Authorization"] = `Bearer ${token}`;
 
-    let url = config.django_api + _contentType;
+    // you can either enter the resource name e.g. "posts" or the actual full url
+    let url;
+    if ("fullUrl" in params && params.fullUrl){
+        url = resource
+    } else {
+        url = config.django_api + resource;
+    }
 
     switch (params.method) {
         case 'GET':
-            url += `?page=${params.page}&`
+            if ("page" in params) url += `?page=${params.page}&`;
             break
 
         case 'POST':
             // requestOptions.headers = {}
-            requestOptions["body"] = JSON.stringify(params.payload)
+            requestOptions["body"] = body
             break
 
         case 'DELETE':
             break
 
         case 'PATCH':
+            requestOptions["body"] = body
+            break
+
+        case "PUT":
+            requestOptions["body"] = body
             break
     }
 
@@ -42,6 +46,7 @@ export default async function apiCall(_contentType, token, params) {
         const response = await fetch(url, requestOptions);
         return await response.json()
     } catch (error) {
+        console.log(error.message)
         throw new Error(error)
     }
 

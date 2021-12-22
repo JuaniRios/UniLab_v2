@@ -7,21 +7,25 @@ import password_img from "../../Assets/img/password.png";
 
 import AttachImage from "../Forms/AttachImage";
 import BasicInput from "../Forms/BasicInput";
+import postContent from "../HelperFunctions/postContent";
+import PostContainer from "../Community/PostContainer";
+import apiCall from "../HelperFunctions/apiCall";
+import {useAuthState} from "../../Context";
 import { NavLink } from "react-router-dom";
 
 function Settings(props) {
-
+    const [spanText ,setSpanText] = useState("Attach an image");
     document.title = "Settings - UniLab";
     document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
     document.body.classList.remove("noscroll");
-
+    const {token, userData} = useAuthState()
     const [image, setImage] = useState("");
 
     // Input states
 
-    const [firstName, setFirstName] = useState("Firstname");
-    const [lastName, setLastName] = useState("Lastname");
-    const [email, setEmail] = useState("Your@email.com");
+    const [firstName, setFirstName] = useState(userData.first_name);
+    const [lastName, setLastName] = useState(userData.last_name);
+    const [email, setEmail] = useState(userData.email);
 
     const [currPass, setCurrPass] = useState("");
     const [newPass, setNewPass] = useState("");
@@ -81,6 +85,50 @@ function Settings(props) {
         menuBtnState("active-settings-item");
     }
 
+    async function changeInfo(e) {
+        e.preventDefault()
+        let payload = {
+            first_name: firstName,
+            last_name: lastName,
+            email: email
+        }
+        const params = {
+            method: "PATCH",
+            payload: payload,
+            fullUrl: true
+        }
+        if (typeof (image) !== "string") {
+            payload["image"] = image;
+        }
+
+        try {
+            const updatedInfo = await apiCall(userData.url, token, params)
+            setImage(updatedInfo.image)
+            setSpanText("Attach an image")
+        } catch (e) {
+            console.log(e)
+        }
+        window.location.reload()
+    }
+
+    async function changePassword(e) {
+        e.preventDefault()
+        let payload = {
+            "old_password": currPass,
+            "new_password": newPass,
+        }
+        const params = {
+            payload: payload,
+            method: "PUT"
+        }
+
+        try {
+            const updatedInfo = await apiCall("change-password", token, params)
+        } catch (e) {
+            console.log("error in changePassword")
+            console.log(e.message)
+        }
+    }
 
 
     return (
@@ -109,7 +157,8 @@ function Settings(props) {
                         <div id="general-info" className={`settings-content shadow`} ref={generalInfo}>
                             <h2 className={`settings-content-title`}>General Info</h2>
 
-                            <AttachImage avatar={true} image={image} setImage={setImage} />
+                            <AttachImage avatar={true} image={image} setImage={setImage} spanText={spanText}
+                            setSpanText={setSpanText}/>
 
                             <div className={`double-input-wrap w100 flex row-wrap j-c-s-b a-i-c`}>
                                 <BasicInput name="change-first-name" type="text" width="47%" label="First Name" setter={setFirstName} value={firstName} />
@@ -118,7 +167,7 @@ function Settings(props) {
 
                             <BasicInput name="change-email" type="text" width="100%" label="Email Address" setter={setEmail} value={email} />
 
-                            <button className={`uni-button save-btn`}>Save Changes</button>
+                            <button className={`uni-button save-btn`} onClick={changeInfo}>Save Changes</button>
                         </div>
 
                         <div id="change-password" className={`settings-content shadow`} ref={changePass}>
@@ -132,7 +181,7 @@ function Settings(props) {
                                 <BasicInput name="confirm-new-password" type="password" width="100%" label="Confirm New Password" setter={setConfirmNewPass} value={confirmNewPass} />
 
                             </div>
-                            <button className={`uni-button save-btn`}>Save Changes</button>
+                            <button className={`uni-button save-btn`} onClick={changePassword}>Save Changes</button>
                         </div>
 
                     </div>
