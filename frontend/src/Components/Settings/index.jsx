@@ -7,6 +7,7 @@ import password_img from "../../Assets/img/password.png";
 
 import AttachImage from "../Forms/AttachImage";
 import BasicInput from "../Forms/BasicInput";
+import { NavLink } from "react-router-dom";
 
 function Settings(props) {
 
@@ -90,22 +91,22 @@ function Settings(props) {
                     <div className={`settings-menu`}>
 
                         <div className={`settings-menu-nav`}>
-                            <div className={`settings-menu-item ${generalInfoState}`} onClick={e => toggleMenuOption(generalInfo.current, setGeneralInfoState)}>
+                            <NavLink to="#general-info" className={`settings-menu-item ${generalInfoState} disabled-link`} onClick={e => toggleMenuOption(generalInfo.current, setGeneralInfoState)}>
                                 <img className={`settings-menu-img noselect`} src={account_img} alt="Account image" />
                                 <span>General Info</span>
-                            </div>
+                            </NavLink>
 
-                            <div className={`settings-menu-item ${changePassState}`} onClick={e => toggleMenuOption(changePass.current, setChangePassState)}>
+                            <NavLink to="#change-password" className={`settings-menu-item ${changePassState} disabled-link`} onClick={e => toggleMenuOption(changePass.current, setChangePassState)}>
                                 <img className={`settings-menu-img noselect`} src={password_img} alt="Change password image" />
                                 <span>Change Password</span>
-                            </div>
+                            </NavLink>
                         </div>
 
                     </div>
 
                     <div className={`settings-content-container`}>
 
-                        <div className={`settings-content shadow`} ref={generalInfo}>
+                        <div id="general-info" className={`settings-content shadow`} ref={generalInfo}>
                             <h2 className={`settings-content-title`}>General Info</h2>
 
                             <AttachImage avatar={true} image={image} setImage={setImage} />
@@ -120,7 +121,7 @@ function Settings(props) {
                             <button className={`uni-button save-btn`}>Save Changes</button>
                         </div>
 
-                        <div className={`settings-content shadow`} ref={changePass}>
+                        <div id="change-password" className={`settings-content shadow`} ref={changePass}>
                             <h2 className={`settings-content-title`}>Change Password</h2>
                             <div className={`passwords-container`}>
 
