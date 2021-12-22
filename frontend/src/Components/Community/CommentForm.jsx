@@ -31,7 +31,6 @@ function CommentForm(props) {
     }, [cursorPosition])
 
     useEffect( () => {
-        console.log(`focused state is ${focused}`)
         if (focused) {
             document.addEventListener("keyup", handleEnter)
         } else {
@@ -43,7 +42,7 @@ function CommentForm(props) {
         }
     }, [focused])
 
-    async function handleSubmit(e) {
+    async function handleSubmit() {
         let payload = {content: message}
         try {
             const commentInfo = await postContent("comments", authState.token, payload)
@@ -69,7 +68,7 @@ function CommentForm(props) {
     }
 
     function handleEnter(event) {
-        if (event.key === "Enter" ) console.log("Enter pressed")
+        if (event.key === "Enter" ) handleSubmit()
     }
 
     return (
