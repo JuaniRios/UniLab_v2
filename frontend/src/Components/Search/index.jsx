@@ -26,7 +26,7 @@ function Search(props) {
         }
     }
     function escFunction(event) {
-        if (event.keyCode === 27 && searchState === "shown") {
+        if (event.key === "Escape" && searchState === "shown") {
             toggleSearch();
         }
     }

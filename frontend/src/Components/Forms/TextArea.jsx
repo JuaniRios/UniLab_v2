@@ -40,7 +40,7 @@ function TextArea(props) {
                 <textarea
                     ref={textarea}
                     className={`text-area input custom-scroll`}
-                    name='content' rows={"14"} required
+                    name='content' rows={"10"} required
                     placeholder="Write a post..."
                     onFocus={removeError} onBlur={emptyCheck}
                     value={message}

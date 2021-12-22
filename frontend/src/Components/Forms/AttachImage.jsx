@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 // STYLES
 import "./AttachImage.css";
 
@@ -13,7 +13,7 @@ function AttachImage(props) {
     const [image, setImage] = [props.image, props.setImage]
     const [avatarPreviewSrc, setAvatarPreviewSrc] = useState(profile_icon);
     // const imgPreviewClass = {true: "shown", false: "hidden"}
-    useEffect( () => {
+    useEffect(() => {
         if (imgPreviewClass === "hidden") {
             setImgPreviewClass("shown")
         } else {
@@ -23,6 +23,7 @@ function AttachImage(props) {
 
     function getFileData(event) {
         let file = event.files[0];
+        setSpanText(file.name);
         if (avatar) {
             setAvatarPreviewSrc(URL.createObjectURL(file));
         }
@@ -32,7 +33,7 @@ function AttachImage(props) {
     }
 
     let imgUrl
-    if (typeof(image) == "string") {
+    if (typeof (image) == "string") {
         imgUrl = ""
     } else {
         imgUrl = URL.createObjectURL(image)

@@ -4,14 +4,26 @@
     margin-bottom: 3rem;
     position: relative;
     padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--unilab-gray);
 }
 .vote-container
 {
     position: absolute;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    left: -4rem;
+    left: -3.5rem;
+    top: 0;
+    height: 100%;
+    margin-top: 1rem;
+}
+.vote-container-sticky
+{
+    position: sticky;
     top: 0;
 }
 .upvote-btn, .downvote-btn
@@ -19,39 +31,47 @@
     background-color: unset;
     border: none;
     outline: none;
-    font-size: 2rem;
     cursor: pointer;
     transition: .1s;
     border-radius: 10px;
-    padding: 0 .5rem;
+    height: 1.5rem;
+    width: 1.5rem;
+    padding: 0 !important;
 }
-.upvote-btn::before, .downvote-btn::before
+.upvote-btn:hover .arrow-up
 {
-    content: "\21E7";
+    fill: green;
 }
-.upvote-btn:hover
+.downvote-btn:hover .arrow-down
 {
-    color: green;
+    fill: red;
 }
-.downvote-btn:hover
+.arrow-up, .arrow-down
 {
-    color: red;
+    stroke-width: 3;
+	fill: none;
+	cursor: pointer;
 }
-.downvote-btn
+.green
 {
-    transform: rotate(180deg);
+    stroke: green;
 }
-.Upvoted {
-    color: green;
+.red
+{
+    stroke: red;
+}
+.Upvoted .arrow-up {
+    fill: green;
     /*background-color: var(--gray-hover);*/
 }
-.Downvoted {
-    color: red;
+.Downvoted .arrow-down {
+    fill: red;
     /*background-color: var(--gray-hover);*/
 }
 .total-points
 {
     text-align: center;
+    margin: 1rem 0;
 }
 .post-details-img
 {
@@ -71,6 +91,8 @@
 .post-image
 {
     margin-bottom: 2rem;
+    max-height: 40rem;
+    max-width: 100%;
 }
 .post-option
 {

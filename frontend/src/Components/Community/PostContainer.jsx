@@ -69,7 +69,7 @@ function PostContainer(props) {
             } catch (e) {
                 console.log(e)
             }
-        setUserVote(voteType)
+            setUserVote(voteType)
         }
 
     }
@@ -81,35 +81,48 @@ function PostContainer(props) {
     let imageContent;
     if (props.image) {
         imageContent = <>
-            <img className="post-image w100" src={props.image} alt="Post Image" />
-        </>
+            <img className="post-image" src={props.image} alt="Post Image" />
+        </>;
     } else {
-        imageContent = <></>
+        imageContent = <></>;
     }
 
     const upvoteState = userVote === "Upvote" ? "Upvoted" : ""
     const downvoteState = userVote === "Downvote" ? "Downvoted" : ""
 
-    useEffect( () => {
+    useEffect(() => {
         let commentList = []
-        props.comments.forEach( comment => {
-            commentList.push(<CommentContainer {...comment}/>)
+        props.comments.forEach(comment => {
+            commentList.push(<CommentContainer {...comment} />)
         })
         setCommentList(commentList)
     }, [props.comments])
 
     return (
-        <div id="post-" className={`post-container education-item shadow gui-element w100`} >
+        <div id="post-" className={`post-container shadow w100`} >
 
             {/*  VOTE CONTAINER  */}
             <div className="vote-container flex-col j-c-c a-i-c">
-                <button className={`upvote-btn noselect ${upvoteState}`} type="submit" name="vote_type"
-                    value="Upvote" onClick={handleVote}/>
+                <div className={`vote-container-sticky`}>
 
-                <h3 className="total-points">{voteCount} </h3>
+                    <button className={`upvote-btn noselect ${upvoteState}`} type="submit" name="vote_type"
+                        value="Upvote" onClick={handleVote} >
+                        <svg viewBox="0 0 100 100" preserveAspectRatio="none" height="100%" width="100%">
+                            <polygon class="green arrow-up" points="50,1 99,50 70,50 70,99 30,99 30,50 0,50" />
+                        </svg>
+                    </button>
 
-                <button className={`downvote-btn noselect ${downvoteState}`} type="submit" name="vote_type"
-                    value="Downvote" onClick={handleVote}/>
+                    <h4 className="total-points">{voteCount} </h4>
+
+                    <button className={`downvote-btn noselect ${downvoteState}`} type="submit" name="vote_type"
+                        value="Downvote" onClick={handleVote} >
+                        <svg viewBox="0 0 100 100" preserveAspectRatio="none" height="100%" width="100%">
+                            <polygon class="red arrow-down" points="30,1 70,1 70,50 99,50 50,99 1,50 30,50" />
+                        </svg>
+                    </button>
+
+                </div>
+
             </div>
 
             {/* POST CONTENT  */}

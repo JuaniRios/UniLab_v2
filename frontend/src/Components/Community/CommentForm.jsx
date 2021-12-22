@@ -33,7 +33,8 @@ function CommentForm(props) {
                     message={message}
                     setMessage={setMessage}
                     textarea={textarea}
-                    setCursorPosition={setCursorPosition} />
+                    setCursorPosition={setCursorPosition}
+                />
             </div>
         </form>
     )

@@ -13,7 +13,7 @@ function CreatePost(props) {
 
             <NavLink className={`post-pfp shadow`} to="/profile"></NavLink>
 
-            <h3 className={`action-btn shadow normal`} onClick={setPostFormClasses}>Create a post</h3>
+            <h4 className={`action-btn shadow normal`} onClick={setPostFormClasses}>Create a post</h4>
 
         </div>
     )
