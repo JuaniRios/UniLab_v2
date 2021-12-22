@@ -13,6 +13,8 @@ import Community from "./Components/Community";
 import Companies from "./Components/Companies";
 import Jobs from "./Components/Jobs";
 
+import Profile from "./Components/Profile";
+
 import Settings from "./Components/Settings";
 
 import SignOut from "./Components/SignOut";
@@ -53,6 +55,10 @@ function App() {
 
                     <PrivateRoute exact path='/companies'>
                         <Companies />
+                    </PrivateRoute>
+
+                    <PrivateRoute exact path='/profile'>
+                        <Profile />
                     </PrivateRoute>
 
                     <PrivateRoute exact path='/settings'>
