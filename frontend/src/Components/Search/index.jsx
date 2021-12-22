@@ -4,9 +4,14 @@ import "./Search.css";
 
 import search_img from "../../Assets/img/top-nav/search.png";
 import CloseButton from "../Buttons/CloseButton";
+import apiCall from "../HelperFunctions/apiCall";
+import {useAuthState} from "../../Context";
 
 function Search(props) {
-
+    const {token, userData} = useAuthState()
+    const [searchString, setSearchString] = useState("")
+    const [page, setPage] = useState(1)
+    const [results, setResults] = useState("")
     const searchType = props.searchType;
     const width = props.width;
     const [searchState, setSearchState] = useState("hidden");
@@ -32,6 +37,19 @@ function Search(props) {
     }
     document.addEventListener("keydown", escFunction, false);
 
+    async function fetchAndUpdate() {
+        const params = {
+            method: "GET",
+            page: page,
+        }
+        try {
+            const data = await apiCall("companies", token, params)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+
     return (
         <>
             <h3 className={`search-opener normal ${width}`} onClick={toggleSearch}>
@@ -40,9 +58,11 @@ function Search(props) {
             <div className={`search-expanded-field ${searchState}`}>
                 <div className={`search-input-field ${searchFieldState} w60 shadow`}>
                     <img className={`search-icon`} src={search_img} alt="" />
-                    <input className={`search-input`} type="text" placeholder={`Search for ${searchType}...`} />
+                    <input className={`search-input`} type="text" placeholder={`Search for ${searchType}...`}
+                        value={searchString} onChange={(e) => setSearchString(e.target.value)} />
                     <CloseButton position="relative" clickEvent={toggleSearch} />
                 </div>
+
 
             </div>
 

@@ -4,14 +4,15 @@ import "./AttachImage.css";
 
 import attach_icon from "../../Assets/img/attach.png";
 import profile_icon from "../../Assets/img/profile.png"
+import {useAuthState} from "../../Context";
 
 function AttachImage(props) {
-
     const avatar = props.avatar;
-    const [spanText, setSpanText] = useState("Attach an image");
+    const [spanText, setSpanText] = [props.spanText, props.setSpanText]
     const [imgPreviewClass, setImgPreviewClass] = useState("shown");
     const [image, setImage] = [props.image, props.setImage]
-    const [avatarPreviewSrc, setAvatarPreviewSrc] = useState(profile_icon);
+    const [imageUrl, setImageUrl] = useState()
+    const {userData} = useAuthState()
     // const imgPreviewClass = {true: "shown", false: "hidden"}
     useEffect(() => {
         if (imgPreviewClass === "hidden") {
@@ -21,23 +22,25 @@ function AttachImage(props) {
         }
     }, [image])
 
+    useEffect( () => {
+        if (avatar) {
+            setImageUrl(userData.image)
+        }
+    }, [])
+
+    useEffect( () => {
+        if (typeof (image) !== "string") {
+            setImageUrl(URL.createObjectURL(image))
+        }
+    }, [image])
+
     function getFileData(event) {
         let file = event.files[0];
         setSpanText(file.name);
-        if (avatar) {
-            setAvatarPreviewSrc(URL.createObjectURL(file));
-        }
-        else {
-            setImage(file);
-        }
+        setImage(file)
+        setImageUrl(URL.createObjectURL(file))
     }
 
-    let imgUrl
-    if (typeof (image) == "string") {
-        imgUrl = ""
-    } else {
-        imgUrl = URL.createObjectURL(image)
-    }
 
     if (!avatar) {
         return (
@@ -47,7 +50,7 @@ function AttachImage(props) {
                     <img className={`custom-file-upload-img noselect`} src={attach_icon} alt="" />
                     <span>{spanText}</span>
                 </label>
-                <img src={imgUrl} className={`img-preview shadow noselect ${imgPreviewClass}`} alt="" />
+                <img src={imageUrl} className={`img-preview shadow noselect ${imgPreviewClass}`} alt="" />
             </>
         )
     }
@@ -55,7 +58,7 @@ function AttachImage(props) {
     else {
         return (
             <div className={`avatar-upload-wrapper`}>
-                <img src={avatarPreviewSrc} className={`img-preview-avatar noselect`} alt="" />
+                <img src={imageUrl} className={`img-preview-avatar noselect`} alt="" />
                 <div className={`flex-col`}>
                     <h4 className={`avatar-upload-title`}>Change Profile Picture</h4>
                     <label className={`custom-file-upload avatar-upload-btn shadow`}>

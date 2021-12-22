@@ -78,6 +78,8 @@ urlpatterns += [
     path('api/applications/<int:pk>',
          views.ApplicationDetail.as_view(), name='application-detail'),
 
+    path('api/change-password', views.UpdatePassword.as_view(), name='updatepassword')
+
 ]
 
 # urlpatterns = format_suffix_patterns(urlpatterns)

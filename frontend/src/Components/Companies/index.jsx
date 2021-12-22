@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, {useReducer, useState} from "react";
 import NavMenu from "../NavMenu";
 import Search from "../Search";
 import Slider from "../Slider";
@@ -6,7 +6,6 @@ import Slider from "../Slider";
 import mainBackground from "../../Assets/img/vienna.jpg";
 
 function Companies(props) {
-
     document.title = "Companies - UniLab";
     document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
     document.body.classList.remove("noscroll");
@@ -21,7 +20,7 @@ function Companies(props) {
         <>
             <NavMenu />
             <div className={`main-content-fixed`} style={mainFrameStyle}>
-                <Search searchType="companies" width="w60" />
+                <Search searchType="companies" width="w60"/>
                 <Slider contentType={'companies'} />
             </div>
         </>
