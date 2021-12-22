@@ -574,6 +574,7 @@ tr:nth-child(even)
 {
     background-color: #dddddd;
 }
+.disabled-link {color: var(--unilab-black);}
 .orange-link {color: var(--unilab-orange);}
 .orange-link::selection {color: var(--unilab-white);}
 
