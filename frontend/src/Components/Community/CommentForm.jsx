@@ -12,6 +12,7 @@ import CommentContainer from "./CommentContainer";
 
 function CommentForm(props) {
     const authState = useAuthState()
+    console.log(authState.userData)
     const textarea = useRef(null);
     const [focused, setFocused] = useState(false);
     function autoGrow() {
@@ -24,7 +25,6 @@ function CommentForm(props) {
     const handleChange = e => {
         setMessage(e.target.value);
     };
-    const [posting, setPosting] = useState(false)
 
     useEffect(() => {
         textarea.current.selectionEnd = cursorPosition;
@@ -40,11 +40,11 @@ function CommentForm(props) {
         return () => {
             document.removeEventListener("keyup", handleEnter)
         }
-    }, [focused])
+    }, [focused, message])
 
     async function handleSubmit() {
         if (message.length < 1) return false
-        let payload = { content: message }
+        let payload = { content: message, post: props.postUrl }
         try {
             const commentInfo = await postContent("comments", authState.token, payload)
             console.log(commentInfo)
@@ -63,15 +63,25 @@ function CommentForm(props) {
     }
 
     function handleEnter(event) {
-        if (event.key === "Enter") handleSubmit().catch(e => console.log)
+        if (event.key === "Enter" && !event.shiftKey) {
+            event.preventDefault()
+            handleSubmit().catch(e => console.log)
+        }
+    }
+
+    function preventNewLine(e) {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault()
+        }
     }
 
     return (
         <form className="comment-form w90">
-            <img className={`comment-form-img`} src={profile_icon} alt={`Your profile picture`} title={`Post Owner`} />
+            <img className={`comment-form-img`} src={authState.userData.image} alt={`Your profile picture`} title={`Post Owner`} />
             <div className={`comment-input-container`}>
                 <textarea ref={textarea} className="custom-scroll" placeholder="Write a comment..."
-                    onInput={autoGrow} value={message} onChange={handleChange} onFocus={() => setFocused(true)} onBlur={() => setFocused(false)} />
+                    onInput={autoGrow} value={message} onChange={handleChange} onFocus={() => setFocused(true)}
+                    onBlur={() => setFocused(false)} onKeyPress={preventNewLine}/>
                 <EmoteMenu menuWidth="60%" menuTop="100%" menuRight="0"
                     message={message}
                     setMessage={setMessage}

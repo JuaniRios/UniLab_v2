@@ -74,10 +74,6 @@ function PostContainer(props) {
 
     }
 
-    async function handleComment(e) {
-
-    }
-
     let imageContent;
     if (props.image) {
         imageContent = <>
@@ -132,7 +128,7 @@ function PostContainer(props) {
                 <div className="post-details flex-row a-i-c w90">
 
                     <NavLink to={`/students?url=${props.owner.url}`} className="post-details-link">
-                        <img className="post-details-img" src={profile_icon} alt={`${props.owner.first_name} ${props.owner.last_name}'s profile picture`}
+                        <img className="post-details-img" src={props.owner.image} alt={`${props.owner.first_name} ${props.owner.last_name}'s profile picture`}
                             title={`${props.owner.first_name} ${props.owner.last_name}`} />
                     </NavLink>
                     <div className="post-details-text">
@@ -180,7 +176,7 @@ function PostContainer(props) {
             <div className={`comment-section-container ${commentSection} w100`}>
                 <hr className="hr90" />
 
-                <CommentForm setCommentList={setCommentList} />
+                <CommentForm setCommentList={setCommentList} postUrl={props.url}/>
                 {/* THIS HAS TO BE GENERATED IN A LOOP */}
                 {commentList}
                 <div className="w90" style={{ margin: "3rem auto 1rem auto", textAlign: "center" }}>
