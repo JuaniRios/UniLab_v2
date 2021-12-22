@@ -108,7 +108,7 @@ function PostContainer(props) {
                     <button className={`upvote-btn noselect ${upvoteState}`} type="submit" name="vote_type"
                         value="Upvote" onClick={handleVote} >
                         <svg viewBox="0 0 100 100" preserveAspectRatio="none" height="100%" width="100%">
-                            <polygon class="green arrow-up" points="50,1 99,50 70,50 70,99 30,99 30,50 0,50" />
+                            <polygon className={`green arrow-up`} points="50,1 99,50 70,50 70,99 30,99 30,50 0,50" />
                         </svg>
                     </button>
 
@@ -117,7 +117,7 @@ function PostContainer(props) {
                     <button className={`downvote-btn noselect ${downvoteState}`} type="submit" name="vote_type"
                         value="Downvote" onClick={handleVote} >
                         <svg viewBox="0 0 100 100" preserveAspectRatio="none" height="100%" width="100%">
-                            <polygon class="red arrow-down" points="30,1 70,1 70,50 99,50 50,99 1,50 30,50" />
+                            <polygon className={`red arrow-down`} points="30,1 70,1 70,50 99,50 50,99 1,50 30,50" />
                         </svg>
                     </button>
 
