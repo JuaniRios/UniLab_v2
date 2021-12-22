@@ -35,7 +35,7 @@ function PostContainer(props) {
 
     async function handleVote(e) {
         e.preventDefault()
-        const voteType = e.target.value
+        const voteType = e.currentTarget.value
         const typeConverter = { "Upvote": 1, "Downvote": 2 }
         const payload = {
             post: props.url,
