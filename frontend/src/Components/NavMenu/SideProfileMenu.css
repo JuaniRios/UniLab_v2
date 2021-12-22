@@ -2,7 +2,7 @@
 {
     .profile-menu
     {
-        width: 25vw;
+        width: 25rem;
     }
     .profile-close-button
     {
@@ -11,11 +11,12 @@
     }
     .profile-menu-closed
     {
-        right: -25vw;
+        right: -25rem;
         padding-top: 0rem;
     }
     .profile-menu-opened
     {
+        opacity: 1 !important;
         right: 0;
         padding-top: 3rem;
     }
@@ -43,6 +44,7 @@
 }
 .profile-menu
 {
+    opacity: 0;
     display: flex;
     position: fixed;
     flex-direction: column;
@@ -52,7 +54,7 @@
     height: 100vh;
     top: 0;
     background-color: var(--unilab-white);
-    transition: all .4s linear;
+    transition: .4s linear;
 }
 .profile-picture
 {
@@ -119,11 +121,12 @@
     font-weight:bold;
     margin-bottom: 2rem;
 }
-.profile-menu-btn-holder
+p
 {
-    font-weight: bold;
+    text-align: start;
 }
 .verbose
 {
     margin-bottom: 2rem;
+    text-align: center;
 }

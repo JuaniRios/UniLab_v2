@@ -68,8 +68,10 @@ function NavMenu(props) {
             return ["login-form-opened", "shown"];
         }
         else {
-            document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
-            document.body.classList.remove("noscroll");
+            if (profileClasses[1] === "hidden") {
+                document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
+                document.body.classList.remove("noscroll");
+            }
             return ["login-form-closed", "hidden"];
         }
     }
@@ -81,7 +83,28 @@ function NavMenu(props) {
             setLoginClasses();
             setRedirected(false);
         }
-    }, [])
+        document.addEventListener('keyup', keyFuncNavMenu);
+        return () => {
+            document.removeEventListener('keyup', keyFuncNavMenu);
+        }
+    }, [profileClasses, loginClasses, languageClasses, searchClasses])
+
+    function keyFuncNavMenu(event) {
+        if (event.key === "Escape") {
+            if (loginClasses[0] === "login-form-opened") {
+                setLoginClasses();
+            }
+            else if (loginClasses[0] === "login-form-closed" && profileClasses[0] === "profile-menu-opened") {
+                setProfileClasses();
+            }
+            else if (languageClasses[0] === "language-menu-opened") {
+                setLanguageClasses();
+            }
+            else if (searchClasses[0] === "search-menu-opened") {
+                setSearchClasses();
+            }
+        }
+    }
 
     return (
         <>

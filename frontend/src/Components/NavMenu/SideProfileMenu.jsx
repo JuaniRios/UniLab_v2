@@ -16,25 +16,25 @@ function SideProfileMenu(props) {
     const profileButton =
         <NavLink to="/profile" className={`settings-button`}>
             <div className={`prof-picture`} />
-            <p className={`w80`}>My Profile</p>
+            <p className={`w80 bold`}>My Profile</p>
         </NavLink>;
 
     const myCompaniesButton =
         <NavLink to="my-companies" className={`settings-button`}>
             <div className={`prof-picture`} />
-            <p className={`w80`}>My Companies</p>
+            <p className={`w80 bold`}>My Companies</p>
         </NavLink>;
 
     let signedInButtons =
         <>
             <NavLink to="/settings" className={`settings-button`}>
                 <div className={`settings-picture`} />
-                <p className={`w80`}>Settings</p>
+                <p className={`w80 bold`}>Settings</p>
             </NavLink>
 
             <NavLink to="/logout" className={`settings-button`}>
                 <div className={`logout-picture`} />
-                <p className={`w80`}>Sign Out</p>
+                <p className={`w80 bold`}>Sign Out</p>
             </NavLink>
         </>;
 
@@ -56,12 +56,12 @@ function SideProfileMenu(props) {
             <button onClick={setLoginClasses} className={`settings-button`}>
                 <div className={`login-picture`} />
                 {/* {# Translators: End of side profile menu #} */}
-                <h3 className={`w80`}>Sign In</h3>
+                <p className={`w80 bold`}>Sign In</p>
             </button>
             <NavLink to="/sign-up" className={`settings-button`}>
                 <div className={`signup-picture`} />
                 {/* {# Translators: End of side profile menu #} */}
-                <h3 className={`w80`}>Sign Up</h3>
+                <p className={`w80 bold`}>Sign Up</p>
             </NavLink>
         </>;
 
@@ -87,7 +87,7 @@ function SideProfileMenu(props) {
 
             <div className={`profile-names`}>Guest User</div>
 
-            <div className={`verbose`}>You are currently not signed in.</div>
+            <div className={`verbose w70`}>Sign in to access your profile or create a new account.</div>
 
         </div>;
 

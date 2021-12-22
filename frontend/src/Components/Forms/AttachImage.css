@@ -29,7 +29,8 @@ input[type="file"]
 }
 .img-preview
 {
-    height: 10rem;
+    max-height: 25rem;
+    max-width: 100%;
     align-self: start;
     margin-top: 3rem;
     border-radius: 10px;
