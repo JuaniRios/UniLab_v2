@@ -55,7 +55,7 @@ input[type="file"]
     object-fit: cover;
     object-position: center center;
     margin-right: 3rem;
-    border: 2px solid var(--unilab-gray);
+    border: 1px solid var(--gray-hover);
 }
 .avatar-upload-btn, .avatar-upload-title
 {

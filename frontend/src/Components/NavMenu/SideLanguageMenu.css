@@ -92,7 +92,7 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: center center;
-    border: 1px solid lightgray;
+    border: 1px solid var(--gray-hover);
 }
 .language-links:hover
 {

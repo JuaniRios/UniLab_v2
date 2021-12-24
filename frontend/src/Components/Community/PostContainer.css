@@ -76,9 +76,12 @@
 .post-details-img
 {
     height: 50px;
+    width: 50px;
     object-fit: cover;
     object-position: center center;
     margin-right: 1rem;
+    border-radius: 50%;
+    border: 1px solid var(--gray-hover);
 }
 .post-details
 {

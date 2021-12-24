@@ -10,15 +10,15 @@ import BasicInput from "../Forms/BasicInput";
 import postContent from "../HelperFunctions/postContent";
 import PostContainer from "../Community/PostContainer";
 import apiCall from "../HelperFunctions/apiCall";
-import {useAuthState} from "../../Context";
+import { useAuthState } from "../../Context";
 import { NavLink } from "react-router-dom";
 
 function Settings(props) {
-    const [spanText ,setSpanText] = useState("Attach an image");
+    const [spanText, setSpanText] = useState("Attach an image");
     document.title = "Settings - UniLab";
     document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
     document.body.classList.remove("noscroll");
-    const {token, userData} = useAuthState()
+    const { token, userData } = useAuthState()
     const [image, setImage] = useState("");
 
     // Input states
@@ -139,12 +139,14 @@ function Settings(props) {
                     <div className={`settings-menu`}>
 
                         <div className={`settings-menu-nav`}>
-                            <NavLink to="#general-info" className={`settings-menu-item ${generalInfoState} disabled-link`} onClick={e => toggleMenuOption(generalInfo.current, setGeneralInfoState)}>
+                            <NavLink to="#general-info" className={`settings-menu-item ${generalInfoState} disabled-link`}
+                                onClick={e => toggleMenuOption(generalInfo.current, setGeneralInfoState)}>
                                 <img className={`settings-menu-img noselect`} src={account_img} alt="Account image" />
                                 <span>General Info</span>
                             </NavLink>
 
-                            <NavLink to="#change-password" className={`settings-menu-item ${changePassState} disabled-link`} onClick={e => toggleMenuOption(changePass.current, setChangePassState)}>
+                            <NavLink to="#change-password" className={`settings-menu-item ${changePassState} disabled-link`}
+                                onClick={e => toggleMenuOption(changePass.current, setChangePassState)}>
                                 <img className={`settings-menu-img noselect`} src={password_img} alt="Change password image" />
                                 <span>Change Password</span>
                             </NavLink>
@@ -158,7 +160,7 @@ function Settings(props) {
                             <h2 className={`settings-content-title`}>General Info</h2>
 
                             <AttachImage avatar={true} image={image} setImage={setImage} spanText={spanText}
-                            setSpanText={setSpanText}/>
+                                setSpanText={setSpanText} />
 
                             <div className={`double-input-wrap w100 flex row-wrap j-c-s-b a-i-c`}>
                                 <BasicInput name="change-first-name" type="text" width="47%" label="First Name" setter={setFirstName} value={firstName} />

@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import "./CreatePost.css";
 // IMAGES
 import { NavLink } from "react-router-dom";
-import {useAuthState} from "../../Context";
+import { useAuthState } from "../../Context";
 
 function CreatePost(props) {
-    const {userData} = useAuthState()
+    const { userData } = useAuthState()
     const setPostFormClasses = props.setPostFormClasses;
     const picStyle = {
         backgroundImage: `url(${userData.image})`
@@ -14,7 +14,7 @@ function CreatePost(props) {
 
     return (
         <div className={`create-post flex-row a-i-c w40 shadow`}>
-            <NavLink to="/profile" style={picStyle} className={`post-pfp shadow`} />
+            <NavLink to="/profile" style={picStyle} className={`post-pfp`} />
 
             <h4 className={`action-btn shadow normal`} onClick={setPostFormClasses}>Create a post</h4>
 

@@ -13,6 +13,7 @@ function PostForm(props) {
     const { token } = useAuthState()
     const setPostFormClasses = props.setPostFormClasses;
     const [postFormClass, overlayClass] = props.postFormClasses;
+    const [spanText, setSpanText] = useState("Attach an image");
     const [image, setImage] = useState("");
     const [content, setContent] = useState("");
     async function handleSubmit(e) {
@@ -23,8 +24,8 @@ function PostForm(props) {
         }
 
         try {
-            const postInfo = await postContent("posts", token, {content: content, image: image})
-            props.setPosts( current => {
+            const postInfo = await postContent("posts", token, { content: content, image: image })
+            props.setPosts(current => {
                 let updated = current.slice()
                 updated.unshift(<PostContainer {...postInfo} key={current.length} />)
                 return updated
@@ -53,7 +54,8 @@ function PostForm(props) {
 
                 <TextArea width="100%" label="Write a post" message={content} setMessage={setContent} />
 
-                <AttachImage image={image} setImage={setImage} avatar={false} />
+                <AttachImage image={image} setImage={setImage} avatar={false}
+                    spanText={spanText} setSpanText={setSpanText} />
 
                 <div className={`double-input-wrap post-btns`}>
                     <button disabled={!content} className={`uni-button w100`} type="submit" name="submit" value="post" onClick={handleSubmit}>Post</button>

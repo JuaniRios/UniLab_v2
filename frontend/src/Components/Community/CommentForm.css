@@ -1,22 +1,24 @@
 .comment-form
 {
     display: flex;
-    align-items: center;
     margin: 2rem auto 0 auto;
 }
 .comment-form-img
 {
-    height: 40px;
-    width: 40px;
+    height: 50px;
+    width: 50px;
     object-fit: cover;
     object-position: center center;
     margin-right: 1rem;
     cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid var(--gray-hover);
 }
 .comment-input-container
 {
-    width: calc(100% - 40px - 1rem);
-    padding: 1rem 1.5rem;
+    width: calc(100% - 50px - 1rem);
+    padding: 1rem;
+    min-height: 50px;
     position: relative;
     display: flex;
     align-items: center;
@@ -36,5 +38,4 @@
     align-items: center;
     padding: 0 !important;
     height: 1.5rem;
-    max-height: 4.5rem;
 }

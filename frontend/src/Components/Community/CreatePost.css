@@ -30,4 +30,5 @@
     margin-right: 2rem;
     background-size: cover; 
     background-position: center center;
+    border: 1px solid var(--gray-hover);
 }

@@ -50,6 +50,10 @@ body
     margin: 0;
     padding-top: 10vh;
 }
+img
+{
+    font-size: 0.75rem;
+}
 ::selection, ::-moz-selection {background: rgba(230, 135, 41, 0.8);}
 /* VARIABLES */
 :root
@@ -434,37 +438,6 @@ hr{margin: 1rem 0;}
 .close-button::before {transform: rotate(-45deg);}
 .close-button::after {transform: rotate(-135deg);}
 .close-button:hover::before, .close-button:hover::after {transform: rotate(0deg);}
-
-/* PLUS BUTTON */
-.plus-button
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    color: var(--unilab-orange);
-    height: 50px;
-    width: 50px;
-    padding: 0;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0);
-    transition: .2s;
-}
-.plus-button::before, .plus-button::after
-{
-    content: '';
-    position: absolute;
-    display: block;
-    height: 3px;
-    width: 30px;
-    background-color: var(--unilab-orange);
-    transition: all .25s ease-out;
-}
-.plus-button::before {transform: rotate(0deg);}
-.plus-button::after {transform: rotate(90deg);}
-.plus-button:hover {background-color: var(--gray-hover);}
 
 /* TRIPLE DOT BUTTON */
 .triple-dot-btn

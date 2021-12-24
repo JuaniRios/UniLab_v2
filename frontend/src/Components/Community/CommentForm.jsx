@@ -14,10 +14,21 @@ function CommentForm(props) {
     const authState = useAuthState()
     console.log(authState.userData)
     const textarea = useRef(null);
+    const inputContainer = useRef(null);
     const [focused, setFocused] = useState(false);
+
+    const [commentFormAlign, setCommentFormAlign] = useState(true);
     function autoGrow() {
         textarea.current.style.height = "5px";
         textarea.current.style.height = (textarea.current.scrollHeight) + "px";
+        if (parseInt(textarea.current.style.height) > 50) {
+            inputContainer.current.style.borderRadius = "10px";
+            setCommentFormAlign(false);
+        }
+        else {
+            inputContainer.current.style.borderRadius = "50px";
+            setCommentFormAlign(true);
+        }
     }
 
     const [message, setMessage] = useState("");
@@ -76,12 +87,12 @@ function CommentForm(props) {
     }
 
     return (
-        <form className="comment-form w90">
+        <form className={`comment-form w90 ${(commentFormAlign) ? "a-i-c" : "a-i-f-s"}`}>
             <img className={`comment-form-img`} src={authState.userData.image} alt={`Your profile picture`} title={`Post Owner`} />
-            <div className={`comment-input-container`}>
+            <div className={`comment-input-container`} ref={inputContainer}>
                 <textarea ref={textarea} className="custom-scroll" placeholder="Write a comment..."
                     onInput={autoGrow} value={message} onChange={handleChange} onFocus={() => setFocused(true)}
-                    onBlur={() => setFocused(false)} onKeyPress={preventNewLine}/>
+                    onBlur={() => setFocused(false)} onKeyPress={preventNewLine} />
                 <EmoteMenu menuWidth="60%" menuTop="100%" menuRight="0"
                     message={message}
                     setMessage={setMessage}

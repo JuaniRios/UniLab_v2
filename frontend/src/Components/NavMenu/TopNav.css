@@ -12,7 +12,7 @@
     }
     #logo-img:hover, #search-img:hover, #profile-img:hover, #lang-img:hover
     {
-        opacity: .5;
+        opacity: .7;
     }
     #search-img, #profile-img, #lang-img
     {
@@ -189,6 +189,7 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: center center;
+    border: 1px solid var(--gray-hover);
 }
 .top-nav-logo
 {
