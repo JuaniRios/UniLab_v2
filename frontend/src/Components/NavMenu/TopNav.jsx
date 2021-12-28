@@ -3,11 +3,11 @@ import React, { useState, useEffect, useReducer } from "react";
 import "./TopNav.css";
 // IMAGES
 import logo from "../../Assets/img/unilab_logo.png";
-import home_icon from "../../Assets/img/top-nav/address2.png";
-import community_icon from "../../Assets/img/top-nav/community.png";
-import companies_icon from "../../Assets/img/top-nav/employers.png";
-import jobs_icon from "../../Assets/img/top-nav/jobs.svg";
-import about_icon from "../../Assets/img/top-nav/about.png";
+import home_icon from "../../Assets/img/top-nav/home.png";
+import community_icon from "../../Assets/img/top-nav/community2.png";
+import companies_icon from "../../Assets/img/top-nav/companies.png";
+import jobs_icon from "../../Assets/img/top-nav/jobs.png";
+import about_icon from "../../Assets/img/top-nav/about2.png";
 import profile_icon from "../../Assets/img/top-nav/profile.png";
 import search_icon from "../../Assets/img/top-nav/search.png";
 
@@ -30,18 +30,10 @@ function TopNav(props) {
     const setLanguageClasses = props.setLanguageClasses;
     const setSearchClasses = props.setSearchClasses;
 
-    // OPEN AND CLOSE MOBILE MENU
-    function changeMobileClasses(initState) {
-        if (initState[0] === "linebar-inactive") {
-            return ["linebar-toggled", "container-opened"];
-        }
-        else {
-            return ["linebar-inactive", "container-closed"];
-        }
-    }
-    const initMobileClasses = ["linebar-inactive", "container-closed"];
-    const [mobileClasses, setMobileClasses] = useReducer(changeMobileClasses, initMobileClasses);
-    const [linebarClass, containerClass] = mobileClasses;
+
+
+    const [linebarClass, containerClass] = props.mobileClasses;
+    const setMobileClasses = props.setMobileClasses;
 
     return (
         <nav className={`top-nav flex-row a-i-c shadow`}>
@@ -130,7 +122,7 @@ function TopNav(props) {
                 </a>
 
                 {/*LANGUAGE BUTTON*/}
-                <a className={`top-nav-item flex-row a-i-c`} onClick={setLanguageClasses}>
+                <a className={`top-nav-item flex-row a-i-c`} onClick={setLanguageClasses} style={{ border: "none" }}>
                     <img id="lang-img" className={`top-nav-image`} src={english_icon} alt="Locale Flag" title="Language" />
                     {/*{# Translators: End of navigation bar #}*/}
                     <div id="search-text" className={`top-nav-item-text`}>

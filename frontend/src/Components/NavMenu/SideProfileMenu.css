@@ -2,16 +2,11 @@
 {
     .profile-menu
     {
-        width: 25rem;
-    }
-    .profile-close-button
-    {
-        height: 3vh;
-        width: 3vh;
+        width: 20rem;
     }
     .profile-menu-closed
     {
-        right: -25rem;
+        right: -20rem;
         padding-top: 0rem;
     }
     .profile-menu-opened
@@ -20,26 +15,31 @@
         right: 0;
         padding-top: 3rem;
     }
+    .profile-user-data
+    {
+        margin-top: 3rem;
+    }
 }
 @media only screen and (max-width: 1030px)
 {
     .profile-menu
     {
-        width: 100vw;
-        left: 100vw;
-    }
-    .profile-close-button
-    {
-        height: 5vw;
-        width: 5vw;
+        width: 100%;
     }
     .profile-menu-closed
     {
-        left: 100vw;
+        right: -100%;
+        padding-top: 0rem;
     }
     .profile-menu-opened
     {
-        left: 0;
+        opacity: 1 !important;
+        right: 0;
+        padding-top: 3rem;
+    }
+    .profile-user-data
+    {
+        margin-top: 5rem;
     }
 }
 .profile-menu
@@ -58,8 +58,8 @@
 }
 .profile-picture
 {
-    height: 25vh;
-    width: 25vh;
+    height: 10rem;
+    width: 10rem;
     border-radius: 50%;
     object-fit:cover;
     margin-bottom: 2rem;

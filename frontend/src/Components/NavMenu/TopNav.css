@@ -16,8 +16,8 @@
     }
     #search-img, #profile-img, #lang-img
     {
-        height: 5vh;
-        width: 5vh;
+        height: 2.5rem;
+        width: 2.5rem;
     }
     #profile-img
     {
@@ -35,7 +35,7 @@
         position: relative;
         justify-content: center;
         font-weight: bold;
-        height: 50px;
+        height: 100%;
         text-align: center;
         z-index: 9001;
         cursor: pointer;
@@ -59,6 +59,7 @@
         justify-content: space-evenly; 
         align-items: center;
         width: 70%;
+        height: 70%;
     }
 }
 @media only screen and (max-width: 1030px)
@@ -72,7 +73,6 @@
     .top-nav-item-text
     {
         justify-content: left;
-        font-size: 24px;
     }
     .top-nav-item-text img
     {
@@ -80,49 +80,48 @@
     }
     .top-nav-image
     {
-        height: 5vh;
-        width: 5vh;
+        height: 2rem;
+        width: 2rem;
+        margin-right: 2rem;
     }
     .top-nav-item
     {
-        width: 55%;
-        border-radius: 10px;
         position: relative;
         font-weight: bold;
         text-align: center;
         z-index: 9001;
         cursor: pointer;
-        padding: 2% 5%;
-        border-top: 1px solid rgba(230, 135, 41,0);
-        border-left: 1px solid rgba(230, 135, 41,0);
-        border-right: 1px solid rgba(230, 135, 41,0);
-        border-bottom: 1px solid var(--unilab-orange);
+        padding: 2rem 3rem 2rem 3rem;
+        border-bottom: 2px solid var(--gray-hover);
+        width: 90%;
     }
     .top-nav-item:active
     {
-        border: 1px solid var(--unilab-orange);
+        border-bottom: 2px solid var(--unilab-orange);
     }
     .top-nav-container
     {
         display: flex; 
-        justify-content: space-evenly;
+        justify-content: flex-start;
         flex-direction: column;
-        width: 100vw;
-        height: 90vh;
+        width: 100%;
+        height: calc(100vh - var(--topnav-height));
         top: var(--topnav-height);
         position: fixed;
         background-color: var(--unilab-white);
-        padding: 0 5%;
-        align-items: center;
+        padding: 1rem 0;
         transition: .5s;
+        align-items: center;
+        opacity: 0;
     }
     .container-closed
     {
-        left: 100vw;
+        right: -100%;
     }
     .container-opened
     {
-        left: 0;
+        right: 0;
+        opacity: 1 !important;
     }
     .top-nav-search
     {
@@ -138,8 +137,8 @@
 }
 #logo-link
 {
-    height: 7vh;
-    width: calc(7vh*2.155448717948718);
+    height: 3rem;
+    width: calc(3rem*2.155448717948718);
     background-color: rgba(0, 0, 0, 0);
     padding: 0;
     border-bottom: none;
@@ -148,6 +147,7 @@
 {
     height: 100%;
     width: 100%;
+    margin: 0 !important;
 }
 .top-nav-item-filler, .top-nav-item-text, .top-nav-logo, .top-nav-search, .top-nav-profile
 {
@@ -168,7 +168,7 @@
     position: absolute;
     left: 0;
     width: 0;
-    height: 50px;
+    height: 100%;
     background-color: var(--unilab-orange);
     z-index: 9002;
     border-radius: 10px;

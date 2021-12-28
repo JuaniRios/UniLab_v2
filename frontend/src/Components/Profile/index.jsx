@@ -4,6 +4,10 @@ import NavMenu from "../NavMenu";
 import "./index.css";
 import ProfileContentFrame from "./ProfileContentFrame";
 
+import profile_icon from "../../Assets/img/profile.png";
+import pencil_icon from "../../Assets/img/profile/pencil.png";
+import redirect_icon from "../../Assets/img/profile/redirect.svg";
+
 function Profile(props) {
 
     document.title = "Profile - UniLab";
@@ -27,34 +31,60 @@ function Profile(props) {
                 <div className={`profile`}>
 
                     <div className={`main-profile-menu`} ref={profileMenuRef}>
+                        <div className={`fixed-menu`}>
 
-                        <NavLink to="#basic-info" className={`profile-menu-item active-menu-item`} onClick={e => changeActiveItem(0)}>
-                            <div className={`item-text`}>Basic Information</div>
-                        </NavLink>
+                            <NavLink to="#basic-info" className={`profile-menu-item active-menu-item`} onClick={e => changeActiveItem(0)}>
+                                <div className={`item-text`}>Basic Information</div>
+                            </NavLink>
 
-                        <NavLink to="#education" className={`profile-menu-item`} onClick={e => changeActiveItem(1)}>
-                            <div className={`item-text`}>Education</div>
-                        </NavLink>
+                            <NavLink to="#education" className={`profile-menu-item`} onClick={e => changeActiveItem(1)}>
+                                <div className={`item-text`}>Education</div>
+                            </NavLink>
 
-                        <NavLink to="#experience" className={`profile-menu-item`} onClick={e => changeActiveItem(2)}>
-                            <div className={`item-text`}>Experience</div>
-                        </NavLink>
+                            <NavLink to="#experience" className={`profile-menu-item`} onClick={e => changeActiveItem(2)}>
+                                <div className={`item-text`}>Experience</div>
+                            </NavLink>
 
-                        <NavLink to="#skills" className={`profile-menu-item`} onClick={e => changeActiveItem(3)}>
-                            <div className={`item-text`}>Skills</div>
-                        </NavLink>
+                            <NavLink to="#skills" className={`profile-menu-item`} onClick={e => changeActiveItem(3)}>
+                                <div className={`item-text`}>Skills</div>
+                            </NavLink>
 
-                        <NavLink to="#posts" className={`profile-menu-item`} onClick={e => changeActiveItem(4)}>
-                            <div className={`item-text`}>Posts</div>
-                        </NavLink>
+                            <NavLink to="#posts" className={`profile-menu-item`} onClick={e => changeActiveItem(4)}>
+                                <div className={`item-text`}>Posts</div>
+                            </NavLink>
 
-                        <NavLink to="#comments" className={`profile-menu-item`} onClick={e => changeActiveItem(5)}>
-                            <div className={`item-text`}>Comments</div>
-                        </NavLink>
+                            <NavLink to="#comments" className={`profile-menu-item`} onClick={e => changeActiveItem(5)}>
+                                <div className={`item-text`}>Comments</div>
+                            </NavLink>
 
+                        </div>
                     </div>
 
                     <div className={`profile-content-container`}>
+
+                        <ProfileContentFrame id="basic-info">
+                            <div className={`profile-banner`}>
+                                <img className={`profile-banner-pfp`} src={profile_icon} alt="Profile icon" />
+                            </div>
+                            <div className={`profile-basic-info`}>
+                                <img className={`basic-info-toggler`} src={pencil_icon} alt="Pen icon" />
+                                <h3>
+                                    Firstname Lastname
+                                </h3>
+                                <p>Occupation</p>
+                                <p>
+                                    <span className={`gray-text`}>Location</span>
+                                    <span className={`gray-text`}> · </span>
+                                    <NavLink to="#" className={`website-link`}>Website<img src={redirect_icon} alt="Redirect icon" />
+                                    </NavLink>
+                                </p>
+                                <h3>
+                                    Summary
+                                </h3>
+                                <p>This user has no summary yet...</p>
+                            </div>
+
+                        </ProfileContentFrame>
 
                         <ProfileContentFrame id="education" margin={true} title="Education" plusBtn={true}>
                             <h4 className={`normal`} style={{ margin: "3rem 0 0 0" }}>

@@ -2,16 +2,12 @@
 {
     .language-menu
     {
-        width: 25vw;
-    }
-    .language-close-button
-    {
-        height: 3vh;
-        width: 3vh;
+        width: 20rem;
+        justify-content: space-between;
     }
     .language-menu-closed
     {
-        right: -25vw;
+        right: -20rem;
         padding-top: 0rem;
     }
     .language-menu-closed .lang-menu-btn-holder
@@ -33,20 +29,16 @@
 {
     .language-menu
     {
-        width: 100vw;
-        left: 100vw;
-    }
-    .language-close-button
-    {
-        height: 5vw;
-        width: 5vw;
+        width: 100%;
+        justify-content: space-evenly;
     }
     .language-menu-closed
     {
-        left: 100vw;
+        left: 100%;
     }
     .language-menu-opened
     {
+        opacity: 1 !important;
         left: 0;
     }
 }
@@ -56,7 +48,6 @@
     position: fixed;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     z-index: 9501;
     height: 100vh;
@@ -81,14 +72,15 @@
     color: black;
     display: flex;
     width: 100%;
-    padding: 7.5% 15%;
+    padding: 2rem 4rem;
     transition: .1s;
+    align-items: center;
 }
 .language-links img
 {
-    height: 50px;
-    width: 50px;
-    margin: 0 5%;
+    height: 2.5rem;
+    width: 2.5rem;
+    margin-right: 1rem;
     border-radius: 50%;
     object-fit: cover;
     object-position: center center;

@@ -12,6 +12,22 @@ function NavMenu(props) {
     const userData = state.userData;
     const [redirected, setRedirected] = useState(props.redirected);
 
+    // OPEN AND CLOSE MOBILE MENU
+    function changeMobileClasses(initState) {
+        if (initState[0] === "linebar-inactive") {
+            document.getElementsByTagName("HTML")[0].classList.add("y-scroll");
+            document.body.classList.add("noscroll");
+            return ["linebar-toggled", "container-opened"];
+        }
+        else {
+            document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
+            document.body.classList.remove("noscroll");
+            return ["linebar-inactive", "container-closed"];
+        }
+    }
+    const initMobileClasses = ["linebar-inactive", "container-closed"];
+    const [mobileClasses, setMobileClasses] = useReducer(changeMobileClasses, initMobileClasses);
+
     // OPEN AND CLOSE SIDE PROFILE MENU
     function changeProfileClasses(initState) {
         if (initState[0] === "profile-menu-closed") {
@@ -20,8 +36,10 @@ function NavMenu(props) {
             return ["profile-menu-opened", "shown"];
         }
         else {
-            document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
-            document.body.classList.remove("noscroll");
+            if (mobileClasses[1] === "container-closed") {
+                document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
+                document.body.classList.remove("noscroll");
+            }
             return ["profile-menu-closed", "hidden"];
         }
     }
@@ -36,8 +54,10 @@ function NavMenu(props) {
             return ["language-menu-opened", "shown"];
         }
         else {
-            document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
-            document.body.classList.remove("noscroll");
+            if (mobileClasses[1] === "container-closed") {
+                document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
+                document.body.classList.remove("noscroll");
+            }
             return ["language-menu-closed", "hidden"];
         }
     }
@@ -52,8 +72,10 @@ function NavMenu(props) {
             return ["search-menu-opened", "shown"];
         }
         else {
-            document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
-            document.body.classList.remove("noscroll");
+            if (mobileClasses[1] === "container-closed") {
+                document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
+                document.body.classList.remove("noscroll");
+            }
             return ["search-menu-closed", "hidden"];
         }
     }
@@ -68,7 +90,7 @@ function NavMenu(props) {
             return ["login-form-opened", "shown"];
         }
         else {
-            if (profileClasses[1] === "hidden") {
+            if (profileClasses[1] === "hidden" && mobileClasses[1] === "container-closed") {
                 document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
                 document.body.classList.remove("noscroll");
             }
@@ -112,6 +134,8 @@ function NavMenu(props) {
                 setProfileClasses={setProfileClasses}
                 setLanguageClasses={setLanguageClasses}
                 setSearchClasses={setSearchClasses}
+                mobileClasses={mobileClasses}
+                setMobileClasses={setMobileClasses}
             />
             <GeneralSearch
                 searchClasses={searchClasses}

@@ -9,12 +9,20 @@
 }
 .main-profile-menu
 {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     margin: 1.5rem 0;
     width: 15%;
+}
+.fixed-menu
+{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
 }
 .profile-content-container
 {
@@ -34,6 +42,7 @@
     position: relative;
     transition: .5s;
     margin: 1rem 0;
+    padding: 0 2.5rem;
 }
 .profile-menu-item::before
 {
@@ -63,4 +72,57 @@
 .active-menu-item::before
 {
     background-color: var(--unilab-orange);
+}
+.profile-banner
+{
+    width: 100%;
+    background-image: url('../../Assets/img/vienna.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px 10px 0 0;
+    padding: 3rem;
+}
+.profile-banner-pfp
+{
+    border-radius: 50%;
+    height: 10rem;
+    width: 10rem;
+    object-fit: cover;
+    object-position: center;
+    background-color: var(--unilab-white);
+    padding: 3px;
+    border: 1px solid var(--gray-hover);
+}
+.profile-basic-info
+{
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 2rem;
+}
+.basic-info-toggler
+{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    padding: 1%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
+}
+.basic-info-toggler:hover
+{
+    background-color: rgba(0, 0, 0, .1);
+}
+.website-link
+{
+    color: #0084ff;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
 }

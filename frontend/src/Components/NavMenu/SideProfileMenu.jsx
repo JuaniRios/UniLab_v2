@@ -66,7 +66,7 @@ function SideProfileMenu(props) {
         </>;
 
     const signedInUserData =
-        <div className={`w100 flex-col j-c-c a-i-c`}>
+        <div className={`profile-user-data w100 flex-col j-c-c a-i-c`}>
 
             <NavLink to="/profile">
                 <img className={`profile-picture`} src={userData ? userData['image'] : profile_icon} alt="Profile Picture" />
