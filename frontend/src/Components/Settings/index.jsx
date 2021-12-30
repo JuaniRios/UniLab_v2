@@ -13,20 +13,24 @@ import apiCall from "../HelperFunctions/apiCall";
 import { useAuthState } from "../../Context";
 import { NavLink } from "react-router-dom";
 
+import scrollTo from "../HelperFunctions/scrollTo";
+import isScrolledToElement from "../HelperFunctions/isScrolledToElement";
+
 function Settings(props) {
-    const [spanText, setSpanText] = useState("Attach an image");
+
     document.title = "Settings - UniLab";
     document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
     document.body.classList.remove("noscroll");
+
     const { token, userData } = useAuthState()
     const [image, setImage] = useState("");
+    const [spanText, setSpanText] = useState("Attach an image");
 
     // Input states
 
     const [firstName, setFirstName] = useState(userData.first_name);
     const [lastName, setLastName] = useState(userData.last_name);
     const [email, setEmail] = useState(userData.email);
-
     const [currPass, setCurrPass] = useState("");
     const [newPass, setNewPass] = useState("");
     const [confirmNewPass, setConfirmNewPass] = useState("");
@@ -41,23 +45,6 @@ function Settings(props) {
     const [generalInfoState, setGeneralInfoState] = useState("active-settings-item");
     const [changePassState, setChangePassState] = useState("");
 
-    function isScrolledToElement(el) {
-        var rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-
-    function scrollTo(element) {
-        element.scrollIntoView({
-            behavior: 'auto',
-            block: 'center',
-            inline: 'center'
-        });
-    }
     useEffect(() => {
         document.addEventListener('scroll', scrollToMenu);
         return () => {
@@ -65,9 +52,7 @@ function Settings(props) {
         }
     }, [])
 
-
     function scrollToMenu(e) {
-        console.log("scroll_trigger")
         if (isScrolledToElement(changePass.current)) {
             setChangePassState("active-settings-item");
             setGeneralInfoState("");
@@ -129,7 +114,6 @@ function Settings(props) {
             console.log(e.message)
         }
     }
-
 
     return (
         <>

@@ -1,14 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
 import PlusButton from "../Buttons/PlusButton";
-import NavMenu from "../NavMenu";
 import "./ProfileContentFrame.css";
 
 function ProfileContentFrame(props) {
 
     let contentStyle = {
         width: props.width,
-        padding: (props.margin) ? "2rem" : "0"
+        padding: (props.margin) ? "1rem 2rem" : "0"
     }
 
     let plusBtn;
@@ -19,17 +17,20 @@ function ProfileContentFrame(props) {
     if (props.title) {
         title = <h1 className={`normal`} style={{ margin: "0" }}>{props.title}</h1>;
     }
+    let wrapper;
+    if (props.title || props.plusBtn) {
+        wrapper = <div className={`profile-content-upper`}>
+            {title}
+            {plusBtn}
+        </div>;
+    }
 
     return (
-        <div id={props.id} className={`profile-content shadow`} style={contentStyle}>
-            <div className={`flex-row j-c-s-b a-i-c w100`}>
-                {title}
-                {plusBtn}
-
-            </div>
+        <div id={props.id} className={`profile-content shadow ${props.className}`} style={contentStyle}>
+            {wrapper}
             {props.children}
         </div>
     );
 }
 
-export default ProfileContentFrame; 
+export default ProfileContentFrame;

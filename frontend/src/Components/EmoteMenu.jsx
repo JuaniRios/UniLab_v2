@@ -3,10 +3,6 @@ import Picker from 'emoji-picker-react';
 // STYLES
 import "./EmoteMenu.css";
 
-/**
- * Hook that alerts clicks outside of the passed ref
- */
-
 function EmoteMenu(props) {
 
     const menuWidth = props.menuWidth;

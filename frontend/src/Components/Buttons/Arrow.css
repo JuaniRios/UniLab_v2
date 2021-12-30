@@ -1,0 +1,41 @@
+.arrow
+{
+    height: 1rem;
+    width: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: .2s;
+}
+.arrow::before, .arrow::after
+{
+    content: "";
+    height: 15%;
+    width: 60%;
+    background-color: var(--unilab-orange);
+    position: absolute;
+    border-radius: 10px;
+}
+.arrow::before
+{
+    transform: rotate(45deg);
+    left: 0;
+}
+.arrow::after
+{
+    transform: rotate(-45deg);
+    right: 0;
+}
+.up-arrow
+{
+    transform: rotate(180deg);
+}
+.left-arrow
+{
+    transform: rotate(90deg);
+}
+.right-arrow
+{
+    transform: rotate(-90deg);
+}

@@ -1,15 +1,16 @@
 .plus-btn
 {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     outline: none;
     border: none;
     color: var(--unilab-orange);
-    height: 50px;
-    width: 50px;
-    padding: 0;
+    height: 3rem;
+    width: 3rem;
+    padding: 0 !important;
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0);
     transition: .2s;
@@ -19,11 +20,16 @@
     content: '';
     position: absolute;
     display: block;
-    height: 3px;
-    width: 30px;
+    height: 5%;
+    width: 50%;
     background-color: var(--unilab-orange);
     transition: all .25s ease-out;
 }
-.plus-btn::before {transform: rotate(0deg);}
-.plus-btn::after {transform: rotate(90deg);}
-.plus-btn:hover {background-color: var(--gray-hover);}
+.plus-btn::after 
+{
+    transform: rotate(90deg);
+}
+.plus-btn:hover 
+{
+    background-color: var(--gray-hover);
+}
