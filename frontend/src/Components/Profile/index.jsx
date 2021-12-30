@@ -168,12 +168,75 @@ function Profile(props) {
                         </ProfileContentFrame>
 
                         <ProfileContentFrame id="posts" className={`${contentClassesArray[4]}`} margin={true} title="Posts">
+
+                            <div className="post-comment-container shadow">
+                                <div className="post-comment-content">
+                                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM...
+                                </div>
+                                <div className="post-comment-btn-holder">
+                                    <div className="uni-button post-comment-btn">View</div>
+                                    <div className="uni-button post-comment-btn">Delete</div>
+                                </div>
+                            </div>
+
+                            <div className="post-comment-container shadow">
+                                <img className="post-comment-img" src={profile_icon} alt="Post image" />
+                                <div className="post-comment-content">
+                                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM...
+                                </div>
+                                <div className="post-comment-btn-holder">
+                                    <div className="uni-button post-comment-btn">View</div>
+                                    <div className="uni-button post-comment-btn">Delete</div>
+                                </div>
+                            </div>
+
+                            <div className="post-comment-container shadow">
+                                <div className="post-comment-content">
+                                    Short post
+                                </div>
+                                <div className="post-comment-btn-holder">
+                                    <div className="uni-button post-comment-btn">View</div>
+                                    <div className="uni-button post-comment-btn">Delete</div>
+                                </div>
+                            </div>
+
+                            <div className="post-comment-container shadow">
+                                <img className="post-comment-img" src={profile_icon} alt="Post image" />
+                                <div className="post-comment-content">
+                                    Short image post
+                                </div>
+                                <div className="post-comment-btn-holder">
+                                    <div className="uni-button post-comment-btn">View</div>
+                                    <div className="uni-button post-comment-btn">Delete</div>
+                                </div>
+                            </div>
+
                             <h4 className={`normal`} style={{ margin: "1rem 0" }}>
                                 You haven't posted anything yet...
                             </h4>
                         </ProfileContentFrame>
 
                         <ProfileContentFrame id="comments" className={`${contentClassesArray[5]}`} margin={true} title="Comments">
+                            <div className="post-comment-container shadow">
+                                <div className="post-comment-content">
+                                    MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM...
+                                </div>
+                                <div className="post-comment-btn-holder">
+                                    <div className="uni-button post-comment-btn">View</div>
+                                    <div className="uni-button post-comment-btn">Delete</div>
+                                </div>
+                            </div>
+
+                            <div className="post-comment-container shadow">
+                                <div className="post-comment-content">
+                                    Short comment
+                                </div>
+                                <div className="post-comment-btn-holder">
+                                    <div className="uni-button post-comment-btn">View</div>
+                                    <div className="uni-button post-comment-btn">Delete</div>
+                                </div>
+                            </div>
+
                             <h4 className={`normal`} style={{ margin: "1rem 0" }}>
                                 You haven't commented on anything yet...
                             </h4>
