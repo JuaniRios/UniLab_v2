@@ -121,3 +121,20 @@
     transition: transform 0.5s ease-in-out;
     background-color: red !important;
 }
+
+.input-field .special-input ~ .bottom-line:before
+{
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform 0.5s ease-in-out;
+}
+.input-field .special-input + label
+{
+    transform: translateY(-35px);
+    font-size: 0.95rem;
+    color: black;
+}
+.input-field .special-input
+{
+    background-color: none;
+}

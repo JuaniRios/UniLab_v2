@@ -11,7 +11,7 @@ function ProfileContentFrame(props) {
 
     let plusBtn;
     if (props.plusBtn) {
-        plusBtn = <PlusButton />;
+        plusBtn = <PlusButton clickEvent={props.onClick} />;
     }
     let title;
     if (props.title) {

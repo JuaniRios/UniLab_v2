@@ -12,7 +12,7 @@ function CloseButton(props) {
     }
 
     return (
-        <button className={`close-btn`} onClick={clickEvent} style={btnStyle}>
+        <button className={`close-btn`} onClick={clickEvent} style={btnStyle} type="button">
 
         </button>
     );

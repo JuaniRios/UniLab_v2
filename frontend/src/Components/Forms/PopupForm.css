@@ -1,0 +1,45 @@
+.popup-form-container
+{
+    z-index: 10500 !important;
+    position: absolute;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    background-color: var(--unilab-white);
+    overflow: hidden;
+    border-radius: 10px;
+    padding: 3rem 0;
+    left: 0; 
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 95vh;
+    margin: auto;
+}
+.popup-form
+{
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.popup-form h1
+{
+    margin: 0 0 2rem 0;
+}
+.popup-opened
+{
+    display: flex;
+}
+.popup-closed
+{
+    display: none;
+}
+.popup-save-btn
+{
+    margin-top: 2rem;
+    width: 100%;
+}

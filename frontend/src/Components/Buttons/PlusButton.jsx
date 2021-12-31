@@ -12,7 +12,7 @@ function PlusButton(props) {
     }
 
     return (
-        <button className={`plus-btn`} onClick={clickEvent} style={btnStyle}></button>
+        <button className={`plus-btn`} onClick={clickEvent} style={btnStyle} type="button"></button>
     );
 }
 

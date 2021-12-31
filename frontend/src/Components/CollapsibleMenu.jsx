@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Arrow from "./Buttons/Arrow";
 import "./CollapsibleMenu.css";
 
 export default function CollapsibleMenu(props) {

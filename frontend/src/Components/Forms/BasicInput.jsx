@@ -13,8 +13,7 @@ function BasicInput(props) {
     const label = props.label;
     let type = props.type;
     const errorMsg = props.errorMsg;
-    const setInput = props.setter;
-    const inputValue = props.value;
+    const [inputValue, setInput] = [props.value, props.setter];
 
     // FOR ERROR MESSAGE
     let errorBlock = <></>;
@@ -51,16 +50,42 @@ function BasicInput(props) {
         setErrorCheck("no-line");
     }
 
+    let inputBody;
+    if(props.required === "no") {
+        inputBody = <input 
+            value={inputValue} 
+            type={type} 
+            required
+            name={name}
+            onChange={e => setInput(e.target.value)}
+        />;
+    }
+    else if(props.required === "special") {
+        inputBody = <input className="special-input"
+            value={inputValue} 
+            type={type} 
+            required
+            name={name}
+            onChange={e => setInput(e.target.value)}
+        />;
+    }
+    else {
+        inputBody = <input 
+            value={inputValue} 
+            type={type} 
+            name={name} 
+            required
+            onFocus={removeError}
+            onBlur={e => emptyCheck(e.target.value)}
+            onChange={e => setInput(e.target.value)}
+        />;
+    }
 
     return (
         <div className={`input-container`} style={{ width: width }}>
             <div className={`input-field`}>
                 {eyeIcon}
-                <input value={inputValue} type={type} name={name} required
-                    onFocus={removeError}
-                    onBlur={e => emptyCheck(e.target.value)}
-                    onChange={e => setInput(e.target.value)}
-                />
+                {inputBody}
                 <label className={`noselect`}>{label}</label>
                 <span className={`${errorCheck} bottom-line`} />
             </div>

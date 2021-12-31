@@ -9,7 +9,6 @@ function TextArea(props) {
     const label = props.label;
     const textarea = useRef(null);
 
-
     const [message, setMessage] = [props.message, props.setMessage]
     const [cursorPosition, setCursorPosition] = useState("");
     const handleChange = e => {
@@ -29,30 +28,45 @@ function TextArea(props) {
         setErrorCheck("no-line");
     }
 
+    let textareaBody;
+    if(props.required === "no") {
+        textareaBody = <textarea
+            ref={textarea}
+            className={`text-area input custom-scroll`}
+            name='content' rows={(props.rows) ? (props.rows) : "10"} 
+            placeholder={label}
+            required
+            value={message}
+            onChange={handleChange}>
+        </textarea>;
+    }
+    else {
+        textareaBody = <textarea
+            ref={textarea}
+            className={`text-area input custom-scroll`}
+            name='content' rows={(props.rows) ? (props.rows) : "10"} 
+            placeholder={label}
+            required
+            onFocus={removeError} onBlur={emptyCheck}
+            value={message}
+            onChange={handleChange}>
+        </textarea>;
+    }
+
     return (
 
         <div className={`textarea-container`} style={{ width: width }}>
 
             <div className={`textarea-field`}>
 
-
-
-                <textarea
-                    ref={textarea}
-                    className={`text-area input custom-scroll`}
-                    name='content' rows={"10"} required
-                    placeholder="Write a post..."
-                    onFocus={removeError} onBlur={emptyCheck}
-                    value={message}
-                    onChange={handleChange}>
-                </textarea>
+                {textareaBody}
 
                 <EmoteMenu message={message}
                     setMessage={setMessage}
                     textarea={textarea}
                     setCursorPosition={setCursorPosition}
                     menuWidth="40%"
-                    menuTop="10%"
+                    menuTop={(props.menuTop) ? (props.menuTop) : "10%"}
                     menuRight="0" />
 
                 <span className={`${errorCheck} bottom-line`}></span>
@@ -62,5 +76,4 @@ function TextArea(props) {
         </div>
     )
 }
-
 export default TextArea;
