@@ -16,7 +16,7 @@ import { NavLink } from "react-router-dom";
 import scrollTo from "../HelperFunctions/scrollTo";
 import isScrolledToElement from "../HelperFunctions/isScrolledToElement";
 
-function Settings(props) {
+export default function Settings(props) {
 
     document.title = "Settings - UniLab";
     document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
@@ -178,5 +178,3 @@ function Settings(props) {
         </>
     );
 }
-
-export default Settings;

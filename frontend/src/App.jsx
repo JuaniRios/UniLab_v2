@@ -12,17 +12,12 @@ import Home from "./Components/Home";
 import Community from "./Components/Community";
 import Companies from "./Components/Companies";
 import Jobs from "./Components/Jobs";
-
 import Profile from "./Components/Profile";
-
 import Settings from "./Components/Settings";
-
 import SignOut from "./Components/SignOut";
-
 import SignUp from "./Components/SignUp";
-
+// ERROR PAGES
 import NotFound from "./Components/PageNotFound";
-
 // OTHER
 import { useAuthDispatch, ContextProvider, useAuthState } from "./Context";
 import { read_token } from "./Context/actions";
@@ -37,6 +32,26 @@ function App() {
                         <Home />
                     </PrivateRoute>
 
+                    <PrivateRoute exact path='/community'>
+                        <Community />
+                    </PrivateRoute>
+
+                    <PrivateRoute exact path='/companies'>
+                        <Companies />
+                    </PrivateRoute>
+                    
+                    <PrivateRoute exact path='/jobs'>
+                        <Jobs />
+                    </PrivateRoute>
+
+                    <PrivateRoute exact path='/profile'>
+                        <Profile />
+                    </PrivateRoute>
+
+                    <PrivateRoute exact path='/settings'>
+                        <Settings />
+                    </PrivateRoute>
+
                     <Route exact path='/login'>
                         <Home />
                     </Route>
@@ -49,26 +64,7 @@ function App() {
                         <SignUp />
                     </Route>
 
-                    <PrivateRoute exact path='/community'>
-                        <Community />
-                    </PrivateRoute>
-
-                    <PrivateRoute exact path='/companies'>
-                        <Companies />
-                    </PrivateRoute>
-
-                    <PrivateRoute exact path='/profile'>
-                        <Profile />
-                    </PrivateRoute>
-
-                    <PrivateRoute exact path='/settings'>
-                        <Settings />
-                    </PrivateRoute>
-
-                    <PrivateRoute exact path='/jobs'>
-                        <Jobs />
-                    </PrivateRoute>
-
+                    {/* Error responses */}
                     <Route component={NotFound} />
 
                 </Switch>

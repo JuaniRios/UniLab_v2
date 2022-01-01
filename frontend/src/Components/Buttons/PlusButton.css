@@ -1,35 +1,31 @@
-.plus-btn
-{
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    outline: none;
-    border: none;
-    color: var(--unilab-orange);
-    height: 3rem;
-    width: 3rem;
-    padding: 0 !important;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0);
-    transition: .2s;
+.plus-btn {
+	display: flex;
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	outline: none;
+	border: none;
+	color: var(--unilab-orange);
+	height: 3rem;
+	width: 3rem;
+	padding: 0 !important;
+	border-radius: 50%;
+	background-color: rgba(0, 0, 0, 0);
+	transition: 0.1s;
 }
-.plus-btn::before, .plus-btn::after
-{
-    content: '';
-    position: absolute;
-    display: block;
-    height: 5%;
-    width: 50%;
-    background-color: var(--unilab-orange);
-    transition: all .25s ease-out;
+.plus-btn::before,
+.plus-btn::after {
+	content: "";
+	position: absolute;
+	display: block;
+	height: 5%;
+	width: 50%;
+	background-color: var(--unilab-orange);
 }
-.plus-btn::after 
-{
-    transform: rotate(90deg);
+.plus-btn::before {
+	transform: rotate(90deg);
 }
-.plus-btn:hover 
-{
-    background-color: var(--gray-hover);
+.plus-btn:hover {
+	background-color: var(--gray-hover);
 }

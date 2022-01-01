@@ -103,9 +103,10 @@
 	right: 1rem;
 	top: 1rem;
 	cursor: pointer;
+	transition: 0.1s;
 }
 .basic-info-toggler:hover {
-	background-color: rgba(0, 0, 0, 0.1);
+	background-color: var(--gray-hover);
 }
 .website-link {
 	color: #0084ff;

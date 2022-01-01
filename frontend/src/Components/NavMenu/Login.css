@@ -1,42 +1,35 @@
-.login-form-closed
-{
-    display: none;
+.login-form-closed {
+	display: none;
 }
-.login-form-opened
-{
-    display: flex;
+.login-form-opened {
+	display: flex;
 }
-.login-form
-{
-    z-index: 10500 !important;
-    position: absolute;
-    align-items: center;
-    flex-direction: column;
-    width: 30vw;
-    background-color: var(--unilab-white);
-    overflow-y: auto;
-    border-radius: 10px;
-    padding: 3rem;
-    left: 0; 
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
+.login-form {
+	z-index: 10500 !important;
+	position: absolute;
+	align-items: center;
+	flex-direction: column;
+	width: 30vw;
+	background-color: var(--unilab-white);
+	overflow-y: auto;
+	border-radius: 10px;
+	padding: 3rem;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;
 }
-.signin-buttons
-{
-    display: flex;
-    justify-content: space-between;
+.signin-buttons {
+	display: flex;
+	justify-content: space-between;
 }
-.sign-in
-{
-    margin-bottom: 3rem;
+.sign-in {
+	margin-bottom: 3rem;
 }
-.forgot-pass
-{
-    margin-top: 3rem;
+.forgot-pass {
+	margin-top: 3rem;
 }
-.login-btn
-{
-    margin-top: 3rem;
+.login-btn {
+	margin-top: 3rem;
 }

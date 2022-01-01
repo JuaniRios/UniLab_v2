@@ -3,26 +3,27 @@ import React, { useState, useEffect } from "react";
 import "./GeneralSearch.css";
 // IMAGES
 import search_icon from "../../Assets/img/top-nav/search.png";
+import CloseButton from "../Buttons/CloseButton";
 
-function GeneralSearch(props) {
-    const user = props.user;
-    const [searchClass, overlayClass] = props.searchClasses;
-    const setSearchClasses = props.setSearchClasses;
-    return (
-        <>
-            <div className={`overlay ${overlayClass}`} onClick={setSearchClasses}></div>
+export default function GeneralSearch(props) {
+	const user = props.user;
+	const [searchClass, overlayClass] = props.searchClasses;
+	const setSearchClasses = props.setSearchClasses;
+	return (
+		<>
+			<div className={`overlay ${overlayClass}`} onClick={setSearchClasses}></div>
+			<form className={`search-wrapper ${searchClass} shadow flex-row a-i-c j-c-c`}>
+				<img id="search-icon" src={search_icon} alt="Magnifying Glass" title="Search" />
 
-            <form className={`search-wrapper ${searchClass} shadow flex-row a-i-c j-c-c`}>
+				<input
+					className={`search-field noshadow`}
+					name="main-search"
+					type="search"
+					placeholder="Search UniLab..."
+				/>
 
-                <img id="search-icon" src={search_icon} alt="Magnifying Glass" title="Search" />
-
-                {/* <!-- Search Field --> */}
-                <input className={`search-field noshadow`} name="main-search" type="search" placeholder="Search UniLab..." />
-                <div className={`search-cancel close-button`} onClick={setSearchClasses}></div>
-
-            </form>
-        </>
-    )
+				<CloseButton clickEvent={setSearchClasses} position="relative" borderRadius="50%" />
+			</form>
+		</>
+	);
 }
-
-export default GeneralSearch;

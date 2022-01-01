@@ -1,63 +1,52 @@
-input[type="file"] 
-{
-    position: absolute; 
-    left: -99999rem;
+input[type="file"] {
+	position: absolute;
+	left: -99999rem;
 }
-.custom-file-upload 
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    padding: 1rem;
-    cursor: pointer;
+.custom-file-upload {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+	padding: 1rem;
+	cursor: pointer;
 }
-.custom-file-upload-img
-{
-    height: 1.5rem;
-    margin-right: .5rem;
-    object-fit: cover;
-    object-position: center center;
+.custom-file-upload-img {
+	height: 1.5rem;
+	margin-right: 0.5rem;
+	object-fit: cover;
+	object-position: center center;
 }
-.custom-file-upload-img-avatar
-{
-    height: 1.5rem;
-    width: 1.5rem;
-    margin-right: .5rem;
-    object-fit: cover;
-    object-position: center center;
+.custom-file-upload-img-avatar {
+	height: 1.5rem;
+	width: 1.5rem;
+	margin-right: 0.5rem;
+	object-fit: cover;
+	object-position: center center;
 }
-.img-preview
-{
-    max-height: 25rem;
-    max-width: 100%;
-    align-self: start;
-    margin-top: 3rem;
-    border-radius: 10px;
+.img-preview {
+	max-height: 25rem;
+	max-width: 100%;
+	align-self: start;
+	margin-top: 3rem;
+	border-radius: 10px;
 }
-
-
-
-
-
-.avatar-upload-wrapper
-{
-    display: flex;
-    align-items: center;
-    margin: 3rem 0;
-    flex-flow: row wrap;
+/* Avatar Version */
+.avatar-upload-wrapper {
+	display: flex;
+	align-items: center;
+	margin: 3rem 0;
+	flex-flow: row wrap;
 }
-.img-preview-avatar
-{
-    height: 9rem;
-    width: 9rem;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center center;
-    margin-right: 3rem;
-    border: 1px solid var(--gray-hover);
+.img-preview-avatar {
+	height: 9rem;
+	width: 9rem;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: center center;
+	margin-right: 3rem;
+	border: 1px solid var(--gray-hover);
 }
-.avatar-upload-btn, .avatar-upload-title
-{
-    margin: 1rem 0;
+.avatar-upload-btn,
+.avatar-upload-title {
+	margin: 1rem 0;
 }

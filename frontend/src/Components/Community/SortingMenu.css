@@ -1,31 +1,26 @@
-.sorting-menu
-{
-    background-color: var(--unilab-gray);
-    padding: 2rem;
-    margin-bottom: 3rem;
-    border-radius: 10px;
+.sorting-menu {
+	background-color: var(--unilab-gray);
+	padding: 2rem;
+	margin-bottom: 3rem;
+	border-radius: 10px;
 }
-.sorting-item
-{
-    background-color: var(--unilab-white); 
-    width: 15%;
-    padding: 2%;
-    text-align: center;
-    margin: 0 1%;
-    border-radius: 50px;
-    transition: .2s;
-    cursor: pointer;
-    
-
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+.sorting-item {
+	background-color: var(--unilab-white);
+	width: 15%;
+	padding: 2%;
+	text-align: center;
+	margin: 0 1%;
+	border-radius: 50px;
+	transition: 0.2s;
+	cursor: pointer;
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
-.sorting-item:hover
-{
-    background-color: var(--unilab-gray);
-    color: black;
+.sorting-item:hover {
+	background-color: var(--unilab-gray);
+	color: black;
 }

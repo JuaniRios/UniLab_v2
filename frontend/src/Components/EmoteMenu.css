@@ -1,37 +1,31 @@
-.emote-btn
-{
-    outline: none;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .1s;
-    z-index: 5;
-    right: 0;
-    padding: 0;
-    font-size: 1.25rem;
-    background-color: unset;
+.emote-btn {
+	outline: none;
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	transition: 0.1s;
+	z-index: 5;
+	right: 0;
+	padding: 0;
+	font-size: 1.25rem;
+	background-color: unset;
 }
-.emote-btn:hover
-{
-    transform: scale(1.2);
+.emote-btn:hover {
+	transform: scale(1.2);
 }
-.emote-btn-toggled
-{
-    transform: scale(1.2);
+.emote-btn-toggled {
+	transform: scale(1.2);
 }
-.emote-field
-{
-    position: absolute;
-    display: inline-block;
-    z-index: 5;
-    height: 25rem;
+.emote-field {
+	position: absolute;
+	display: inline-block;
+	z-index: 5;
+	height: 25rem;
 }
-.content-wrapper::before
-{
-    content: ""!important;
+.content-wrapper::before {
+	content: "" !important;
 }
-.emoji-picker-react
-{
-    height: 100%!important;
-    width: 100%!important;
+.emoji-picker-react {
+	height: 100% !important;
+	width: 100% !important;
 }

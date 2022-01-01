@@ -1,23 +1,20 @@
-.profile-content-item
-{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    margin: 1rem 0;
+.profile-content-item {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	margin: 1rem 0;
 }
-.profile-content-item-img
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 7rem;
-    width: 7rem;
-    border-radius: 10px;
-    object-fit: cover;
-    object-position: center;
-    margin-right: 2rem;
+.profile-content-item-img {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 7rem;
+	width: 7rem;
+	border-radius: 10px;
+	object-fit: cover;
+	object-position: center;
+	margin-right: 2rem;
 }
-.profile-content-item-subtext
-{
-    margin: .5rem 0;
+.profile-content-item-subtext {
+	margin: 0.5rem 0;
 }

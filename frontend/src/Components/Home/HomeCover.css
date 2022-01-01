@@ -1,56 +1,59 @@
-.home-cover
-{
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: calc(100vh - var(--topnav-height));
-    width: 100%;
-    background-image: url('../../Assets/img/vienna.jpg');
-    background-size: cover;
-    overflow: hidden;
+.home-cover {
+	position: relative;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	height: calc(100vh - var(--topnav-height));
+	width: 100%;
+	background-image: url("../../Assets/img/vienna.jpg");
+	background-size: cover;
+	overflow: hidden;
 }
-.home-cover-polygon
-{
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    z-index: 4;
-    background-color: var(--unilab-white);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    animation: 2s reveal;
-    animation-fill-mode: forwards;
+.home-cover-polygon {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	z-index: 4;
+	background-color: var(--unilab-white);
+	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+	animation: 2s reveal;
+	animation-fill-mode: forwards;
 }
-.home-cover-message
-{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    z-index: 5;
-    height: 100%;
-    text-align: center;
-    padding: 0 4rem;
-    position: relative;
-    bottom: -100%;
-    transition: 1s;
-    animation: 2s revealCoverMessage;
-    animation-fill-mode: forwards;
+.home-cover-message {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	z-index: 5;
+	height: 100%;
+	text-align: center;
+	padding: 0 4rem;
+	position: relative;
+	bottom: -100%;
+	transition: 1s;
+	animation: 2s revealCoverMessage;
+	animation-fill-mode: forwards;
 }
-@keyframes revealCoverMessage 
-{
-    0% {bottom: -100%;}
-    100% {bottom: 0;}
+@keyframes revealCoverMessage {
+	0% {
+		bottom: -100%;
+	}
+	100% {
+		bottom: 0;
+	}
 }
-@keyframes reveal 
-{
-    100% { clip-path: polygon(75% 0, 100% 0, 100% 100%, 50% 100%); }
+@keyframes reveal {
+	100% {
+		clip-path: polygon(75% 0, 100% 0, 100% 100%, 50% 100%);
+	}
 }
-.home-cover h1, .home-cover h2, .home-cover h3, .home-cover h4, .home-cover .uni-button-3
-{
-    margin: 2rem 0;
+.home-cover h1,
+.home-cover h2,
+.home-cover h3,
+.home-cover h4,
+.home-cover .uni-button-3 {
+	margin: 2rem 0;
 }
-.welcome-msg
-{
-    font-size: 3rem;
+.welcome-msg {
+	font-size: 3rem;
 }

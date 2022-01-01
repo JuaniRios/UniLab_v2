@@ -2,16 +2,13 @@ import React, { useEffect, useReducer, useState } from "react";
 import { NavLink } from "react-router-dom";
 import NavMenu from "../NavMenu";
 import "./index.css";
-import ProfileContentFrame from "./ProfileContentFrame";
-import ProfileContentItem from "./ProfileContentItem";
-
+// ICONS
 import profile_icon from "../../Assets/img/profile.png";
 import pencil_icon from "../../Assets/img/profile/pencil.png";
 import redirect_icon from "../../Assets/img/profile/redirect.svg";
-
-import scrollTo from "../HelperFunctions/scrollTo";
-import isScrolledToElement from "../HelperFunctions/isScrolledToElement";
-
+// OTHER COMPONENTS
+import ProfileContentFrame from "./ProfileContentFrame";
+import ProfileContentItem from "./ProfileContentItem";
 import default_education_icon from "../../Assets/img/defaults/university.jpg";
 import CollapsibleMenu from "../CollapsibleMenu";
 import PopupForm from "../Forms/PopupForm";
@@ -54,7 +51,7 @@ function Profile(props) {
             document.getElementsByTagName("HTML")[0].classList.add("y-scroll");
             document.body.classList.add("noscroll");
             return ["popup-opened", ""];
-        } 
+        }
         else {
             document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
             document.body.classList.remove("noscroll");
@@ -65,7 +62,7 @@ function Profile(props) {
     const [popupClasses2, setPopupClasses2] = useReducer(changePopupClasses, ["popup-closed", "hidden"]);
     const [popupClasses3, setPopupClasses3] = useReducer(changePopupClasses, ["popup-closed", "hidden"]);
     const [popupClasses4, setPopupClasses4] = useReducer(changePopupClasses, ["popup-closed", "hidden"]);
-    
+
     function changeActiveItem(n) {
         let pseudoArray = ["", "", "", "", "", ""];
         let pseudoArray2 = ["hidden", "hidden", "hidden", "hidden", "hidden", "hidden"];
@@ -75,8 +72,7 @@ function Profile(props) {
         setContentClassesArray(pseudoArray2);
     }
 
-    if (popupClasses[1] === "hidden" && popupClasses2[1] === "hidden" && popupClasses3[1] === "hidden" && popupClasses4[1] === "hidden")
-    {
+    if (popupClasses[1] === "hidden" && popupClasses2[1] === "hidden" && popupClasses3[1] === "hidden" && popupClasses4[1] === "hidden") {
         document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
         document.body.classList.remove("noscroll");
     }
@@ -114,74 +110,74 @@ function Profile(props) {
                 <div className={`profile`}>
 
                     <PopupForm title="Edit your information" popupClasses={popupClasses} setPopupClasses={setPopupClasses}>
-                        
+
                         <div className={`double-input-wrap w100 flex row-wrap j-c-s-b a-i-c`}>
-                            <BasicInput name="edit-info-fname" type="text" width="47%" label="First Name" 
+                            <BasicInput name="edit-info-fname" type="text" width="47%" label="First Name"
                                 value={editInfoFname} setter={setEditInfoFname} />
-                            <BasicInput name="edit-info-lname" type="text" width="47%" label="Last Name" 
+                            <BasicInput name="edit-info-lname" type="text" width="47%" label="Last Name"
                                 value={editInfoLname} setter={setEditInfoLname} />
                         </div>
 
-                        <BasicInput name="edit-info-headline" type="text" width="100%" label="Headline" 
+                        <BasicInput name="edit-info-headline" type="text" width="100%" label="Headline"
                             value={editInfoHeadline} setter={setEditInfoHeadline} required="no" />
-                        
+
                         <div className={`double-input-wrap w100 flex row-wrap j-c-s-b a-i-c`}>
-                            <BasicInput name="edit-info-location" type="text" width="47%" label="Location" 
+                            <BasicInput name="edit-info-location" type="text" width="47%" label="Location"
                                 value={editInfoLocation} setter={setEditInfoLocation} required="no" />
-                            <BasicInput name="edit-info-website" type="text" width="47%" label="Website" 
+                            <BasicInput name="edit-info-website" type="text" width="47%" label="Website"
                                 value={editInfoWebsite} setter={setEditInfoWebsite} required="no" />
                         </div>
 
-                        <TextArea width="100%" label="Summary" message={editInfoSummary} setMessage={setEditInfoSummary} 
+                        <TextArea width="100%" label="Summary" message={editInfoSummary} setMessage={setEditInfoSummary}
                             rows="5" menuTop="20%" required="no" />
-                        
+
                     </PopupForm>
 
                     <PopupForm title="Add Education" popupClasses={popupClasses2} setPopupClasses={setPopupClasses2}>
-                        
-                        <BasicInput name="add-education-institution" type="text" width="100%" label="Institution" 
+
+                        <BasicInput name="add-education-institution" type="text" width="100%" label="Institution"
                             value={eduInstitution} setter={setEduInstitution} required="yes" />
-                        <BasicInput name="add-education-degree" type="text" width="100%" label="Degree" 
+                        <BasicInput name="add-education-degree" type="text" width="100%" label="Degree"
                             value={eduDegree} setter={setEduDegree} required="yes" />
 
                         <div className={`double-input-wrap w100 flex row-wrap j-c-s-b a-i-c`}>
-                            <BasicInput name="add-education-start-date" type="date" width="47%" label="Start Date" 
+                            <BasicInput name="add-education-start-date" type="date" width="47%" label="Start Date"
                                 value={eduSDate} setter={setEduSDate} required="special" />
-                            <BasicInput name="add-education-end-date" type="date" width="47%" label="End Date" 
+                            <BasicInput name="add-education-end-date" type="date" width="47%" label="End Date"
                                 value={eduEDate} setter={setEduEDate} required="special" />
                         </div>
 
-                        <TextArea width="100%" label="Desciption" message={eduDesc} setMessage={setEduDesc} 
+                        <TextArea width="100%" label="Desciption" message={eduDesc} setMessage={setEduDesc}
                             rows="5" menuTop="20%" required="yes" />
-                        
+
                     </PopupForm>
 
                     <PopupForm title="Add Experience" popupClasses={popupClasses3} setPopupClasses={setPopupClasses3}>
-                        
-                        <BasicInput name="add-experience-company" type="text" width="100%" label="Company" 
+
+                        <BasicInput name="add-experience-company" type="text" width="100%" label="Company"
                             value={expCompany} setter={setExpCompany} required="yes" />
-                        <BasicInput name="add-experience-job-title" type="text" width="100%" label="Job Title" 
+                        <BasicInput name="add-experience-job-title" type="text" width="100%" label="Job Title"
                             value={expJTitle} setter={setExpJTitle} required="yes" />
 
                         <div className={`double-input-wrap w100 flex row-wrap j-c-s-b a-i-c`}>
-                            <BasicInput name="add-experience-start-date" type="date" width="47%" label="Start Date" 
+                            <BasicInput name="add-experience-start-date" type="date" width="47%" label="Start Date"
                                 value={expSDate} setter={setExpSDate} required="special" />
-                            <BasicInput name="add-experience-end-date" type="date" width="47%" label="End Date" 
+                            <BasicInput name="add-experience-end-date" type="date" width="47%" label="End Date"
                                 value={expEDate} setter={setExpEDate} required="special" />
                         </div>
 
-                        <TextArea width="100%" label="Desciption" message={expDesc} setMessage={setExpDesc} 
+                        <TextArea width="100%" label="Desciption" message={expDesc} setMessage={setExpDesc}
                             rows="5" menuTop="20%" required="yes" />
-                        
+
                     </PopupForm>
 
                     <PopupForm title="Add Skill" popupClasses={popupClasses4} setPopupClasses={setPopupClasses4}>
-                        
-                        <BasicInput name="add-skill-category" type="text" width="100%" label="Category" 
+
+                        <BasicInput name="add-skill-category" type="text" width="100%" label="Category"
                             value={skillCategory} setter={setSkillCategory} required="yes" />
-                        <BasicInput name="add-skill-skill" type="text" width="100%" label="Skill" 
+                        <BasicInput name="add-skill-skill" type="text" width="100%" label="Skill"
                             value={skillSkill} setter={setSkillSkill} required="yes" />
-                        
+
                     </PopupForm>
 
                     <div className={`main-profile-menu`}>
@@ -245,7 +241,7 @@ function Profile(props) {
                             </div>
                         </ProfileContentFrame>
 
-                        <ProfileContentFrame id="education" className={`${contentClassesArray[1]}`} margin={true} title="Education" 
+                        <ProfileContentFrame id="education" className={`${contentClassesArray[1]}`} margin={true} title="Education"
                             plusBtn={true} onClick={setPopupClasses2}>
                             <ProfileContentItem imgSrc={default_education_icon} />
                             <ProfileContentItem imgSrc={default_education_icon} />
@@ -255,7 +251,7 @@ function Profile(props) {
                             </h4>
                         </ProfileContentFrame>
 
-                        <ProfileContentFrame id="experience" className={`${contentClassesArray[2]}`} margin={true} title="Experience" 
+                        <ProfileContentFrame id="experience" className={`${contentClassesArray[2]}`} margin={true} title="Experience"
                             plusBtn={true} onClick={setPopupClasses3}>
                             <ProfileContentItem imgSrc={default_education_icon} />
                             <ProfileContentItem imgSrc={default_education_icon} />
@@ -265,8 +261,8 @@ function Profile(props) {
                             </h4>
                         </ProfileContentFrame>
 
-                        <ProfileContentFrame id="skills" className={`${contentClassesArray[3]}`} margin={true} title="Skills" 
-                            plusBtn={true}  onClick={setPopupClasses4}>
+                        <ProfileContentFrame id="skills" className={`${contentClassesArray[3]}`} margin={true} title="Skills"
+                            plusBtn={true} onClick={setPopupClasses4}>
                             <CollapsibleMenu text="Category_1">
                                 <div>Short Skill</div>
                                 <div>Very very very very very long skill</div>

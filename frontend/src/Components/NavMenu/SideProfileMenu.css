@@ -1,132 +1,117 @@
-@media only screen and (min-width: 1030px)
-{
-    .profile-menu
-    {
-        width: 20rem;
-    }
-    .profile-menu-closed
-    {
-        right: -20rem;
-        padding-top: 0rem;
-    }
-    .profile-menu-opened
-    {
-        opacity: 1 !important;
-        right: 0;
-        padding-top: 3rem;
-    }
-    .profile-user-data
-    {
-        margin-top: 3rem;
-    }
+@media only screen and (min-width: 1030px) {
+	.profile-menu {
+		width: 20rem;
+	}
+	.profile-menu-closed {
+		right: -20rem;
+		padding-top: 0rem;
+	}
+	.profile-menu-opened {
+		opacity: 1 !important;
+		right: 0;
+		padding-top: 3rem;
+	}
+	.profile-user-data {
+		margin-top: 3rem;
+	}
 }
-@media only screen and (max-width: 1030px)
-{
-    .profile-menu
-    {
-        width: 100%;
-    }
-    .profile-menu-closed
-    {
-        right: -100%;
-        padding-top: 0rem;
-    }
-    .profile-menu-opened
-    {
-        opacity: 1 !important;
-        right: 0;
-        padding-top: 3rem;
-    }
-    .profile-user-data
-    {
-        margin-top: 5rem;
-    }
+@media only screen and (max-width: 1030px) {
+	.profile-menu {
+		width: 100%;
+	}
+	.profile-menu-closed {
+		right: -100%;
+		padding-top: 0rem;
+	}
+	.profile-menu-opened {
+		opacity: 1 !important;
+		right: 0;
+		padding-top: 3rem;
+	}
+	.profile-user-data {
+		margin-top: 5rem;
+	}
 }
-.profile-menu
-{
-    opacity: 0;
-    display: flex;
-    position: fixed;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 9501;
-    height: 100vh;
-    top: 0;
-    background-color: var(--unilab-white);
-    transition: .4s linear;
+.profile-menu {
+	opacity: 0;
+	display: flex;
+	position: fixed;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 9501;
+	height: 100vh;
+	top: 0;
+	background-color: var(--unilab-white);
+	transition: 0.4s linear;
 }
-.profile-picture
-{
-    height: 10rem;
-    width: 10rem;
-    border-radius: 50%;
-    object-fit:cover;
-    margin-bottom: 2rem;
+.profile-picture {
+	height: 10rem;
+	width: 10rem;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-bottom: 2rem;
 }
-.settings-picture, .logout-picture, .prof-picture, .login-picture, .signup-picture
-{
-    height: 3vh;
-    width: 3vh;
-    margin: 0 3%;
-    background-size: contain;
-    background-position: center center;
+.settings-picture,
+.logout-picture,
+.prof-picture,
+.login-picture,
+.signup-picture {
+	height: 3vh;
+	width: 3vh;
+	margin: 0 3%;
+	background-size: contain;
+	background-position: center center;
 }
-.prof-picture {background-image: url('../../Assets/img/profile.png');}
-.settings-picture {background-image: url('../../Assets/img/settings2.png');}
-.logout-picture 
-{
-    background-image: url('../../Assets/img/logout2.png');
-    transform: rotate(180deg);
+.prof-picture {
+	background-image: url("../../Assets/img/profile.png");
 }
-.login-picture 
-{
-    background-image: url('../../Assets/img/logout2.png');
+.settings-picture {
+	background-image: url("../../Assets/img/settings2.png");
 }
-.signup-picture 
-{
-    background-image: url('../../Assets/img/sign_up.png');
+.logout-picture {
+	background-image: url("../../Assets/img/logout2.png");
+	transform: rotate(180deg);
 }
-.settings-button
-{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 3% 5%;
-    background-color: rgba(0,0,0,0);
-    color: var(--unilab-orange);
-    transition: .1s;
-    width: 100%;
-    outline: none;
-    border: none;
+.login-picture {
+	background-image: url("../../Assets/img/logout2.png");
 }
-.settings-button:hover
-{
-    background-color: rgba(0, 0, 0, 0.1);
+.signup-picture {
+	background-image: url("../../Assets/img/sign_up.png");
 }
-.settings-button h3
-{
-    text-align: start;
+.settings-button {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	padding: 3% 5%;
+	background-color: rgba(0, 0, 0, 0);
+	color: var(--unilab-orange);
+	transition: 0.1s;
+	width: 100%;
+	outline: none;
+	border: none;
 }
-.profile-close-button
-{
-    right: unset !important;
-    left: 2% !important;
+.settings-button:hover {
+	background-color: rgba(0, 0, 0, 0.1);
 }
-.profile-names
-{
-    font-size: 1.25em; 
-    text-align:center; 
-    width:80%;
-    font-weight:bold;
-    margin-bottom: 2rem;
+.settings-button h3 {
+	text-align: start;
 }
-p
-{
-    text-align: start;
+.profile-close-button {
+	right: unset !important;
+	left: 2% !important;
 }
-.verbose
-{
-    margin-bottom: 2rem;
-    text-align: center;
+.profile-names {
+	font-size: 1.25em;
+	text-align: center;
+	width: 80%;
+	font-weight: bold;
+	margin-bottom: 2rem;
+}
+p {
+	text-align: start;
+}
+.verbose {
+	margin-bottom: 2rem;
+	text-align: center;
 }

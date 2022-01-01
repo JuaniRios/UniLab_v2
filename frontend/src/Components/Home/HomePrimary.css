@@ -1,94 +1,76 @@
-.home-primary
-{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 80vw;
-    padding: 10% 0;
+.home-primary {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 80vw;
+	padding: 10% 0;
 }
-.home-block-content-1
-{
-    z-index: 100;
-    padding: 5%;
-    text-align:center; 
-    display: flex; 
-    justify-content: center; 
-    align-items:center;
-    flex-direction:column;
+.home-block-content-1 {
+	z-index: 100;
+	padding: 5%;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
-
-/* ---------------- */
-/* ---------------- */
 /* EMPLOYER SECTION */
-/* ---------------- */
-/* ---------------- */
-
-
-.employer-box
-{
-    position: relative;
-    display: flex; 
-    flex-flow: row wrap; 
-    justify-content: center;
-    row-gap: 1rem;
-    column-gap: 1rem;
+.employer-box {
+	position: relative;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	row-gap: 1rem;
+	column-gap: 1rem;
 }
-.employer-item
-{
-    height: 100px; 
-    width: 100px; 
-    border-radius: 20px;
-    position: relative;
-    background-size: cover;
-    background-position: center center;
-    transition: .5s;
-    cursor: pointer;
-    background-size: cover;
-    background-position: center center;
+.employer-item {
+	height: 100px;
+	width: 100px;
+	border-radius: 20px;
+	position: relative;
+	background-size: cover;
+	background-position: center center;
+	transition: 0.5s;
+	cursor: pointer;
+	background-size: cover;
+	background-position: center center;
 }
-.employer-item:active
-{
-    transform: scale(0.95);
+.employer-item:active {
+	transform: scale(0.95);
 }
-.employer-item:hover .employer-name
-{
-    display: flex;
+.employer-item:hover .employer-name {
+	display: flex;
 }
-.employer-item:hover .employer-overlay
-{
-    display: block;
+.employer-item:hover .employer-overlay {
+	display: block;
 }
-.employer-name
-{
-    display: none;
-    position: absolute;
-    z-index: 10;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.employer-name {
+	display: none;
+	position: absolute;
+	z-index: 10;
+	height: 100%;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
-.employer-name div
-{
-    color: var(--unilab-white);
-    font-family: 'Norwester';
-    text-align: center;
+.employer-name div {
+	color: var(--unilab-white);
+	font-family: "Norwester";
+	text-align: center;
 }
-.employer-overlay
-{
-    display: none;
-    position: absolute;
-    z-index: 4;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 20px;
+.employer-overlay {
+	display: none;
+	position: absolute;
+	z-index: 4;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 20px;
 }
-.employer-stars
-{
-    color: var(--unilab-orange) !important;
-    font-size: 0.90em;
+.employer-stars {
+	color: var(--unilab-orange) !important;
+	font-size: 0.9em;
 }

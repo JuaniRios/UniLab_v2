@@ -1,35 +1,38 @@
-.signup-form
-{
-    display: flex;
-    align-items: center;
-    flex-flow: column wrap;
-    width: 40rem;
-    background-color: var(--unilab-white);
-    overflow-y: auto;
-    border-radius: 10px;
-    padding: 3rem;
-    margin: 3rem 0;
+.signup-form {
+	display: flex;
+	align-items: center;
+	flex-flow: column wrap;
+	width: 40rem;
+	background-color: var(--unilab-white);
+	overflow-y: auto;
+	border-radius: 10px;
+	padding: 3rem;
+	margin: 3rem 0;
 }
-.signup-email, .signup-password, .signup-password-confirm, .signup-fname, .signup-lname
-{
-    background-color: var(--unilab-gray);
-    transition: .1s ease-out;
+.signup-email,
+.signup-password,
+.signup-password-confirm,
+.signup-fname,
+.signup-lname {
+	background-color: var(--unilab-gray);
+	transition: 0.1s ease-out;
 }
-.signup-email:focus, .signup-password:focus, .signup-password-confirm:focus, .signup-fname:focus, .signup-lname:focus
-{
-    border-bottom: 3px solid var(--unilab-orange);
+.signup-email:focus,
+.signup-password:focus,
+.signup-password-confirm:focus,
+.signup-fname:focus,
+.signup-lname:focus {
+	border-bottom: 3px solid var(--unilab-orange);
 }
-.signin-buttons
-{
-    display: flex;
-    justify-content: space-between;
+.signin-buttons {
+	display: flex;
+	justify-content: space-between;
 }
-.sign-up
-{
-    text-align: center;
-    margin: 0 0 3rem 0;
+.sign-up {
+	text-align: center;
+	margin: 0 0 3rem 0;
 }
-.signup-agreements, .signup-btn
-{
-    margin-top: 3rem;
+.signup-agreements,
+.signup-btn {
+	margin-top: 3rem;
 }

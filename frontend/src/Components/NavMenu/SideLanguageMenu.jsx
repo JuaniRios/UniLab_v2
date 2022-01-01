@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 // STYLES
 import "./SideLanguageMenu.css";
 // IMAGES
@@ -8,52 +8,49 @@ import german_icon from "../../Assets/img/languages/de.webp";
 import russian_icon from "../../Assets/img/languages/ru.webp";
 import french_icon from "../../Assets/img/languages/fr.webp";
 
-function SideLanguageMenu(props) {
+export default function SideLanguageMenu(props) {
+	const [languageClass, overlayClass] = props.languageClasses;
+	const setLanguageClasses = props.setLanguageClasses;
 
-    const [languageClass, overlayClass] = props.languageClasses;
-    const setLanguageClasses = props.setLanguageClasses;
+	return (
+		<>
+			<div className={`overlay ${overlayClass}`} onClick={setLanguageClasses}></div>
 
-    return (
-        <>
-            <div className={`overlay ${overlayClass}`} onClick={setLanguageClasses}></div>
+			<aside className={`language-menu ${languageClass} shadow`}>
+				<button
+					className={`language-close-button close-button`}
+					onClick={setLanguageClasses}
+				></button>
 
-            <aside className={`language-menu ${languageClass} shadow`}>
+				<h2>Select Language</h2>
 
-                <button className={`language-close-button close-button`} onClick={setLanguageClasses}></button>
+				<div className={`lang-menu-btn-holder w100`}>
+					<a className={`language-links`} href="../en">
+						<img src={english_icon} alt="English Flag" />
+						<p>English</p>
+					</a>
 
-                <h2>Select Language</h2>
+					<a className={`language-links`} href="../de">
+						<img src={german_icon} alt="German Flag" />
+						<p>German</p>
+					</a>
 
-                <div className={`lang-menu-btn-holder w100`}>
-                    <a className={`language-links`} href="../en">
-                        <img src={english_icon} alt="English Flag" />
-                        <p>English</p>
-                    </a>
+					<a className={`language-links`} href="../fr">
+						<img src={french_icon} alt="French Flag" />
+						<p>French</p>
+					</a>
 
-                    <a className={`language-links`} href="../de">
-                        <img src={german_icon} alt="German Flag" />
-                        <p>German</p>
-                    </a>
+					<a className={`language-links`} href="../es">
+						<img src={spanish_icon} alt="Spanish Flag" />
+						<p>Spanish</p>
+					</a>
 
-                    <a className={`language-links`} href="../fr">
-                        <img src={french_icon} alt="French Flag" />
-                        <p>French</p>
-                    </a>
-
-                    <a className={`language-links`} href="../es">
-                        <img src={spanish_icon} alt="Spanish Flag" />
-                        <p>Spanish</p>
-                    </a>
-
-                    <a className={`language-links`} href="../ru">
-                        <img src={russian_icon} alt="Russian Flag" />
-                        <p>Russian</p>
-                    </a>
-                </div>
-
-
-            </aside>
-        </>
-    )
+					<a className={`language-links`} href="../ru">
+						<img src={russian_icon} alt="Russian Flag" />
+						<p>Russian</p>
+					</a>
+				</div>
+			</aside>
+		</>
+	);
 }
-
-export default SideLanguageMenu;

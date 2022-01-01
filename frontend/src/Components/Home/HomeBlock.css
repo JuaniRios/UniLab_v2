@@ -1,21 +1,18 @@
-.home-block
-{
-    position: relative; 
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-flow: column;
-    height: 500px;
-    width: 500px;
-    background-color: var(--unilab-gray);
-    border-radius: 10px;
+.home-block {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	flex-flow: column;
+	height: 500px;
+	width: 500px;
+	background-color: var(--unilab-gray);
+	border-radius: 10px;
 }
-.home-block-btn
-{
-    z-index: 100;
+.home-block-btn {
+	z-index: 100;
 }
-.home-block-header
-{
-    font-size: 1.5em;
-    z-index: 100;
+.home-block-header {
+	font-size: 1.5em;
+	z-index: 100;
 }

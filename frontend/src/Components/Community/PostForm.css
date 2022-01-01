@@ -1,35 +1,29 @@
-.post-form-closed
-{
-    display: none;
+.post-form-closed {
+	display: none;
 }
-.post-form-opened
-{
-    display: flex;
+.post-form-opened {
+	display: flex;
 }
-.post-form
-{
-    position: absolute;
-    flex-direction: column;
-    align-items: center;
-    z-index: 10500;
-    background-color: var(--unilab-white);
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    width: 50%;
-    border-radius: 10px;
-    padding: 3rem;
+.post-form {
+	position: absolute;
+	flex-direction: column;
+	align-items: center;
+	z-index: 10500;
+	background-color: var(--unilab-white);
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	width: 50%;
+	border-radius: 10px;
+	padding: 3rem;
 }
-.file-upload
-{
-    align-self: flex-start;
-    margin-top: 3rem;
+.file-upload {
+	align-self: flex-start;
+	margin-top: 3rem;
 }
-.post-btns
-{
-    margin-top: 3rem;
+.post-btns {
+	margin-top: 3rem;
 }
-.post-title
-{
-    margin: 0;
+.post-title {
+	margin: 0;
 }
