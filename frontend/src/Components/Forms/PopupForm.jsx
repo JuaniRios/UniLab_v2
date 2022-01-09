@@ -20,7 +20,7 @@ export default function PopupForm(props) {
 					<CloseButton clickEvent={setPopupClasses} position="absolute" />
 					{title}
 					{props.children}
-					<button className="uni-button popup-save-btn">Save</button>
+					<button className="uni-button popup-save-btn" onClick={props.handleSubmit}>Save</button>
 				</form>
 			</aside>
 		</>

@@ -333,6 +333,12 @@ class UserDataList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+    def get_queryset(self):
+        user = self.request.query_params.get("user")
+        pk = re.search(r"users/(\d+)", user)[1]
+        return UserData.objects.filter(user=pk)
+
+
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()

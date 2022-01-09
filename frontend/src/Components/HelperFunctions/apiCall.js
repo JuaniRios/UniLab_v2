@@ -2,9 +2,13 @@ import { config } from "../../Config/config";
 
 export default async function apiCall(resource, token, params) {
     let body = new FormData
-    for (const [key, val] of Object.entries(params.payload)) {
-        body.append(key, val)
+    if ("payload" in params) {
+        for (const [key, val] of Object.entries(params.payload)) {
+            body.append(key, val)
+        }
     }
+
+
 
     let requestOptions = {
         method: params.method,
@@ -22,11 +26,16 @@ export default async function apiCall(resource, token, params) {
 
     switch (params.method) {
         case 'GET':
-            if ("page" in params) url += `?page=${params.page}&`;
+            if ("page" in params){
+                if (url.includes("?")) {
+                    url += `page=${params.page}&`;
+                } else {
+                    url += `?page=${params.page}&`;
+                }
+            }
             break
 
         case 'POST':
-            // requestOptions.headers = {}
             requestOptions["body"] = body
             break
 
@@ -44,7 +53,11 @@ export default async function apiCall(resource, token, params) {
 
     try {
         const response = await fetch(url, requestOptions);
-        return await response.json()
+        if ([200,201].includes(response.status)) {
+            return await response.json()
+        } else {
+            throw JSON.stringify(await response.json())
+        }
     } catch (error) {
         console.log(error.message)
         throw new Error(error)
