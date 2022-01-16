@@ -22,7 +22,8 @@
 	overflow-y: scroll;
 }
 .search-icon {
-	height: 2.2rem;
+	height: 2.5rem;
+	width: 2.5rem;
 	object-fit: cover;
 	object-position: center center;
 	align-self: flex-start;
@@ -42,8 +43,9 @@
 	top: 0;
 }
 .search-input {
+	padding: 0;
 	border: none;
 	outline: none;
-	width: 100%;
+	width: calc(100% - 4rem - 5rem);
 	margin: 0 2rem;
 }

@@ -51,7 +51,7 @@ export default function Search(props) {
 	return (
 		<>
 			<h3 className={`search-opener normal ${width}`} onClick={toggleSearch}>
-				Search for companies
+				Search for {searchType}
 			</h3>
 			<div className={`search-expanded-field ${searchState}`}>
 				<div className={`search-input-field ${searchFieldState} w60 shadow`}>
@@ -63,7 +63,7 @@ export default function Search(props) {
 						value={searchString}
 						onChange={(e) => setSearchString(e.target.value)}
 					/>
-					<CloseButton position="relative" clickEvent={toggleSearch} />
+					<CloseButton position="relative" clickEvent={toggleSearch} borderRadius="50%" />
 				</div>
 			</div>
 		</>

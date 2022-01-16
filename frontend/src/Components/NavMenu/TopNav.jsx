@@ -72,6 +72,16 @@ export default function TopNav(props) {
 					</div>
 				</NavLink>
 
+				{/*UNIVERSITIES BUTTON*/}
+				<NavLink to="/universities" className={`top-nav-item flex-row a-i-c`}>
+					<div className={`top-nav-item-filler flex-row a-i-c`} />
+					<img className={`top-nav-image`} src="" alt="Universities Icon" />
+					<div id="universities-button" className={`top-nav-item-text`}>
+						{/*{% translate "Universities"%}*/}
+						Universities
+					</div>
+				</NavLink>
+
 				{/*COMPANIES BUTTON*/}
 				<NavLink to="/companies" className={`top-nav-item flex-row a-i-c`}>
 					<div className={`top-nav-item-filler flex-row a-i-c`} />
