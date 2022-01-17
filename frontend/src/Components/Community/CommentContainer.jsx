@@ -18,7 +18,7 @@ export default function CommentContainer(props) {
 			<img
 				className={`comment-container-img`}
 				src={owner.image}
-				alt={`Your profile picture`}
+				alt={`Your profile`}
 				title={`Post Owner`}
 			/>
 			<div className={`comment-content`}>

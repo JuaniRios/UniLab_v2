@@ -69,13 +69,13 @@ export default function CommentForm(props) {
 		return () => {
 			document.removeEventListener("keyup", handleEnter);
 		};
-	}, [focused, message]);
+	}, [focused, message, handleEnter]);
 	return (
 		<form className={`comment-form w90 ${commentFormAlign ? "a-i-c" : "a-i-f-s"}`}>
 			<img
 				className={`comment-form-img`}
 				src={authState.userData.image}
-				alt={`Your profile picture`}
+				alt={`Your profile`}
 				title={`Post Owner`}
 			/>
 			<div className={`comment-input-container`} ref={inputContainer}>
