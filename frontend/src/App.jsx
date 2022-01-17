@@ -1,5 +1,11 @@
-import React, { useEffect } from "react";
-import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
+import React, { useEffect } from 'react';
+import {
+    BrowserRouter as Router,
+    Navigate,
+    Route,
+    Routes,
+    Outlet
+} from 'react-router-dom';
 // STYLES
 import "./main_style.css";
 // PAGES
@@ -13,67 +19,69 @@ import Settings from "./Components/Settings";
 import SignOut from "./Components/SignOut";
 import SignUp from "./Components/SignUp";
 // ERROR PAGES
-import NotFound from "./Components/PageNotFound";
+import PageNotFound from "./Components/PageNotFound";
 // OTHER
 import { useAuthDispatch, ContextProvider, useAuthState } from "./Context";
 import { read_token } from "./Context/actions";
+import SinglePost from "./Components/SinglePost";
 
 function App() {
-	return (
-		<ContextProvider>
-			<Router>
-				<Switch>
-					<PrivateRoute optional={true} exact path="/">
-						<Home />
-					</PrivateRoute>
+    return (
+        <ContextProvider>
+            <Router>
+                <Routes>
 
-					<PrivateRoute exact path="/community">
-						<Community />
-					</PrivateRoute>
+                    <Route optional={true} path='/' element={<Home/>}/>
 
-					<PrivateRoute exact path="/universities">
-						<Universities />
-					</PrivateRoute>
-
-					<PrivateRoute exact path="/companies">
-						<Companies />
-					</PrivateRoute>
-
-					<PrivateRoute exact path="/jobs">
-						<Jobs />
-					</PrivateRoute>
-
-					<PrivateRoute exact path="/profile">
-						<Profile />
-					</PrivateRoute>
-
-					<PrivateRoute exact path="/settings">
-						<Settings />
-					</PrivateRoute>
-
-					<Route exact path="/login">
-						<Home />
+					<Route path="/community" element={<PrivateRoute/>}>
+						<Route path="" element={<Community />}/>
 					</Route>
 
-					<Route exact path="/logout">
-						<SignOut />
+					<Route path="/universities" element={<PrivateRoute/>}>
+						<Route path="" element={<Universities />}/>
 					</Route>
 
-					<Route exact path="/sign-up">
-						<SignUp />
+					<Route path="/companies" element={<PrivateRoute/>}>
+						<Route path="" element={<Companies />}/>
 					</Route>
 
-					{/* Error responses */}
-					<Route component={NotFound} />
-				</Switch>
-			</Router>
-		</ContextProvider>
-	);
+					<Route path="/jobs" element={<PrivateRoute/>}>
+						<Route path="" element={<Jobs />}/>
+					</Route>
+                    <Route path='/post' element={<PrivateRoute/>}>
+                        <Route path="" element={<SinglePost />}/>
+                    </Route>
+
+                    <Route path='/jobs' element={<PrivateRoute/>}>
+                        <Route path="" element={<Jobs />}/>
+                    </Route>
+
+					<Route path="/profile" element={<PrivateRoute/>}>
+						<Route path="" element={<Profile />}/>
+					</Route>
+
+					<Route path="/settings" element={<PrivateRoute/>}>
+						<Route path="" element={<Settings />}/>
+					</Route>
+
+					<Route path="/login" element={<Home/>}/>
+
+					<Route path="/logout" element={<SignOut/>}/>
+
+					<Route path="/sign-up" element={<SignUp/>}/>
+
+                    {/* Error responses */}
+                    <Route path="*" element={<PageNotFound/>} />
+
+                </Routes>
+            </Router>
+        </ContextProvider>
+    )
 }
 
 // A wrapper for <Route> that redirects to the login
 // screen if you're not yet authenticated.
-function PrivateRoute({ children, userType, optional = false, ...rest }) {
+function PrivateRoute({optional = false}) {
 	const dispatch = useAuthDispatch();
 	const state = useAuthState();
 
@@ -81,26 +89,19 @@ function PrivateRoute({ children, userType, optional = false, ...rest }) {
 		read_token(dispatch);
 	}, [dispatch]);
 
-	if (!state.token && !state.errorMessage) {
-		return null;
-	} else {
-		if (optional) {
-			return <Route {...rest} render={({ location }) => children} />;
-		} else {
-			return (
-				<Route
-					{...rest}
-					render={({ location }) =>
-						!state.errorMessage ? (
-							children
-						) : (
-							<Redirect to={{ pathname: "/", state: { redirected: true } }} />
-						)
-					}
-				/>
-			);
-		}
-	}
+    if (!state.token && !state.errorMessage) {
+        return null
+
+    } else {
+        if (optional) {
+            return <Outlet/>
+        } else {
+            return (
+               !state.errorMessage ? <Outlet/> :<Navigate to="/"  state={ {"redirected": true } }/>
+            )
+        }
+
+    }
 }
 
 export default App;

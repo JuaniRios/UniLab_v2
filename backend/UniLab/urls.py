@@ -27,6 +27,8 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(path("", include("website.urls")))
 
+print(settings.MEDIA_ROOT)
+
 if settings.DEBUG:
     urlpatterns += [
         url(

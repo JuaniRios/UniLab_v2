@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 // STYLES
 import "./Search.css";
 
@@ -6,12 +6,13 @@ import search_img from "../../Assets/img/top-nav/search.png";
 import CloseButton from "../Buttons/CloseButton";
 import apiCall from "../HelperFunctions/apiCall";
 import { useAuthState } from "../../Context";
+import SearchResult from "./SearchResult";
 
 export default function Search(props) {
 	const { token, userData } = useAuthState();
 	const [searchString, setSearchString] = useState("");
 	const [page, setPage] = useState(1);
-	const [results, setResults] = useState("");
+	const [results, setResults] = useState([]);
 	const searchType = props.searchType;
 	const width = props.width;
 	const [searchState, setSearchState] = useState("hidden");
@@ -36,17 +37,41 @@ export default function Search(props) {
 	}
 	document.addEventListener("keydown", escFunction, false);
 
-	async function fetchAndUpdate() {
+	async function getResults() {
+		if (searchString.length <= 0) {
+			return
+		}
 		const params = {
 			method: "GET",
 			page: page,
+			search: searchString
 		};
 		try {
-			const data = await apiCall("companies", token, params);
+			const data = await apiCall(searchType, token, params);
+			console.log(data)
+			let temp_results = []
+			if (searchType === "companies") {
+				for (const result of data.results) {
+					temp_results.push(<SearchResult name={result.name} image={result.image} url={result.url}/>)
+				}
+			} else if (searchType === "jobs") {
+				for (const result of data.results) {
+					temp_results.push(<SearchResult name={result.title} image={result.company.image} url={result.url}/>)
+				}
+			}
+			if (temp_results.length > 0) setResults(temp_results);
+			else setResults([<h5>No match found.</h5>])
 		} catch (e) {
 			console.log(e);
 		}
 	}
+
+	useEffect( () => {
+		const delayBounce = setTimeout( () => {
+			getResults()
+		}, 1000)
+		return () => clearTimeout(delayBounce)
+	}, [searchString])
 
 	return (
 		<>
@@ -64,7 +89,10 @@ export default function Search(props) {
 						onChange={(e) => setSearchString(e.target.value)}
 					/>
 					<CloseButton position="relative" clickEvent={toggleSearch} borderRadius="50%" />
+
 				</div>
+				{results}
+
 			</div>
 		</>
 	);
