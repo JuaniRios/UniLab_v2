@@ -1,4 +1,5 @@
-const ROOT_URL = 'http://127.0.0.1:8000/api';
+import { config } from "../../Config/config";
+const ROOT_URL = config.django_api;
 
 export async function loginUser(dispatch, loginPayload) {
     const requestOptions = {

@@ -1,3 +1,3 @@
 export const config = {
-  "django_api": "http://127.0.0.1:8000/api/"
+  "django_api": "http://104.214.223.89:8000/api/"
 }
