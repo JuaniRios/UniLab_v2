@@ -2,14 +2,14 @@ import React, { useState } from "react";
 // STYLES
 import "./Login.css";
 // OTHER
-import { NavLink, Redirect, useHistory } from "react-router-dom";
+import { NavLink, Redirect, useNavigate } from "react-router-dom";
 import { loginUser, useAuthDispatch, useAuthState } from "../../Context";
 import BasicInput from "../Forms/BasicInput";
 
 export default function Login(props) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	let history = useHistory();
+	let history = useNavigate();
 	const dispatch = useAuthDispatch();
 
 	const [loginClass, overlayClass] = props.loginClasses;

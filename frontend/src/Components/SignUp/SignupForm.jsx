@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // STYLES
 import "./SignupForm.css";
 // IMAGES
-import { NavLink, Redirect, useHistory } from "react-router-dom";
+import { NavLink, Redirect, useNavigate } from "react-router-dom";
 import { config } from "../../Config/config";
 import { loginUser, useAuthDispatch, useAuthState } from "../../Context";
 import { useMessage } from "../../Context/context";
@@ -15,7 +15,7 @@ export default function SignupForm(props) {
 	const [firstName, setFirstName] = useState();
 	const [lastName, setLastName] = useState();
 	const { token } = useAuthState();
-	let history = useHistory();
+	let history = useNavigate();
 	const dispatch = useAuthDispatch();
 	const [feedbackMessage, setFeedbackMessage] = useMessage();
 
