@@ -1,4 +1,4 @@
-import { config } from "../../Config/config";
+import { config } from "../Config/config";
 const ROOT_URL = config.django_api;
 
 export async function loginUser(dispatch, loginPayload) {
