@@ -26,12 +26,16 @@ export default async function apiCall(resource, token, params) {
 
     switch (params.method) {
         case 'GET':
+            if (!url.includes("?")) {
+                url += `?`;
+            }
+
             if ("page" in params){
-                if (url.includes("?")) {
-                    url += `page=${params.page}&`;
-                } else {
-                    url += `?page=${params.page}&`;
-                }
+                 url += `page=${params.page}&`;
+            }
+
+            if ("search" in params) {
+                url += `search=${params.search}&`;
             }
             break
 
