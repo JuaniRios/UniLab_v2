@@ -19,7 +19,7 @@ import Settings from "./Components/Settings";
 import SignOut from "./Components/SignOut";
 import SignUp from "./Components/SignUp";
 // ERROR PAGES
-import NotFound from "./Components/PageNotFound";
+import PageNotFound from "./Components/PageNotFound";
 // OTHER
 import { useAuthDispatch, ContextProvider, useAuthState } from "./Context";
 import { read_token } from "./Context/actions";
@@ -71,7 +71,7 @@ function App() {
 					<Route path="/sign-up" element={<SignUp/>}/>
 
                     {/* Error responses */}
-                    <Route component={NotFound} />
+                    <Route path="*" element={<PageNotFound/>} />
 
                 </Routes>
             </Router>
