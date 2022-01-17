@@ -10,7 +10,7 @@ export async function loginUser(dispatch, loginPayload) {
     };
 
     try {
-        let response = await fetch(`${ROOT_URL}/token`, requestOptions);
+        let response = await fetch(`${ROOT_URL}token`, requestOptions);
         let data = await response.json();
 
         if (data.access) {
@@ -45,7 +45,7 @@ export async function read_token(dispatch) {
 
     try {
         // dispatch({ type: 'REQUEST_LOGIN' });
-        let response = await fetch(`${ROOT_URL}/token/get-user`, requestOptions);
+        let response = await fetch(`${ROOT_URL}token/get-user`, requestOptions);
         let data = await response.json();
 
         if (data.response) {
