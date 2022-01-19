@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 // STYLES
 import "./Login.css";
 // OTHER
@@ -11,36 +11,58 @@ export default function Login(props) {
 	const [password, setPassword] = useState("");
 	let history = useNavigate();
 	const dispatch = useAuthDispatch();
+	const auth = useAuthState()
+
+	const [loginError, setLoginError] = useState(false)
+	const loginErrorContainer = <>
+									<div id="main-error-message" className={`error-message`}>
+										<p>⚠ "No active account found with the given credentials."</p>
+									</div>
+								</>
+
+	const [missingEmailError, setMissingEmailError] = useState(false)
+	const [missingPasswordError, setMissingPasswordError] = useState(false)
+	const [invalidEmailError, setInvalidEmailError] = useState(false)
+	const [invalidPasswordError, setInvalidPasswordError] = useState(false)
+
 
 	const [loginClass, overlayClass] = props.loginClasses;
 	const setLoginClasses = props.setLoginClasses;
 
-	const loginErrorMessage = <></>;
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
+		setMissingEmailError(false)
+		setMissingPasswordError(false)
+		setInvalidEmailError(false)
+		setInvalidPasswordError(false)
+		setLoginError(false)
 		let payload = { email, password };
 		const emailRegex =
 			/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
+		if (!email) setMissingEmailError(true)
+		if (!password) setMissingPasswordError(true)
+		if (!email.match(emailRegex) && email) setInvalidEmailError(true)
 
-		try {
-			const success = await loginUser(dispatch, payload);
-			if (success) {
-				props.setLoginClasses();
-				props.setProfileClasses();
-			} else {
-				const loginErrorMessage = (
-					<>
-						<div id="main-error-message" className={`error-message`}>
-							⚠ "No active account found with the given credentials."
-						</div>
-					</>
-				);
+		if (!missingEmailError && !missingPasswordError && !invalidEmailError){
+			try {
+				await loginUser(dispatch, payload);
+
+			} catch (error) {
+				console.log(error);
 			}
-		} catch (error) {
-			console.log(error);
 		}
 	};
+
+	useEffect( () => {
+		if (auth.token && !auth.errorMessage) { // successfully logged in
+			props.setLoginClasses();
+			props.setProfileClasses();
+		} else if (auth.errorMessage) { // login error
+			setLoginError(true);
+		}
+	}, [auth])
+
 
 	return (
 		<>
@@ -56,7 +78,10 @@ export default function Login(props) {
 					type="text"
 					width="100%"
 					label="Email Address"
-					errorMsg="Email Address Missing!"
+					errors={[
+						["Email Address Missing!", missingEmailError],
+						["Invalid Email Address!", invalidEmailError]
+					]}
 					setter={setEmail}
 					value={email}
 				/>
@@ -65,12 +90,16 @@ export default function Login(props) {
 					type="password"
 					width="100%"
 					label="Password"
-					errorMsg="Password Missing!"
+					errors={[
+						["Password Missing!", missingPasswordError],
+						["Invalid Password!", invalidPasswordError]
+					]}
 					setter={setPassword}
 					value={password}
 				/>
 
-				{loginErrorMessage}
+				{loginError ? loginErrorContainer : null}
+
 
 				<button className={`login-btn uni-button w100`} type="submit" onClick={handleLogin}>
 					Sign in

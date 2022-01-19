@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 // STYLES
 import "./BasicInput.css";
 // FONT AWESOME
@@ -11,13 +11,22 @@ export default function BasicInput(props) {
 	const width = props.width;
 	const label = props.label;
 	let type = props.type;
-	const errorMsg = props.errorMsg;
+	const errors = props.errors;
 	const [inputValue, setInput] = [props.value, props.setter];
-	// FOR ERROR MESSAGE
-	let errorBlock = <></>;
-	if (errorMsg) {
-		errorBlock = <div className={`error-message noselect`}>⚠ {errorMsg}</div>;
-	}
+	const [shownErrors, setShownErrors] = useState([])
+
+
+	// update shown errors
+	useEffect( () => {
+		let errorList = []
+		for (const error of errors) {
+			if (error[1]) {
+				errorList.push(<div className={`error-message noselect`}>⚠ {error[0]}</div>)
+			}
+		setShownErrors(errorList)
+		}
+	}, [errors])
+
 	// FOR PASSWORD INPUT
 	const [opacity, setOpacityShown] = useState("transparent");
 	const [passwordShown, setPasswordShown] = useState(false);
@@ -90,7 +99,7 @@ export default function BasicInput(props) {
 				<label className={`noselect`}>{label}</label>
 				<span className={`${errorCheck} bottom-line`} />
 			</div>
-			{errorBlock}
+			{shownErrors}
 		</div>
 	);
 }
