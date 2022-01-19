@@ -5,6 +5,8 @@ import "./Login.css";
 import { NavLink, Redirect, useNavigate } from "react-router-dom";
 import { loginUser, useAuthDispatch, useAuthState } from "../../Context";
 import BasicInput from "../Forms/BasicInput";
+import {ErrorMessage} from "../Forms/BasicInput";
+
 
 export default function Login(props) {
 	const [email, setEmail] = useState("");
@@ -14,11 +16,7 @@ export default function Login(props) {
 	const auth = useAuthState()
 
 	const [loginError, setLoginError] = useState(false)
-	const loginErrorContainer = <>
-									<div id="main-error-message" className={`error-message`}>
-										<p>⚠ "No active account found with the given credentials."</p>
-									</div>
-								</>
+	const loginErrorContainer = <ErrorMessage message={"No active account found with the given credentials."}/>
 
 	const [missingEmailError, setMissingEmailError] = useState(false)
 	const [missingPasswordError, setMissingPasswordError] = useState(false)

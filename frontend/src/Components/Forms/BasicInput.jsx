@@ -6,6 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 const eye = <FontAwesomeIcon icon={faEye} />;
 
+export function ErrorMessage(props) {
+	return (<>
+				<div className={`error-message noselect`}>⚠ {props.message}</div>
+			</>
+	)
+}
+
 export default function BasicInput(props) {
 	const name = props.name;
 	const width = props.width;
@@ -21,7 +28,7 @@ export default function BasicInput(props) {
 		let errorList = []
 		for (const error of errors) {
 			if (error[1]) {
-				errorList.push(<div className={`error-message noselect`}>⚠ {error[0]}</div>)
+				errorList.push(<ErrorMessage message={error[0]}/>)
 			}
 		setShownErrors(errorList)
 		}
