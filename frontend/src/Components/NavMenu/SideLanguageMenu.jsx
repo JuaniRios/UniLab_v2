@@ -9,18 +9,15 @@ import russian_icon from "../../Assets/img/languages/ru.webp";
 import french_icon from "../../Assets/img/languages/fr.webp";
 
 export default function SideLanguageMenu(props) {
-	const [languageClass, overlayClass] = props.languageClasses;
-	const setLanguageClasses = props.setLanguageClasses;
-
 	return (
 		<>
-			<div className={`overlay ${overlayClass}`} onClick={setLanguageClasses}></div>
+			<div className={`overlay shown`} onClick={() => props.setDisplay(false)}/>
 
-			<aside className={`language-menu ${languageClass} shadow`}>
+			<aside className={`language-menu language-menu-opened shadow`}>
 				<button
 					className={`language-close-button close-button`}
-					onClick={setLanguageClasses}
-				></button>
+					onClick={() => {props.setDisplay(false)}}
+				/>
 
 				<h2>Select Language</h2>
 

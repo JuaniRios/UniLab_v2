@@ -17,7 +17,7 @@ export default function Universities(props) {
 	};
 	return (
 		<>
-			<NavMenu />
+			<NavMenu/>
 			<div className={`main-content-fixed`} style={mainFrameStyle}>
 				<Search searchType="universities" width="w60" />
 			</div>

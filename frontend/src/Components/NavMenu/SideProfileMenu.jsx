@@ -9,8 +9,6 @@ import { NavLink } from "react-router-dom";
 export default function SideProfileMenu(props) {
 	const state = useAuthState();
 	const userData = state.userData;
-	const [profileClass, overlayClass] = props.profileClasses;
-	const setProfileClasses = props.setProfileClasses;
 	const setLoginClasses = props.setLoginClasses;
 
 	const profileButton = (
@@ -19,12 +17,14 @@ export default function SideProfileMenu(props) {
 			<p className={`w80 bold`}>My Profile</p>
 		</NavLink>
 	);
+
 	const myCompaniesButton = (
 		<NavLink to="my-companies" className={`settings-button`}>
 			<div className={`prof-picture`} />
 			<p className={`w80 bold`}>My Companies</p>
 		</NavLink>
 	);
+
 	let signedInButtons = (
 		<>
 			<NavLink to="/settings" className={`settings-button`}>
@@ -38,6 +38,7 @@ export default function SideProfileMenu(props) {
 			</NavLink>
 		</>
 	);
+
 	let userHTML;
 	if (userData.user_type_verbose === "Student") {
 		userHTML = (
@@ -56,7 +57,7 @@ export default function SideProfileMenu(props) {
 	}
 	const notSignedInButtons = (
 		<>
-			<button onClick={setLoginClasses} className={`settings-button`}>
+			<button onClick={() => {props.setDisplayLogin(true)}} className={`settings-button`}>
 				<div className={`login-picture`} />
 				{/* {# Translators: End of side profile menu #} */}
 				<p className={`w80 bold`}>Sign In</p>
@@ -68,6 +69,7 @@ export default function SideProfileMenu(props) {
 			</NavLink>
 		</>
 	);
+
 	const signedInUserData = (
 		<div className={`profile-user-data w100 flex-col j-c-c a-i-c`}>
 			<NavLink to="/profile">
@@ -105,12 +107,11 @@ export default function SideProfileMenu(props) {
 
 	return (
 		<>
-			<div className={`overlay ${overlayClass}`} onClick={setProfileClasses} />
-
-			<aside className={`profile-menu ${profileClass} shadow`}>
+			<div className={`overlay shown`} onClick={() => {props.setDisplay(false)}} />
+			<aside className={`profile-menu profile-menu-opened shadow`}>
 				<button
 					className={`profile-close-button close-button`}
-					onClick={setProfileClasses}
+					onClick={() => {props.setDisplay(false)}}
 				/>
 
 				{userData && signedInUserData}

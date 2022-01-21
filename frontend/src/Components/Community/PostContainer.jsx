@@ -48,7 +48,6 @@ export default function PostContainer(props) {
 			// change vote.
 			try {
 				let response = await apiCall("vote", token, { method: "POST", payload: payload });
-				console.log(response);
 				if (voteType === "Upvote") {
 					let votes = 1;
 					if (userVote === "Downvote") votes++;

@@ -14,7 +14,6 @@ export default function CommunityPosts(props) {
 	useEffect(() => {
 		fetchContent("posts", page, state.token).then((data) => {
 			let appending = [];
-			console.log(data);
 			for (let i = 0; i < data.results.length; i++) {
 				appending.push(<PostContainer {...data.results[i]} key={i} />);
 			}

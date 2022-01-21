@@ -48,7 +48,6 @@ export default function Search(props) {
 		};
 		try {
 			const data = await apiCall(searchType, token, params);
-			console.log(data)
 			let temp_results = []
 			if (searchType === "companies") {
 				for (const result of data.results) {

@@ -18,6 +18,6 @@ export default function CloseButton(props) {
 			onClick={props.clickEvent}
 			style={btnStyle}
 			type="button"
-		></button>
+		/>
 	);
 }

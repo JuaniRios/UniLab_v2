@@ -8,16 +8,36 @@ import { loginUser, useAuthDispatch, useAuthState } from "../../Context";
 import { useMessage } from "../../Context/context";
 // OTHER COMPONENTS
 import BasicInput from "../Forms/BasicInput";
+import apiCall from "../HelperFunctions/apiCall";
 
 export default function SignupForm(props) {
-	const [email, setEmail] = useState();
-	const [password, setPassword] = useState();
-	const [firstName, setFirstName] = useState();
-	const [lastName, setLastName] = useState();
-	const { token } = useAuthState();
-	let history = useNavigate();
+	const [message, setMessage] = useMessage()
+
+	// form strings
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("")
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+
+	let navigate = useNavigate();
 	const dispatch = useAuthDispatch();
-	const [feedbackMessage, setFeedbackMessage] = useMessage();
+
+	// error booleans
+	const [missingPassword, setMissingPassword] = useState(false)
+	const [missingConfirmPassword, setMissingConfirmPassword] = useState(false)
+	const [missingFirstName, setMissingFirstName] = useState(false)
+	const [missingLastName, setMissingLastName] = useState(false)
+	const [missingEmail, setMissingEmail] = useState(false)
+	const [passwordMismatch, setPasswordMismatch] = useState(false)
+	const [generalError, setGeneralError] = useState(false)
+
+	const generalErrorComponent = <>
+		<div id="main-error-message" className={`error-message noselect`}>
+				⚠ An error has occurred, please try again.
+		</div>
+	</>
+
 
 	useEffect(() => {
 		dispatch({ type: "LOGOUT" });
@@ -29,45 +49,54 @@ export default function SignupForm(props) {
 
 	async function handleSignup(e) {
 		e.preventDefault();
-		async function apiCall() {
-			const requestOptions = {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-				body: JSON.stringify({
-					email: email,
-					first_name: firstName,
-					last_name: lastName,
-					password: password,
-					user_type: 3,
-				}),
-			};
-
-			const url = config.django_api + "users";
-			try {
-				const response = await fetch(url, requestOptions);
-				if (!response.ok) {
-					console.log("response not ok. error is " + response.status);
-					setFeedbackMessage("response not ok. error is " + response.status);
-
-					return false;
-				} else {
-					return true;
-				}
-			} catch (e) {
-				console.log(e);
-			}
+		let payload = {
+			"email": email,
+			"first_name": firstName,
+			"last_name": lastName,
+			"password": password,
+			"user_type": 3,
+		}
+		let params = {
+			"payload": payload,
+			"method": "POST",
 		}
 
+		// async function _apiCall() {
+		//
+		// 	const requestOptions = {
+		// 		method: "POST",
+		// 		headers: {
+		// 			"Content-Type": "application/json",
+		// 			Accept: "application/json",
+		// 		},
+		// 		body: JSON.stringify({
+		//
+		// 		}),
+		// 	};
+		//
+		// 	const url = config.django_api + "users";
+		// 	try {
+		// 		const response = await fetch(url, requestOptions);
+		// 		if (!response.ok) {
+		// 			console.log("response not ok. error is " + response.status);
+		//
+		// 			return false;
+		// 		} else {
+		// 			return true;
+		// 		}
+		// 	} catch (e) {
+		// 		console.log(e);
+		// 	}
+		// }
+
 		if (dataIsValid()) {
-			const api_resp = await apiCall();
-			if (api_resp) {
-				const success = await loginUser(dispatch, { email: email, password: password });
-				if (success) {
-					history.push("/");
-				}
+			try {
+				await apiCall("users", null, params) // if api call is unsuccessful, then catch block is executed
+				const success = await loginUser(dispatch, {email: email, password: password});
+				if (success) navigate("/")
+
+			} catch (error) {
+				setMessage(error)
 			}
 		}
 	}
@@ -75,25 +104,29 @@ export default function SignupForm(props) {
 	return (
 		<aside className={`signup-form shadow`}>
 			<h1 className={`sign-up`}>Sign up</h1>
-
-			<div id="main-error-message" className={`error-message noselect`}>
-				⚠ An error has occurred, please try again.
-			</div>
-
+			{generalError ? generalErrorComponent:null}
 			<div className={`double-input-wrap w100 flex row-wrap j-c-s-b a-i-c`}>
 				<BasicInput
 					name="signup-first-name"
 					type="text"
 					width="47%"
 					label="First Name"
-					errorMsg="First Name Missing!"
+					errors={[
+						["First Name Missing!", missingFirstName]
+					]}
+					setter={setFirstName}
+					value={firstName}
 				/>
 				<BasicInput
 					name="signup-last-name"
 					type="text"
 					width="47%"
 					label="Last Name"
-					errorMsg="Last Name Missing!"
+					errors={[
+						["Last Name Missing!", missingLastName]
+					]}
+					setter={setLastName}
+					value={lastName}
 				/>
 			</div>
 
@@ -102,7 +135,11 @@ export default function SignupForm(props) {
 				type="text"
 				width="100%"
 				label="Email Address"
-				errorMsg="Email Address Missing!"
+				errors={[
+					["Email Address Missing!", missingEmail]
+				]}
+				setter={setEmail}
+				value={email}
 			/>
 
 			<div className={`double-input-wrap w100 flex row-wrap j-c-s-b a-i-c`}>
@@ -111,15 +148,24 @@ export default function SignupForm(props) {
 					type="password"
 					width="47%"
 					label="Password"
-					errorMsg="Password Missing!"
+					errors={[
+						["Password Missing!", missingPassword]
+					]}
+					setter={setPassword}
+					value={password}
 				/>
 				<BasicInput
 					name="signup-password-confirm"
 					type="password"
 					width="47%"
 					label="Confirm Password"
-					errorMsg="Passwords do NOT match!"
-				/>
+					errors={[
+						["Passwords do NOT match!", passwordMismatch],
+						["Please confirm your password!", missingConfirmPassword]
+					]}
+					setter={setConfirmPassword}
+					value={confirmPassword}
+					/>
 			</div>
 
 			<div className={`signup-agreements`}>

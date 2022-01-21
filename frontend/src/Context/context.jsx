@@ -1,4 +1,4 @@
-import React, {useReducer, useState} from "react";
+import React, {useEffect, useReducer, useState} from "react";
 import {AuthReducer, initialState} from "./reducer";
 
 const AuthStateContext = React.createContext();
@@ -45,10 +45,13 @@ export const ContextProvider = ({children})  => {
     const [locale, setLocale] = useState("en")
     const [message, setMessage] = useState("")
 
-    if (message) {
-        alert(message)
-        setMessage("")
-    }
+    useEffect( () => {
+        if (message) {
+            alert(message)
+            setMessage("")
+        }
+
+    }, [message])
 
     return (
         <AuthStateContext.Provider value={user}>

@@ -18,7 +18,9 @@ export default function BasicInput(props) {
 	const width = props.width;
 	const label = props.label;
 	let type = props.type;
-	const errors = props.errors;
+	let errors = props.errors;
+	if (errors === undefined) errors = []
+	// errors is a list of lists. each inner list contains a msg string, and a bool hook to display it or not
 	const [inputValue, setInput] = [props.value, props.setter];
 	const [shownErrors, setShownErrors] = useState([])
 

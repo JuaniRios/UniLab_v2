@@ -9,7 +9,6 @@ import CommentContainer from "./CommentContainer";
 
 export default function CommentForm(props) {
 	const authState = useAuthState();
-	console.log(authState.userData);
 	const textarea = useRef(null);
 	const inputContainer = useRef(null);
 	const [focused, setFocused] = useState(false);
@@ -38,7 +37,6 @@ export default function CommentForm(props) {
 		let payload = { content: message, post: props.postUrl };
 		try {
 			const commentInfo = await postContent("comments", authState.token, payload);
-			console.log(commentInfo);
 			props.setCommentList((current) => {
 				let updated = current.slice();
 				updated.unshift(<CommentContainer {...commentInfo} key={current.length} />);

@@ -30,8 +30,9 @@ function App() {
         <ContextProvider>
             <Router>
                 <Routes>
-
-                    <Route optional={true} path='/' element={<Home/>}/>
+                    <Route path="/" element={<PrivateRoute optional={true}/>}>
+                        <Route path='' element={<Home/>}/>
+                    </Route>
 
 					<Route path="/community" element={<PrivateRoute/>}>
 						<Route path="" element={<Community />}/>

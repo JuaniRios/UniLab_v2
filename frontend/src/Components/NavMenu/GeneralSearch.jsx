@@ -6,13 +6,10 @@ import search_icon from "../../Assets/img/top-nav/search.png";
 import CloseButton from "../Buttons/CloseButton";
 
 export default function GeneralSearch(props) {
-	const user = props.user;
-	const [searchClass, overlayClass] = props.searchClasses;
-	const setSearchClasses = props.setSearchClasses;
 	return (
 		<>
-			<div className={`overlay ${overlayClass}`} onClick={setSearchClasses}></div>
-			<form className={`search-wrapper ${searchClass} shadow flex-row a-i-c j-c-c`}>
+			<div className={`overlay shown`} onClick={() => {props.setDisplay(false)}}/>
+			<form className={`search-wrapper search-menu-opened shadow flex-row a-i-c j-c-c`}>
 				<img id="search-icon" src={search_icon} alt="Magnifying Glass" title="Search" />
 
 				<input
@@ -22,7 +19,7 @@ export default function GeneralSearch(props) {
 					placeholder="Search UniLab..."
 				/>
 
-				<CloseButton clickEvent={setSearchClasses} position="relative" borderRadius="50%" />
+				<CloseButton clickEvent={() => {props.setDisplay(false)}} position="relative" borderRadius="50%" />
 			</form>
 		</>
 	);

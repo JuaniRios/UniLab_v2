@@ -6,12 +6,13 @@ import { NavLink, Redirect, useNavigate } from "react-router-dom";
 import { loginUser, useAuthDispatch, useAuthState } from "../../Context";
 import BasicInput from "../Forms/BasicInput";
 import {ErrorMessage} from "../Forms/BasicInput";
+import {useMessage} from "../../Context/context";
 
 
 export default function Login(props) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	let history = useNavigate();
+	const [feedbackMessage, setFeedbackMessage] = useMessage()
 	const dispatch = useAuthDispatch();
 	const auth = useAuthState()
 
@@ -23,13 +24,10 @@ export default function Login(props) {
 	const [invalidEmailError, setInvalidEmailError] = useState(false)
 	const [invalidPasswordError, setInvalidPasswordError] = useState(false)
 
-
-	const [loginClass, overlayClass] = props.loginClasses;
-	const setLoginClasses = props.setLoginClasses;
-
-
 	const handleLogin = async (e) => {
 		e.preventDefault();
+
+		// form validation
 		setMissingEmailError(false)
 		setMissingPasswordError(false)
 		setInvalidEmailError(false)
@@ -40,12 +38,12 @@ export default function Login(props) {
 			/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
 		if (!email) setMissingEmailError(true)
 		if (!password) setMissingPasswordError(true)
-		if (!email.match(emailRegex) && email) setInvalidEmailError(true)
+		const isEmailValid = email.match(emailRegex)
+		if (!isEmailValid && email) setInvalidEmailError(true)
 
-		if (!missingEmailError && !missingPasswordError && !invalidEmailError){
+		if (email && password && isEmailValid){ // make the api call to check user credentials
 			try {
 				await loginUser(dispatch, payload);
-
 			} catch (error) {
 				console.log(error);
 			}
@@ -54,20 +52,23 @@ export default function Login(props) {
 
 	useEffect( () => {
 		if (auth.token && !auth.errorMessage) { // successfully logged in
-			props.setLoginClasses();
-			props.setProfileClasses();
+			props.setDisplayProfile(false)
+			props.setDisplay(false)
+
 		} else if (auth.errorMessage) { // login error
 			setLoginError(true);
 		}
 	}, [auth])
 
-
+	useEffect( () => {
+		setLoginError(false)
+	}, [])
 	return (
 		<>
-			<div className={`overlay overlay-10k ${overlayClass}`} onClick={setLoginClasses} />
+			<div className={`overlay overlay-10k shown`} onClick={()=>props.setDisplay(false)} />
 
-			<aside className={`login-form ${loginClass} shadow`}>
-				<button className={`login-close-button close-button`} onClick={setLoginClasses} />
+			<aside className={`login-form login-form-opened  shadow`}>
+				<button className={`login-close-button close-button`} onClick={() => props.setDisplay(false)} />
 
 				<h1 className={`sign-in`}>Sign in</h1>
 
