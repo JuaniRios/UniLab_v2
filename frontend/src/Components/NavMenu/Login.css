@@ -1,24 +1,39 @@
-.login-form-closed {
-	display: none;
+.menu-login-enter{
+	opacity: 0;
+	transform: scale(0.9);
 }
-.login-form-opened {
-	display: flex;
+.menu-login-enter-active{
+	opacity: 1;
+	transform: translateX(0);
+	transition: opacity 300ms, transform 300ms;
 }
+.menu-login-exit{
+	opacity: 1;
+}
+.menu-login-exit-active{
+	opacity: 0;
+	transform: scale(0.9);
+	transition: opacity 300ms, transform 300ms;
+}
+
 .login-form {
+	display: flex;
 	z-index: 10500 !important;
 	position: absolute;
 	align-items: center;
 	flex-direction: column;
-	width: 30vw;
+	--form-width: min(30vw, 500px);
+	width: var(--form-width);
 	background-color: var(--unilab-white);
 	overflow-y: auto;
 	border-radius: 10px;
 	padding: 3rem;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
+	left: calc(50% - var(--form-width)/2);
+	/*right: 0;*/
+	top: 25%;
+	/*bottom: 2%;*/
 	margin: auto;
+
 }
 .signin-buttons {
 	display: flex;

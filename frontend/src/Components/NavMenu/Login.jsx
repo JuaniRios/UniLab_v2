@@ -7,6 +7,7 @@ import { loginUser, useAuthDispatch, useAuthState } from "../../Context";
 import BasicInput from "../Forms/BasicInput";
 import {ErrorMessage} from "../Forms/BasicInput";
 import {useMessage} from "../../Context/context";
+import {CSSTransition} from "react-transition-group";
 
 
 export default function Login(props) {
@@ -65,8 +66,11 @@ export default function Login(props) {
 	}, [])
 	return (
 		<>
-			<div className={`overlay overlay-10k shown`} onClick={()=>props.setDisplay(false)} />
-
+		<CSSTransition
+			in={props.display}
+			unmountOnExit
+			timeout={500}
+			classNames={"menu-login"}>
 			<aside className={`login-form login-form-opened  shadow`}>
 				<button className={`login-close-button close-button`} onClick={() => props.setDisplay(false)} />
 
@@ -108,6 +112,7 @@ export default function Login(props) {
 					Forgot your password?
 				</NavLink>
 			</aside>
+		</CSSTransition>
 		</>
 	);
 }

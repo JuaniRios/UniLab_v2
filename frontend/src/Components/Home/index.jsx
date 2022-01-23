@@ -14,16 +14,9 @@ export default function Home(props) {
 	document.title = "UniLab - Home";
 	document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
 	document.body.classList.remove("noscroll");
-	const location = useLocation();
-	let redirected;
-	try {
-		redirected = location.state.redirected;
-	} catch (e) {
-		redirected = false;
-	}
 	return (
 		<>
-			<NavMenu redirected={redirected} />
+			<NavMenu/>
 			<HomeCover />
 			<div className={`home-content`}>
 				<HomePrimary />

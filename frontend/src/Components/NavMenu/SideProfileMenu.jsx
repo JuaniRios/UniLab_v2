@@ -10,7 +10,6 @@ import {CSSTransition} from "react-transition-group";
 export default function SideProfileMenu(props) {
 	const state = useAuthState();
 	const userData = state.userData;
-	const setLoginClasses = props.setLoginClasses;
 
 	const profileButton = (
 		<NavLink to="/profile" className={`settings-button`}>
@@ -113,7 +112,6 @@ export default function SideProfileMenu(props) {
 				unmountOnExit
 				timeout={500}
 				classNames={"menu-primary"}>
-			{/*	<div className={`overlay shown`} onClick={() => {props.setDisplay(false)}} />*/}
 				<div className={`profile-menu shadow`}>
 					<button
 						className={`profile-close-button close-button`}

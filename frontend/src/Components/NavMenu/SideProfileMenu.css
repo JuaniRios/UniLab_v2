@@ -2,41 +2,23 @@
 	.profile-menu {
 		width: 20rem;
 	}
-	/*.profile-menu-closed {*/
-	/*	right: -20rem;*/
-	/*	padding-top: 0rem;*/
-	/*}*/
-	/*.profile-menu-opened {*/
-	/*	opacity: 1 !important;*/
-	/*	right: 0;*/
-	/*	padding-top: 3rem;*/
-	/*}*/
 	.profile-user-data {
 		margin-top: 3rem;
 	}
 	.menu-primary-enter{
 		position:absolute;
 		transform: translateX(110%);
-		/*opacity: 0;*/
-
 	}
 	.menu-primary-enter-active{
 		transform: translateX(0%);
 		transition: all 500ms ease;
-		/*opacity: 1;*/
-		/*transition: opacity 2000ms;*/
-
-
 	}
 	.menu-primary-exit{
 		position: absolute;
-		/*opacity: 1;*/
 	}
 	.menu-primary-exit-active{
 		transform: translateX(110%);
 		transition: all 500ms ease;
-		/*opacity: 0;*/
-		/*transition: opacity 2000ms;*/
 	}
 }
 @media only screen and (max-width: 1030px) {
@@ -67,7 +49,6 @@
 	height: 100vh;
 	top: 0;
 	background-color: var(--unilab-white);
-	/*transition: 0.4s linear;*/
 }
 .profile-picture {
 	height: 10rem;

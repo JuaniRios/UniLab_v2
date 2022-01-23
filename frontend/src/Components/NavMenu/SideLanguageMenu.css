@@ -1,22 +1,23 @@
 @media only screen and (min-width: 1030px) {
 	.language-menu {
 		width: 20rem;
-		justify-content: space-between;
 	}
-	.language-menu-closed {
-		right: -20rem;
-		padding-top: 0rem;
+
+	.menu-lang-enter{
+	position:absolute;
+	transform: translateX(110%);
+
 	}
-	.language-menu-closed .lang-menu-btn-holder {
-		margin-left: 7rem;
+	.menu-lang-enter-active{
+		transform: translateX(0%);
+		transition: all 500ms ease;
 	}
-	.language-menu-opened {
-		opacity: 1 !important;
-		right: 0;
-		padding-top: 3rem;
+	.menu-lang-exit{
+		position: absolute;
 	}
-	.language-menu-opened .lang-menu-btn-holder {
-		margin-left: 0;
+	.menu-lang-exit-active{
+		transform: translateX(110%);
+		transition: all 500ms ease;
 	}
 }
 @media only screen and (max-width: 1030px) {
@@ -33,7 +34,7 @@
 	}
 }
 .language-menu {
-	opacity: 0;
+	right:0;
 	position: fixed;
 	display: flex;
 	flex-direction: column;

@@ -63,20 +63,19 @@ export default function Footer(props) {
 				</div>
 				<div className="footer-upper-block">
 					<p className="footer-disclaimer">
-						{/* {{ long_texts.1 }} */}
-						LONG TEXT HERE
+						The European Commission support for the production of this website does not constitute an endorsement of the contents which reflects the views only of the authors, and the Commission cannot be held responsible for any use which may be made of the information contained therein.
 					</p>
 				</div>
-				<div className="footer-upper-block">
-					<h2>
-						{/* {% translate "Partners' area"%} */}
-						Partners' area
-					</h2>
-					<button className="partners-login uni-button" type="button">
-						{/* {% translate "LOG IN"%} */}
-						LOG IN
-					</button>
-				</div>
+				{/*<div className="footer-upper-block">*/}
+				{/*	<h2>*/}
+				{/*		/!* {% translate "Partners' area"%} *!/*/}
+				{/*		Partners' area*/}
+				{/*	</h2>*/}
+				{/*	<button className="partners-login uni-button" type="button">*/}
+				{/*		/!* {% translate "LOG IN"%} *!/*/}
+				{/*		LOG IN*/}
+				{/*	</button>*/}
+				{/*</div>*/}
 			</div>
 
 			{/* LOWER FOOTER */}

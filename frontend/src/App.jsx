@@ -65,8 +65,6 @@ function App() {
 						<Route path="" element={<Settings />}/>
 					</Route>
 
-					<Route path="/login" element={<Home/>}/>
-
 					<Route path="/logout" element={<SignOut/>}/>
 
 					<Route path="/sign-up" element={<SignUp/>}/>
@@ -98,7 +96,7 @@ function PrivateRoute({optional = false}) {
             return <Outlet/>
         } else {
             return (
-               !state.errorMessage ? <Outlet/> :<Navigate to="/"  state={ {"redirected": true } }/>
+               !state.errorMessage ? <Outlet/> :<Navigate to="/" state={"showLogin"}/>
             )
         }
 

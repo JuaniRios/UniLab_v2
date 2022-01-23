@@ -9,8 +9,10 @@ import Login from "./Login";
 import {initialState} from "../../Context/reducer";
 import {useMessage} from "../../Context/context";
 import {CSSTransition} from "react-transition-group";
+import {useLocation} from "react-router-dom";
 
 export default function NavMenu(props) {
+	const {state} = useLocation()
 	const [displayLogin, setDisplayLogin] = useState(false)
 	const [displayLanguage, setDisplayLanguage] = useState(false)
 	const [displayProfile, setDisplayProfile] = useState(false)
@@ -18,7 +20,10 @@ export default function NavMenu(props) {
 	const [displayMobile, setDisplayMobile] = useState(false)
 
 	// if you were redirected because you had no auth, open login menu
-	if (props.redirected) setDisplayLogin(props.redirected)
+	useEffect( () => {
+		if (state === "showLogin") setDisplayLogin(true)
+	}, [state])
+
 
 	// disable scroll when a menu is on screen
 	useEffect( () => {
@@ -49,9 +54,22 @@ export default function NavMenu(props) {
 		}
 	}
 
+	function setAll(bool){
+		const safeBool = !!bool
+		setDisplayLogin(safeBool)
+		setDisplayMobile(safeBool)
+		setDisplayLanguage(safeBool)
+		setDisplaySearch(safeBool)
+		setDisplayProfile(safeBool)
+	}
+
+	function anyMenu() {
+		return displayLanguage || displaySearch || displayProfile || displayLogin || displayMobile
+	}
 
 return (
 		<>
+			{anyMenu() && <div className={`overlay shown`} onClick={() => setAll(false)}/>}
 			<TopNav
 				setDisplayProfile={setDisplayProfile}
 				setDisplayLanguage={setDisplayLanguage}
@@ -60,10 +78,10 @@ return (
 				displayMobile={displayMobile}
 			/>
 
-			{displaySearch &&
-				<GeneralSearch
-					setDisplay={setDisplaySearch}
-				/>}
+			<GeneralSearch
+				setDisplay={setDisplaySearch}
+				display={displaySearch}
+			/>
 
 
 			<SideProfileMenu
@@ -72,15 +90,16 @@ return (
 				setDisplayLogin={setDisplayLogin}
 			/>
 
-			{displayLanguage &&
-				<SideLanguageMenu
-					setDisplay={setDisplayLanguage}
-				/>}
+			<SideLanguageMenu
+				setDisplay={setDisplayLanguage}
+				display={displayLanguage}
+			/>
 
-			{displayLogin && <Login
+			<Login
 				setDisplayProfile={setDisplayProfile}
 				setDisplay={setDisplayLogin}
-			/>}
+				display={displayLogin}
+			/>
 
 		</>
 	);
