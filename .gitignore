@@ -25,3 +25,4 @@ backend/website/migrations
 
 
 /frontend/node_modules/
+/frontend/src/Config/config.js

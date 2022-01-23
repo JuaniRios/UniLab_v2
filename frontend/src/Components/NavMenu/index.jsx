@@ -16,8 +16,10 @@ export default function NavMenu(props) {
 	const [displaySearch, setDisplaySearch] = useState(false)
 	const [displayMobile, setDisplayMobile] = useState(false)
 
+	// if you were redirected because you had no auth, open login menu
 	if (props.redirected) setDisplayLogin(props.redirected)
 
+	// disable scroll when a menu is on screen
 	useEffect( () => {
 		if (displayLogin || displayProfile || displaySearch || displayLanguage) {
 			document.body.classList.add("no-scroll")
@@ -28,13 +30,13 @@ export default function NavMenu(props) {
 		}
 	}, [displayLogin,displayLanguage,displayProfile,displaySearch])
 
+	// make it possible to close menus with escape key
 	useEffect(() => {
 		document.addEventListener("keyup", keyFuncNavMenu);
 		return () => {
 			document.removeEventListener("keyup", keyFuncNavMenu);
 		};
 	}, [displayLogin, displayProfile, displayLanguage, displaySearch]);
-
 	function keyFuncNavMenu(event) {
 		if (event.key === "Escape") {
 
