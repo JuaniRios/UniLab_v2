@@ -8,6 +8,7 @@ import SideProfileMenu from "./SideProfileMenu";
 import Login from "./Login";
 import {initialState} from "../../Context/reducer";
 import {useMessage} from "../../Context/context";
+import {CSSTransition} from "react-transition-group";
 
 export default function NavMenu(props) {
 	const [displayLogin, setDisplayLogin] = useState(false)
@@ -64,11 +65,12 @@ return (
 					setDisplay={setDisplaySearch}
 				/>}
 
-			{displayProfile &&
-				<SideProfileMenu
-					setDisplay={setDisplayProfile}
-					setDisplayLogin={setDisplayLogin}
-				/>}
+
+			<SideProfileMenu
+				setDisplay={setDisplayProfile}
+				display={displayProfile}
+				setDisplayLogin={setDisplayLogin}
+			/>
 
 			{displayLanguage &&
 				<SideLanguageMenu
