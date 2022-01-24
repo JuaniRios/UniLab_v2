@@ -5,11 +5,11 @@ import "./SideProfileMenu.css";
 import profile_icon from "../../Assets/img/top-nav/profile.png";
 import { useAuthState } from "../../Context";
 import { NavLink } from "react-router-dom";
+import {CSSTransition} from "react-transition-group";
 
 export default function SideProfileMenu(props) {
 	const state = useAuthState();
 	const userData = state.userData;
-	const setLoginClasses = props.setLoginClasses;
 
 	const profileButton = (
 		<NavLink to="/profile" className={`settings-button`}>
@@ -107,22 +107,27 @@ export default function SideProfileMenu(props) {
 
 	return (
 		<>
-			<div className={`overlay shown`} onClick={() => {props.setDisplay(false)}} />
-			<aside className={`profile-menu profile-menu-opened shadow`}>
-				<button
-					className={`profile-close-button close-button`}
-					onClick={() => {props.setDisplay(false)}}
-				/>
+			<CSSTransition
+				in={props.display}
+				unmountOnExit
+				timeout={500}
+				classNames={"menu-primary"}>
+				<div className={`profile-menu shadow`}>
+					<button
+						className={`profile-close-button close-button`}
+						onClick={() => {props.setDisplay(false)}}
+					/>
 
-				{userData && signedInUserData}
-				{!userData && notSignedInMessage}
+					{userData && signedInUserData}
+					{!userData && notSignedInMessage}
 
-				{/* MENU BUTTONS */}
-				<div className={`profile-menu-btn-holder w100`}>
-					{userData && userHTML}
-					{!userData && notSignedInButtons}
+					{/* MENU BUTTONS */}
+					<div className={`profile-menu-btn-holder w100`}>
+						{userData && userHTML}
+						{!userData && notSignedInButtons}
+					</div>
 				</div>
-			</aside>
+			</CSSTransition>
 		</>
 	);
 }
