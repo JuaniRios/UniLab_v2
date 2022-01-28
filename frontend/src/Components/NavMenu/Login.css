@@ -1,16 +1,16 @@
-.menu-login-enter{
+.menu-login-enter {
 	opacity: 0;
 	transform: scale(0.9);
 }
-.menu-login-enter-active{
+.menu-login-enter-active {
 	opacity: 1;
 	transform: translateX(0);
 	transition: opacity 300ms, transform 300ms;
 }
-.menu-login-exit{
+.menu-login-exit {
 	opacity: 1;
 }
-.menu-login-exit-active{
+.menu-login-exit-active {
 	opacity: 0;
 	transform: scale(0.9);
 	transition: opacity 300ms, transform 300ms;
@@ -19,7 +19,7 @@
 .login-form {
 	display: flex;
 	z-index: 10500 !important;
-	position: absolute;
+	position: fixed;
 	align-items: center;
 	flex-direction: column;
 	--form-width: min(30vw, 500px);
@@ -28,12 +28,9 @@
 	overflow-y: auto;
 	border-radius: 10px;
 	padding: 3rem;
-	left: calc(50% - var(--form-width)/2);
-	/*right: 0;*/
-	top: 25%;
-	/*bottom: 2%;*/
-	margin: auto;
-
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 .signin-buttons {
 	display: flex;

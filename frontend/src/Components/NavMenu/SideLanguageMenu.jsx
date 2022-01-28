@@ -7,24 +7,21 @@ import spanish_icon from "../../Assets/img/languages/es.webp";
 import german_icon from "../../Assets/img/languages/de.webp";
 import russian_icon from "../../Assets/img/languages/ru.webp";
 import french_icon from "../../Assets/img/languages/fr.webp";
-import {CSSTransition} from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 
 export default function SideLanguageMenu(props) {
 	return (
 		<>
-
-			<CSSTransition
-				in={props.display}
-				unmountOnExit
-				timeout={500}
-				classNames={"menu-lang"}>
+			<CSSTransition in={props.display} unmountOnExit timeout={500} classNames={"menu-lang"}>
 				<aside className={`language-menu language-menu-opened shadow`}>
 					<button
 						className={`language-close-button close-button`}
-						onClick={() => {props.setDisplay(false)}}
+						onClick={() => {
+							props.setDisplay(false);
+						}}
 					/>
 
-					<h2>Select Language</h2>
+					<h2 className={`select-lang`}>Select Language</h2>
 
 					<div className={`lang-menu-btn-holder w100`}>
 						<a className={`language-links`} href="../en">

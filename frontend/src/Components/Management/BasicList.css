@@ -1,0 +1,21 @@
+.basic-list {
+	border-radius: 10px;
+	width: 35rem;
+	height: 100%;
+	scrollbar-color: transparent transparent;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+}
+.basic-list:hover {
+	scrollbar-color: lightgray rgba(0, 0, 0, 0);
+}
+.basic-list::-webkit-scrollbar {
+	opacity: 0 !important;
+}
+.basic-list:hover:-webkit-scrollbar {
+	opacity: 1 !important;
+}
+.basic-list-title {
+	margin: 0 0 1rem 0;
+}

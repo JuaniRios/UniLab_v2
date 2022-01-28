@@ -1,5 +1,5 @@
 .search-wrapper {
-	height: 5vh;
+	height: var(--topnav-height);
 	width: 100%;
 	background-color: var(--unilab-white);
 	top: 0;
@@ -49,18 +49,18 @@
 	position: relative !important;
 }
 
-.menu-search-enter{
-	position:absolute;
+.menu-search-enter {
+	position: absolute;
 	transform: translateY(-110%);
 }
-.menu-search-enter-active{
+.menu-search-enter-active {
 	transform: translateY(0%);
 	transition: all 500ms ease;
 }
-.menu-search-exit{
+.menu-search-exit {
 	position: absolute;
 }
-.menu-search-exit-active{
+.menu-search-exit-active {
 	transform: translateY(-110%);
 	transition: all 500ms ease;
 }

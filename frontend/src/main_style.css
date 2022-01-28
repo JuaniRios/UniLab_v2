@@ -693,3 +693,16 @@ tr:nth-child(even) {
 .custom-scroll::-webkit-scrollbar-thumb:hover {
 	background: #555;
 }
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hidden-scroll::-webkit-scrollbar {
+	display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hidden-scroll {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+.c-t {
+	text-align: center;
+}

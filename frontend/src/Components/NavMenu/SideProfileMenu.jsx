@@ -5,7 +5,7 @@ import "./SideProfileMenu.css";
 import profile_icon from "../../Assets/img/top-nav/profile.png";
 import { useAuthState } from "../../Context";
 import { NavLink } from "react-router-dom";
-import {CSSTransition} from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 
 export default function SideProfileMenu(props) {
 	const state = useAuthState();
@@ -57,7 +57,12 @@ export default function SideProfileMenu(props) {
 	}
 	const notSignedInButtons = (
 		<>
-			<button onClick={() => {props.setDisplayLogin(true)}} className={`settings-button`}>
+			<button
+				onClick={() => {
+					props.setDisplayLogin(true);
+				}}
+				className={`settings-button`}
+			>
 				<div className={`login-picture`} />
 				{/* {# Translators: End of side profile menu #} */}
 				<p className={`w80 bold`}>Sign In</p>
@@ -88,7 +93,7 @@ export default function SideProfileMenu(props) {
 		</div>
 	);
 	const notSignedInMessage = (
-		<div className={`w100 flex-col j-c-c a-i-c`}>
+		<div className={`profile-user-data w100 flex-col j-c-c a-i-c`}>
 			<NavLink to="/profile">
 				<img
 					className={`profile-picture`}
@@ -111,11 +116,14 @@ export default function SideProfileMenu(props) {
 				in={props.display}
 				unmountOnExit
 				timeout={500}
-				classNames={"menu-primary"}>
+				classNames={"menu-primary"}
+			>
 				<div className={`profile-menu shadow`}>
 					<button
 						className={`profile-close-button close-button`}
-						onClick={() => {props.setDisplay(false)}}
+						onClick={() => {
+							props.setDisplay(false);
+						}}
 					/>
 
 					{userData && signedInUserData}

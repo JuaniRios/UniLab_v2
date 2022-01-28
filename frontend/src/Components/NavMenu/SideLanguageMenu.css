@@ -3,19 +3,18 @@
 		width: 20rem;
 	}
 
-	.menu-lang-enter{
-	position:absolute;
-	transform: translateX(110%);
-
+	.menu-lang-enter {
+		position: absolute;
+		transform: translateX(110%);
 	}
-	.menu-lang-enter-active{
+	.menu-lang-enter-active {
 		transform: translateX(0%);
 		transition: all 500ms ease;
 	}
-	.menu-lang-exit{
+	.menu-lang-exit {
 		position: absolute;
 	}
-	.menu-lang-exit-active{
+	.menu-lang-exit-active {
 		transform: translateX(110%);
 		transition: all 500ms ease;
 	}
@@ -34,7 +33,7 @@
 	}
 }
 .language-menu {
-	right:0;
+	right: 0;
 	position: fixed;
 	display: flex;
 	flex-direction: column;
@@ -44,6 +43,10 @@
 	top: 0;
 	background-color: var(--unilab-white);
 	transition: 0.4s linear;
+	justify-content: flex-end;
+}
+.select-lang {
+	margin-bottom: 3rem;
 }
 #language-picture {
 	height: 25vh;
