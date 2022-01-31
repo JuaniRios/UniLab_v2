@@ -96,15 +96,12 @@ class CommentList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         user = self.request.user
-
-        if user.user_type == user.UserType.EMPLOYER:
-            company_url = self.request.query_params.get('company')
-            if company_url is None:
-                raise ValidationError('No company specified in query params. Employer type users should always attach a company to their request')
+        company_url = self.request.query_params.get('company')
+        if company_url:
             company = Company.objects.filter(pk=url_to_pk(company_url)).first()
             serializer.save(company=company, owner=user)
 
-        elif user.user_type == user.UserType.STUDENT or user.user_type == user.UserType.ADMIN:
+        else:
             serializer.save(owner=user)
 
     def get_queryset(self):
@@ -266,15 +263,12 @@ class PostList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         user = self.request.user
-
-        if user.user_type == user.UserType.EMPLOYER:
-            company_url = self.request.query_params.get('company')
-            if company_url is None:
-                raise ValidationError('No company specified in query params. Employer type users should always attach a company to their request')
+        company_url = self.request.query_params.get('company')
+        if company_url:
             company = Company.objects.filter(pk=url_to_pk(company_url)).first()
             serializer.save(company=company, owner=user)
 
-        elif user.user_type == user.UserType.STUDENT or user.user_type == user.UserType.ADMIN:
+        else:
             serializer.save(owner=user)
 
     def get_queryset(self):
@@ -365,15 +359,12 @@ class VoteList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         user = self.request.user
-
-        if user.user_type == user.UserType.EMPLOYER:
-            company_url = self.request.query_params.get('company')
-            if company_url is None:
-                raise ValidationError('No company specified in query params. Employer type users should always attach a company to their request')
+        company_url = self.request.query_params.get('company')
+        if company_url:
             company = Company.objects.filter(pk=url_to_pk(company_url)).first()
             serializer.save(company=company, user=user)
 
-        elif user.user_type == user.UserType.STUDENT or user.user_type == user.UserType.ADMIN:
+        else:
             serializer.save(user=user)
 
     def delete(self, request, *args, **kwargs):

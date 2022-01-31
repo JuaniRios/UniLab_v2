@@ -29,12 +29,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='user_image/%Y/%m/%D/', default='defaults/profile.png')
 
-    class UserType(models.IntegerChoices):
-        ADMIN = 1, _('Admin')
-        EMPLOYER = 2, _('Employer')
-        STUDENT = 3, _('Student')
-
-    user_type = models.PositiveSmallIntegerField(choices=UserType.choices)
+    # class UserType(models.IntegerChoices):
+    #     ADMIN = 1, _('Admin')
+    #     EMPLOYER = 2, _('Employer')
+    #     STUDENT = 3, _('Student')
+    #
+    # user_type = models.PositiveSmallIntegerField(choices=UserType.choices)
     date_joined = models.DateTimeField(default=timezone.now)
     voted_posts = models.ManyToManyField(Post, blank=True, through='Vote', related_name='votes')
 
@@ -49,16 +49,24 @@ class User(AbstractBaseUser, PermissionsMixin):
         return True
 
     @property
-    def is_superuser(self):
-        return self.user_type == 1
+    def is_admin(self):
+        return False
+
+    # @property
+    # def is_company(self):
+    #     return self.user_type in (1, 2)
+    #
+    # @property
+    # def is_student(self):
+    #     return self.user_type in (1, 3)
 
     @property
-    def is_company(self):
-        return self.user_type in (1, 2)
+    def allowed_company_creation(self):
+        return False
 
     @property
-    def is_student(self):
-        return self.user_type in (1, 3)
+    def allowed_university_creation(self):
+        return False
 
     def __str__(self):
         return self.email

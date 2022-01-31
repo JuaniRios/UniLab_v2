@@ -15,7 +15,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     companies = serializers.HyperlinkedRelatedField(many=True, view_name='company-detail', queryset=Company.objects.all(), required=False)
     password = serializers.CharField(write_only=True)
     user_data = serializers.HyperlinkedRelatedField(many=False, view_name='userdata-detail', read_only=True)
-    user_type_verbose = serializers.SerializerMethodField()
+    # user_type_verbose = serializers.SerializerMethodField()
     voted_posts = serializers.HyperlinkedRelatedField(many=True, view_name='post-detail', queryset=Post.objects.all(), required=False)
     occupation = serializers.SerializerMethodField()
 
@@ -38,16 +38,15 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             password=validated_data['password'],
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
-            user_type=validated_data['user_type'],
         )
         UserData.objects.create(user=user)
 
         return user
 
-    def get_user_type_verbose(self, obj):
-        int_type = obj.user_type
-        result = UserModel.UserType(int_type).label
-        return result
+    # def get_user_type_verbose(self, obj):
+    #     int_type = obj.user_type
+    #     result = UserModel.UserType(int_type).label
+    #     return result
 
     def get_occupation(self, obj):
         return obj.user_data.occupation
@@ -182,17 +181,15 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
     def create_user_vote(self, post):
         # show what the user requesting the api voted
         user = self.context['request'].user
-        if user.user_type == user.UserType.EMPLOYER:
+        company_url = self.context['request'].query_params.get('company')
+        if company_url:
             company_url = self.context['request'].query_params.get('company')
             assert company_url is not None, "Employer user should always specify a company in query (?company=url)"
             company_pk = url_to_pk(company_url)
             company = Company.objects.filter(pk=company_pk).first()
             vote = Vote.objects.filter(post=post, company=company).first()
-        elif user.user_type == user.UserType.STUDENT:
-            vote = Vote.objects.filter(post=post, user=user).first()
-
         else:
-            vote = None
+            vote = Vote.objects.filter(post=post, user=user).first()
 
         vote_label = None
         if vote:

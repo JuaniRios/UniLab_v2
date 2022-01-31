@@ -9,6 +9,7 @@ class IsOwner(permissions.BasePermission):
     """
     Custom permission to only allow owners and super-admins of an object to edit it.
     """
+
     # makes POST requests valid for unauthenticated users
     def has_permission(self, request, view):
         return True
@@ -18,7 +19,7 @@ class IsOwner(permissions.BasePermission):
             return True
 
         else:
-            if request.user.is_superuser:
+            if request.user.is_admin:
                 return True
 
             if isinstance(obj, User):
@@ -53,10 +54,10 @@ class IsCompanyOrReadOnly(permissions.BasePermission):
             if isinstance(request.user, AnonymousUser):
                 return False
 
-            if request.user.is_superuser:
+            if request.user.is_admin:
                 return True
 
-            elif request.user.is_company:
+            elif request.user.allowed_company_creation:
                 return True
 
             else:
@@ -68,15 +69,13 @@ class IsAdminOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return request.user.is_authenticated
         else:
-            return request.user.is_superuser
-
-
+            return request.user.is_admin
 
 
 class CompanyOwner(permissions.BasePermission):
     """"Check that the company creating the job is owned by the user"""
     def has_permission(self, request, view):
-        if request.user.is_superuser:
+        if request.user.is_admin:
             return True
 
         elif request.method in permissions.SAFE_METHODS:
