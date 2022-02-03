@@ -7,6 +7,7 @@ import profile_icon from "../../Assets/img/profile.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Loader from "../Loader";
+import { NavLink } from "react-router-dom";
 const element = <FontAwesomeIcon icon={faSearch} size="1x" color="gray" />;
 
 export default function Management(props) {
@@ -65,7 +66,7 @@ export default function Management(props) {
 
 	return (
 		<>
-			<main className={`main-content`}>
+			<main className={`main-content-management`}>
 				<div className={`admin-menu`}>
 					<div
 						className={`admin-menu-item ${universities ? "active-item" : ""}`}
@@ -79,6 +80,9 @@ export default function Management(props) {
 					>
 						Companies
 					</div>
+					<NavLink to={`/`} className={`admin-menu-item`}>
+						Back to UniLab
+					</NavLink>
 				</div>
 				<div
 					className={`admin-content content-${
@@ -254,6 +258,66 @@ export default function Management(props) {
 								/>
 							</div>
 							<Loader size="3" color="orange" />
+							<div className={`basic-list-item shadow`}>
+								{/* An example list item */}
+								<img
+									className={`basic-list-item-icon`}
+									src={profile_icon}
+									alt="user"
+								/>
+								FirstnameFirstname LastnameLastname
+								<div className={`basic-list-item-btn noselect`} tabIndex={1}>
+									ADD
+								</div>
+							</div>
+							<div className={`basic-list-item shadow`}>
+								{/* An example list item */}
+								<img
+									className={`basic-list-item-icon`}
+									src={profile_icon}
+									alt="user"
+								/>
+								FirstnameFirstname LastnameLastname
+								<div className={`basic-list-item-btn noselect`} tabIndex={1}>
+									ADD
+								</div>
+							</div>
+							<div className={`basic-list-item shadow`}>
+								{/* An example list item */}
+								<img
+									className={`basic-list-item-icon`}
+									src={profile_icon}
+									alt="user"
+								/>
+								FirstnameFirstname LastnameLastname
+								<div className={`basic-list-item-btn noselect`} tabIndex={1}>
+									ADD
+								</div>
+							</div>
+							<div className={`basic-list-item shadow`}>
+								{/* An example list item */}
+								<img
+									className={`basic-list-item-icon`}
+									src={profile_icon}
+									alt="user"
+								/>
+								FirstnameFirstname LastnameLastname
+								<div className={`basic-list-item-btn noselect`} tabIndex={1}>
+									ADD
+								</div>
+							</div>
+							<div className={`basic-list-item shadow`}>
+								{/* An example list item */}
+								<img
+									className={`basic-list-item-icon`}
+									src={profile_icon}
+									alt="user"
+								/>
+								FirstnameFirstname LastnameLastname
+								<div className={`basic-list-item-btn noselect`} tabIndex={1}>
+									ADD
+								</div>
+							</div>
 							<div className={`basic-list-item shadow`}>
 								{/* An example list item */}
 								<img

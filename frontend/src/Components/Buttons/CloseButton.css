@@ -20,10 +20,11 @@
 	content: "";
 	position: absolute;
 	display: block;
-	height: 5%;
+	height: 3%;
 	width: 50%;
 	background-color: var(--unilab-orange);
 	transition: all 0.25s ease-out;
+	border-radius: 50px;
 }
 .close-btn:hover {
 	background-color: var(--gray-hover);

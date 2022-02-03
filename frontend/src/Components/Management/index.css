@@ -1,4 +1,4 @@
-.main-content {
+.main-content-management {
 	flex-direction: row !important;
 	height: 100vh !important;
 	width: 100% !important;
@@ -26,6 +26,16 @@
 	padding: 1rem;
 	display: flex;
 	flex-direction: column;
+	scrollbar-color: transparent transparent;
+}
+.add-new-field:hover {
+	scrollbar-color: lightgray rgba(0, 0, 0, 0);
+}
+.add-new-field::-webkit-scrollbar {
+	opacity: 0 !important;
+}
+.add-new-field:hover:-webkit-scrollbar {
+	opacity: 1 !important;
 }
 .add-new-input-field {
 	padding: 1rem;
@@ -48,6 +58,10 @@
 	flex-grow: 1;
 }
 .admin-menu-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 	padding: 2rem;
 	cursor: pointer;
 	font-size: 1rem;
