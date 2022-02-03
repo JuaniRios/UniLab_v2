@@ -94,7 +94,7 @@ WSGI_APPLICATION = "UniLab.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "unilab_db",
+        "NAME": "unilab_db_api_rework",
         "USER": "db_admin",
         "PASSWORD": "UniLab#93580",
         "HOST": "localhost",
