@@ -61,34 +61,6 @@ export default function SignupForm(props) {
 			"method": "POST",
 		}
 
-		// async function _apiCall() {
-		//
-		// 	const requestOptions = {
-		// 		method: "POST",
-		// 		headers: {
-		// 			"Content-Type": "application/json",
-		// 			Accept: "application/json",
-		// 		},
-		// 		body: JSON.stringify({
-		//
-		// 		}),
-		// 	};
-		//
-		// 	const url = config.django_api + "users";
-		// 	try {
-		// 		const response = await fetch(url, requestOptions);
-		// 		if (!response.ok) {
-		// 			console.log("response not ok. error is " + response.status);
-		//
-		// 			return false;
-		// 		} else {
-		// 			return true;
-		// 		}
-		// 	} catch (e) {
-		// 		console.log(e);
-		// 	}
-		// }
-
 		if (dataIsValid()) {
 			try {
 				await apiCall("users", null, params) // if api call is unsuccessful, then catch block is executed

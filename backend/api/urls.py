@@ -78,7 +78,10 @@ urlpatterns += [
     path('api/applications/<int:pk>',
          views.ApplicationDetail.as_view(), name='application-detail'),
 
-    path('api/change-password', views.UpdatePassword.as_view(), name='updatepassword')
+    path('api/change-password', views.UpdatePassword.as_view(), name='updatepassword'),
+
+    path('api/company-admins', views.CompanyAdminList.as_view(), name="companyadmin-list"),
+    path('api/company-admins/<int:pk>', views.CompanyAdminDetail.as_view(), name="companyadmin-detail")
 
 ]
 

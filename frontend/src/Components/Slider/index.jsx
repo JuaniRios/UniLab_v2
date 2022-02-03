@@ -5,6 +5,7 @@ import SliderCard from "./SliderCard";
 import Loader from "../Loader";
 // STYLES
 import "./Slider.css";
+import apiCall from "../HelperFunctions/apiCall";
 
 export default function Slider(props) {
 	const authState = useAuthState();
@@ -48,8 +49,15 @@ export default function Slider(props) {
 		slider.current.style.width = `${sliderWidth}rem`;
 		slider.current.style.left = "0rem";
 	});
+
 	useEffect(() => {
-		fetchContent(contentType, page).then((data) => {
+		const params = {
+			"method": "GET",
+			"page": page
+		}
+		apiCall(contentType, null, params).
+
+		then(data=>{
 			const items = data.results;
 			let newCards = [];
 			for (let i = 0; i < items.length; i++) {
@@ -58,7 +66,10 @@ export default function Slider(props) {
 			}
 			setLoaderState("hidden");
 			setCards((oldCards) => oldCards.concat(newCards));
-		});
+
+		}).catch(error=> {
+			console.log(error)
+		})
 	}, [page]);
 
 	// TODO: Pagination

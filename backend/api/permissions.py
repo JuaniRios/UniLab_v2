@@ -19,8 +19,6 @@ class IsOwner(permissions.BasePermission):
             return True
 
         else:
-            if request.user.is_admin:
-                return True
 
             if isinstance(obj, User):
                 return obj == request.user
@@ -54,9 +52,6 @@ class IsCompanyOrReadOnly(permissions.BasePermission):
             if isinstance(request.user, AnonymousUser):
                 return False
 
-            if request.user.is_admin:
-                return True
-
             elif request.user.allowed_company_creation:
                 return True
 
@@ -68,18 +63,16 @@ class IsAdminOrReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:
             return request.user.is_authenticated
-        else:
-            return request.user.is_admin
 
 
 class CompanyOwner(permissions.BasePermission):
     """"Check that the company creating the job is owned by the user"""
     def has_permission(self, request, view):
-        if request.user.is_admin:
+        if request.method in permissions.SAFE_METHODS:
             return True
 
-        elif request.method in permissions.SAFE_METHODS:
-            return True
+        elif request.user.is_anonymous:
+            return False
 
         else:
             owner_url = request.POST.get('owner')
@@ -89,3 +82,4 @@ class CompanyOwner(permissions.BasePermission):
                 self.message = "Please add the company owner url"
                 return False
             return owner in request.user.companies.all()
+

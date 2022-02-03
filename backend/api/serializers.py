@@ -27,8 +27,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     # hide empty companies attribute for students
     def to_representation(self, instance):
         ret = super().to_representation(instance)
-        if instance.user_type == UserModel.UserType.STUDENT:
-            del ret['companies']
+        # if instance.user_type == UserModel.UserType.STUDENT:
+        #     del ret['companies']
 
         return ret
 
@@ -98,6 +98,26 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
         model = Company
         # fields = ('url', 'name', 'owner', 'publish_date', 'description', 'video_url', 'website_url', 'rating')
         fields = "__all__"
+
+
+class CompanyAdminSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.HyperlinkedRelatedField(view_name='user-detail', queryset=User.objects.all())
+    company = serializers.HyperlinkedRelatedField(view_name='company-detail', queryset=Company.objects.all())
+
+    class Meta:
+        model = CompanyAdmin
+        fields = '__all__'
+
+    def validate(self, data):
+        # check for duplicates
+        user = data['user']
+        company = data['company']
+
+        existing = CompanyAdmin.objects.filter(user=user, company=company).first()
+        if existing:
+            return serializers.ValidationError("User already an admin")
+
+        return data
 
 
 class CompanyPicturesSerializer(serializers.HyperlinkedModelSerializer):

@@ -79,7 +79,7 @@ export default async function apiCall(resource, token, params={}) {
             throw JSON.stringify(await response.json())
         }
     } catch (error) {
-        console.log(error.message)
+        console.log(error)
         throw new Error(error)
     }
 

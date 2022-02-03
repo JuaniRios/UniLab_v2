@@ -5,7 +5,6 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import filters
 from rest_framework import generics, status
-from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -84,6 +83,18 @@ class ApplicationList(generics.ListCreateAPIView):
         serializer.save(user=user)
 
 
+class CompanyAdminList(generics.ListCreateAPIView):
+    queryset = CompanyAdmin.objects.all()
+    serializer_class = CompanyAdminSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class CompanyAdminDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = CompanyAdmin.objects.all()
+    serializer_class = CompanyAdminSerializer
+    permission_classes = [IsAuthenticated]
+
+
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
@@ -136,6 +147,13 @@ class CompanyList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+        admin = CompanyAdminSerializer(data={"user": serializer.data["owner"], "company": serializer.data["url"],
+                                             "post_permission": "True", "comment_permission": "True",
+                                             "create_jobs_permission": "True", "accept_applicants_permission": "True",
+                                             "view_applicants_permission": "True", "edit_profile_permission": "True"})
+        admin.is_valid()
+        admin.save()
+
 
     def get_queryset(self):
         queryset = Company.objects.all()
@@ -331,7 +349,6 @@ class UserDataList(generics.ListCreateAPIView):
         user = self.request.query_params.get("user")
         pk = re.search(r"users/(\d+)", user)[1]
         return UserData.objects.filter(user=pk)
-
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):

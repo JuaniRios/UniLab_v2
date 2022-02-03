@@ -44,29 +44,17 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     objects = UserManager()
 
+    allowed_company_creation = models.BooleanField(default=False)
+    allowed_university_creation = models.BooleanField(default=False)
+
+
     @property
     def is_authenticated(self):
         return True
 
-    @property
-    def is_admin(self):
-        return False
-
     # @property
-    # def is_company(self):
-    #     return self.user_type in (1, 2)
-    #
-    # @property
-    # def is_student(self):
-    #     return self.user_type in (1, 3)
-
-    @property
-    def allowed_company_creation(self):
-        return False
-
-    @property
-    def allowed_university_creation(self):
-        return False
+    # def is_admin(self):
+    #     return self.is_admin
 
     def __str__(self):
         return self.email
@@ -135,6 +123,7 @@ class Company(models.Model):
     website_url = models.CharField(max_length=200, blank=True)
     publish_date = models.DateField(default=timezone.now)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='companies', on_delete=models.CASCADE)
+    admins = models.ManyToManyField(User, blank=True, through='CompanyAdmin', related_name='company_admins')
     image = models.ImageField(upload_to='company_image/%Y/%m/%D/', default='defaults/company.jpg')
 
     class EmployeeRange(models.IntegerChoices):
@@ -166,6 +155,22 @@ class Company(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CompanyAdmin(models.Model):
+    class Meta:
+        verbose_name = _('Company Admin')
+        verbose_name_plural = _('Company Admins')
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
+
+    post_permission = models.BooleanField(default=False)
+    comment_permission = models.BooleanField(default=False)
+    create_jobs_permission = models.BooleanField(default=False)
+    accept_applicants_permission = models.BooleanField(default=False)
+    view_applicants_permission = models.BooleanField(default=False)
+    edit_profile_permission = models.BooleanField(default=False)
 
 
 class Vote(models.Model):
