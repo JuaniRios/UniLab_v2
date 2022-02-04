@@ -49,9 +49,11 @@
 	font-family: "Segoe UI", sans-serif;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
 	box-sizing: border-box;
 	word-wrap: break-word;
 	background-repeat: no-repeat;
+	image-rendering: -webkit-optimize-contrast;
 }
 body {
 	margin: 0;
@@ -258,12 +260,17 @@ textarea {
 	box-shadow: none !important;
 }
 .noselect {
-	-webkit-touch-callout: none; /* iOS Safari */
-	-webkit-user-select: none; /* Safari */
-	-khtml-user-select: none; /* Konqueror HTML */
-	-moz-user-select: none; /* Old versions of Firefox */
-	-ms-user-select: none; /* Internet Explorer/Edge */
-	user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+	-webkit-touch-callout: none;
+	/*iOSSafari*/
+	-webkit-user-select: none;
+	/*Safari*/
+	-khtml-user-select: none;
+	/*KonquerorHTML*/
+	-moz-user-select: none;
+	/*OldversionsofFirefox*/
+	-ms-user-select: none;
+	/*InternetExplorer/Edge*/
+	user-select: none;
 }
 .noscroll {
 	overflow: hidden !important;
@@ -669,6 +676,7 @@ tr:nth-child(even) {
 	flex-direction: column;
 	height: calc(100vh - var(--topnav-height));
 	overflow-x: hidden;
+	position: relative;
 }
 .custom-scroll {
 	overflow-y: scroll;
@@ -687,7 +695,6 @@ tr:nth-child(even) {
 /* Handle */
 .custom-scroll::-webkit-scrollbar-thumb {
 	background: lightgray;
-	border-radius: 50px;
 }
 /* Handle on hover */
 .custom-scroll::-webkit-scrollbar-thumb:hover {

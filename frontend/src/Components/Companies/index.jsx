@@ -4,6 +4,7 @@ import Search from "../Search";
 import Slider from "../Slider";
 // ICONS
 import mainBackground from "../../Assets/img/vienna.jpg";
+import CompanyForm from "./CompanyForm";
 
 export default function Companies(props) {
 	document.title = "Companies - UniLab";
@@ -20,6 +21,7 @@ export default function Companies(props) {
 			<div className={`main-content-fixed`} style={mainFrameStyle}>
 				<Search searchType="companies" width="w60" />
 				<Slider contentType={"companies"} />
+				<CompanyForm></CompanyForm>
 			</div>
 		</>
 	);
