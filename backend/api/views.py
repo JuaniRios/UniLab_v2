@@ -88,11 +88,61 @@ class CompanyAdminList(generics.ListCreateAPIView):
     serializer_class = CompanyAdminSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        user = self.request.query_params.get("user")
+        company = self.request.query_params.get("company")
+        if user is None and company is None:
+            return self.queryset
+
+        if user is not None and company is None:
+            user_pk = re.search(r"users/(\d+)", user)[1]
+            return CompanyAdmin.objects.filter(user=user_pk)
+
+        if user is None and company is not None:
+            company_pk = re.search(r"companies/(\d+)", company)[1]
+            return CompanyAdmin.objects.filter(company=company_pk)
+
+        if user is not None and company is not None:
+            user_pk = re.search(r"users/(\d+)", user)[1]
+            company_pk = re.search(r"companies/(\d+)", company)[1]
+            return CompanyAdmin.objects.filter(company=company_pk, user=user_pk)
+
 
 class CompanyAdminDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = CompanyAdmin.objects.all()
     serializer_class = CompanyAdminSerializer
     permission_classes = [IsAuthenticated]
+
+
+class UniversityAdminDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UniversityAdmin.objects.all()
+    serializer_class = UniversityAdminSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class UniversityAdminList(generics.ListCreateAPIView):
+    queryset = UniversityAdmin.objects.all()
+    serializer_class = UniversityAdminSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.query_params.get("user")
+        university = self.request.query_params.get("university")
+        if user is None and university is None:
+            return self.queryset
+
+        if user is not None and university is None:
+            user_pk = re.search(r"users/(\d+)", user)[1]
+            return UniversityAdmin.objects.filter(user=user_pk)
+
+        if user is None and university is not None:
+            university_pk = re.search(r"companies/(\d+)", university)[1]
+            return UniversityAdmin.objects.filter(company=university_pk)
+
+        if user is not None and university is not None:
+            user_pk = re.search(r"users/(\d+)", user)[1]
+            university_pk = re.search(r"companies/(\d+)", university)[1]
+            return UniversityAdmin.objects.filter(company=university_pk, user=user_pk)
 
 
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -154,9 +204,40 @@ class CompanyList(generics.ListCreateAPIView):
         admin.is_valid()
         admin.save()
 
-
     def get_queryset(self):
         queryset = Company.objects.all()
+        email = self.request.query_params.get('email')
+        if email is not None:
+            user = User.objects.filter(email=email).first()
+            queryset = queryset.filter(owner=user)
+
+        return queryset
+
+
+class UniversityDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = University.objects.all()
+    serializer_class = UniversitySerializer
+    permission_classes = [IsCompanyOrReadOnly, IsOwner]
+
+
+class UniversityList(generics.ListCreateAPIView):
+    queryset = University.objects.all()
+    serializer_class = UniversitySerializer
+    permission_classes = [IsCompanyOrReadOnly]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name']
+    ordering = ['-id']
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+        admin = UniversityAdminSerializer(data={"user": serializer.data["owner"], "company": serializer.data["url"],
+                                                "post_permission": "True", "comment_permission": "True",
+                                                "accept_student_application_permission": "True", "edit_profile_permission": "True"})
+        admin.is_valid()
+        admin.save()
+
+    def get_queryset(self):
+        queryset = University.objects.all()
         email = self.request.query_params.get('email')
         if email is not None:
             user = User.objects.filter(email=email).first()
@@ -347,8 +428,11 @@ class UserDataList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user = self.request.query_params.get("user")
-        pk = re.search(r"users/(\d+)", user)[1]
-        return UserData.objects.filter(user=pk)
+        if user is not None:
+            pk = re.search(r"users/(\d+)", user)[1]
+            return UserData.objects.filter(user=pk)
+        else:
+            return UserData.objects.filter(user=self.request.user.id)
 
 
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):

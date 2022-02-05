@@ -159,8 +159,8 @@ class Company(models.Model):
 
 class CompanyAdmin(models.Model):
     class Meta:
-        verbose_name = _('Company Admin')
-        verbose_name_plural = _('Company Admins')
+        verbose_name = _('company Admin')
+        verbose_name_plural = _('company Admins')
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
@@ -171,6 +171,50 @@ class CompanyAdmin(models.Model):
     accept_applicants_permission = models.BooleanField(default=False)
     view_applicants_permission = models.BooleanField(default=False)
     edit_profile_permission = models.BooleanField(default=False)
+
+
+class University(models.Model):
+    class Meta:
+        verbose_name = _('university')
+        verbose_name_plural = _('universities')
+
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    rating = models.PositiveSmallIntegerField(blank=True, null=True)
+    video_url = models.CharField(max_length=200, blank=True)
+    website_url = models.CharField(max_length=200, blank=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='universities', on_delete=models.CASCADE)
+    admins = models.ManyToManyField(User, blank=True, through='UniversityAdmin', related_name='university_admins')
+    image = models.ImageField(upload_to='company_image/%Y/%m/%D/', default='defaults/company.jpg')
+
+    class StudentRange(models.IntegerChoices):
+        TINY = 1, _('1-20 students'),
+        SMALL = 2, _('21-100 students'),
+        MEDIUM = 3, _('101-200 students'),
+        LARGE = 4, _('201-500 students'),
+        HUGE = 5, _('501+ students')
+
+    student_range = models.IntegerField(choices=StudentRange.choices)
+
+    def __repr__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name
+
+
+class UniversityAdmin(models.Model):
+    class Meta:
+        verbose_name = _('university admin')
+        verbose_name_plural = _('university admins')
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    university = models.ForeignKey(University, on_delete=models.CASCADE)
+
+    post_permission = models.BooleanField(default=False)
+    comment_permission = models.BooleanField(default=False)
+    edit_profile_permission = models.BooleanField(default=False)
+    accept_student_application_permission = models.BooleanField(default=False)
 
 
 class Vote(models.Model):

@@ -53,6 +53,10 @@ export default async function apiCall(resource, token, params={}) {
             if ("search" in params) {
                 url += `search=${params.search}&`;
             }
+
+            if ("queries" in params) {
+                url += new URLSearchParams(params.queries) + "&"
+            }
             break
 
         case 'POST':

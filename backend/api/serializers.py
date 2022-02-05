@@ -10,48 +10,6 @@ port = conf_settings.PORT
 UserModel = get_user_model()
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    url = serializers.HyperlinkedIdentityField(view_name='user-detail')
-    companies = serializers.HyperlinkedRelatedField(many=True, view_name='company-detail', queryset=Company.objects.all(), required=False)
-    password = serializers.CharField(write_only=True)
-    user_data = serializers.HyperlinkedRelatedField(many=False, view_name='userdata-detail', read_only=True)
-    # user_type_verbose = serializers.SerializerMethodField()
-    voted_posts = serializers.HyperlinkedRelatedField(many=True, view_name='post-detail', queryset=Post.objects.all(), required=False)
-    occupation = serializers.SerializerMethodField()
-
-    class Meta:
-        model = UserModel
-        # fields = ('url', 'email', 'password', "first_name", 'last_name', 'user_type', 'user_type_verbose', 'companies', 'image', 'user_data')
-        fields = '__all__'
-
-    # hide empty companies attribute for students
-    def to_representation(self, instance):
-        ret = super().to_representation(instance)
-        # if instance.user_type == UserModel.UserType.STUDENT:
-        #     del ret['companies']
-
-        return ret
-
-    def create(self, validated_data):
-        user = UserModel.objects.create_user(
-            email=validated_data['email'],
-            password=validated_data['password'],
-            first_name=validated_data['first_name'],
-            last_name=validated_data['last_name'],
-        )
-        UserData.objects.create(user=user)
-
-        return user
-
-    # def get_user_type_verbose(self, obj):
-    #     int_type = obj.user_type
-    #     result = UserModel.UserType(int_type).label
-    #     return result
-
-    def get_occupation(self, obj):
-        return obj.user_data.occupation
-
-
 class EducationDataSerializer(serializers.HyperlinkedModelSerializer):
     user_data = serializers.HyperlinkedRelatedField(read_only=True, view_name='userdata-detail', many=False)
 
@@ -81,6 +39,7 @@ class UserDataSerializer(serializers.HyperlinkedModelSerializer):
     education_data = EducationDataSerializer(many=True, read_only=True)
     experience_data = ExperienceDataSerializer(many=True, read_only=True)
     skill_data = SkillDataSerializer(many=True, read_only=True)
+
 
     class Meta:
         model = UserData
@@ -120,6 +79,36 @@ class CompanyAdminSerializer(serializers.HyperlinkedModelSerializer):
         return data
 
 
+class UniversitySerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.HyperlinkedRelatedField(read_only=True, view_name='user-detail', many=False)
+    rating = serializers.ReadOnlyField()
+    student_range_verbose = serializers.CharField(source='get_student_range_display', read_only=True)
+
+    class Meta:
+        model = Company
+        fields = "__all__"
+
+
+class UniversityAdminSerializer(serializers.HyperlinkedModelSerializer):
+    user = serializers.HyperlinkedRelatedField(view_name='user-detail', queryset=User.objects.all())
+    university = serializers.HyperlinkedRelatedField(view_name='university-detail', queryset=University.objects.all())
+
+    class Meta:
+        model = CompanyAdmin
+        fields = '__all__'
+
+    def validate(self, data):
+        # check for duplicates
+        user = data['user']
+        university = data['university']
+
+        existing = CompanyAdmin.objects.filter(user=user, university=university).first()
+        if existing:
+            return serializers.ValidationError("User already an admin")
+
+        return data
+
+
 class CompanyPicturesSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.HyperlinkedRelatedField(view_name='company-detail', many=False, queryset=Company.objects.all())
 
@@ -153,6 +142,49 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
     #         return value
     #     else:
     #         raise serializers.ValidationError('Company does not belong to current user')
+
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    url = serializers.HyperlinkedIdentityField(view_name='user-detail')
+    companies = serializers.HyperlinkedRelatedField(many=True, view_name='company-detail', queryset=Company.objects.all(), required=False)
+    password = serializers.CharField(write_only=True)
+    user_data = serializers.HyperlinkedRelatedField(many=False, view_name='userdata-detail', read_only=True)
+    # user_type_verbose = serializers.SerializerMethodField()
+    voted_posts = serializers.HyperlinkedRelatedField(many=True, view_name='post-detail', queryset=Post.objects.all(), required=False)
+    occupation = serializers.SerializerMethodField()
+    company_admins = serializers.HyperlinkedRelatedField(many=True, view_name="companyadmin-detail", queryset=CompanyAdmin.objects.all(), required=False)
+    university_admins = serializers.HyperlinkedRelatedField(many=True, view_name="universityadmin-detail", queryset=UniversityAdmin.objects.all(), required=False)
+    class Meta:
+        model = UserModel
+        # fields = ('url', 'email', 'password', "first_name", 'last_name', 'user_type', 'user_type_verbose', 'companies', 'image', 'user_data')
+        fields = '__all__'
+
+    # hide empty companies attribute for students
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        # if instance.user_type == UserModel.UserType.STUDENT:
+        #     del ret['companies']
+
+        return ret
+
+    def create(self, validated_data):
+        user = UserModel.objects.create_user(
+            email=validated_data['email'],
+            password=validated_data['password'],
+            first_name=validated_data['first_name'],
+            last_name=validated_data['last_name'],
+        )
+        UserData.objects.create(user=user)
+
+        return user
+
+    # def get_user_type_verbose(self, obj):
+    #     int_type = obj.user_type
+    #     result = UserModel.UserType(int_type).label
+    #     return result
+
+    def get_occupation(self, obj):
+        return obj.user_data.occupation
 
 
 class CommentSerializer(serializers.HyperlinkedModelSerializer):

@@ -6,27 +6,51 @@ import profile_icon from "../../Assets/img/top-nav/profile.png";
 import { useAuthState } from "../../Context";
 import { NavLink } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import apiCall from "../HelperFunctions/apiCall";
 
 export default function SideProfileMenu(props) {
-	const state = useAuthState();
-	const userData = state.userData;
+	const {userData, token} = useAuthState();
+	// const [extraData, setExtraData] = useState()
+	// useEffect(() => {
+	// 	const params = {
+	// 		"method": "GET",
+	// 		"queries": {"user": userData.url}
+	// 	}
+	// 	apiCall("user-data", token, params).
+	// 	then(data => {
+	// 		setExtraData(data.results[0])
+	// 		console.log(data)
+	// 	}).
+	// 	catch(alert)
+	// },[userData])
 
-	const profileButton = (
+
+	const profileButton = <>
 		<NavLink to="/profile" className={`settings-button`}>
 			<div className={`prof-picture`} />
 			<p className={`w80 bold`}>My Profile</p>
 		</NavLink>
-	);
+	</>
 
-	const myCompaniesButton = (
+	const myCompaniesButton = <>
 		<NavLink to="my-companies" className={`settings-button`}>
 			<div className={`prof-picture`} />
 			<p className={`w80 bold`}>My Companies</p>
 		</NavLink>
-	);
+	</>
 
-	let signedInButtons = (
+	const myUniversitiesButton = <>
+		<NavLink to="my-universities" className={`settings-button`}>
+			<div className={`prof-picture`} />
+			<p className={`w80 bold`}>My Universities</p>
+		</NavLink>
+	</>
+
+	const signedInButtons =
 		<>
+			{profileButton}
+			{userData && userData.company_admins.length > 0 && myCompaniesButton}
+			{userData && userData.university_admins.length > 0 && myUniversitiesButton}
 			<NavLink to="/settings" className={`settings-button`}>
 				<div className={`settings-picture`} />
 				<p className={`w80 bold`}>Settings</p>
@@ -37,25 +61,8 @@ export default function SideProfileMenu(props) {
 				<p className={`w80 bold`}>Sign Out</p>
 			</NavLink>
 		</>
-	);
 
-	let userHTML;
-	if (userData.user_type_verbose === "Student") {
-		userHTML = (
-			<>
-				{profileButton}
-				{signedInButtons}
-			</>
-		);
-	} else if (userData.user_type_verbose === "Employer") {
-		userHTML = (
-			<>
-				{myCompaniesButton}
-				{signedInButtons}
-			</>
-		);
-	}
-	const notSignedInButtons = (
+	const notSignedInButtons =
 		<>
 			<button
 				onClick={() => {
@@ -73,9 +80,8 @@ export default function SideProfileMenu(props) {
 				<p className={`w80 bold`}>Sign Up</p>
 			</NavLink>
 		</>
-	);
 
-	const signedInUserData = (
+	const signedInUserData = <>
 		<div className={`profile-user-data w100 flex-col j-c-c a-i-c`}>
 			<NavLink to="/profile">
 				<img
@@ -89,10 +95,11 @@ export default function SideProfileMenu(props) {
 				{userData.first_name} {userData.last_name}
 			</div>
 
-			<div className={`verbose`}>{userData.user_type_verbose}</div>
+			<div className={`verbose`}>{userData.occupation}</div>
 		</div>
-	);
-	const notSignedInMessage = (
+	</>
+
+	const notSignedInMessage = <>
 		<div className={`profile-user-data w100 flex-col j-c-c a-i-c`}>
 			<NavLink to="/profile">
 				<img
@@ -108,7 +115,7 @@ export default function SideProfileMenu(props) {
 				Sign in to access your profile or create a new account.
 			</div>
 		</div>
-	);
+	</>
 
 	return (
 		<>
@@ -131,7 +138,7 @@ export default function SideProfileMenu(props) {
 
 					{/* MENU BUTTONS */}
 					<div className={`profile-menu-btn-holder w100`}>
-						{userData && userHTML}
+						{userData && signedInButtons}
 						{!userData && notSignedInButtons}
 					</div>
 				</div>
