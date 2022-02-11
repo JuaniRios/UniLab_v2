@@ -13,7 +13,7 @@ import { useAuthState } from "../../Context";
 
 export default function AttachImage(props) {
 	const avatar = props.avatar;
-	const [spanText, setSpanText] = [props.spanText, props.setSpanText];
+	const [spanText, setSpanText] = useState(props.label);
 	const [imgPreviewClass, setImgPreviewClass] = useState("shown");
 	const [image, setImage] = [props.image, props.setImage];
 	const [imageUrl, setImageUrl] = useState();

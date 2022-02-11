@@ -1,67 +1,92 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import CloseButton from "../Buttons/CloseButton";
 import BasicInput from "../Forms/BasicInput";
 import TextArea from "../Forms/TextArea";
 // STYLES
 import "./UniversityForm.css";
+import {CSSTransition} from "react-transition-group";
+import AttachImage from "../Forms/AttachImage";
+import SelectorInput from "../Forms/SelectorInput";
+import DoubleInputWrap from "../Forms/DoubleInputWrap";
+import GeneralForm from "../Forms/GeneralForm";
+import {useAuthState} from "../../Context";
+import apiCall from "../HelperFunctions/apiCall";
+import {useMessage} from "../../Context/context";
 
 export default function UniversityForm(props) {
-	const [formToggled, setFormToggled] = useState(false);
+	const {token} = useAuthState()
+	const [message, setMessage] = useMessage()
+	const [formToggled, setFormToggled] = props.toggle
+	const [uniName, setUniName] = useState("")
+	const [uniSize, setUniSize] = useState("")
+	const [uniCity, setUniCity] = useState("")
+	const [uniCountry, setUniCountry] = useState("")
+	const [uniWebsite, setUniWebsite] = useState("")
+	const [uniVideo, setUniVideo] = useState("")
+	const [uniDescription, setUniDescription] = useState("")
+	const [uniImage, setUniImage] = useState("")
+	const [formSubmit, setFormSubmit] = useState(false)
+
+	// useEffect(handleUniversitySubmit, [formSubmit])
+
+	async function handleUniversitySubmit(e) {
+		e.preventDefault()
+		const payload = {
+			"name": uniName,
+			"student_range": uniSize,
+			"city": uniCity,
+			"country": uniCountry,
+			"website_url": uniWebsite,
+			"video_url": uniVideo,
+			"description": uniDescription,
+			"image": uniImage
+		}
+		const params = {
+			"payload": payload,
+			"method": "POST"
+		}
+
+		apiCall("universities", token, params)
+			.then(response => {
+				console.log(response)
+				setFormToggled(false)
+				setMessage("University created successfully!")
+
+			})
+			.catch(error => {
+				console.log(error)
+				setMessage("There was an error creating the university. Please try again later.")
+			})
+
+	}
 
 	return (
 		<>
-			<div className={`uni-form-btn uni-button`} onClick={(e) => setFormToggled(true)}>
-				Create a university page
-			</div>
-			{formToggled ? (
-				<>
-					<div className={`overlay`} onClick={(e) => setFormToggled(false)}></div>
-					<div className={`uni-form-wrapper shadow`}>
-						<CloseButton
-							borderRadius="0 10px 0 10px"
-							position="absolute"
-							clickEvent={(e) => setFormToggled(false)}
-						/>
+			<GeneralForm formToggle={[formToggled, setFormToggled]} title={"Create a new University"}
+				handleSubmit={handleUniversitySubmit} submitText={"Submit"}>
 
-						<div className={`uni-form custom-scroll`}>
-							<h1 className={`uni-form-title`}>Create a new university page</h1>
+				<DoubleInputWrap>
+					<BasicInput label={"University Name"} required={true} value={uniName} setter={setUniName}/>
+					<SelectorInput label={"Size"} required={false} vale={uniSize} setter={setUniSize}
+						choices={{"<5000 Students": 1, "5000-15000 Students": 2, ">15000 Students": 3}}/>
+				</DoubleInputWrap>
 
-							<BasicInput
-								name="uni-name"
-								label="University name"
-								type="text"
-								width="100%"
-							/>
+				<DoubleInputWrap>
+					<BasicInput label={"City"} required={false} value={uniCity} setter={setUniCity}/>
+					<BasicInput label={"Country"} required={false} value={uniCountry} setter={setUniCountry}/>
+				</DoubleInputWrap>
 
-							<div className="double-input-wrap">
-								<BasicInput name="uni-city" label="City" type="text" width="47%" />
-								<BasicInput
-									name="uni-country"
-									label="Country"
-									type="text"
-									width="47%"
-								/>
-							</div>
+				<DoubleInputWrap>
+					<BasicInput label={"Website URL"} required={false} value={uniWebsite} setter={setUniWebsite}/>
+					<BasicInput label={"Video URL"} required={false} value={uniVideo} setter={setUniVideo}/>
+				</DoubleInputWrap>
 
-							<TextArea
-								name="uni-summary"
-								label="Summary (Optional)"
-								width="100%"
-								required="no"
-							/>
+				<TextArea label={"Summary"} required={false} value={uniDescription} setter={setUniDescription}/>
 
-							<TextArea
-								name="uni-summary"
-								label="Summary (Optional)"
-								width="100%"
-								required="no"
-							/>
+				<AttachImage label={"Upload Profile Picture"} required={false} image={uniImage} setImage={setUniImage}/>
 
-							<div className="uni-create-btn uni-button">Create</div>
-						</div>
-					</div>
-				</>
-			) : null}
+			</GeneralForm>
+
 		</>
 	);
 }

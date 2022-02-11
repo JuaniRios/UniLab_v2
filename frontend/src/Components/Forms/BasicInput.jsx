@@ -15,7 +15,10 @@ export function ErrorMessage(props) {
 
 export default function BasicInput(props) {
 	const name = props.name;
-	const width = props.width;
+	let width = "100%"
+	if ("width" in props) width = props.width;
+
+
 	const label = props.label;
 	let type = props.type;
 	let errors = props.errors;

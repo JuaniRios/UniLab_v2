@@ -183,18 +183,18 @@ class University(models.Model):
     rating = models.PositiveSmallIntegerField(blank=True, null=True)
     video_url = models.CharField(max_length=200, blank=True)
     website_url = models.CharField(max_length=200, blank=True)
+    city = models.CharField(max_length=200, blank=True)
+    country = models.CharField(max_length=200, blank=True)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='universities', on_delete=models.CASCADE)
     admins = models.ManyToManyField(User, blank=True, through='UniversityAdmin', related_name='university_admins')
-    image = models.ImageField(upload_to='company_image/%Y/%m/%D/', default='defaults/company.jpg')
+    image = models.ImageField(upload_to='company_image/%Y/%m/%D/', default='defaults/university.jpg')
 
     class StudentRange(models.IntegerChoices):
-        TINY = 1, _('1-20 students'),
-        SMALL = 2, _('21-100 students'),
-        MEDIUM = 3, _('101-200 students'),
-        LARGE = 4, _('201-500 students'),
-        HUGE = 5, _('501+ students')
+        SMALL = 1, _('<5000 students'),
+        MEDIUM = 2, _('5000-15000 students'),
+        LARGE = 3, _('>15000 students'),
 
-    student_range = models.IntegerField(choices=StudentRange.choices)
+    student_range = models.IntegerField(choices=StudentRange.choices, blank=True, null=True)
 
     def __repr__(self):
         return self.name

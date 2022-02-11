@@ -86,6 +86,9 @@ urlpatterns += [
     path('api/university-admins', views.UniversityAdminList.as_view(), name="universityadmin-list"),
     path('api/university-admins/<int:pk>', views.UniversityAdminDetail.as_view(), name="universityadmin-detail"),
 
+    path('api/universities', views.UniversityList.as_view(), name="university-list"),
+    path('api/universities/<int:pk>', views.UniversityDetail.as_view(), name="university-detail"),
+
 ]
 
 # urlpatterns = format_suffix_patterns(urlpatterns)

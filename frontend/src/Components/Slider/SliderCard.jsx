@@ -64,4 +64,27 @@ export default function SliderCard(props) {
 			</div>
 		);
 	}
+	if (props.contentType === "universities") {
+		if (content.name.length > 25) {
+			content.name = content.name.slice(0, 25) + "...";
+		}
+		return (
+			<div className={`slider-item shadow`}>
+				<div className={`slider-icon-holder`}>
+					<img className={`slider-icon`} src={content.image} alt="" />
+				</div>
+
+				<div className={`slider-info-holder`}>
+					<NavLink to="/" className={`w90`}>
+						<p className={`link-text slider-item-title`}>{content.name}</p>
+					</NavLink>
+
+					<p className={`gray-text`}>{content.student_range_verbose}</p>
+					<p>
+						<span className={`gray-text smaller-text`}>{content.rating}</span>
+					</p>
+				</div>
+			</div>
+		);
+	}
 }

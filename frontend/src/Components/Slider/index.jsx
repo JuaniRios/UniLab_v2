@@ -15,7 +15,7 @@ export default function Slider(props) {
 	const [cards, setCards] = useState([]);
 	const [page, setPage] = useState(1);
 	const [loaderState, setLoaderState] = useState("shown");
-	const header = contentType === "companies" ? "Companies" : "Jobs";
+	const header = props.contentType.charAt(0).toUpperCase() + props.contentType.slice(1);
 
 	function toggleSlide(direction) {
 		var currentLeft = parseInt(slider.current.style.left);
@@ -65,7 +65,7 @@ export default function Slider(props) {
 				newCards.push(icard);
 			}
 			setLoaderState("hidden");
-			setCards((oldCards) => oldCards.concat(newCards));
+			setCards(oldCards => oldCards.concat(newCards));
 
 		}).catch(error=> {
 			console.log(error)

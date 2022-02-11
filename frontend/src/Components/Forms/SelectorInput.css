@@ -1,0 +1,130 @@
+.select-container {
+	display: flex;
+	flex-direction: column;
+	margin-top: 1rem;
+}
+
+#default-select-option{
+	display:none
+}
+.select-field {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	margin: 1rem 0 1rem 0;
+}
+.select-field label {
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	display: block;
+	transition: 0.5s;
+	color: gray;
+	width: 100%;
+	padding: 1rem;
+	margin: 0 0 0.5rem 0;
+	z-index: 4;
+}
+.select-field select {
+	width: 100%;
+	outline: none;
+	border: none;
+	padding: 1rem;
+	margin: 0 0 0.5rem 0;
+	border-radius: 10px;
+}
+.select-field .bottom-line {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	display: block;
+	background-color: var(--unilab-gray);
+	width: 100%;
+	height: 2px;
+	border-radius: 10px;
+}
+.select-field .bottom-line::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	background-color: var(--unilab-orange);
+	width: 100%;
+	height: 100%;
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform 0.5s ease-in-out;
+	border-radius: 10px;
+}
+.select-field select:focus ~ .bottom-line:before,
+.select-field select:valid ~ .bottom-line:before {
+	transform: scaleX(1);
+	transform-origin: left;
+	transition: transform 0.5s ease-in-out;
+}
+.select-field select:focus + label,
+.select-field select:valid + label {
+	transform: translateY(-35px);
+	font-size: 0.95rem;
+	color: black;
+}
+.select-field select:focus,
+.select-field select:valid {
+	background-color: transparent;
+}
+.error-message {
+	width: 100%;
+	padding: 0.5rem 1rem;
+	color: white;
+	background-color: rgba(255, 0, 45, 0.62);
+	border-radius: 10px;
+}
+.select-field i {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	cursor: pointer;
+}
+.select-field i::before {
+	content: "";
+	height: 2px;
+	width: 20px;
+	background-color: black;
+	position: absolute;
+	transform: rotate(135deg);
+	transition: 0.1s;
+}
+.select-field i:hover::before {
+	opacity: 1;
+}
+.opaque::before {
+	opacity: 1;
+}
+.transparent::before {
+	opacity: 0;
+}
+.red-line {
+	transform: scaleX(1);
+	transform-origin: left;
+	transition: transform 0.5s ease-in-out;
+	background-color: red !important;
+}
+.select-field .special-select ~ .bottom-line:before {
+	transform: scaleX(1);
+	transform-origin: left;
+	transition: transform 0.5s ease-in-out;
+}
+.select-field .special-select + label {
+	transform: translateY(-35px);
+	font-size: 0.95rem;
+	color: black;
+}
+.select-field .special-select {
+	background-color: none;
+}

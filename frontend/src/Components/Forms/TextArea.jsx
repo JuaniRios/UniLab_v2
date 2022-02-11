@@ -5,10 +5,11 @@ import "./TextArea.css";
 import EmoteMenu from "../EmoteMenu";
 
 export default function TextArea(props) {
-	const width = props.width;
+	let width = "100%";
+	if ("width" in props) width = props.width;
 	const label = props.label;
 	const textarea = useRef(null);
-	const [message, setMessage] = [props.message, props.setMessage];
+	const [message, setMessage] = [props.value, props.setter];
 	const [cursorPosition, setCursorPosition] = useState("");
 	const handleChange = (e) => {
 		setMessage(e.target.value);
@@ -37,7 +38,7 @@ export default function TextArea(props) {
 				required
 				value={message}
 				onChange={handleChange}
-			></textarea>
+			/>
 		);
 	} else {
 		textareaBody = (
@@ -52,7 +53,7 @@ export default function TextArea(props) {
 				onBlur={emptyCheck}
 				value={message}
 				onChange={handleChange}
-			></textarea>
+			/>
 		);
 	}
 	return (
@@ -68,7 +69,7 @@ export default function TextArea(props) {
 					menuTop={props.menuTop ? props.menuTop : "10%"}
 					menuRight="0"
 				/>
-				<span className={`${errorCheck} bottom-line`}></span>
+				<span className={`${errorCheck} bottom-line`}/>
 			</div>
 		</div>
 	);

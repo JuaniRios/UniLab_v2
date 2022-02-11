@@ -82,10 +82,11 @@ class CompanyAdminSerializer(serializers.HyperlinkedModelSerializer):
 class UniversitySerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.HyperlinkedRelatedField(read_only=True, view_name='user-detail', many=False)
     rating = serializers.ReadOnlyField()
-    student_range_verbose = serializers.CharField(source='get_student_range_display', read_only=True)
+    student_range_verbose = serializers.CharField(source='get_student_range_display', read_only=True, allow_blank=True)
+
 
     class Meta:
-        model = Company
+        model = University
         fields = "__all__"
 
 
@@ -94,7 +95,7 @@ class UniversityAdminSerializer(serializers.HyperlinkedModelSerializer):
     university = serializers.HyperlinkedRelatedField(view_name='university-detail', queryset=University.objects.all())
 
     class Meta:
-        model = CompanyAdmin
+        model = UniversityAdmin
         fields = '__all__'
 
     def validate(self, data):
@@ -102,7 +103,7 @@ class UniversityAdminSerializer(serializers.HyperlinkedModelSerializer):
         user = data['user']
         university = data['university']
 
-        existing = CompanyAdmin.objects.filter(user=user, university=university).first()
+        existing = UniversityAdmin.objects.filter(user=user, university=university).first()
         if existing:
             return serializers.ValidationError("User already an admin")
 

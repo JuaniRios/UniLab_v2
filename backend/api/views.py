@@ -230,9 +230,7 @@ class UniversityList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-        admin = UniversityAdminSerializer(data={"user": serializer.data["owner"], "company": serializer.data["url"],
-                                                "post_permission": "True", "comment_permission": "True",
-                                                "accept_student_application_permission": "True", "edit_profile_permission": "True"})
+        admin = UniversityAdminSerializer(data={"user": serializer.data["owner"], "university": serializer.data["url"]})
         admin.is_valid()
         admin.save()
 
