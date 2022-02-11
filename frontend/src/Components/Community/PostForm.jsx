@@ -47,8 +47,8 @@ export default function PostForm(props) {
 				<TextArea
 					width="100%"
 					label="Write a post"
-					message={content}
-					setMessage={setContent}
+					value={content}
+					setter={setContent}
 				/>
 				<AttachImage
 					image={image}

@@ -12,8 +12,10 @@ import SelectorInput from "../Forms/SelectorInput";
 import TextArea from "../Forms/TextArea";
 import AttachImage from "../Forms/AttachImage";
 import DoubleInputWrap from "../Forms/DoubleInputWrap";
+import {useAuthState} from "../../Context";
 
 export default function Universities(props) {
+	const {userData} = useAuthState()
 	const [formToggled, setFormToggled] = useState(false)
 
 	document.title = "Universities - UniLab";
@@ -25,15 +27,19 @@ export default function Universities(props) {
 		backgroundSize: "cover",
 	};
 
+	const createUniButton = <>
+		<div className={`uni-form-btn uni-button`} onClick={(e) => setFormToggled(true)}>
+			Create a university page
+		</div>
+	</>
 
 	return (
 		<>
 			<NavMenu />
 			<div className={`main-content-fixed`} style={mainFrameStyle}>
 				<Search searchType="universities" width="w60" />
-				<div className={`uni-form-btn uni-button`} onClick={(e) => setFormToggled(true)}>
-				Create a university page
-				</div>
+				{userData.allowed_university_creation && createUniButton}
+
 				<Slider contentType={"universities"} />
 				<UniversityForm toggle={[formToggled, setFormToggled]}/>
 			</div>

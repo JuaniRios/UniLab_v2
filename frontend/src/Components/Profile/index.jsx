@@ -303,7 +303,7 @@ function Profile(props) {
                                 value={editInfoWebsite} setter={setEditInfoWebsite} required="no"/>
                         </div>
 
-                        <TextArea width="100%" label="Summary" message={editInfoSummary} setMessage={setEditInfoSummary}
+                        <TextArea width="100%" label="Summary" value={editInfoSummary} setter={setEditInfoSummary}
                             rows="5" menuTop="20%" required="no"/>
 
                     </PopupForm>
@@ -323,7 +323,7 @@ function Profile(props) {
                                 value={eduEDate} setter={setEduEDate} required="special"/>
                         </div>
 
-                        <TextArea width="100%" label="Desciption" message={eduDesc} setMessage={setEduDesc}
+                        <TextArea width="100%" label="Desciption" value={eduDesc} setter={setEduDesc}
                             rows="5" menuTop="20%" required="yes"/>
 
                     </PopupForm>
@@ -343,7 +343,7 @@ function Profile(props) {
                                 value={expEDate} setter={setExpEDate} required="special"/>
                         </div>
 
-                        <TextArea width="100%" label="Desciption" message={expDesc} setMessage={setExpDesc}
+                        <TextArea width="100%" label="Desciption" value={expDesc} setter={setExpDesc}
                             rows="5" menuTop="20%" required="yes"/>
 
                     </PopupForm>

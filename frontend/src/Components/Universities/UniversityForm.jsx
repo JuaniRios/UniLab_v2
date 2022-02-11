@@ -1,10 +1,7 @@
 import React, {useEffect, useState} from "react";
-import CloseButton from "../Buttons/CloseButton";
 import BasicInput from "../Forms/BasicInput";
 import TextArea from "../Forms/TextArea";
 // STYLES
-import "./UniversityForm.css";
-import {CSSTransition} from "react-transition-group";
 import AttachImage from "../Forms/AttachImage";
 import SelectorInput from "../Forms/SelectorInput";
 import DoubleInputWrap from "../Forms/DoubleInputWrap";
@@ -25,9 +22,6 @@ export default function UniversityForm(props) {
 	const [uniVideo, setUniVideo] = useState("")
 	const [uniDescription, setUniDescription] = useState("")
 	const [uniImage, setUniImage] = useState("")
-	const [formSubmit, setFormSubmit] = useState(false)
-
-	// useEffect(handleUniversitySubmit, [formSubmit])
 
 	async function handleUniversitySubmit(e) {
 		e.preventDefault()

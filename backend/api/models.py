@@ -125,6 +125,7 @@ class Company(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='companies', on_delete=models.CASCADE)
     admins = models.ManyToManyField(User, blank=True, through='CompanyAdmin', related_name='company_admins')
     image = models.ImageField(upload_to='company_image/%Y/%m/%D/', default='defaults/company.jpg')
+    country = models.CharField(max_length=200, blank=True)
 
     class EmployeeRange(models.IntegerChoices):
         TINY = 1, _('1-20 employees'),
