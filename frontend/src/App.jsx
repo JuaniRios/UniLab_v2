@@ -65,7 +65,9 @@ function App() {
 
 					<Route path="/sign-up" element={<SignUp />} />
 
-					<Route path="/management" element={<Management />} />
+					<Route path="/management" element={<PrivateRoute />}>
+						<Route path="" element={<Management />} />
+					</Route>
 
 					{/* Error responses */}
 					<Route path="*" element={<PageNotFound />} />

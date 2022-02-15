@@ -17,6 +17,7 @@ export default function Slider(props) {
 	const [loaderState, setLoaderState] = useState("shown");
 	const header = props.contentType.charAt(0).toUpperCase() + props.contentType.slice(1);
 
+
 	function toggleSlide(direction) {
 		var currentLeft = parseInt(slider.current.style.left);
 		var sliderChildren = slider.current.childElementCount - 1;
@@ -65,12 +66,12 @@ export default function Slider(props) {
 				newCards.push(icard);
 			}
 			setLoaderState("hidden");
-			setCards(oldCards => oldCards.concat(newCards));
+			setCards(newCards);
 
 		}).catch(error=> {
 			console.log(error)
 		})
-	}, [page]);
+	}, [page, props["reloadOn"]]);
 
 	// TODO: Pagination
 	return (

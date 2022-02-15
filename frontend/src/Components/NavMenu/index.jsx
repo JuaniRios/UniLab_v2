@@ -12,7 +12,8 @@ import {CSSTransition} from "react-transition-group";
 import {useLocation} from "react-router-dom";
 
 export default function NavMenu(props) {
-	const {state} = useLocation()
+	let location = useLocation()
+	const state = location.state
 	const [displayLogin, setDisplayLogin] = useState(false)
 	const [displayLanguage, setDisplayLanguage] = useState(false)
 	const [displayProfile, setDisplayProfile] = useState(false)
@@ -21,7 +22,9 @@ export default function NavMenu(props) {
 
 	// if you were redirected because you had no auth, open login menu
 	useEffect( () => {
+		console.log(state)
 		if (state === "showLogin") setDisplayLogin(true)
+		// alert(state)
 	}, [state])
 
 

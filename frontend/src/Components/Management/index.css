@@ -10,10 +10,27 @@
 	overflow: hidden;
 }
 .admin-menu {
-	width: 15rem;
+	/*width: 15rem;*/
+	display: flex;
+	flex-direction: row;
+}
+.admin-menu-item {
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding: 2rem;
+	cursor: pointer;
+	font-size: 1rem;
+	font-weight: bold;
+	color: var(--unilab-black);
+	text-align: center;
+}
+.admin-menu-item:hover {
+	background-color: var(--gray-hover);
 }
 .admin-content {
 	display: flex;
+	justify-content: center;
 }
 .content-vertical {
 	flex-direction: column;
@@ -57,21 +74,7 @@
 	padding: 0;
 	flex-grow: 1;
 }
-.admin-menu-item {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 100%;
-	padding: 2rem;
-	cursor: pointer;
-	font-size: 1rem;
-	font-weight: bold;
-	color: var(--unilab-black);
-	text-align: center;
-}
-.admin-menu-item:hover {
-	background-color: var(--gray-hover);
-}
+
 .basic-list-item {
 	display: flex;
 	align-items: center;

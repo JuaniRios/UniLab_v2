@@ -23,7 +23,7 @@ export default function CompanyForm(props) {
 	const [description, setDescription] = useState("")
 	const [image, setImage] = useState("")
 
-	async function handleversitySubmit(e) {
+	async function handleUniversitySubmit(e) {
 		e.preventDefault()
 		const payload = {
 			"name": name,
@@ -52,12 +52,13 @@ export default function CompanyForm(props) {
 				setMessage("There was an error creating the company. Please try again later.")
 			})
 
+
 	}
 
 	return (
 		<>
 			<GeneralForm formToggle={[formToggled, setFormToggled]} title={"Create a new Company"}
-				handleSubmit={handleversitySubmit} submitText={"Submit"}>
+				handleSubmit={handleUniversitySubmit} submitText={"Submit"}>
 
 				<DoubleInputWrap>
 					<BasicInput label={"Company Name"} required={true} value={name} setter={setName}/>

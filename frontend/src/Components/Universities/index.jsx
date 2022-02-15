@@ -40,7 +40,7 @@ export default function Universities(props) {
 				<Search searchType="universities" width="w60" />
 				{userData.allowed_university_creation && createUniButton}
 
-				<Slider contentType={"universities"} />
+				<Slider contentType={"universities"} reloadOn={formToggled}/>
 				<UniversityForm toggle={[formToggled, setFormToggled]}/>
 			</div>
 		</>

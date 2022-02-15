@@ -1,5 +1,6 @@
 import json
 
+import django_filters.rest_framework
 import requests
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -443,6 +444,9 @@ class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsOwner]
+    filter_backends = [filters.SearchFilter, django_filters.rest_framework.DjangoFilterBackend]
+    filterset_fields = ["allowed_company_creation", "allowed_university_creation"]
+    search_fields = ['first_name', "last_name", "email"]
 
 
 class VoteDetail(generics.RetrieveUpdateDestroyAPIView):

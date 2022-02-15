@@ -18,6 +18,9 @@ class IsOwner(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
 
+        elif request.user.is_superuser:
+            return True
+
         else:
 
             if isinstance(obj, User):
