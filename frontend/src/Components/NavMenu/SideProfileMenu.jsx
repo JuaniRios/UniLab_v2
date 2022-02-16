@@ -33,16 +33,20 @@ export default function SideProfileMenu(props) {
 	</>
 
 	const myCompaniesButton = <>
-		<NavLink to="my-companies" className={`settings-button`}>
-			<div className={`prof-picture`} />
+		<NavLink to="/my-companies" className={`settings-button`}>
 			<p className={`w80 bold`}>My Companies</p>
 		</NavLink>
 	</>
 
 	const myUniversitiesButton = <>
-		<NavLink to="my-universities" className={`settings-button`}>
-			<div className={`prof-picture`} />
+		<NavLink to="/my-universities" className={`settings-button`}>
 			<p className={`w80 bold`}>My Universities</p>
+		</NavLink>
+	</>
+
+	const managementButton = <>
+		<NavLink to="/management" className={`settings-button`}>
+			<p className={`w80 bold`}>Management</p>
 		</NavLink>
 	</>
 
@@ -51,6 +55,7 @@ export default function SideProfileMenu(props) {
 			{profileButton}
 			{userData && userData.company_admins.length > 0 && myCompaniesButton}
 			{userData && userData.university_admins.length > 0 && myUniversitiesButton}
+			{userData && userData.is_superuser && managementButton}
 			<NavLink to="/settings" className={`settings-button`}>
 				<div className={`settings-picture`} />
 				<p className={`w80 bold`}>Settings</p>

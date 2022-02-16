@@ -19,11 +19,13 @@ import french_icon from "../../Assets/img/languages/fr.webp";
 import { NavLink } from "react-router-dom";
 import { useAuthState } from "../../Context";
 import useWindowSize from "../../CustomHooks/useWindowSize";
+import {useTranslation} from "react-i18next";
 
 export default function TopNav(props) {
 	const windowSize = useWindowSize()
 	const state = useAuthState();
 	const userData = state.userData;
+	const {t, i18n} = useTranslation("translation", {keyPrefix: "navbar"});
 
 	useEffect(() => {
 		if (windowSize[0]<1030){
@@ -33,6 +35,7 @@ export default function TopNav(props) {
 		}
 	}, [windowSize])
 
+	const langIcon = {"en": english_icon, "es": spanish_icon, "de": german_icon, "ru": russian_icon, "fr": french_icon }
 	return (
 		<nav className={`top-nav flex-row a-i-c shadow`}>
 			{/*LOGO*/}
@@ -66,7 +69,7 @@ export default function TopNav(props) {
 						{/*{# Translators: Start of Navigation bar #}*/}
 						<div id="home-button" className={`top-nav-item-text`}>
 							{/*{% translate "Home" context "this is the navbar"%}*/}
-							Home
+							{t("Home")}
 						</div>
 					</NavLink>
 
@@ -76,7 +79,7 @@ export default function TopNav(props) {
 						<img className={`top-nav-image`} src={community_icon} alt="Community Icon"/>
 						<div id="community-button" className={`top-nav-item-text`}>
 							{/*{% translate "Community"%}*/}
-							Community
+							{t("Community")}
 						</div>
 					</NavLink>
 
@@ -86,7 +89,7 @@ export default function TopNav(props) {
 						<img className={`top-nav-image`} src="" alt="Universities Icon"/>
 						<div id="universities-button" className={`top-nav-item-text`}>
 							{/*{% translate "Universities"%}*/}
-							Universities
+							{t("Universities")}
 						</div>
 					</NavLink>
 
@@ -96,7 +99,7 @@ export default function TopNav(props) {
 						<img className={`top-nav-image`} src={companies_icon} alt="Companies Icon"/>
 						<div id="employers-button" className={`top-nav-item-text`}>
 							{/*{% translate "Companies"%}*/}
-							Companies
+							{t("Companies")}
 						</div>
 					</NavLink>
 
@@ -106,7 +109,7 @@ export default function TopNav(props) {
 						<img className={`top-nav-image`} src={jobs_icon} alt="Jobs Icon"/>
 						<div id="jobs-button" className={`top-nav-item-text`}>
 							{/*{% translate "Jobs"%}*/}
-							Jobs
+							{t("Jobs")}
 						</div>
 					</NavLink>
 
@@ -116,7 +119,7 @@ export default function TopNav(props) {
 						<img className={`top-nav-image`} src={about_icon} alt="About Icon"/>
 						<div id="about-button" className={`top-nav-item-text`}>
 							{/*{% translate "About"%}*/}
-							About
+							{t("About")}
 						</div>
 					</NavLink>
 
@@ -172,7 +175,7 @@ export default function TopNav(props) {
 						<img
 							id="lang-img"
 							className={`top-nav-image`}
-							src={english_icon}
+							src={langIcon[i18n.language]}
 							alt="Locale Flag"
 							title="Language"
 						/>

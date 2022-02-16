@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Navigate, Route, Routes, Outlet } from "react-router-dom";
+import { Suspense } from 'react';
 // STYLES
 import "./main_style.css";
 // PAGES
@@ -98,4 +99,13 @@ function PrivateRoute({ optional = false }) {
 	}
 }
 
-export default App;
+// here app catches the suspense from page in case translations are not yet loaded
+export default function WrappedApp() {
+  return (
+    <Suspense fallback="...is loading">
+      <App />
+    </Suspense>
+  );
+}
+
+// export default App;
