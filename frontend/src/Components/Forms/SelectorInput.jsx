@@ -4,7 +4,8 @@ import "./SelectorInput.css";
 // FONT AWESOME
 
 export default function SelectorInput(props) {
-	const width = props.width;
+	let width = "100%"
+	if ("width" in props) width = props.width;
 	const label = props.label;
 	const [inputValue, setInput] = [props.value, props.setter];
 	const choices = props.choices // a json where the key is the text for the button, and the val is the text for the api

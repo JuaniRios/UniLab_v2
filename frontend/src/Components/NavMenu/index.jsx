@@ -10,6 +10,8 @@ import {initialState} from "../../Context/reducer";
 import {useMessage} from "../../Context/context";
 import {CSSTransition} from "react-transition-group";
 import {useLocation} from "react-router-dom";
+import FeedbackButton from "./FeedbackButton";
+import FeedbackForm from "./FeedbackForm"
 
 export default function NavMenu(props) {
 	let location = useLocation()
@@ -19,6 +21,7 @@ export default function NavMenu(props) {
 	const [displayProfile, setDisplayProfile] = useState(false)
 	const [displaySearch, setDisplaySearch] = useState(false)
 	const [displayMobile, setDisplayMobile] = useState(false)
+	const [displayFeedback, setDisplayFeedback] = useState(false)
 
 	// if you were redirected because you had no auth, open login menu
 	useEffect( () => {
@@ -67,12 +70,15 @@ export default function NavMenu(props) {
 	}
 
 	function anyMenu() {
-		return displayLanguage || displaySearch || displayProfile || displayLogin || displayMobile
+		return displayLanguage || displaySearch || displayProfile || displayLogin || displayMobile || displayFeedback
 	}
 
 return (
 		<>
 			{anyMenu() && <div className={`overlay shown`} onClick={() => setAll(false)}/>}
+			<FeedbackForm setDisplay={setDisplayFeedback} display={displayFeedback}/>
+			<FeedbackButton onClick={()=>{setDisplayFeedback(true)}}/>
+
 			<TopNav
 				setDisplayProfile={setDisplayProfile}
 				setDisplayLanguage={setDisplayLanguage}
@@ -80,6 +86,7 @@ return (
 				setDisplayMobile={setDisplayMobile}
 				displayMobile={displayMobile}
 			/>
+
 
 			<GeneralSearch
 				setDisplay={setDisplaySearch}
