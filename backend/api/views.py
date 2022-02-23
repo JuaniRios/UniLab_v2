@@ -84,6 +84,18 @@ class ApplicationList(generics.ListCreateAPIView):
         serializer.save(user=user)
 
 
+class FeedbackFormDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = FeedbackForm.objects.all()
+    serializer_class = FeedbackFormSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class FeedbackFormList(generics.ListCreateAPIView):
+    queryset = FeedbackForm.objects.all()
+    serializer_class = FeedbackFormSerializer
+    permission_classes = [IsAuthenticated]
+
+
 class CompanyAdminList(generics.ListCreateAPIView):
     queryset = CompanyAdmin.objects.all()
     serializer_class = CompanyAdminSerializer

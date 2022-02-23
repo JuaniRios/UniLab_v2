@@ -89,6 +89,9 @@ urlpatterns += [
     path('api/universities', views.UniversityList.as_view(), name="university-list"),
     path('api/universities/<int:pk>', views.UniversityDetail.as_view(), name="university-detail"),
 
+    path('api/feedback-form', views.FeedbackFormList.as_view(), name="feedbackform-list"),
+    path('api/feedback-form/<int:pk>', views.FeedbackFormDetail.as_view(), name="feedbackform-detail"),
+
 ]
 
 # urlpatterns = format_suffix_patterns(urlpatterns)

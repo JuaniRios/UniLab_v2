@@ -16,6 +16,7 @@ import FeedbackForm from "./FeedbackForm"
 export default function NavMenu(props) {
 	let location = useLocation()
 	const state = location.state
+	const {userData} = useAuthState()
 	const [displayLogin, setDisplayLogin] = useState(false)
 	const [displayLanguage, setDisplayLanguage] = useState(false)
 	const [displayProfile, setDisplayProfile] = useState(false)
@@ -71,13 +72,16 @@ export default function NavMenu(props) {
 
 	function anyMenu() {
 		return displayLanguage || displaySearch || displayProfile || displayLogin || displayMobile || displayFeedback
+
 	}
+
+	useEffect(()=>{console.log(userData)},[userData])
 
 return (
 		<>
 			{anyMenu() && <div className={`overlay shown`} onClick={() => setAll(false)}/>}
 			<FeedbackForm setDisplay={setDisplayFeedback} display={displayFeedback}/>
-			<FeedbackButton onClick={()=>{setDisplayFeedback(true)}}/>
+			{userData && <FeedbackButton onClick={()=>{setDisplayFeedback(true)}}/>}
 
 			<TopNav
 				setDisplayProfile={setDisplayProfile}

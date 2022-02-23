@@ -1,0 +1,153 @@
+.profile {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-evenly;
+	margin: auto;
+	width: 90rem;
+	padding: 1.5rem 0;
+}
+.main-profile-menu {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	margin: 1.5rem 0;
+	width: 15%;
+}
+.fixed-menu {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+}
+.profile-content-container {
+	width: 75%;
+	display: flex;
+	flex-direction: column;
+}
+.profile-menu-item {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	height: 3rem;
+	width: 100%;
+	cursor: pointer;
+	color: black;
+	position: relative;
+	transition: 0.5s;
+	margin: 1rem 0;
+	padding: 0 2.5rem;
+}
+.profile-menu-item::backdrop {
+	background-color: darkorange;
+}
+.profile-menu-item::before {
+	content: "";
+	background-color: gray;
+	height: 100%;
+	width: 5%;
+	border-radius: 10px;
+	right: 0;
+	transition: 0.5s;
+	position: absolute;
+	z-index: 4;
+}
+.profile-menu-item:hover {
+	color: var(--unilab-white);
+}
+.profile-menu-item:hover::before {
+	width: 100% !important;
+	background-color: var(--unilab-orange);
+}
+.item-text {
+	z-index: 5;
+}
+.active-menu-item::before {
+	background-color: var(--unilab-orange);
+}
+.profile-banner {
+	width: 100%;
+	background-image: url("../../Assets/img/vienna.jpg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-radius: 10px 10px 0 0;
+	padding: 3rem;
+}
+.profile-banner-pfp {
+	border-radius: 50%;
+	height: 10rem;
+	width: 10rem;
+	object-fit: cover;
+	object-position: center;
+	background-color: var(--unilab-white);
+	padding: 3px;
+	border: 1px solid var(--gray-hover);
+}
+.profile-basic-info {
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 1rem 2rem;
+}
+.basic-info-toggler {
+	height: 3rem;
+	width: 3rem;
+	border-radius: 50%;
+	padding: 1%;
+	object-fit: cover;
+	object-position: center;
+	position: absolute;
+	right: 1rem;
+	top: 1rem;
+	cursor: pointer;
+	transition: 0.1s;
+}
+.basic-info-toggler:hover {
+	background-color: var(--gray-hover);
+}
+.website-link {
+	color: #0084ff;
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.post-comment-container {
+	width: 100%;
+	padding: 1rem;
+	border-radius: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 1rem 0;
+}
+.post-comment-content {
+	width: calc(100% - 4rem - 15%);
+	max-height: 4rem;
+	padding: 0 1rem;
+}
+.post-comment-btn-holder {
+	display: flex;
+	width: 15%;
+	justify-content: space-between;
+	align-self: center;
+}
+.post-comment-btn {
+	padding: 0.5rem 0 !important;
+	width: 49%;
+	text-align: center;
+	margin: 0.5rem 0;
+}
+.post-comment-img {
+	height: 4rem;
+	width: 4rem;
+	object-fit: cover;
+	object-position: center;
+	border-radius: 10px;
+}
+.post-comment-noimg {
+	height: 4rem;
+	border-radius: 10px;
+}

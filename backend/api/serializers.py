@@ -327,3 +327,11 @@ class ChangePasswordSerializer(serializers.Serializer):
     """
     old_password = serializers.CharField(required=True)
     new_password = serializers.CharField(required=True)
+
+
+class FeedbackFormSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = FeedbackForm
+        fields = "__all__"
+

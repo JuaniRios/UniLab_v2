@@ -14,6 +14,7 @@ import Settings from "./Components/Settings";
 import SignOut from "./Components/SignOut";
 import SignUp from "./Components/SignUp";
 import Management from "./Components/Management";
+import CompanyProfile from "./Components/CompanyProfile/index";
 // ERROR PAGES
 import PageNotFound from "./Components/PageNotFound";
 // OTHER
@@ -40,6 +41,10 @@ function App() {
 
 					<Route path="/companies" element={<PrivateRoute />}>
 						<Route path="" element={<Companies />} />
+					</Route>
+
+					<Route path="/companies/:id" element={<PrivateRoute />}>
+						<Route path="" element={<CompanyProfile />} />
 					</Route>
 
 					<Route path="/jobs" element={<PrivateRoute />}>

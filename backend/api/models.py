@@ -344,3 +344,27 @@ class PostReport(models.Model):
         MISLEADING = 3, _('Misleading')
 
     reason = models.PositiveSmallIntegerField(choices=Reasons.choices)
+
+
+class FeedbackForm(models.Model):
+    class Meta:
+        verbose_name = "feedback form"
+        verbose_name_plural = "feedback forms"
+
+    class Scale(models.IntegerChoices):
+        VERY_BAD = 1, "Very Bad"
+        BAD = 2, "Bad"
+        COULD_BE_BETTER = 3, "Could be Better"
+        ALRIGHT = 4, "Alright"
+        GOOD = 5, "Good"
+        VERY_GOOD = 6, "Very Good"
+        INCREDIBLE = 7, "Incredible"
+
+    institution = models.TextField()
+    country = models.TextField()
+    looks = models.PositiveSmallIntegerField(choices=Scale.choices)
+    accessibility = models.PositiveSmallIntegerField(choices=Scale.choices)
+    usability = models.PositiveSmallIntegerField(choices=Scale.choices)
+    future_use = models.BooleanField()
+    recommend = models.BooleanField()
+    comments = models.TextField()
