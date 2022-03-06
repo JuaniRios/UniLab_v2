@@ -21,6 +21,7 @@ import {useMessage} from "../../Context/context";
 import AttachImage from "../Forms/AttachImage";
 import DoubleInputWrap from "../Forms/DoubleInputWrap";
 import SelectorInput from "../Forms/SelectorInput";
+import ImageGallery from "./ImageGallery";
 
 export default function CompanyProfile(props) {
     const {token} = useAuthState()
@@ -51,6 +52,7 @@ export default function CompanyProfile(props) {
 
         // Add Pictures Form
     const [newImage, setNewImage] = useState("")
+    const [companyImages, setCompanyImages] = useState([])
 
         // Add Jobs Form
     const [jobTitle, setJobTitle] = useState("")
@@ -122,8 +124,9 @@ export default function CompanyProfile(props) {
     }, [])
 
     useEffect( async () => {
+        let data;
         try {
-            const data = await apiCall(`companies/${urlParams.id}`, token, {method: "GET"})
+            data = await apiCall(`companies/${urlParams.id}`, token, {method: "GET"})
             setCompanyData(data)
             setCompanyName(data.name)
             setCompanyDescription(data.description)
@@ -132,25 +135,41 @@ export default function CompanyProfile(props) {
             setCompanyIndustry(data.industry)
             setCompanyEmployeeRage(data.employee_range)
             setCompanyCountry(data.country)
+        } catch (e) {
+            setMessage(e)
+        }
 
-            const posts = await apiCall(`posts?company_owner=${data.url}&`, token, {method: "GET"}).results
+        try {
+            const posts = await apiCall(`posts?company_owner=${data.url}&`, token, {method: "GET"})
+            console.table(posts)
             let newPostItems = []
             let keyIdx = 0
-            for (const post of posts) {
+            for (const post of posts.results) {
                 newPostItems.push(<PostCommentContainer content={post.content} key={keyIdx}/>)
                 keyIdx++;
             }
             setPostItems(newPostItems)
+        } catch (e) {
+            setMessage(e)
+        }
 
-            const comments = await apiCall(`comments?company_owner=${data.url}&`, token, {method: "GET"}).results
+        try {
+            const comments = await apiCall(`comments?company_owner=${data.url}&`, token, {method: "GET"})
             let newCommentItems = []
-            keyIdx = 0
-            for (const comment of comments) {
+            let keyIdx = 0
+            for (const comment of comments.results) {
                 newCommentItems.push(<PostCommentContainer content={comment.content} key={keyIdx}/>)
                 keyIdx++;
             }
             setCommentItems(newCommentItems)
+        } catch (e) {
+            setMessage(e)
+        }
 
+
+        try {
+            let images = await apiCall(`company-pictures?owner=http://127.0.0.1:8000/api/companies/1`, token, {method: "GET"})
+            setCompanyImages(images.results)
         } catch (e) {
             setMessage(e)
         }
@@ -190,7 +209,17 @@ export default function CompanyProfile(props) {
     }
 
     async function postPicture(e){
-
+        setPopupClasses2()
+        e.preventDefault()
+        const params = {
+            "method": "POST",
+            "payload": {"image": newImage, "owner": companyData.url}
+        }
+        try {
+            await apiCall("company-pictures", token, params)
+        } catch (e) {
+            setMessage(e)
+        }
     }
 
     async function postJob(e){
@@ -333,7 +362,7 @@ export default function CompanyProfile(props) {
 
                         <NavLink to="#education" className={`profile-menu-item ${menuClassesArray[1]}`}
                             onClick={e => changeActiveItem(1)}>
-                            <div className={`item-text`}>Upload Images</div>
+                            <div className={`item-text`}>Pictures</div>
                         </NavLink>
 
                         <NavLink to="#experience" className={`profile-menu-item ${menuClassesArray[2]}`}
@@ -387,11 +416,7 @@ export default function CompanyProfile(props) {
 
                     <ProfileContentFrame id="education" className={`${contentClassesArray[1]}`} margin={true} title="Pictures"
                         plusBtn={true} onClick={setPopupClasses2}>
-                        {pictureItems}
-                        {pictureItems || <h4 className={`normal`} style={{margin: "1rem 0"}}>
-                                            You haven't added any Pictures yet...
-                                        </h4>
-                        }
+                        <ImageGallery images={companyImages}/>
 
                     </ProfileContentFrame>
 

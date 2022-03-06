@@ -76,7 +76,7 @@ export default function BasicInput(props) {
 				type={type}
 				required
 				name={name}
-				onChange={(e) => setInput(e.target.value)}
+				onChange={(e) => {setInput(e.target.value)}}
 			/>
 		);
 	} else if (props.required === "special") {
@@ -87,7 +87,7 @@ export default function BasicInput(props) {
 				type={type}
 				required
 				name={name}
-				onChange={(e) => setInput(e.target.value)}
+				onChange={(e) => {setInput(e.target.value)}}
 			/>
 		);
 	} else {
@@ -98,8 +98,8 @@ export default function BasicInput(props) {
 				name={name}
 				required
 				onFocus={removeError}
-				onBlur={(e) => emptyCheck(e.target.value)}
-				onChange={(e) => setInput(e.target.value)}
+				onBlur={(e) => {emptyCheck(e.target.value)}}
+				onChange={(e) => {setInput(e.target.value)}}
 			/>
 		);
 	}
