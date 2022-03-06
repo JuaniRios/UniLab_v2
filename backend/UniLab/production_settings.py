@@ -8,8 +8,4 @@ PORT = '8000'
 API_URL = "104.214.223.89"
 WEBSITE_URL = "104.214.223.89"
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-    "http://unilab.fh-krems.ac.at",
-    "104.214.223.89"
-]
+CORS_ORIGIN_ALLOW_ALL = True
