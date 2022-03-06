@@ -67,8 +67,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "UniLab.urls"
 
-# todo: change this
-CORS_ALLOW_ALL_ORIGINS = True
+# # todo: change this
+# CORS_ALLOW_ALL_ORIGINS = True
 
 TEMPLATES = [
     {
