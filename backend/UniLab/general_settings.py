@@ -18,7 +18,7 @@ from django.utils.translation import ugettext_lazy as _
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 if os.environ["DJANGO_SETTINGS_MODULE"] == "UniLab.production_settings":
-    MEDIA_ROOT = os.path.join(BASE_DIR, "/backend/media")
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 else:
     MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
