@@ -1,9 +1,13 @@
-import { NavLink } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import "./Slider.css";
 import "./SliderCard.css";
 import timeSince from "../HelperFunctions/timeSince.js";
+import urlToPk from "../HelperFunctions/urlToPk";
 
 export default function SliderCard(props) {
+	let navigate = useNavigate()
+	console.log("content is:")
+	console.log(props.content)
 	const content = props.content;
 	if (props.contentType === "jobs") {
 		var applicantsWord = "applicants";
@@ -14,13 +18,13 @@ export default function SliderCard(props) {
 			applicantsWord = "applicant";
 		}
 		return (
-			<div className={`slider-item shadow`}>
+			<div className={`slider-item shadow`} onClick={()=>{navigate(`/jobs/${urlToPk(content.url)}`)}}>
 				<div className={`slider-icon-holder`}>
 					<img className={`slider-icon`} src={content.company.image} alt="" />
 				</div>
 
 				<div className={`slider-info-holder`}>
-					<NavLink to="/" className={`w90`}>
+					<NavLink to={`/jobs/${urlToPk(content.url)}`} className={`w90`}>
 						<p className={`link-text slider-item-title`}>{content.title}</p>
 					</NavLink>
 
@@ -45,13 +49,13 @@ export default function SliderCard(props) {
 			content.name = content.name.slice(0, 25) + "...";
 		}
 		return (
-			<div className={`slider-item shadow`}>
+			<div className={`slider-item shadow`} onClick={()=>{navigate(`/companies/${urlToPk(content.url)}`)}}>
 				<div className={`slider-icon-holder`}>
 					<img className={`slider-icon`} src={content.image} alt="" />
 				</div>
 
 				<div className={`slider-info-holder`}>
-					<NavLink to="/" className={`w90`}>
+					<NavLink to={`/companies/${urlToPk(content.url)}`} className={`w90`}>
 						<p className={`link-text slider-item-title`}>{content.name}</p>
 					</NavLink>
 
@@ -69,13 +73,13 @@ export default function SliderCard(props) {
 			content.name = content.name.slice(0, 25) + "...";
 		}
 		return (
-			<div className={`slider-item shadow`}>
+			<div className={`slider-item shadow`} onClick={()=>{navigate(`/universities/${urlToPk(content.url)}`)}}>
 				<div className={`slider-icon-holder`}>
 					<img className={`slider-icon`} src={content.image} alt="" />
 				</div>
 
 				<div className={`slider-info-holder`}>
-					<NavLink to="/" className={`w90`}>
+					<NavLink to={`/universities/${urlToPk(content.url)}`} className={`w90`}>
 						<p className={`link-text slider-item-title`}>{content.name}</p>
 					</NavLink>
 

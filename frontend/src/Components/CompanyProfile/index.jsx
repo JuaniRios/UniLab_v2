@@ -123,6 +123,7 @@ export default function CompanyProfile(props) {
         }
     }, [])
 
+    // load in initial data
     useEffect( async () => {
         let data;
         try {
@@ -223,7 +224,29 @@ export default function CompanyProfile(props) {
     }
 
     async function postJob(e){
-
+        setPopupClasses3()
+        e.preventDefault()
+        const payload = {
+            "title": jobTitle,
+            "city": jobCity,
+            "country": jobCountry,
+            "hours_per_week": jobHours,
+            "salary_per_month": jobSalary,
+            "category" : jobCategory,
+            "type" : jobType,
+            "you_do": jobYouDo,
+            "we_offer": jobWeOffer,
+            "requirements": jobRequirements,
+        }
+        const params = {
+            "method": "POST",
+            "payload": payload
+        }
+        try {
+            await apiCall("company-pictures", token, params)
+        } catch (e) {
+            setMessage(`postJob api call failed. error: ${e}`)
+        }
     }
 
     async function handleAdmins(e){
