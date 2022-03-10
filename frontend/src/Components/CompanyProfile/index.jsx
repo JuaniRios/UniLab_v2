@@ -25,6 +25,9 @@ import ImageGallery from "./ImageGallery";
 import BasicList from "../Management/BasicList";
 import AdminList from "./AdminList";
 import { CSSTransition } from "react-transition-group";
+import RectangleItem from "../RectangleItem";
+import ApplicantsSlider from "../ApplicantsSlider";
+import Applicant from "../Applicant";
 
 export default function CompanyProfile(props) {
 	const { token } = useAuthState();
@@ -37,6 +40,8 @@ export default function CompanyProfile(props) {
 	const [forceReload, setForceReload] = useState(false); // for admin list
 	const [postItems, setPostItems] = useState([]);
 	const [commentItems, setCommentItems] = useState([]);
+
+	const [applicantsList, setApplicantsList] = useState(false);
 
 	const [menuClassesArray, setMenuClassesArray] = useState([
 		"active-menu-item",
@@ -265,17 +270,17 @@ export default function CompanyProfile(props) {
 		setPopupClasses3();
 		e.preventDefault();
 		const payload = {
-			"title": jobTitle,
-			"city": jobCity,
-			"country": jobCountry,
-			"hours_per_week": jobHours,
-			"salary_per_month": jobSalary,
-			"category": jobCategory,
-			"type": jobType,
-			"you_do": jobYouDo,
-			"we_offer": jobWeOffer,
-			"requirements": jobRequirements,
-			"owner": companyData.url
+			title: jobTitle,
+			city: jobCity,
+			country: jobCountry,
+			hours_per_week: jobHours,
+			salary_per_month: jobSalary,
+			category: jobCategory,
+			type: jobType,
+			you_do: jobYouDo,
+			we_offer: jobWeOffer,
+			requirements: jobRequirements,
+			owner: companyData.url,
 		};
 		const params = {
 			method: "POST",
@@ -442,9 +447,9 @@ export default function CompanyProfile(props) {
 								choices={{
 									"Full-time": 1,
 									"Part-time": 2,
-									"Contract": 3,
-									"Temporary": 4,
-									"Internship": 5,
+									Contract: 3,
+									Temporary: 4,
+									Internship: 5,
 								}}
 							/>
 							<SelectorInput
@@ -453,29 +458,29 @@ export default function CompanyProfile(props) {
 								vale={jobCategory}
 								setter={setJobCategory}
 								choices={{
-									"Administrative": 1,
+									Administrative: 1,
 									"Arts & Design": 2,
-									"Business": 3,
-									"Consulting": 4,
+									Business: 3,
+									Consulting: 4,
 									"Customer Services & Support": 5,
-									"Education": 6,
-									"Engineering": 7,
-									"Finance & Accounting" : 8,
-									"Healthcare": 9,
+									Education: 6,
+									Engineering: 7,
+									"Finance & Accounting": 8,
+									Healthcare: 9,
 									"Human Resources": 10,
 									"Information Technology": 11,
-									"Legal": 12,
-									"Marketing": 13,
+									Legal: 12,
+									Marketing: 13,
 									"Media & Communications": 14,
 									"Military & Protective Services": 15,
-									"Operations": 16,
-									"Other": 17,
+									Operations: 16,
+									Other: 17,
 									"Product & Project Management": 18,
 									"Research & Science": 19,
 									"Retail & Food Services": 20,
-									"Sales": 21,
+									Sales: 21,
 									"Skilled Labor & Manufacturing": 22,
-									"Transportation": 23,
+									Transportation: 23,
 								}}
 							/>
 						</DoubleInputWrap>
@@ -643,6 +648,21 @@ export default function CompanyProfile(props) {
 							<ImageGallery images={companyImages} />
 						</ProfileContentFrame>
 
+						{applicantsList ? (
+							<ApplicantsSlider
+								closeEvent={(e) => setApplicantsList(applicantsList ? false : true)}
+							>
+								<Applicant name="Valio Angelov" />
+								<Applicant name="Valio Angelov" />
+								<Applicant name="Valio Angelov" />
+								<Applicant name="Valio Angelov" />
+								<Applicant name="Valio Angelov" />
+								<Applicant name="Valio Angelov" />
+								<Applicant name="Valio Angelov" />
+								<Applicant name="Valio Angelov" />
+							</ApplicantsSlider>
+						) : null}
+
 						<ProfileContentFrame
 							id="experience"
 							className={`${contentClassesArray[2]}`}
@@ -652,6 +672,19 @@ export default function CompanyProfile(props) {
 							onClick={setPopupClasses3}
 						>
 							{jobItems}
+							<RectangleItem
+								content="Job Title"
+								btns={["View Job", "View Applicants", "Delete Job"]}
+								onClick={[
+									(e) => {
+										return 0;
+									},
+									(e) => setApplicantsList(applicantsList ? false : true),
+									(e) => {
+										return 0;
+									},
+								]}
+							/>
 							{jobItems || (
 								<h4 className={`normal`} style={{ margin: "1rem 0" }}>
 									You haven't added any Jobs yet...

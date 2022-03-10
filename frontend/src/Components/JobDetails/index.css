@@ -6,6 +6,7 @@
 	align-self: flex-start;
 	font-weight: bold;
 	cursor: pointer;
+	color: black;
 }
 .job-details {
 	/* background-color: var(--unilab-gray); */

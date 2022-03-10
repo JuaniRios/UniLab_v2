@@ -1,0 +1,15 @@
+.applicant {
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	gap: 1rem;
+}
+.applicant-pfp {
+	object-fit: cover;
+	object-position: center;
+	height: 5rem;
+	width: 5rem;
+}

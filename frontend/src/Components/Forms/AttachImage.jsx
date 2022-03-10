@@ -34,9 +34,8 @@ export default function AttachImage(props) {
 	useEffect(() => {
 		if (typeof image !== "string") {
 			setImageUrl(URL.createObjectURL(image));
-		}
-		else if (image === ""){
-			setSpanText(props.label)
+		} else if (image === "") {
+			setSpanText(props.label);
 		}
 	}, [image]);
 	function getFileData(event) {
@@ -50,11 +49,15 @@ export default function AttachImage(props) {
 			<>
 				<label
 					className={`custom-file-upload ${
-						document ? "file-upload-2" : "file-upload"
+						props.document ? "file-upload-2" : "file-upload"
 					} shadow`}
 				>
 					{props.document ? (
-						<input type="file" onChange={(e) => getFileData(e.target)} />
+						<input
+							type="file"
+							onChange={(e) => getFileData(e.target)}
+							multiple={props.multiple}
+						/>
 					) : (
 						<input
 							accept="image/*"
@@ -65,11 +68,13 @@ export default function AttachImage(props) {
 					<img className={`custom-file-upload-img noselect`} src={attach_icon} alt="" />
 					<span>{spanText}</span>
 				</label>
-				<img
-					src={imageUrl}
-					className={`img-preview shadow noselect ${imgPreviewClass}`}
-					alt=""
-				/>
+				{props.document ? null : (
+					<img
+						src={imageUrl}
+						className={`img-preview shadow noselect ${imgPreviewClass}`}
+						alt=""
+					/>
+				)}
 			</>
 		);
 	} else {
