@@ -10,6 +10,7 @@ const element = <FontAwesomeIcon icon={faSearch} size="1x" color="gray" />;
 
 function UserBar(props) {
 
+
 	return (<>
 		<div className={`basic-list-item shadow`}>
 			<img
@@ -44,6 +45,12 @@ function SearchBar(props) {
 }
 
 export default function BasicList(props) {
+	/*
+	Props required:
+		- option : "REMOVE" or "ADD"
+		-
+
+	*/
 	const {setMessage} = useMessage()
 	const {token, userData} = useAuthState()
 	const [userList, setUserList] = useState([])
