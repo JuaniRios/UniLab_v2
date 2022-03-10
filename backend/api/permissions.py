@@ -2,7 +2,7 @@ from django.contrib.auth.models import AnonymousUser
 from rest_framework import permissions
 
 from .data_converters import *
-from .models import Job, Company, Post, User, Comment, UserData, EducationData, ExperienceData
+from .models import Job, Company, Post, User, Comment, UserData, EducationData, ExperienceData, University
 
 
 class IsOwner(permissions.BasePermission):
@@ -42,6 +42,22 @@ class IsOwner(permissions.BasePermission):
                 return obj.owner == request.user
 
 
+class IsAdmin(permissions.BasePermission):
+    def has_permission(self, request, view):
+        return True
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        elif request.user.is_superuser:
+            return True
+
+        else:
+            if isinstance(obj, University):
+                return request.user in obj.admins.all()
+
+
 class IsCompanyOrReadOnly(permissions.BasePermission):
     """
     Custom permission to allow companies and super-admins to create jobs, but not students. All users can GET.
@@ -70,6 +86,7 @@ class IsAdminOrReadOnly(permissions.BasePermission):
 
 class CompanyOwner(permissions.BasePermission):
     """"Check that the company creating the job is owned by the user"""
+
     def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:
             return True
@@ -85,4 +102,3 @@ class CompanyOwner(permissions.BasePermission):
                 self.message = "Please add the company owner url"
                 return False
             return owner in request.user.companies.all()
-

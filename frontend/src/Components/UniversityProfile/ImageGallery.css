@@ -1,0 +1,25 @@
+.preview{
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 180px;
+}
+
+.preview:hover {
+  border: 1px solid #777;
+}
+
+.preview img {
+  width: 100%;
+  height: auto;
+}
+
+.preview.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+.gallery {
+  display: flex;
+  max-width: 720px;
+}

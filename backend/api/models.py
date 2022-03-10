@@ -172,6 +172,8 @@ class CompanyAdmin(models.Model):
     accept_applicants_permission = models.BooleanField(default=False)
     view_applicants_permission = models.BooleanField(default=False)
     edit_profile_permission = models.BooleanField(default=False)
+    edit_admins_permission = models.BooleanField(default=False)
+
 
 
 class University(models.Model):

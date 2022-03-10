@@ -35,6 +35,9 @@ export default function AttachImage(props) {
 		if (typeof image !== "string") {
 			setImageUrl(URL.createObjectURL(image));
 		}
+		else if (image === ""){
+			setSpanText(props.label)
+		}
 	}, [image]);
 	function getFileData(event) {
 		let file = event.files[0];

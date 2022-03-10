@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState, Suspense } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import NavMenu from "../NavMenu";
 import "./index.css";
@@ -22,6 +22,9 @@ import AttachImage from "../Forms/AttachImage";
 import DoubleInputWrap from "../Forms/DoubleInputWrap";
 import SelectorInput from "../Forms/SelectorInput";
 import ImageGallery from "./ImageGallery";
+import BasicList from "../Management/BasicList";
+import AdminList from "./AdminList";
+import { CSSTransition } from "react-transition-group";
 
 export default function CompanyProfile(props) {
 	const { token } = useAuthState();
@@ -31,7 +34,7 @@ export default function CompanyProfile(props) {
 	const [companyData, setCompanyData] = useState({});
 	const [pictureItems, setPictureItems] = useState([]);
 	const [jobItems, setJobItems] = useState([]);
-	const [adminItems, setAdminItems] = useState([]);
+	const [forceReload, setForceReload] = useState(false); // for admin list
 	const [postItems, setPostItems] = useState([]);
 	const [commentItems, setCommentItems] = useState([]);
 
@@ -167,7 +170,7 @@ export default function CompanyProfile(props) {
 			setCompanyEmployeeRage(data.employee_range);
 			setCompanyCountry(data.country);
 		} catch (e) {
-			setMessage(e);
+			setMessage(`fetch on company data failed: ${e}`);
 		}
 
 		try {
@@ -183,7 +186,7 @@ export default function CompanyProfile(props) {
 			}
 			setPostItems(newPostItems);
 		} catch (e) {
-			setMessage(e);
+			setMessage(`fetch on company posts failed: ${e}`);
 		}
 
 		try {
@@ -200,18 +203,16 @@ export default function CompanyProfile(props) {
 			}
 			setCommentItems(newCommentItems);
 		} catch (e) {
-			setMessage(e);
+			setMessage(`fetch on company comments failed: ${e}`);
 		}
 
 		try {
-			let images = await apiCall(
-				`company-pictures?owner=http://127.0.0.1:8000/api/companies/1`,
-				token,
-				{ method: "GET" }
-			);
+			let images = await apiCall(`company-pictures?owner=${data.url}`, token, {
+				method: "GET",
+			});
 			setCompanyImages(images.results);
 		} catch (e) {
-			setMessage(e);
+			setMessage(`fetch on company pictues failed: ${e}`);
 		}
 	}, []);
 
@@ -673,15 +674,34 @@ export default function CompanyProfile(props) {
 							className={`${contentClassesArray[3]}`}
 							margin={true}
 							title="Admins"
-							plusBtn={true}
+							plusBtn={false}
 							onClick={setPopupClasses4}
 						>
-							{adminItems}
-							{adminItems || (
-								<h4 className={`normal`} style={{ margin: "1rem 0" }}>
-									You haven't added any Admins yet...
-								</h4>
-							)}
+							<CSSTransition
+								in={companyData}
+								unmountOnExit
+								timeout={500}
+								classNames={"admin-list-transition"}
+							>
+								<div>
+									<div className={`add-new-field custom-scroll`}>
+										<AdminList
+											title={`Manage admins:`}
+											option="REMOVE"
+											forceReload={[forceReload, setForceReload]}
+											companyUrl={companyData.url}
+										/>
+									</div>
+									<div className={`add-new-field custom-scroll`}>
+										<AdminList
+											title="Add a new admin:"
+											option="ADD"
+											forceReload={[forceReload, setForceReload]}
+											companyUrl={companyData.url}
+										/>
+									</div>
+								</div>
+							</CSSTransition>
 						</ProfileContentFrame>
 
 						<ProfileContentFrame
@@ -719,3 +739,11 @@ export default function CompanyProfile(props) {
 		</>
 	);
 }
+
+// function TestComponent(props) {
+//     useEffect(()=>{
+//         console.log(`my data is ${props.data} and statement is ${!!props.data}`)
+//     },[])
+//
+//     return(<h1>{props.data}</h1>)
+// }

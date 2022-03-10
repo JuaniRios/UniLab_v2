@@ -79,6 +79,8 @@ export default async function apiCall(resource, token, params={}) {
         const response = await fetch(url, requestOptions);
         if ([200,201].includes(response.status)) {
             return await response.json()
+        }else if ([204].includes(response.status)) {
+            return true
         } else {
             throw JSON.stringify(await response.json())
         }

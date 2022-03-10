@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework import filters
 from rest_framework import generics, status
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -101,6 +102,16 @@ class CompanyAdminList(generics.ListCreateAPIView):
     serializer_class = CompanyAdminSerializer
     permission_classes = [IsAuthenticated]
 
+    def delete(self, request, *args, **kwargs):
+        user_url = self.request.query_params.get('user')
+        if user_url:
+            user_pk = url_to_pk(user_url)
+            admin = CompanyAdmin.objects.filter(user=user_pk).first()
+            admin.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            raise ValidationError("user_url parameter needed")
+
     def get_queryset(self):
         user = self.request.query_params.get("user")
         company = self.request.query_params.get("company")
@@ -125,6 +136,10 @@ class CompanyAdminDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = CompanyAdmin.objects.all()
     serializer_class = CompanyAdminSerializer
     permission_classes = [IsAuthenticated]
+
+    def perform_destroy(self, instance):
+        if instance.user == instance.company.owner:
+            raise ValidationError("Owner cannot be removed as admin")
 
 
 class UniversityAdminDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -230,7 +245,7 @@ class CompanyList(generics.ListCreateAPIView):
 class UniversityDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = University.objects.all()
     serializer_class = UniversitySerializer
-    permission_classes = [IsCompanyOrReadOnly, IsOwner]
+    permission_classes = [IsAdmin]
 
 
 class UniversityList(generics.ListCreateAPIView):
@@ -459,6 +474,16 @@ class UserList(generics.ListCreateAPIView):
     filter_backends = [filters.SearchFilter, django_filters.rest_framework.DjangoFilterBackend]
     filterset_fields = ["allowed_company_creation", "allowed_university_creation"]
     search_fields = ['first_name', "last_name", "email"]
+
+    def get_queryset(self):
+        not_admin_of = self.request.query_params.get("not_admin_of")
+        if not_admin_of:
+            pk = re.search(r"companies/(\d+)", not_admin_of)[1]
+            admin_list = Company.objects.filter(pk=pk).first().admins.all()
+            admins_pks = [user.id for user in admin_list]
+            return User.objects.exclude(pk__in=admins_pks)
+        else:
+            return User.objects.all()
 
 
 class VoteDetail(generics.RetrieveUpdateDestroyAPIView):

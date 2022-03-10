@@ -22,6 +22,7 @@ import PageNotFound from "./Components/PageNotFound";
 import { useAuthDispatch, ContextProvider, useAuthState } from "./Context";
 import { read_token } from "./Context/actions";
 import SinglePost from "./Components/SinglePost";
+import UniversityProfile from "./Components/UniversityProfile";
 
 function App() {
 	return (
@@ -46,6 +47,10 @@ function App() {
 
 					<Route path="/companies/:id" element={<PrivateRoute />}>
 						<Route path="" element={<CompanyProfile />} />
+					</Route>
+
+					<Route path="/universities/:id" element={<PrivateRoute />}>
+						<Route path="" element={<UniversityProfile />} />
 					</Route>
 
 					<Route path="/jobs" element={<PrivateRoute />}>
