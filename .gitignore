@@ -8,7 +8,6 @@
 /backend/db.sqlite3
 
 /backend/api/__pycache__
-/backend/api/migrations/
 
 backend/website/migrations
 /backend/website/__pycache__
