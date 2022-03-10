@@ -83,7 +83,7 @@ class UniversitySerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.HyperlinkedRelatedField(read_only=True, view_name='user-detail', many=False)
     rating = serializers.ReadOnlyField()
     student_range_verbose = serializers.CharField(source='get_student_range_display', read_only=True, allow_blank=True)
-
+    students = serializers.HyperlinkedRelatedField(many=True, view_name='university-detail', read_only=True)
 
     class Meta:
         model = University

@@ -9,7 +9,7 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons";
 const element = <FontAwesomeIcon icon={faSearch} size="1x" color="gray" />;
 
 function UserBar(props) {
-
+	const {userData} = useAuthState()
 
 	return (<>
 		<div className={`basic-list-item shadow`}>
@@ -19,9 +19,15 @@ function UserBar(props) {
 				alt="user"
 			/>
 			{props.first_name} {props.last_name}
-			<div className={`basic-list-item-btn noselect`} tabIndex={1} onClick={()=>{props.changeUser(props.url, props.change)}}>
-				{props.option}
-			</div>
+
+			{/*avoid changing your own status*/}
+			{props.url !== userData.url &&
+				<div className={`basic-list-item-btn noselect`} tabIndex={1} onClick={() => {
+					props.changeUser(props.url, props.change)
+				}}>
+					{props.option}
+				</div>
+			}
 		</div>
 	</>)
 }
