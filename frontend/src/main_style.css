@@ -54,6 +54,9 @@
 	word-wrap: break-word;
 	background-repeat: no-repeat;
 	image-rendering: -webkit-optimize-contrast;
+	/* image-rendering: pixelated; */
+	/* image-rendering: optimizeQuality; */
+	/* image-rendering: -moz-crisp-edges; */
 }
 body {
 	margin: 0;
@@ -677,6 +680,17 @@ tr:nth-child(even) {
 	height: calc(100vh - var(--topnav-height));
 	overflow-x: hidden;
 	position: relative;
+}
+.main-content-fixed-2 {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: column;
+	/* height: calc(100vh - var(--topnav-height));
+	overflow-x: hidden; */
+	position: relative;
+	width: 70%;
+	margin: auto;
 }
 .custom-scroll {
 	overflow-y: scroll;

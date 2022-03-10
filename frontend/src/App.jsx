@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Navigate, Route, Routes, Outlet } from "react-router-dom";
-import { Suspense } from 'react';
+import { Suspense } from "react";
 // STYLES
 import "./main_style.css";
 // PAGES
@@ -9,6 +9,7 @@ import Community from "./Components/Community";
 import Universities from "./Components/Universities";
 import Companies from "./Components/Companies";
 import Jobs from "./Components/Jobs";
+import JobDetails from "./Components/JobDetails";
 import Profile from "./Components/Profile";
 import Settings from "./Components/Settings";
 import SignOut from "./Components/SignOut";
@@ -49,6 +50,10 @@ function App() {
 
 					<Route path="/jobs" element={<PrivateRoute />}>
 						<Route path="" element={<Jobs />} />
+					</Route>
+
+					<Route path="/jobs/:id" element={<PrivateRoute />}>
+						<Route path="" element={<JobDetails />} />
 					</Route>
 
 					<Route path="/post" element={<PrivateRoute />}>
@@ -106,11 +111,11 @@ function PrivateRoute({ optional = false }) {
 
 // here app catches the suspense from page in case translations are not yet loaded
 export default function WrappedApp() {
-  return (
-    <Suspense fallback="...is loading">
-      <App />
-    </Suspense>
-  );
+	return (
+		<Suspense fallback="...is loading">
+			<App />
+		</Suspense>
+	);
 }
 
 // export default App;

@@ -61,7 +61,8 @@
 .logout-picture,
 .prof-picture,
 .login-picture,
-.signup-picture {
+.signup-picture,
+.companies-picture {
 	height: 3vh;
 	width: 3vh;
 	margin: 0 3%;
@@ -83,6 +84,9 @@
 }
 .signup-picture {
 	background-image: url("../../Assets/img/sign_up.png");
+}
+.companies-picture {
+	background-image: url("../../Assets/img/top-nav/companies.png");
 }
 .settings-button {
 	display: flex;

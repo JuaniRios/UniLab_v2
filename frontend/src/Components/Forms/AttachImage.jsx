@@ -45,8 +45,20 @@ export default function AttachImage(props) {
 	if (!avatar) {
 		return (
 			<>
-				<label className={`custom-file-upload file-upload shadow`}>
-					<input accept="image/*" type="file" onChange={(e) => getFileData(e.target)} />
+				<label
+					className={`custom-file-upload ${
+						document ? "file-upload-2" : "file-upload"
+					} shadow`}
+				>
+					{props.document ? (
+						<input type="file" onChange={(e) => getFileData(e.target)} />
+					) : (
+						<input
+							accept="image/*"
+							type="file"
+							onChange={(e) => getFileData(e.target)}
+						/>
+					)}
 					<img className={`custom-file-upload-img noselect`} src={attach_icon} alt="" />
 					<span>{spanText}</span>
 				</label>

@@ -9,7 +9,7 @@ import { CSSTransition } from "react-transition-group";
 import apiCall from "../HelperFunctions/apiCall";
 
 export default function SideProfileMenu(props) {
-	const {userData, token} = useAuthState();
+	const { userData, token } = useAuthState();
 	// const [extraData, setExtraData] = useState()
 	// useEffect(() => {
 	// 	const params = {
@@ -24,33 +24,41 @@ export default function SideProfileMenu(props) {
 	// 	catch(alert)
 	// },[userData])
 
+	const profileButton = (
+		<>
+			<NavLink to="/profile" className={`settings-button`}>
+				<div className={`prof-picture`} />
+				<p className={`w80 bold`}>My Profile</p>
+			</NavLink>
+		</>
+	);
 
-	const profileButton = <>
-		<NavLink to="/profile" className={`settings-button`}>
-			<div className={`prof-picture`} />
-			<p className={`w80 bold`}>My Profile</p>
-		</NavLink>
-	</>
+	const myCompaniesButton = (
+		<>
+			<NavLink to="/my-companies" className={`settings-button`}>
+				<div className={`companies-picture`} />
+				<p className={`w80 bold`}>My Companies</p>
+			</NavLink>
+		</>
+	);
 
-	const myCompaniesButton = <>
-		<NavLink to="/my-companies" className={`settings-button`}>
-			<p className={`w80 bold`}>My Companies</p>
-		</NavLink>
-	</>
+	const myUniversitiesButton = (
+		<>
+			<NavLink to="/my-universities" className={`settings-button`}>
+				<p className={`w80 bold`}>My Universities</p>
+			</NavLink>
+		</>
+	);
 
-	const myUniversitiesButton = <>
-		<NavLink to="/my-universities" className={`settings-button`}>
-			<p className={`w80 bold`}>My Universities</p>
-		</NavLink>
-	</>
+	const managementButton = (
+		<>
+			<NavLink to="/management" className={`settings-button`}>
+				<p className={`w80 bold`}>Management</p>
+			</NavLink>
+		</>
+	);
 
-	const managementButton = <>
-		<NavLink to="/management" className={`settings-button`}>
-			<p className={`w80 bold`}>Management</p>
-		</NavLink>
-	</>
-
-	const signedInButtons =
+	const signedInButtons = (
 		<>
 			{profileButton}
 			{userData && userData.company_admins.length > 0 && myCompaniesButton}
@@ -66,8 +74,9 @@ export default function SideProfileMenu(props) {
 				<p className={`w80 bold`}>Sign Out</p>
 			</NavLink>
 		</>
+	);
 
-	const notSignedInButtons =
+	const notSignedInButtons = (
 		<>
 			<button
 				onClick={() => {
@@ -85,42 +94,47 @@ export default function SideProfileMenu(props) {
 				<p className={`w80 bold`}>Sign Up</p>
 			</NavLink>
 		</>
+	);
 
-	const signedInUserData = <>
-		<div className={`profile-user-data w100 flex-col j-c-c a-i-c`}>
-			<NavLink to="/profile">
-				<img
-					className={`profile-picture`}
-					src={userData ? userData["image"] : profile_icon}
-					alt="Profile Picture"
-				/>
-			</NavLink>
+	const signedInUserData = (
+		<>
+			<div className={`profile-user-data w100 flex-col j-c-c a-i-c`}>
+				<NavLink to="/profile">
+					<img
+						className={`profile-picture`}
+						src={userData ? userData["image"] : profile_icon}
+						alt="Profile Picture"
+					/>
+				</NavLink>
 
-			<div className={`profile-names`}>
-				{userData.first_name} {userData.last_name}
+				<div className={`profile-names`}>
+					{userData.first_name} {userData.last_name}
+				</div>
+
+				<div className={`verbose`}>{userData.occupation}</div>
 			</div>
+		</>
+	);
 
-			<div className={`verbose`}>{userData.occupation}</div>
-		</div>
-	</>
+	const notSignedInMessage = (
+		<>
+			<div className={`profile-user-data w100 flex-col j-c-c a-i-c`}>
+				<NavLink to="/profile">
+					<img
+						className={`profile-picture`}
+						src={userData ? userData["image"] : profile_icon}
+						alt="Profile Picture"
+					/>
+				</NavLink>
 
-	const notSignedInMessage = <>
-		<div className={`profile-user-data w100 flex-col j-c-c a-i-c`}>
-			<NavLink to="/profile">
-				<img
-					className={`profile-picture`}
-					src={userData ? userData["image"] : profile_icon}
-					alt="Profile Picture"
-				/>
-			</NavLink>
+				<div className={`profile-names`}>Guest User</div>
 
-			<div className={`profile-names`}>Guest User</div>
-
-			<div className={`verbose w70`}>
-				Sign in to access your profile or create a new account.
+				<div className={`verbose w70`}>
+					Sign in to access your profile or create a new account.
+				</div>
 			</div>
-		</div>
-	</>
+		</>
+	);
 
 	return (
 		<>
