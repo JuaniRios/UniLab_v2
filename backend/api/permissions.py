@@ -57,6 +57,9 @@ class IsAdmin(permissions.BasePermission):
             if isinstance(obj, University):
                 return request.user in obj.admins.all()
 
+            if isinstance(obj, Company):
+                return request.user in obj.admins.all()
+
 
 class IsCompanyOrReadOnly(permissions.BasePermission):
     """

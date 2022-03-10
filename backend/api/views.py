@@ -347,7 +347,7 @@ class JobDetail(generics.RetrieveUpdateDestroyAPIView):
 class JobList(generics.ListCreateAPIView):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
-    permission_classes = [IsCompanyOrReadOnly, CompanyOwner]
+    permission_classes = [IsAdmin]
     filter_backends = [filters.SearchFilter]
     search_fields = ['title']
     ordering = ['-id']

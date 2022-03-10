@@ -175,7 +175,6 @@ class CompanyAdmin(models.Model):
     edit_admins_permission = models.BooleanField(default=False)
 
 
-
 class University(models.Model):
     class Meta:
         verbose_name = _('university')

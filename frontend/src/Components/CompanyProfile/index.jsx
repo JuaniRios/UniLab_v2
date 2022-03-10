@@ -265,23 +265,24 @@ export default function CompanyProfile(props) {
 		setPopupClasses3();
 		e.preventDefault();
 		const payload = {
-			title: jobTitle,
-			city: jobCity,
-			country: jobCountry,
-			hours_per_week: jobHours,
-			salary_per_month: jobSalary,
-			category: jobCategory,
-			type: jobType,
-			you_do: jobYouDo,
-			we_offer: jobWeOffer,
-			requirements: jobRequirements,
+			"title": jobTitle,
+			"city": jobCity,
+			"country": jobCountry,
+			"hours_per_week": jobHours,
+			"salary_per_month": jobSalary,
+			"category": jobCategory,
+			"type": jobType,
+			"you_do": jobYouDo,
+			"we_offer": jobWeOffer,
+			"requirements": jobRequirements,
+			"owner": companyData.url
 		};
 		const params = {
 			method: "POST",
 			payload: payload,
 		};
 		try {
-			await apiCall("company-pictures", token, params);
+			await apiCall("jobs", token, params);
 		} catch (e) {
 			setMessage(`postJob api call failed. error: ${e}`);
 		}
@@ -401,26 +402,15 @@ export default function CompanyProfile(props) {
 						setPopupClasses={setPopupClasses3}
 						handleSubmit={postJob}
 					>
-						<DoubleInputWrap>
-							<BasicInput
-								name="add-job-title"
-								type="text"
-								width="100%"
-								label="Job Title"
-								value={jobTitle}
-								setter={setJobTitle}
-								required="yes"
-							/>
-							<BasicInput
-								name="add-job-city"
-								type="text"
-								width="100%"
-								label="City"
-								value={jobCity}
-								setter={setJobCity}
-								required="yes"
-							/>
-						</DoubleInputWrap>
+						<BasicInput
+							name="add-job-title"
+							type="text"
+							width="100%"
+							label="Job Title"
+							value={jobTitle}
+							setter={setJobTitle}
+							required="yes"
+						/>
 
 						<DoubleInputWrap>
 							<BasicInput
@@ -450,11 +440,11 @@ export default function CompanyProfile(props) {
 								vale={jobType}
 								setter={setJobType}
 								choices={{
-									1: "Full-time",
-									2: "Part-time",
-									3: "Contract",
-									4: "Temporary",
-									5: "Internship",
+									"Full-time": 1,
+									"Part-time": 2,
+									"Contract": 3,
+									"Temporary": 4,
+									"Internship": 5,
 								}}
 							/>
 							<SelectorInput
@@ -463,29 +453,29 @@ export default function CompanyProfile(props) {
 								vale={jobCategory}
 								setter={setJobCategory}
 								choices={{
-									1: "Administrative",
-									2: "Arts & Design",
-									3: "Business",
-									4: "Consulting",
-									5: "Customer Services & Support",
-									6: "Education",
-									7: "Engineering",
-									8: "Finance & Accounting",
-									9: "Healthcare",
-									10: "Human Resources",
-									11: "Information Technology",
-									12: "Legal",
-									13: "Marketing",
-									14: "Media & Communications",
-									15: "Military & Protective Services",
-									16: "Operations",
-									17: "Other",
-									18: "Product & Project Management",
-									19: "Research & Science",
-									20: "Retail & Food Services",
-									21: "Sales",
-									22: "Skilled Labor & Manufacturing",
-									23: "Transportation",
+									"Administrative": 1,
+									"Arts & Design": 2,
+									"Business": 3,
+									"Consulting": 4,
+									"Customer Services & Support": 5,
+									"Education": 6,
+									"Engineering": 7,
+									"Finance & Accounting" : 8,
+									"Healthcare": 9,
+									"Human Resources": 10,
+									"Information Technology": 11,
+									"Legal": 12,
+									"Marketing": 13,
+									"Media & Communications": 14,
+									"Military & Protective Services": 15,
+									"Operations": 16,
+									"Other": 17,
+									"Product & Project Management": 18,
+									"Research & Science": 19,
+									"Retail & Food Services": 20,
+									"Sales": 21,
+									"Skilled Labor & Manufacturing": 22,
+									"Transportation": 23,
 								}}
 							/>
 						</DoubleInputWrap>

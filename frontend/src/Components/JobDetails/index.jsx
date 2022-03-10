@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useParams } from "react";
+import React, { useState, useEffect} from "react";
 // STYLES
 import "./index.css";
 // OTHER
@@ -7,104 +7,143 @@ import NavMenu from "../NavMenu";
 import icon from "../../Assets/img/profile.png";
 import PopupForm from "../Forms/PopupForm";
 import AttachImage from "../Forms/AttachImage";
+import {Link, NavLink, useParams} from "react-router-dom";
+import {useAuthState} from "../../Context";
+import apiCall from "../HelperFunctions/apiCall";
+import urlToPk from "../HelperFunctions/urlToPk";
+import {useMessage} from "../../Context/context";
 
 export default function JobDetails(props) {
-
+    const [message, setMessage] = useMessage()
+    let urlParams = useParams();
+    const {token, userData} = useAuthState()
     const [applyForm, setApplyForm] = useState(false);
     const [overlayClass, setOverlayClass] = useState("");
-    const [image, setImage] = useState("");
+    const [cv, setCv] = useState("")
+    const [letter, setLetter] = useState("")
     const [spanText, setSpanText] = useState("Attach your CV");
+    const [companyData, setCompanyData] = useState({})
+    const [jobData, setJobData] = useState({})
+    // component mount data load-in
+    useEffect(async ()=>{
+        const job_data = await apiCall(`jobs/${urlParams.id}`, token, {method:"GET"})
+        console.log(job_data)
+        setJobData(job_data)
+        const company_data = await apiCall(job_data.company.url, token, {method:"GET", fullUrl:true})
+        setCompanyData(company_data)
+
+    },[])
+
+    async function handleApplication(e) {
+        e.preventDefault()
+        try {
+            const params = {
+                method: "POST",
+                payload: {
+                    "cv": cv,
+                    "motivation_letter": letter,
+                    "job": jobData.url
+                }
+            }
+            await apiCall("applications", token, params)
+        } catch (e) {
+            setMessage(`error handling application: ${e}`)
+        } finally {
+            setApplyForm(false)
+        }
+
+    }
 
     return (
         <>
             <NavMenu />
             <div className={`main-content-fixed-2`}>
-                <button className={`return-btn`}>&#8617; Return to Jobs</button>
+                <Link to={"/jobs"} className={`return-btn`}>&#8617; Return to Jobs</Link>
                 <div className={`job-details shadow`}>
                     <div className={`job-details-left`}>
-                        <img className={`job-company-img`} src={icon} />
+                        {companyData && <Link to={`/companies/${urlToPk(companyData.url)}`}><img className={`job-company-img`} src={companyData.image} /></Link>}
                         <div className={`job-mini-btns-holder`}>
-                            <span className={`job-mini-btn shadow`}>Website</span>
-                            <span className={`job-mini-btn shadow`}>Other Jobs</span>
+                            {jobData.website_url && <a className={`job-mini-btn shadow`} href={jobData.website_url}>Website</a>}
                         </div>
+                        <h3 className={`job-info-text`}>
+                            {companyData.name}
+                        </h3>
                         <div className={`job-info-text`}>
-                            Sports Business Advisory
-                        </div>
-                        <div className={`job-info-text`}>
-                            21-100 employees
+                            {companyData.employee_range_verbose}
                         </div>
                         <hr className="hr100" />
                         <div className={`job-info-longer-text w100`}>
                             <h3>Company Summary</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                {companyData.description}
                             </p>
                         </div>
                     </div>
                     <div className={`job-details-right`}>
-                        <h2>Job Title</h2>
+                        <h2>{jobData.title}</h2>
                         <hr className="hr100" />
                         <div className={`job-info-container`}>
                             <div className={`job-info-subcontainer`}>
-                                <div className={`job-info-text`}>TYPE</div>
+                                <div className={`job-info-text`}>Employment Type</div>
                                 <div className={`job-info-text`}><b>Full-time</b></div>
                             </div>
                             <div className={`job-info-subcontainer`}>
-                                <div className={`job-info-text`}>FIELD</div>
-                                <div className={`job-info-text`}><b>Skilled Labor & Manufacturing</b></div>
+                                <div className={`job-info-text`}>Field</div>
+                                <div className={`job-info-text`}><b>{jobData.category_verbose}</b></div>
                             </div>
                         </div>
                         <hr className="hr100" />
-                        <div className={`job-info-text`}>LOCATION</div>
-                        <div className={`job-info-text`}><b>Sofia, Bulgaria</b></div>
+                        <div className={`job-info-text`}>Location</div>
+                        <div className={`job-info-text`}><b>{jobData.country} {jobData.city && ` · ${jobData.city}`}</b></div>
                         <hr className="hr100" />
                         <div className={`job-info-container`}>
                             <div className={`job-info-subcontainer`}>
-                                <div className={`job-info-text`}>SALARY</div>
-                                <div className={`job-info-text`}><b>1000 EUR per month</b></div>
+                                <div className={`job-info-text`}>Monthly Salary</div>
+                                <div className={`job-info-text`}><b>{jobData.salary_per_month} EUR</b></div>
                             </div>
                             <div className={`job-info-subcontainer`}>
-                                <div className={`job-info-text`}>HOURS</div>
-                                <div className={`job-info-text`}><b>40 hours per week</b></div>
+                                <div className={`job-info-text`}>Weekly Hours</div>
+                                <div className={`job-info-text`}><b>{jobData.hours_per_week} hours</b></div>
                             </div>
                         </div>
                         <hr className="hr100" />
                         <div className={`job-info-longer-text w100`}>
                             <h3>What you will do</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                {jobData.you_do}
                             </p>
                         </div>
                         <hr className="hr100" />
                         <div className={`job-info-longer-text w100`}>
                             <h3>Requirements</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                {jobData.requirements}
                             </p>
                         </div>
                         <hr className="hr100" />
                         <div className={`job-info-longer-text w100`}>
                             <h3>What we offer</h3>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                {jobData.we_offer}
                             </p>
                         </div>
                     </div>
                 </div>
-                <button className={`apply-btn uni-button`} type="button" onClick={() => setApplyForm(applyForm ? false : true)}>Apply</button>
+                <button className={`apply-btn uni-button`} type="button" onClick={() => setApplyForm(!applyForm)}>Apply</button>
             </div>
             {applyForm ? (
                 <PopupForm
                     title="Apply for this job"
                     popupClasses={[applyForm, overlayClass]}
-                    setPopupClasses={() => setApplyForm(applyForm ? false : true)}
+                    setPopupClasses={() => setApplyForm(!applyForm)}
+                    handleSubmit={handleApplication}
                 >
                     <h4 className="w100">Curriculum Vitae (CV)</h4>
                     <AttachImage
                         label="Attach your CV"
                         document={true}
-                        image={image}
-                        setImage={setImage}
+                        image={cv}
+                        setImage={setCv}
                         avatar={false}
                         spanText={spanText}
                         setSpanText={setSpanText}
@@ -113,8 +152,8 @@ export default function JobDetails(props) {
                     <AttachImage
                         label="Attach your letter"
                         document={true}
-                        image={image}
-                        setImage={setImage}
+                        image={letter}
+                        setImage={setLetter}
                         avatar={false}
                         spanText={spanText}
                         setSpanText={setSpanText}
