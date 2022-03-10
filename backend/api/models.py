@@ -47,6 +47,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     allowed_company_creation = models.BooleanField(default=False)
     allowed_university_creation = models.BooleanField(default=False)
 
+    university = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='students', on_delete=models.CASCADE,
+                                   null=True, blank=True)
+
 
     @property
     def is_authenticated(self):
