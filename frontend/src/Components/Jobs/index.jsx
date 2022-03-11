@@ -19,8 +19,8 @@ export default function Jobs(props) {
 		<>
 			<NavMenu />
 			<div className={`main-content-fixed`} style={mainFrameStyle}>
-				<Search searchType="jobs" width="w60" />
 				<Slider contentType={"jobs"} />
+				<Search searchType="jobs" width="w60" />
 			</div>
 		</>
 	);
