@@ -40,7 +40,6 @@ class UserDataSerializer(serializers.HyperlinkedModelSerializer):
     experience_data = ExperienceDataSerializer(many=True, read_only=True)
     skill_data = SkillDataSerializer(many=True, read_only=True)
 
-
     class Meta:
         model = UserData
         fields = '__all__'
@@ -83,7 +82,8 @@ class UniversitySerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.HyperlinkedRelatedField(read_only=True, view_name='user-detail', many=False)
     rating = serializers.ReadOnlyField()
     student_range_verbose = serializers.CharField(source='get_student_range_display', read_only=True, allow_blank=True)
-    students = serializers.HyperlinkedRelatedField(many=True, view_name='university-detail', read_only=True)
+    students = serializers.HyperlinkedRelatedField(many=True, queryset=User.objects.all(), view_name='user-detail',
+                                                   required=False)
 
     class Meta:
         model = University
@@ -120,7 +120,8 @@ class CompanyPicturesSerializer(serializers.HyperlinkedModelSerializer):
 
 class JobSerializer(serializers.HyperlinkedModelSerializer):
     publish_date = serializers.ReadOnlyField()
-    owner = serializers.HyperlinkedRelatedField(view_name='company-detail', queryset=Company.objects.all(), write_only=True, required=True)
+    owner = serializers.HyperlinkedRelatedField(view_name='company-detail', queryset=Company.objects.all(),
+                                                write_only=True, required=True)
     company = serializers.SerializerMethodField()
     category_verbose = serializers.CharField(source='get_category_display', read_only=True)
     type_verbose = serializers.CharField(source='get_type_display', read_only=True)
@@ -147,17 +148,22 @@ class JobSerializer(serializers.HyperlinkedModelSerializer):
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='user-detail')
-    companies = serializers.HyperlinkedRelatedField(many=True, view_name='company-detail', queryset=Company.objects.all(), required=False)
+    companies = serializers.HyperlinkedRelatedField(many=True, view_name='company-detail',
+                                                    queryset=Company.objects.all(), required=False)
+
     password = serializers.CharField(write_only=True)
     user_data = serializers.HyperlinkedRelatedField(many=False, view_name='userdata-detail', read_only=True)
     # user_type_verbose = serializers.SerializerMethodField()
-    voted_posts = serializers.HyperlinkedRelatedField(many=True, view_name='post-detail', queryset=Post.objects.all(), required=False)
+    voted_posts = serializers.HyperlinkedRelatedField(many=True, view_name='post-detail', queryset=Post.objects.all(),
+                                                      required=False)
     occupation = serializers.SerializerMethodField()
-    company_admins = serializers.HyperlinkedRelatedField(many=True, view_name="companyadmin-detail", queryset=CompanyAdmin.objects.all(), required=False)
-    university_admins = serializers.HyperlinkedRelatedField(many=True, view_name="universityadmin-detail", queryset=UniversityAdmin.objects.all(), required=False)
+    company_admins = serializers.HyperlinkedRelatedField(many=True, view_name="companyadmin-detail",
+                                                         queryset=CompanyAdmin.objects.all(), required=False)
+    university_admins = serializers.HyperlinkedRelatedField(many=True, view_name="universityadmin-detail",
+                                                            queryset=UniversityAdmin.objects.all(), required=False)
+
     class Meta:
         model = UserModel
-        # fields = ('url', 'email', 'password', "first_name", 'last_name', 'user_type', 'user_type_verbose', 'companies', 'image', 'user_data')
         fields = '__all__'
 
     # hide empty companies attribute for students
@@ -178,11 +184,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         UserData.objects.create(user=user)
 
         return user
-
-    # def get_user_type_verbose(self, obj):
-    #     int_type = obj.user_type
-    #     result = UserModel.UserType(int_type).label
-    #     return result
 
     def get_occupation(self, obj):
         return obj.user_data.occupation
@@ -263,7 +264,8 @@ class UserDataToUserField(serializers.RelatedField):
 
 class VoteSerializer(serializers.HyperlinkedModelSerializer):
     user = serializers.HyperlinkedRelatedField(view_name='user-detail', queryset=UserModel.objects.all())
-    company = serializers.HyperlinkedRelatedField(view_name='company-detail', queryset=Company.objects.all(), required=False)
+    company = serializers.HyperlinkedRelatedField(view_name='company-detail', queryset=Company.objects.all(),
+                                                  required=False)
     # user_data = serializers.HyperlinkedRelatedField(view_name='userdata-detail', queryset=UserData.objects.all())
     post = serializers.HyperlinkedRelatedField(view_name='post-detail', queryset=Post.objects.all())
 
@@ -330,8 +332,6 @@ class ChangePasswordSerializer(serializers.Serializer):
 
 
 class FeedbackFormSerializer(serializers.HyperlinkedModelSerializer):
-
     class Meta:
         model = FeedbackForm
         fields = "__all__"
-

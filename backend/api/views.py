@@ -153,6 +153,16 @@ class UniversityAdminList(generics.ListCreateAPIView):
     serializer_class = UniversityAdminSerializer
     permission_classes = [IsAuthenticated]
 
+    def delete(self, request, *args, **kwargs):
+        user_url = self.request.query_params.get('user')
+        if user_url:
+            user_pk = url_to_pk(user_url)
+            admin = UniversityAdmin.objects.filter(user=user_pk).first()
+            admin.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            raise ValidationError("user_url parameter needed")
+
     def get_queryset(self):
         user = self.request.query_params.get("user")
         university = self.request.query_params.get("university")
@@ -464,13 +474,13 @@ class UserDataList(generics.ListCreateAPIView):
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, IsOwner]
+    permission_classes = [IsAuthenticated, UserViewPermissions]
 
 
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsOwner]
+    permission_classes = [IsAuthenticated, UserViewPermissions]
     filter_backends = [filters.SearchFilter, django_filters.rest_framework.DjangoFilterBackend]
     filterset_fields = ["allowed_company_creation", "allowed_university_creation"]
     search_fields = ['first_name', "last_name", "email"]
@@ -478,10 +488,25 @@ class UserList(generics.ListCreateAPIView):
     def get_queryset(self):
         not_admin_of = self.request.query_params.get("not_admin_of")
         if not_admin_of:
-            pk = re.search(r"companies/(\d+)", not_admin_of)[1]
-            admin_list = Company.objects.filter(pk=pk).first().admins.all()
-            admins_pks = [user.id for user in admin_list]
-            return User.objects.exclude(pk__in=admins_pks)
+            if "companies" in not_admin_of:
+                pk = re.search(r"companies/(\d+)", not_admin_of)[1]
+                admin_list = Company.objects.filter(pk=pk).first().admins.all()
+                admins_pks = [user.id for user in admin_list]
+                return User.objects.exclude(pk__in=admins_pks)
+
+            elif "universities" in not_admin_of:
+                pk = re.search(r"universities/(\d+)", not_admin_of)[1]
+                admin_list = University.objects.filter(pk=pk).first().admins.all()
+                admins_pks = [user.id for user in admin_list]
+                return User.objects.exclude(pk__in=admins_pks)
+
+        not_student_of = self.request.query_params.get("not_student_of")
+        if not_student_of:
+            pk = re.search(r"universities/(\d+)", not_student_of)[1]
+            student_list = University.objects.filter(pk=pk).first().students.all()
+            student_pks = [user.id for user in student_list]
+            return User.objects.exclude(pk__in=student_pks)
+
         else:
             return User.objects.all()
 

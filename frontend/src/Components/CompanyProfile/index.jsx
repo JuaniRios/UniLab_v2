@@ -668,7 +668,7 @@ export default function CompanyProfile(props) {
 							onClick={setPopupClasses4}
 						>
 							<CSSTransition
-								in={companyData}
+								in={!!companyData}
 								unmountOnExit
 								timeout={500}
 								classNames={"admin-list-transition"}

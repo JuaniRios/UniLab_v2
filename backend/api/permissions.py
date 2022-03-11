@@ -11,6 +11,7 @@ class IsOwner(permissions.BasePermission):
     """
 
     # makes POST requests valid for unauthenticated users
+
     def has_permission(self, request, view):
         return True
 
@@ -59,6 +60,38 @@ class IsAdmin(permissions.BasePermission):
 
             if isinstance(obj, Company):
                 return request.user in obj.admins.all()
+
+
+class UserViewPermissions(permissions.BasePermission):
+    def has_permission(self, request, view):
+        # only changing the university of the user
+        if request.method == "PATCH" and list(request.POST) == ["university"]:
+            uni_url = request.POST.get("university")
+            if uni_url:
+                uni_pk = url_to_pk(request.POST.get("university"))
+                uni = University.objects.filter(pk=uni_pk).first()
+                return request.user in uni.admins.all()
+            else:
+                # if trying to set university to null then check on individual object
+                return True
+
+        # handle the rest with the next function
+        else:
+            return True
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        if request.method == "PATCH" and list(request.POST) == ["university"]:
+            # only university of student is allowed to delete him from their uni
+            if request.POST["university"] == "":
+                return obj.university in request.user.university_admins.all()
+
+            else:
+                return True
+
+        return request.user == obj
 
 
 class IsCompanyOrReadOnly(permissions.BasePermission):

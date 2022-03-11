@@ -22,6 +22,9 @@ import AttachImage from "../Forms/AttachImage";
 import DoubleInputWrap from "../Forms/DoubleInputWrap";
 import SelectorInput from "../Forms/SelectorInput";
 import ImageGallery from "./ImageGallery";
+import AdminList from "../Forms/AdminList";
+import {CSSTransition} from "react-transition-group";
+import StudentList from "./StudentList";
 
 export default function UniversityProfile(props) {
     const {token} = useAuthState()
@@ -55,6 +58,9 @@ export default function UniversityProfile(props) {
     const [newImage, setNewImage] = useState("")
     const [uniImages, setUniImages] = useState([])
 
+
+    // Admins Form
+    const [forceReload, setForceReload] = useState(false)
 
     function changePopupClasses(initState) {
         if (initState[1] === "hidden") {
@@ -359,7 +365,33 @@ export default function UniversityProfile(props) {
                     <ProfileContentFrame id="students" className={`${contentClassesArray[1]}`} margin={true}
                                          title="Students"
                                          plusBtn={true} onClick={setPopupClasses2}>
-                        WIP
+                        <CSSTransition
+                            in={!!universityData}
+                            unmountOnExit
+                            timeout={500}
+                            classNames={"admin-list-transition"}
+                        >
+                            <div>
+                                <div className={`add-new-field custom-scroll`}>
+                                    <StudentList
+                                        title={`Manage Students:`}
+                                        option="REMOVE"
+                                        forceReload={[forceReload, setForceReload]}
+                                        entityUrl={universityData.url}
+                                        entity={"university"}
+                                    />
+                                </div>
+                                <div className={`add-new-field custom-scroll`}>
+                                    <StudentList
+                                        title="Add a new student:"
+                                        option="ADD"
+                                        forceReload={[forceReload, setForceReload]}
+                                        entityUrl={universityData.url}
+                                        entity={"university"}
+                                    />
+                                </div>
+                            </div>
+                        </CSSTransition>
                     </ProfileContentFrame>
 
                     <ProfileContentFrame id="applications" className={`${contentClassesArray[2]}`} margin={true}
@@ -371,7 +403,34 @@ export default function UniversityProfile(props) {
                     <ProfileContentFrame id="admins" className={`${contentClassesArray[3]}`} margin={true}
                                          title="Admins"
                                          plusBtn={true} onClick={setPopupClasses2}>
-                        WIP
+
+                    <CSSTransition
+                            in={!!universityData}
+                            unmountOnExit
+                            timeout={500}
+                            classNames={"admin-list-transition"}
+                        >
+                            <div>
+                                <div className={`add-new-field custom-scroll`}>
+                                    <AdminList
+                                        title={`Manage admins:`}
+                                        option="REMOVE"
+                                        forceReload={[forceReload, setForceReload]}
+                                        entityUrl={universityData.url}
+                                        entity={"university"}
+                                    />
+                                </div>
+                                <div className={`add-new-field custom-scroll`}>
+                                    <AdminList
+                                        title="Add a new admin:"
+                                        option="ADD"
+                                        forceReload={[forceReload, setForceReload]}
+                                        entityUrl={universityData.url}
+                                        entity={"university"}
+                                    />
+                                </div>
+                            </div>
+                        </CSSTransition>
                     </ProfileContentFrame>
 
 
