@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 // ICONS
 import mainBackground from "../../Assets/img/vienna.jpg";
 // OTHER
@@ -12,11 +12,11 @@ import SelectorInput from "../Forms/SelectorInput";
 import TextArea from "../Forms/TextArea";
 import AttachImage from "../Forms/AttachImage";
 import DoubleInputWrap from "../Forms/DoubleInputWrap";
-import {useAuthState} from "../../Context";
+import { useAuthState } from "../../Context";
 
 export default function Universities(props) {
-	const {userData} = useAuthState()
-	const [formToggled, setFormToggled] = useState(false)
+	const { userData } = useAuthState();
+	const [formToggled, setFormToggled] = useState(false);
 
 	document.title = "Universities - UniLab";
 	document.getElementsByTagName("HTML")[0].classList.remove("y-scroll");
@@ -27,21 +27,22 @@ export default function Universities(props) {
 		backgroundSize: "cover",
 	};
 
-	const createUniButton = <>
-		<div className={`uni-form-btn uni-button`} onClick={(e) => setFormToggled(true)}>
-			Create a university page
-		</div>
-	</>
+	const createUniButton = (
+		<>
+			<div className={`uni-form-btn uni-button`} onClick={(e) => setFormToggled(true)}>
+				Create a university page
+			</div>
+		</>
+	);
 
 	return (
 		<>
 			<NavMenu />
 			<div className={`main-content-fixed`} style={mainFrameStyle}>
-				<Search searchType="universities" width="w60" />
 				{userData.allowed_university_creation && createUniButton}
-
-				<Slider contentType={"universities"} reloadOn={formToggled}/>
-				<UniversityForm toggle={[formToggled, setFormToggled]}/>
+				<Slider contentType={"universities"} reloadOn={formToggled} />
+				<Search searchType="universities" width="w60" />
+				<UniversityForm toggle={[formToggled, setFormToggled]} />
 			</div>
 		</>
 	);
