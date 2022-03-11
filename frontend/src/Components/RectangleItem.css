@@ -1,0 +1,35 @@
+.rect-item-container {
+	width: 100%;
+	padding: 1rem;
+	border-radius: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 1rem 0;
+}
+.rect-item-content {
+	width: 20%;
+	max-height: 4rem;
+	padding: 0 1rem;
+}
+.rect-item-btn-holder {
+	display: flex;
+	justify-content: space-between;
+	align-self: center;
+}
+.rect-item-btn {
+	padding: 0.5rem !important;
+	text-align: center;
+	margin: 0.5rem;
+}
+.rect-item-img {
+	height: 4rem;
+	width: 4rem;
+	object-fit: cover;
+	object-position: center;
+	border-radius: 10px;
+}
+.rect-item-noimg {
+	height: 4rem;
+	border-radius: 10px;
+}
