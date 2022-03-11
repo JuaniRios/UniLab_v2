@@ -1,36 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 // STYLES
 import "./BasicList.css";
 import profile_icon from "../../Assets/img/profile.png";
 import apiCall from "../HelperFunctions/apiCall";
-import { useAuthState, useMessage } from "../../Context/context";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import {useAuthState, useMessage} from "../../Context/context";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
 const element = <FontAwesomeIcon icon={faSearch} size="1x" color="gray" />;
 
 function UserBar(props) {
-	const { userData } = useAuthState();
+	const {userData} = useAuthState()
 
-	return (
-		<>
-			<div className={`basic-list-item shadow`}>
-				<img className={`basic-list-item-icon`} src={props.image} alt="user" />
-				{props.first_name} {props.last_name}
-				{/*avoid changing your own status*/}
-				{props.url !== userData.url && (
-					<div
-						className={`basic-list-item-btn noselect`}
-						tabIndex={1}
-						onClick={() => {
-							props.changeUser(props.url, props.change);
-						}}
-					>
-						{props.option}
-					</div>
-				)}
+	return (<>
+		<div className={`basic-list-item shadow`}>
+			<img
+				className={`basic-list-item-icon`}
+				src={props.image}
+				alt="user"
+			/>
+			{props.first_name} {props.last_name}
+
+			<div className={`basic-list-item-btn noselect`} tabIndex={1} onClick={() => {
+				props.changeUser(props.url, props.change)
+			}}>
+				{props.option}
 			</div>
-		</>
-	);
+		</div>
+	</>)
 }
 
 function SearchBar(props) {
@@ -43,13 +39,12 @@ function SearchBar(props) {
 					type="text"
 					placeholder="Search for a user..."
 					onChange={(e) => {
-						props.setSearch(e.target.value);
+						props.setSearch(e.target.value)
 					}}
 					value={props.search}
 				/>
 			</div>
-		</>
-	);
+		</>)
 }
 
 export default function BasicList(props) {
@@ -59,78 +54,68 @@ export default function BasicList(props) {
 		-
 
 	*/
-	const { setMessage } = useMessage();
-	const { token, userData } = useAuthState();
-	const [userList, setUserList] = useState([]);
-	const [search, setSearch] = useState("");
-	const [forceReload, setForceReload] = props.forceReload;
+	const {setMessage} = useMessage()
+	const {token, userData} = useAuthState()
+	const [userList, setUserList] = useState([])
+	const [search, setSearch] = useState("")
+	const [forceReload, setForceReload] = props.forceReload
 
-	useEffect(() => {
-		console.log(userData);
-	}, [userData]);
-	useEffect(() => {
-		const delayBounce = setTimeout(() => {
-			retrieveUsers();
-		}, 500);
-		return () => clearTimeout(delayBounce);
-	}, [search]);
+	useEffect(()=>{console.log(userData)}, [userData])
+	useEffect( () => {
+		const delayBounce = setTimeout( () => {
+			retrieveUsers()
+		}, 500)
+		return () => clearTimeout(delayBounce)
+	}, [search])
 
-	const resource = {
-		university: "allowed_university_creation",
-		company: "allowed_company_creation",
-	};
+	const resource = {"university": "allowed_university_creation", "company": "allowed_company_creation"}
 
-	async function retrieveUsers() {
-		const selector = props.option === "REMOVE";
-		let url = `users?${resource[props.type]}=${selector}&search=${search}`;
+	async function retrieveUsers(){
+		const selector = props.option === "REMOVE"
+		let url = `users?${resource[props.type]}=${selector}&search=${search}`
 		const params = {
-			method: "GET",
-		};
-		try {
-			const data = await apiCall(url, token, params);
-			const newUsers = data["results"].map((info, i) => (
-				<UserBar
-					key={i}
-					option={props.option}
-					change={!selector}
-					changeUser={changeUser}
-					{...info}
-				/>
-			));
-
-			setUserList(newUsers);
-		} catch (error) {
-			alert(error);
+			"method": "GET"
 		}
+		try {
+			const data = await apiCall(url, token, params)
+			const newUsers = data["results"].map(info =>
+				<UserBar option={props.option} change={!selector} changeUser={changeUser} {...info} />)
+
+			setUserList(newUsers)
+		} catch (error) {
+			alert(error)
+		}
+
 	}
 
-	async function changeUser(userUrl, change) {
+	async function changeUser(userUrl, change){
 		// change === true is ADD user permission
 		const params = {
-			method: "PATCH",
-			payload: {
-				[resource[props.type]]: change,
+			"method": "PATCH",
+			"payload": {
+				[resource[props.type]]: change
 			},
-			fullUrl: true,
-		};
+			"fullUrl": true
+		}
 
 		try {
-			await apiCall(userUrl, token, params);
-			setForceReload(!forceReload);
+			await apiCall(userUrl, token, params)
+			setForceReload(!forceReload)
 		} catch (e) {
-			alert(e);
+			alert(e)
 		}
 	}
 
-	useEffect(() => {
-		retrieveUsers();
-	}, [forceReload, props.type]);
+
+	useEffect( () => {
+		retrieveUsers()
+	}, [forceReload, props.type])
 
 	return (
 		<>
 			<div className={`basic-list custom-scroll`}>
 				<h4 className={`basic-list-title c-t`}>{props.title}</h4>
-				<SearchBar search={search} setSearch={setSearch} />
+				<SearchBar search={search} setSearch={setSearch}/>
 				{userList}
 			</div>
 		</>

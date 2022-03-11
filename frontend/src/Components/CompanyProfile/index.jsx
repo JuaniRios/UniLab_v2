@@ -22,7 +22,6 @@ import AttachImage from "../Forms/AttachImage";
 import DoubleInputWrap from "../Forms/DoubleInputWrap";
 import SelectorInput from "../Forms/SelectorInput";
 import ImageGallery from "./ImageGallery";
-import BasicList from "../Management/BasicList";
 import AdminList from "./AdminList";
 import { CSSTransition } from "react-transition-group";
 import RectangleItem from "../RectangleItem";
@@ -778,16 +777,16 @@ export default function CompanyProfile(props) {
 								<div>
 									<div className={`add-new-field custom-scroll`}>
 										<AdminList
-											title={`Manage admins:`}
-											option="REMOVE"
+											title="Add a new admin:"
+											option="ADD"
 											forceReload={[forceReload, setForceReload]}
 											companyUrl={companyData.url}
 										/>
 									</div>
 									<div className={`add-new-field custom-scroll`}>
 										<AdminList
-											title="Add a new admin:"
-											option="ADD"
+											title={`Manage admins:`}
+											option="REMOVE"
 											forceReload={[forceReload, setForceReload]}
 											companyUrl={companyData.url}
 										/>
