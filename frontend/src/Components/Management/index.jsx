@@ -88,11 +88,11 @@ export default function Management(props) {
 				>
 						<div className={`add-new-field custom-scroll`}>
 							<BasicList title={`Approved users for creating a ${type}`} type={type} option="REMOVE"
-								forceReload={[forceReload, setForceReload]}/>
+								forceReload={[forceReload, setForceReload]} avoidYourself={true}/>
 						</div>
 						<div className={`add-new-field custom-scroll`}>
 							<BasicList title="Unapproved users" type={type} option="ADD"
-								forceReload={[forceReload, setForceReload]}/>
+								forceReload={[forceReload, setForceReload]} avoidYourself={true}/>
 						</div>
 				</div>
 			</main>

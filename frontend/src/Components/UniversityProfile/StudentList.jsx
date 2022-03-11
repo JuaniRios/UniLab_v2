@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 // STYLES
-// import "./BasicList.css";
+import CSS from "./StudentList.module.css";
 import profile_icon from "../../Assets/img/profile.png";
 import apiCall from "../HelperFunctions/apiCall";
 import {useAuthState, useMessage} from "../../Context/context";
@@ -12,16 +12,26 @@ const element = <FontAwesomeIcon icon={faSearch} size="1x" color="gray" />;
 function UserBar(props) {
     return (<>
         <div className={`basic-list-item shadow`}>
+
             <img
                 className={`basic-list-item-icon`}
                 src={props.image}
                 alt="user"
             />
+
             {props.first_name} {props.last_name}
-            <div className={`basic-list-item-btn noselect`} tabIndex={1} onClick={() => {
+
+            {/*<div className={"basic-list-item-btn noselect"} style={{fontSize:"1rem"}} tabIndex={1} onClick={() => {*/}
+            {/*    props.showApplications()*/}
+            {/*}}>*/}
+            {/*    Applications*/}
+            {/*</div>*/}
+
+            <div className={`basic-list-item-btn noselect`} style={{fontSize:"2rem"}} tabIndex={1} onClick={() => {
                 props.changeUser()
             }}>
-                {props.option}
+                {props.option === "ADD" ? "+" : "🗑"}
+
             </div>
         </div>
     </>)
@@ -154,7 +164,8 @@ export default function StudentList(props) {
         <div className={`basic-list custom-scroll`}>
             <h4 className={`basic-list-title c-t`}>{props.title}</h4>
             {props.option === "ADD" && <SearchBar search={search} setSearch={setSearch}/>}
-            {userList}
+            {props.option === "ADD" && search && userList}
+            {props.option === "REMOVE" && userList}
         </div>
     </>);
 }

@@ -3,7 +3,6 @@ import React from "react";
 import "./RectangleItem.css";
 
 export default function RectangleItem(props) {
-<<<<<<< Updated upstream
 	return (<>
 		{
 			props["url"] ?
@@ -32,25 +31,4 @@ export default function RectangleItem(props) {
 				</a>
 		}
 	</>);
-=======
-	return (
-		<div className="rect-item-container shadow">
-			<img className="rect-item-img" src={props.img} />
-			<div className="rect-item-content">{props.content}</div>
-			<div className="rect-item-btn-holder">
-				{props.btns
-					? props.btns.map((item, i) => (
-							<div
-								key={i}
-								className="uni-button rect-item-btn"
-								onClick={props.onClick[i]}
-							>
-								{props.btns[i]}
-							</div>
-					  ))
-					: null}
-			</div>
-		</div>
-	);
->>>>>>> Stashed changes
 }

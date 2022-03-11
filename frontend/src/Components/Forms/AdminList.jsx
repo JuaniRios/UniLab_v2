@@ -10,6 +10,7 @@ import {CSSTransition} from "react-transition-group";
 const element = <FontAwesomeIcon icon={faSearch} size="1x" color="gray" />;
 
 function UserBar(props) {
+    const {userData} = useAuthState()
     return (<>
         <div className={`basic-list-item shadow`}>
             <img
@@ -18,11 +19,14 @@ function UserBar(props) {
                 alt="user"
             />
             {props.first_name} {props.last_name}
-            <div className={`basic-list-item-btn noselect`} tabIndex={1} onClick={() => {
-                props.changeUser()
-            }}>
-                {props.option}
-            </div>
+
+            {props.url !== userData.url &&
+                <div className={`basic-list-item-btn noselect`} tabIndex={1} onClick={() => {
+                    props.changeUser()
+                }}>
+                    {props.option}
+                </div>
+            }
         </div>
     </>)
 }
@@ -149,7 +153,8 @@ export default function AdminList(props) {
         <div className={`basic-list custom-scroll`}>
             <h4 className={`basic-list-title c-t`}>{props.title}</h4>
             {props.option === "ADD" && <SearchBar search={search} setSearch={setSearch}/>}
-            {userList}
+            {props.option === "ADD" && search && userList}
+            {props.option === "REMOVE" && userList}
         </div>
     </>);
 }

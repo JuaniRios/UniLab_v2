@@ -20,14 +20,11 @@ function UserBar(props) {
 			/>
 			{props.first_name} {props.last_name}
 
-			{/*avoid changing your own status*/}
-			{props.url !== userData.url &&
-				<div className={`basic-list-item-btn noselect`} tabIndex={1} onClick={() => {
-					props.changeUser(props.url, props.change)
-				}}>
-					{props.option}
-				</div>
-			}
+			<div className={`basic-list-item-btn noselect`} tabIndex={1} onClick={() => {
+				props.changeUser(props.url, props.change)
+			}}>
+				{props.option}
+			</div>
 		</div>
 	</>)
 }

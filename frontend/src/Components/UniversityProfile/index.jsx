@@ -309,11 +309,7 @@ export default function UniversityProfile(props) {
                                  onClick={e => changeActiveItem(1)}>
                             <div className={`item-text`}>Students</div>
                         </NavLink>
-
-                        <NavLink to="#experience" className={`profile-menu-item ${menuClassesArray[2]}`}
-                                 onClick={e => changeActiveItem(2)}>
-                            <div className={`item-text`}>Student Applications</div>
-                        </NavLink>
+                        
 
                         <NavLink to="#skills" className={`profile-menu-item ${menuClassesArray[3]}`}
                                  onClick={e => changeActiveItem(3)}>
@@ -372,15 +368,7 @@ export default function UniversityProfile(props) {
                             classNames={"admin-list-transition"}
                         >
                             <div>
-                                <div className={`add-new-field custom-scroll`}>
-                                    <StudentList
-                                        title={`Manage Students:`}
-                                        option="REMOVE"
-                                        forceReload={[forceReload, setForceReload]}
-                                        entityUrl={universityData.url}
-                                        entity={"university"}
-                                    />
-                                </div>
+
                                 <div className={`add-new-field custom-scroll`}>
                                     <StudentList
                                         title="Add a new student:"
@@ -390,14 +378,19 @@ export default function UniversityProfile(props) {
                                         entity={"university"}
                                     />
                                 </div>
+
+                                <div className={`add-new-field custom-scroll`}>
+                                    <StudentList
+                                        title={`Manage Students:`}
+                                        option="REMOVE"
+                                        forceReload={[forceReload, setForceReload]}
+                                        entityUrl={universityData.url}
+                                        entity={"university"}
+                                    />
+                                </div>
+
                             </div>
                         </CSSTransition>
-                    </ProfileContentFrame>
-
-                    <ProfileContentFrame id="applications" className={`${contentClassesArray[2]}`} margin={true}
-                                         title="Student Applications"
-                                         plusBtn={true} onClick={setPopupClasses2}>
-                        WIP
                     </ProfileContentFrame>
 
                     <ProfileContentFrame id="admins" className={`${contentClassesArray[3]}`} margin={true}
@@ -411,15 +404,7 @@ export default function UniversityProfile(props) {
                             classNames={"admin-list-transition"}
                         >
                             <div>
-                                <div className={`add-new-field custom-scroll`}>
-                                    <AdminList
-                                        title={`Manage admins:`}
-                                        option="REMOVE"
-                                        forceReload={[forceReload, setForceReload]}
-                                        entityUrl={universityData.url}
-                                        entity={"university"}
-                                    />
-                                </div>
+
                                 <div className={`add-new-field custom-scroll`}>
                                     <AdminList
                                         title="Add a new admin:"
@@ -429,8 +414,19 @@ export default function UniversityProfile(props) {
                                         entity={"university"}
                                     />
                                 </div>
+
+                                                                <div className={`add-new-field custom-scroll`}>
+                                    <AdminList
+                                        title={`Manage admins:`}
+                                        option="REMOVE"
+                                        forceReload={[forceReload, setForceReload]}
+                                        entityUrl={universityData.url}
+                                        entity={"university"}
+                                    />
+                                </div>
+
                             </div>
-                        </CSSTransition>
+                    </CSSTransition>
                     </ProfileContentFrame>
 
 

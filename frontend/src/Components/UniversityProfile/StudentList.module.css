@@ -1,0 +1,26 @@
+.basic-list-item:hover .basic-list-item-btn {
+	display: flex;
+}
+
+.basic-list-item-btn {
+	margin-left: auto;
+	color: var(--unilab-orange);
+	font-weight: bold;
+	display: none;
+	cursor: pointer;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translate(0, -50%);
+	background-color: var(--unilab-white);
+	height: 100%;
+	padding: 1rem;
+	border: 0.1px solid transparent;
+	border-radius: 10px;
+}
+
+.basic-list-item-btn:focus {
+	border: 0.1px solid var(--unilab-orange);
+}
