@@ -6,7 +6,7 @@ export default function RectangleItem(props) {
 	return (
 		<>
 			{props["url"] ? (
-				<div className="rect-item-container shadow w100">
+				<div className="rect-item-container shadow">
 					<img className="rect-item-img" src={props.img} />
 					<div className="rect-item-content">{props.content}</div>
 					<div className="rect-item-btn-holder">
@@ -23,7 +23,7 @@ export default function RectangleItem(props) {
 					</div>
 				</div>
 			) : (
-				<a className="rect-item-container shadow w100" href={props.url}>
+				<a className="rect-item-container shadow" href={props.url}>
 					<img className="rect-item-img" src={props.img} />
 					<div className="rect-item-content">{props.content}</div>
 					<div className="rect-item-btn-holder">

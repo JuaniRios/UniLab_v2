@@ -51,8 +51,8 @@
 	background-color: var(--unilab-white);
 }
 .profile-picture {
-	height: 10rem;
-	width: 10rem;
+	height: 7rem;
+	width: 7rem;
 	border-radius: 50%;
 	object-fit: cover;
 	margin-bottom: 2rem;

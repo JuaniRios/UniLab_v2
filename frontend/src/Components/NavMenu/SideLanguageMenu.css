@@ -43,7 +43,7 @@
 	top: 0;
 	background-color: var(--unilab-white);
 	transition: 0.4s linear;
-	/*justify-content: flex-end;*/
+	justify-content: flex-end;
 }
 .select-lang {
 	margin-bottom: 3rem;
@@ -59,12 +59,16 @@
 	left: 2% !important;
 }
 .language-links {
+	background-color: transparent;
+	outline: none;
+	border: none;
 	color: black;
 	display: flex;
 	width: 100%;
 	padding: 2rem 4rem;
 	transition: 0.1s;
 	align-items: center;
+	cursor: pointer;
 }
 .language-links img {
 	height: 2.5rem;
