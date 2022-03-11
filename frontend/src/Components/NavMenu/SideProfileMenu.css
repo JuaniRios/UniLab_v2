@@ -62,7 +62,9 @@
 .prof-picture,
 .login-picture,
 .signup-picture,
-.companies-picture {
+.companies-picture,
+.universities-picture,
+.management-picture {
 	height: 3vh;
 	width: 3vh;
 	margin: 0 3%;
@@ -87,6 +89,12 @@
 }
 .companies-picture {
 	background-image: url("../../Assets/img/top-nav/companies.png");
+}
+.universities-picture {
+	background-image: url("../../Assets/img/defaults/university.jpg");
+}
+.management-picture {
+	background-image: url("../../Assets/img/defaults/management.png");
 }
 .settings-button {
 	display: flex;

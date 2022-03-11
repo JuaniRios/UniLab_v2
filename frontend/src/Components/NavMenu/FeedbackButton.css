@@ -1,25 +1,24 @@
 .fab {
-   width: 70px;
-   height: 70px;
-   background-color: var(--unilab-orange);
-   border-radius: 50%;
-   box-shadow: 0 6px 10px 0 #666;
-   transition: all 0.1s ease-in-out;
+	width: 4rem;
+	height: 4rem;
+	background-color: var(--unilab-orange);
+	border-radius: 50%;
+	transition: all 0.1s ease-in-out;
 
-   font-size: 50px;
-   color: white;
-   text-align: center;
-   line-height: 70px;
-
-   position: fixed;
-   z-index: 10;
-   cursor: pointer;
-   right: 50px;
-   bottom: 50px;
+	font-size: 1rem;
+	color: white;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	z-index: 10;
+	cursor: pointer;
+	right: 50px;
+	bottom: 50px;
 }
 
 .fab:hover {
-   box-shadow: 0 6px 14px 0 #666;
-   background-color: var(--unilab-orange-hover);
-   transform: scale(1.05);
+	background-color: var(--unilab-orange-hover);
+	transform: scale(1.05);
 }

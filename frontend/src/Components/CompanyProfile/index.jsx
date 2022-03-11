@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState, Suspense } from "react";
-import {NavLink, useParams, Link, useNavigate} from "react-router-dom";
+import { NavLink, useParams, Link, useNavigate } from "react-router-dom";
 import NavMenu from "../NavMenu";
 import "./index.css";
 // ICONS
@@ -43,7 +43,7 @@ export default function CompanyProfile(props) {
 	const [commentItems, setCommentItems] = useState([]);
 
 	const [applicantsToggle, setApplicantsToggle] = useState(false);
-	const [applicantsList, setApplicantsList] = useState([])
+	const [applicantsList, setApplicantsList] = useState([]);
 
 	const [menuClassesArray, setMenuClassesArray] = useState([
 		"active-menu-item",
@@ -227,75 +227,82 @@ export default function CompanyProfile(props) {
 
 		// company jobs
 		try {
-			const jobs = await apiCall(`jobs?owner=${data.url}`, token, {method:"GET"})
-			let newJobItems = []
-			let keyIdx = 0
-			console.log("results are:")
-			console.log(jobs.results)
+			const jobs = await apiCall(`jobs?owner=${data.url}`, token, { method: "GET" });
+			let newJobItems = [];
+			let keyIdx = 0;
+			console.log("results are:");
+			console.log(jobs.results);
 			for (const job of jobs.results) {
 				newJobItems.push(
-					<RectangleItem content={job.title} 
-									btns={["View Job", `${job.applicants.length} applicants`, "Delete Job"]}
-									onClick={[
-										(e)=>{navigate(`/jobs/${urlToPk(job.url)}`)},
-										(e)=>{return showApplicants(job)},
-										(e)=>{return deleteJob(job.url, keyIdx)}
-									]}
-								   key={keyIdx}
+					<RectangleItem
+						content={job.title}
+						btns={["View Job", `${job.applicants.length} applicants`, "Delete Job"]}
+						onClick={[
+							(e) => {
+								navigate(`/jobs/${urlToPk(job.url)}`);
+							},
+							(e) => {
+								return showApplicants(job);
+							},
+							(e) => {
+								return deleteJob(job.url, keyIdx);
+							},
+						]}
+						key={keyIdx}
 					/>
-				)
+				);
 				keyIdx++;
 			}
-			console.log(newJobItems)
-			setJobItems(newJobItems)
-			
+			console.log(newJobItems);
+			setJobItems(newJobItems);
 		} catch (e) {
-			setMessage(`fetch error on jobs: ${e}`)
+			setMessage(`fetch error on jobs: ${e}`);
 		}
 	}, []);
-	
-	async function showApplicants(job){
+
+	async function showApplicants(job) {
 		try {
-			console.log("running showApplicants with:")
-			console.log(job)
+			console.log("running showApplicants with:");
+			console.log(job);
 			if (job["applicants"].length === 0) {
-				setMessage("No applicants yet :(")
-				return
+				setMessage("No applicants yet :(");
+				return;
 			}
-			const applicants = []
+			const applicants = [];
 			for (const applicant of job["applicants"]) {
-				applicants.push(await apiCall(applicant, token, {method:"GET", fullUrl: true}))
+				applicants.push(await apiCall(applicant, token, { method: "GET", fullUrl: true }));
 			}
-			const newApplicantList = []
+			const newApplicantList = [];
 			for (const applicant of applicants) {
-				newApplicantList.push(<Applicant first_name={applicant.first_name}
-											   last_name={applicant.last_name}
-											   icon={applicant.image}
-											   url={applicant.url}
-									/>)
+				newApplicantList.push(
+					<Applicant
+						first_name={applicant.first_name}
+						last_name={applicant.last_name}
+						icon={applicant.image}
+						url={applicant.url}
+					/>
+				);
 			}
-			setApplicantsList(newApplicantList)
-			setApplicantsToggle(true)
+			setApplicantsList(newApplicantList);
+			setApplicantsToggle(true);
 		} catch (e) {
-			setMessage(`error in showApplicants: ${e}`)
+			setMessage(`error in showApplicants: ${e}`);
 		}
 	}
 
-	async function deleteJob(jobUrl, id){
-		try{
+	async function deleteJob(jobUrl, id) {
+		try {
 			const params = {
-				"method": "DELETE",
-				"fullUrl": true
-			}
-			await apiCall(jobUrl, token, params)
-			console.log(jobItems)
-			const newJobItems = jobItems.filter(item=>item.key!==id)
-			setJobItems(newJobItems)
-
+				method: "DELETE",
+				fullUrl: true,
+			};
+			await apiCall(jobUrl, token, params);
+			console.log(jobItems);
+			const newJobItems = jobItems.filter((item) => item.key !== id);
+			setJobItems(newJobItems);
 		} catch (e) {
-			setMessage(`delete job error: ${e}`)
+			setMessage(`delete job error: ${e}`);
 		}
-
 	}
 	async function updateBasicInfo(e) {
 		e.preventDefault();
@@ -364,18 +371,26 @@ export default function CompanyProfile(props) {
 		};
 		try {
 			const newJob = await apiCall("jobs", token, params);
-			const newIdx = jobItems.length>0 ? jobItems[jobItems.length-1].key + 1 : 0;
-			const newJobItem = <RectangleItem content={newJob.title}
-									btns={["View Job", `${newJob.applicants.length} applicants`, "Delete Job"]}
-									onClick={[
-										(e)=>{navigate(`/jobs/${urlToPk(newJob.url)}`)},
-										(e)=>{return showApplicants(newJob)},
-										(e)=>{return deleteJob(newJob.url, newIdx)}
-									]}
-								   key={newIdx}
-					/>
-			setJobItems(prev=>prev.concat(newJobItem))
-
+			const newIdx = jobItems.length > 0 ? jobItems[jobItems.length - 1].key + 1 : 0;
+			const newJobItem = (
+				<RectangleItem
+					content={newJob.title}
+					btns={["View Job", `${newJob.applicants.length} applicants`, "Delete Job"]}
+					onClick={[
+						(e) => {
+							navigate(`/jobs/${urlToPk(newJob.url)}`);
+						},
+						(e) => {
+							return showApplicants(newJob);
+						},
+						(e) => {
+							return deleteJob(newJob.url, newIdx);
+						},
+					]}
+					key={newIdx}
+				/>
+			);
+			setJobItems((prev) => prev.concat(newJobItem));
 		} catch (e) {
 			setMessage(`postJob api call failed. error: ${e}`);
 		}
@@ -738,8 +753,17 @@ export default function CompanyProfile(props) {
 
 						{applicantsToggle ? (
 							<ApplicantsSlider
+								jobName="[job__name]"
 								closeEvent={(e) => setApplicantsToggle(!applicantsToggle)}
 							>
+								{applicantsList}
+								{applicantsList}
+								{applicantsList}
+								{applicantsList}
+								{applicantsList}
+								{applicantsList}
+								{applicantsList}
+								{applicantsList}
 								{applicantsList}
 							</ApplicantsSlider>
 						) : null}
@@ -752,7 +776,6 @@ export default function CompanyProfile(props) {
 							plusBtn={true}
 							onClick={setPopupClasses3}
 						>
-
 							{jobItems || (
 								<h4 className={`normal`} style={{ margin: "1rem 0" }}>
 									You haven't added any Jobs yet...

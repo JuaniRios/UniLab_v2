@@ -18,7 +18,11 @@ export default function ApplicantsSlider(props) {
 		<>
 			<div className="overlay" onClick={props.closeEvent}></div>
 			<div className="applicants-container shadow">
-				<h1 className="normal">Applicants</h1>
+				<h1 className="normal" style={{ textAlign: "center" }}>
+					Applicants for
+					<br />
+					{props.jobName}
+				</h1>
 				<div className="applicants-list custom-scroll">{props.children}</div>
 				<CloseButton
 					position="absolute"

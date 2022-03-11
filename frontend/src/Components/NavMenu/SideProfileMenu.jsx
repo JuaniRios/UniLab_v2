@@ -45,6 +45,7 @@ export default function SideProfileMenu(props) {
 	const myUniversitiesButton = (
 		<>
 			<NavLink to="/my-universities" className={`settings-button`}>
+				<div className={`universities-picture`} />
 				<p className={`w80 bold`}>My Universities</p>
 			</NavLink>
 		</>
@@ -53,6 +54,7 @@ export default function SideProfileMenu(props) {
 	const managementButton = (
 		<>
 			<NavLink to="/management" className={`settings-button`}>
+				<div className={`management-picture`} />
 				<p className={`w80 bold`}>Management</p>
 			</NavLink>
 		</>
