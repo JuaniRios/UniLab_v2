@@ -5,6 +5,7 @@ import "./RectangleItem.css";
 export default function RectangleItem(props) {
 	return (
 		<div className="rect-item-container shadow">
+			<img className="rect-item-img" src={props.img} />
 			<div className="rect-item-content">{props.content}</div>
 			<div className="rect-item-btn-holder">
 				{props.btns.map((item, i) => (

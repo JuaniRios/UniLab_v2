@@ -1,4 +1,4 @@
-/.idea
+hy/.idea
 /__pycache__
 
 ./.vscode
@@ -9,7 +9,6 @@
 
 /backend/api/__pycache__
 
-backend/website/migrations
 /backend/website/__pycache__
 /backend/website/templatetags/__pycache__
 

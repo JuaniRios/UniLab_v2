@@ -33,3 +33,9 @@
 	height: 4rem;
 	border-radius: 10px;
 }
+.rect-item-img {
+	object-fit: cover;
+	object-position: center;
+	height: 3rem;
+	width: 3rem;
+}
