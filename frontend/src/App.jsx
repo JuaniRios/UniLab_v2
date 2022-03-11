@@ -7,7 +7,9 @@ import "./main_style.css";
 import Home from "./Components/Home";
 import Community from "./Components/Community";
 import Universities from "./Components/Universities";
+import MyUniversities from "./Components/MyUniversities";
 import Companies from "./Components/Companies";
+import MyCompanies from "./Components/MyCompanies";
 import Jobs from "./Components/Jobs";
 import JobDetails from "./Components/JobDetails";
 import Profile from "./Components/Profile";
@@ -38,8 +40,16 @@ function App() {
 						<Route path="" element={<Community />} />
 					</Route>
 
+					<Route path="/my-universities" element={<PrivateRoute />}>
+						<Route path="" element={<MyUniversities />} />
+					</Route>
+
 					<Route path="/universities" element={<PrivateRoute />}>
 						<Route path="" element={<Universities />} />
+					</Route>
+
+					<Route path="/my-companies" element={<PrivateRoute />}>
+						<Route path="" element={<MyCompanies />} />
 					</Route>
 
 					<Route path="/companies" element={<PrivateRoute />}>

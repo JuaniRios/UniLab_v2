@@ -8,6 +8,7 @@ hy/.idea
 /backend/db.sqlite3
 
 /backend/api/__pycache__
+/backend/api/migrations
 
 /backend/website/__pycache__
 /backend/website/templatetags/__pycache__
