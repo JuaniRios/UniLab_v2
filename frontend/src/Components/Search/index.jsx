@@ -61,6 +61,8 @@ export default function Search(props) {
 				for (const result of data.results) {
 					temp_results.push(<SearchResult name={result.name} image={result.image} url={result.url}/>)
 				}
+			} else if (searchType === "all") {
+
 			}
 			if (temp_results.length > 0) setResults(temp_results);
 			else setResults([<h5>No match found.</h5>])

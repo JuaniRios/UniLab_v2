@@ -480,7 +480,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, UserViewPermissions]
+    permission_classes = [UserViewPermissions]
     filter_backends = [filters.SearchFilter, django_filters.rest_framework.DjangoFilterBackend]
     filterset_fields = ["allowed_company_creation", "allowed_university_creation"]
     search_fields = ['first_name', "last_name", "email"]

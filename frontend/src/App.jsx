@@ -23,6 +23,7 @@ import { useAuthDispatch, ContextProvider, useAuthState } from "./Context";
 import { read_token } from "./Context/actions";
 import SinglePost from "./Components/SinglePost";
 import UniversityProfile from "./Components/UniversityProfile";
+import About from "./Components/About";
 
 function App() {
 	return (
@@ -84,6 +85,8 @@ function App() {
 					<Route path="/management" element={<PrivateRoute />}>
 						<Route path="" element={<Management />} />
 					</Route>
+
+					<Route path="/about" element={<About/>}/>
 
 					{/* Error responses */}
 					<Route path="*" element={<PageNotFound />} />

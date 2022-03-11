@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState, Suspense } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import {NavLink, useParams, Link, useNavigate} from "react-router-dom";
 import NavMenu from "../NavMenu";
 import "./index.css";
 // ICONS
@@ -28,11 +28,13 @@ import { CSSTransition } from "react-transition-group";
 import RectangleItem from "../RectangleItem";
 import ApplicantsSlider from "../ApplicantsSlider";
 import Applicant from "../Applicant";
+import urlToPk from "../HelperFunctions/urlToPk";
 
 export default function CompanyProfile(props) {
 	const { token } = useAuthState();
 	const [message, setMessage] = useMessage();
 	let urlParams = useParams();
+	let navigate = useNavigate();
 
 	const [companyData, setCompanyData] = useState({});
 	const [pictureItems, setPictureItems] = useState([]);
@@ -41,7 +43,8 @@ export default function CompanyProfile(props) {
 	const [postItems, setPostItems] = useState([]);
 	const [commentItems, setCommentItems] = useState([]);
 
-	const [applicantsList, setApplicantsList] = useState(false);
+	const [applicantsToggle, setApplicantsToggle] = useState(false);
+	const [applicantsList, setApplicantsList] = useState([])
 
 	const [menuClassesArray, setMenuClassesArray] = useState([
 		"active-menu-item",
@@ -164,6 +167,7 @@ export default function CompanyProfile(props) {
 	// load in initial data
 	useEffect(async () => {
 		let data;
+		// company data
 		try {
 			data = await apiCall(`companies/${urlParams.id}`, token, { method: "GET" });
 			setCompanyData(data);
@@ -178,6 +182,7 @@ export default function CompanyProfile(props) {
 			setMessage(`fetch on company data failed: ${e}`);
 		}
 
+		// company posts
 		try {
 			const posts = await apiCall(`posts?company_owner=${data.url}&`, token, {
 				method: "GET",
@@ -193,7 +198,7 @@ export default function CompanyProfile(props) {
 		} catch (e) {
 			setMessage(`fetch on company posts failed: ${e}`);
 		}
-
+		// company comments
 		try {
 			const comments = await apiCall(`comments?company_owner=${data.url}&`, token, {
 				method: "GET",
@@ -211,6 +216,7 @@ export default function CompanyProfile(props) {
 			setMessage(`fetch on company comments failed: ${e}`);
 		}
 
+		//company pictures
 		try {
 			let images = await apiCall(`company-pictures?owner=${data.url}`, token, {
 				method: "GET",
@@ -219,8 +225,79 @@ export default function CompanyProfile(props) {
 		} catch (e) {
 			setMessage(`fetch on company pictues failed: ${e}`);
 		}
-	}, []);
 
+		// company jobs
+		try {
+			const jobs = await apiCall(`jobs?owner=${data.url}`, token, {method:"GET"})
+			let newJobItems = []
+			let keyIdx = 0
+			console.log("results are:")
+			console.log(jobs.results)
+			for (const job of jobs.results) {
+				newJobItems.push(
+					<RectangleItem content={job.title} 
+									btns={["View Job", `${job.applicants.length} applicants`, "Delete Job"]}
+									onClick={[
+										(e)=>{navigate(`/jobs/${urlToPk(job.url)}`)},
+										(e)=>{return showApplicants(job)},
+										(e)=>{return deleteJob(job.url, keyIdx)}
+									]}
+								   key={keyIdx}
+					/>
+				)
+				keyIdx++;
+			}
+			console.log(newJobItems)
+			setJobItems(newJobItems)
+			
+		} catch (e) {
+			setMessage(`fetch error on jobs: ${e}`)
+		}
+	}, []);
+	
+	async function showApplicants(job){
+		try {
+			console.log("running showApplicants with:")
+			console.log(job)
+			if (job["applicants"].length === 0) {
+				setMessage("No applicants yet :(")
+				return
+			}
+			const applicants = []
+			for (const applicant of job["applicants"]) {
+				applicants.push(await apiCall(applicant, token, {method:"GET", fullUrl: true}))
+			}
+			const newApplicantList = []
+			for (const applicant of applicants) {
+				newApplicantList.push(<Applicant first_name={applicant.first_name}
+											   last_name={applicant.last_name}
+											   icon={applicant.image}
+											   url={applicant.url}
+									/>)
+			}
+			setApplicantsList(newApplicantList)
+			setApplicantsToggle(true)
+		} catch (e) {
+			setMessage(`error in showApplicants: ${e}`)
+		}
+	}
+
+	async function deleteJob(jobUrl, id){
+		try{
+			const params = {
+				"method": "DELETE",
+				"fullUrl": true
+			}
+			await apiCall(jobUrl, token, params)
+			console.log(jobItems)
+			const newJobItems = jobItems.filter(item=>item.key!==id)
+			setJobItems(newJobItems)
+
+		} catch (e) {
+			setMessage(`delete job error: ${e}`)
+		}
+
+	}
 	async function updateBasicInfo(e) {
 		e.preventDefault();
 		setPopupClasses();
@@ -287,7 +364,19 @@ export default function CompanyProfile(props) {
 			payload: payload,
 		};
 		try {
-			await apiCall("jobs", token, params);
+			const newJob = await apiCall("jobs", token, params);
+			const newIdx = jobItems.length>0 ? jobItems[jobItems.length-1].key + 1 : 0;
+			const newJobItem = <RectangleItem content={newJob.title}
+									btns={["View Job", `${newJob.applicants.length} applicants`, "Delete Job"]}
+									onClick={[
+										(e)=>{navigate(`/jobs/${urlToPk(newJob.url)}`)},
+										(e)=>{return showApplicants(newJob)},
+										(e)=>{return deleteJob(newJob.url, newIdx)}
+									]}
+								   key={newIdx}
+					/>
+			setJobItems(prev=>prev.concat(newJobItem))
+
 		} catch (e) {
 			setMessage(`postJob api call failed. error: ${e}`);
 		}
@@ -648,18 +737,11 @@ export default function CompanyProfile(props) {
 							<ImageGallery images={companyImages} />
 						</ProfileContentFrame>
 
-						{applicantsList ? (
+						{applicantsToggle ? (
 							<ApplicantsSlider
-								closeEvent={(e) => setApplicantsList(applicantsList ? false : true)}
+								closeEvent={(e) => setApplicantsToggle(!applicantsToggle)}
 							>
-								<Applicant name="Valio Angelov" />
-								<Applicant name="Valio Angelov" />
-								<Applicant name="Valio Angelov" />
-								<Applicant name="Valio Angelov" />
-								<Applicant name="Valio Angelov" />
-								<Applicant name="Valio Angelov" />
-								<Applicant name="Valio Angelov" />
-								<Applicant name="Valio Angelov" />
+								{applicantsList}
 							</ApplicantsSlider>
 						) : null}
 
@@ -671,20 +753,7 @@ export default function CompanyProfile(props) {
 							plusBtn={true}
 							onClick={setPopupClasses3}
 						>
-							{jobItems}
-							<RectangleItem
-								content="Job Title"
-								btns={["View Job", "View Applicants", "Delete Job"]}
-								onClick={[
-									(e) => {
-										return 0;
-									},
-									(e) => setApplicantsList(applicantsList ? false : true),
-									(e) => {
-										return 0;
-									},
-								]}
-							/>
+
 							{jobItems || (
 								<h4 className={`normal`} style={{ margin: "1rem 0" }}>
 									You haven't added any Jobs yet...

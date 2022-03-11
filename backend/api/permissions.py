@@ -64,6 +64,8 @@ class IsAdmin(permissions.BasePermission):
 
 class UserViewPermissions(permissions.BasePermission):
     def has_permission(self, request, view):
+        if request.method == "POST" and not request.user.is_authenticated:
+            return True
         # only changing the university of the user
         if request.method == "PATCH" and list(request.POST) == ["university"]:
             uni_url = request.POST.get("university")
@@ -80,7 +82,7 @@ class UserViewPermissions(permissions.BasePermission):
             return True
 
     def has_object_permission(self, request, view, obj):
-        if request.method in permissions.SAFE_METHODS:
+        if request.method in permissions.SAFE_METHODS or request.method == "POST":
             return True
 
         if request.method == "PATCH" and list(request.POST) == ["university"]:
