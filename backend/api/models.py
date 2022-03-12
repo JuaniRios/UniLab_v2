@@ -126,7 +126,7 @@ class Company(models.Model):
     website_url = models.CharField(max_length=200, blank=True)
     publish_date = models.DateField(default=timezone.now)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='companies', on_delete=models.CASCADE)
-    admins = models.ManyToManyField(User, blank=True, through='CompanyAdmin', related_name='company_admins')
+    admins = models.ManyToManyField(User, blank=True, through='CompanyAdmin')
     image = models.ImageField(upload_to='company_image/%Y/%m/%D/', default='defaults/company.jpg')
     country = models.CharField(max_length=200, blank=True)
 
@@ -166,7 +166,7 @@ class CompanyAdmin(models.Model):
         verbose_name = _('company Admin')
         verbose_name_plural = _('company Admins')
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="company_admins")
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
 
     post_permission = models.BooleanField(default=False)
@@ -190,8 +190,8 @@ class University(models.Model):
     website_url = models.CharField(max_length=200, blank=True)
     city = models.CharField(max_length=200, blank=True)
     country = models.CharField(max_length=200, blank=True)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='universities', on_delete=models.CASCADE)
-    admins = models.ManyToManyField(User, blank=True, through='UniversityAdmin', related_name='university_admins')
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='owner_universities', on_delete=models.CASCADE)
+    admins = models.ManyToManyField(User, blank=True, through='UniversityAdmin', related_name="university_admin_set")
     image = models.ImageField(upload_to='company_image/%Y/%m/%D/', default='defaults/university.jpg')
 
     class StudentRange(models.IntegerChoices):
@@ -213,7 +213,7 @@ class UniversityAdmin(models.Model):
         verbose_name = _('university admin')
         verbose_name_plural = _('university admins')
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="university_admins")
     university = models.ForeignKey(University, on_delete=models.CASCADE)
 
     post_permission = models.BooleanField(default=False)

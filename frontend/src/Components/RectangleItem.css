@@ -6,6 +6,8 @@
 	/* justify-content: space-between; */
 	align-items: center;
 	margin: 1rem 0;
+	text-decoration: none;
+	color: black;
 }
 .rect-item-content {
 	width: 20%;
@@ -40,3 +42,4 @@
 	height: 3rem;
 	width: 3rem;
 }
+
