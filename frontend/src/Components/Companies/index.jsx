@@ -29,7 +29,7 @@ export default function Companies(props) {
 	return (
 		<>
 			<NavMenu />
-			<div className={`main-content-fixed`} style={mainFrameStyle}>
+			<div className={`main-content-fixed-3`} style={mainFrameStyle}>
 				{userData.allowed_company_creation && createCompanyButton}
 				<Slider contentType={"companies"} reloadOn={formToggled} />
 				{/* <Search searchType="companies" width="w60" /> */}
