@@ -25,8 +25,8 @@ import ImageGallery from "./ImageGallery";
 import AdminList from "./AdminList";
 import { CSSTransition } from "react-transition-group";
 import RectangleItem from "../RectangleItem";
-import ApplicantsSlider from "../ApplicantsSlider";
-import Applicant from "../Applicant";
+import ApplicantsSlider from "./ApplicantsSlider";
+import Applicant from "./Applicant";
 import urlToPk from "../HelperFunctions/urlToPk";
 
 export default function CompanyProfile(props) {
@@ -43,7 +43,7 @@ export default function CompanyProfile(props) {
 	const [commentItems, setCommentItems] = useState([]);
 
 	const [applicantsToggle, setApplicantsToggle] = useState(false);
-	const [applicantsList, setApplicantsList] = useState([]);
+	const [applicantsList, setApplicantsList] = useState(<></>);
 
 	const [menuClassesArray, setMenuClassesArray] = useState([
 		"active-menu-item",
@@ -88,6 +88,8 @@ export default function CompanyProfile(props) {
 	const [jobYouDo, setJobYouDo] = useState("");
 	const [jobWeOffer, setJobWeOffer] = useState("");
 	const [jobRequirements, setJobRequirements] = useState("");
+
+
 
 	function changePopupClasses(initState) {
 		if (initState[1] === "hidden") {
@@ -197,6 +199,7 @@ export default function CompanyProfile(props) {
 		} catch (e) {
 			setMessage(`fetch on company posts failed: ${e}`);
 		}
+
 		// company comments
 		try {
 			const comments = await apiCall(`comments?company_owner=${data.url}&`, token, {
@@ -229,10 +232,7 @@ export default function CompanyProfile(props) {
 		try {
 			const jobs = await apiCall(`jobs?owner=${data.url}`, token, { method: "GET" });
 			let newJobItems = [];
-			let keyIdx = 0;
-			console.log("results are:");
-			console.log(jobs.results);
-			for (const job of jobs.results) {
+			for (const [id, job] of jobs.results.entries()) {
 				newJobItems.push(
 					<RectangleItem
 						content={job.title}
@@ -245,15 +245,14 @@ export default function CompanyProfile(props) {
 								return showApplicants(job);
 							},
 							(e) => {
-								return deleteJob(job.url, keyIdx);
-							},
+							return deleteJob(job.url, id)
+							}
 						]}
-						key={keyIdx}
+						key={id}
+						img={data.image}
 					/>
 				);
-				keyIdx++;
 			}
-			console.log(newJobItems);
 			setJobItems(newJobItems);
 		} catch (e) {
 			setMessage(`fetch error on jobs: ${e}`);
@@ -262,29 +261,39 @@ export default function CompanyProfile(props) {
 
 	async function showApplicants(job) {
 		try {
-			console.log("running showApplicants with:");
-			console.log(job);
-			if (job["applicants"].length === 0) {
+			if (job["applications"].length === 0) {
 				setMessage("No applicants yet :(");
 				return;
 			}
-			const applicants = [];
-			for (const applicant of job["applicants"]) {
-				applicants.push(await apiCall(applicant, token, { method: "GET", fullUrl: true }));
+			const applications = [];
+			// get applications from url
+			for (const application of job["applications"]) {
+				applications.push(await apiCall(application, token, { method: "GET", fullUrl: true }));
 			}
-			const newApplicantList = [];
-			for (const applicant of applicants) {
-				newApplicantList.push(
+
+			// build application widgets
+			const newApplicationsList = [];
+			for (const application of applications) {
+				newApplicationsList.push(
 					<Applicant
-						first_name={applicant.first_name}
-						last_name={applicant.last_name}
-						icon={applicant.image}
-						url={applicant.url}
+						first_name={application.user.first_name}
+						last_name={application.user.last_name}
+						icon={application.user.image}
+						url={application.user.url}
+						cv={application.cv}
+						motivation_letter={application.motivation_letter}
 					/>
 				);
 			}
-			setApplicantsList(newApplicantList);
+
+			// build main widget for application list
+			setApplicantsList(
+				<ApplicantsSlider jobName={job.title} closeEvent={(e) => {setApplicantsToggle(false)}}>
+					{newApplicationsList}
+				</ApplicantsSlider>
+			);
 			setApplicantsToggle(true);
+
 		} catch (e) {
 			setMessage(`error in showApplicants: ${e}`);
 		}
@@ -296,14 +305,20 @@ export default function CompanyProfile(props) {
 				method: "DELETE",
 				fullUrl: true,
 			};
+
+			// Database Change
 			await apiCall(jobUrl, token, params);
-			console.log(jobItems);
-			const newJobItems = jobItems.filter((item) => item.key !== id);
-			setJobItems(newJobItems);
+
+			// UI Change
+			setJobItems(prev => {
+				return prev.filter(item => item.key !== `${id}`)
+			})
+
 		} catch (e) {
 			setMessage(`delete job error: ${e}`);
 		}
 	}
+
 	async function updateBasicInfo(e) {
 		e.preventDefault();
 		setPopupClasses();
@@ -318,7 +333,6 @@ export default function CompanyProfile(props) {
 		};
 
 		if (companyImage) {
-			console.log(companyImage);
 			payload["image"] = companyImage;
 		}
 		const params = {
@@ -371,7 +385,7 @@ export default function CompanyProfile(props) {
 		};
 		try {
 			const newJob = await apiCall("jobs", token, params);
-			const newIdx = jobItems.length > 0 ? jobItems[jobItems.length - 1].key + 1 : 0;
+			const newIdx = jobItems.length > 0 ? parseInt(jobItems[jobItems.length-1].key) + 1 : 0;
 			const newJobItem = (
 				<RectangleItem
 					content={newJob.title}
@@ -388,6 +402,7 @@ export default function CompanyProfile(props) {
 						},
 					]}
 					key={newIdx}
+					img={companyData.image}
 				/>
 			);
 			setJobItems((prev) => prev.concat(newJobItem));
@@ -395,8 +410,6 @@ export default function CompanyProfile(props) {
 			setMessage(`postJob api call failed. error: ${e}`);
 		}
 	}
-
-	async function handleAdmins(e) {}
 
 	return (
 		<>
@@ -638,15 +651,6 @@ export default function CompanyProfile(props) {
 						/>
 					</PopupForm>
 
-					<PopupForm
-						title="Admins"
-						popupClasses={popupClasses4}
-						setPopupClasses={setPopupClasses4}
-						handleSubmit={handleAdmins}
-					>
-						<h2>WIP</h2>
-					</PopupForm>
-
 					<div className={`main-profile-menu`}>
 						<div className={`fixed-menu`}>
 							<NavLink
@@ -751,22 +755,7 @@ export default function CompanyProfile(props) {
 							<ImageGallery images={companyImages} />
 						</ProfileContentFrame>
 
-						{applicantsToggle ? (
-							<ApplicantsSlider
-								jobName="[job__name]"
-								closeEvent={(e) => setApplicantsToggle(!applicantsToggle)}
-							>
-								{applicantsList}
-								{applicantsList}
-								{applicantsList}
-								{applicantsList}
-								{applicantsList}
-								{applicantsList}
-								{applicantsList}
-								{applicantsList}
-								{applicantsList}
-							</ApplicantsSlider>
-						) : null}
+						{applicantsToggle && applicantsList}
 
 						<ProfileContentFrame
 							id="experience"

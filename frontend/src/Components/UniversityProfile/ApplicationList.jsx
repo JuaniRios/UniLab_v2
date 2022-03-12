@@ -70,14 +70,12 @@ export default function StudentList(props) {
 
     // For props.option == "ADD"
     async function retrieveNonStudents() {
-        console.log("retrieving non students")
         const params = {
             "method": "GET",
             "fullUrl": false,
             "payload": {"page": page}
         }
         try {
-            console.log(`running non admins with url = ${props.entityUrl}`)
             const data = await apiCall(`users?search=${search}&not_student_of=${props.entityUrl}`, token, params)
             const newUsers = []
             data.results.forEach((info, key) => {
@@ -114,10 +112,7 @@ export default function StudentList(props) {
             "fullUrl": true
         }
         try {
-            console.log(`THE UNI URL IS: ${props.entityUrl}`)
             const data = await apiCall(props.entityUrl, token, params)
-            console.log(`DATA IS:`)
-            console.log(data)
             const newUsers = []
             const insert_user = async (user_url, key) => {
 

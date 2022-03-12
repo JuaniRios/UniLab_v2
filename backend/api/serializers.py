@@ -121,10 +121,12 @@ class CompanyPicturesSerializer(serializers.HyperlinkedModelSerializer):
 class JobSerializer(serializers.HyperlinkedModelSerializer):
     publish_date = serializers.ReadOnlyField()
     owner = serializers.HyperlinkedRelatedField(view_name='company-detail', queryset=Company.objects.all(),
-                                                write_only=True, required=True)
+                                              write_only=True, required=True)
     company = serializers.SerializerMethodField()
     category_verbose = serializers.CharField(source='get_category_display', read_only=True)
     type_verbose = serializers.CharField(source='get_type_display', read_only=True)
+    applications = serializers.HyperlinkedRelatedField(many=True, view_name='application-detail',
+                                                       queryset=Application.objects.all(), required=False)
 
     class Meta:
         model = Job
@@ -150,7 +152,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     url = serializers.HyperlinkedIdentityField(view_name='user-detail')
     companies = serializers.HyperlinkedRelatedField(many=True, view_name='company-detail',
                                                     queryset=Company.objects.all(), required=False)
-
+    applications = serializers.HyperlinkedRelatedField(many=True, view_name='application-detail',
+                                                       queryset=Application.objects.all(), required=False)
     password = serializers.CharField(write_only=True)
     user_data = serializers.HyperlinkedRelatedField(many=False, view_name='userdata-detail', read_only=True)
     # user_type_verbose = serializers.SerializerMethodField()
@@ -304,11 +307,13 @@ class PostReportSerializer(serializers.HyperlinkedModelSerializer):
 
 class ApplicationSerializer(serializers.HyperlinkedModelSerializer):
     user = UserSerializer(read_only=True, many=False)
-    job = serializers.HyperlinkedRelatedField(view_name='job-detail', queryset=Job.objects.all())
+    job = JobSerializer(read_only=True, many=False)
+    # job = serializers.HyperlinkedRelatedField(view_name='job-detail', queryset=Job.objects.all())
 
     class Meta:
         model = Application
         fields = '__all__'
+
 
     def create(self, validated_data):
         # delete previous application from the same user on same job

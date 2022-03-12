@@ -22,29 +22,41 @@ import AttachImage from "../Forms/AttachImage";
 import DoubleInputWrap from "../Forms/DoubleInputWrap";
 import SelectorInput from "../Forms/SelectorInput";
 import ImageGallery from "./ImageGallery";
-import AdminList from "../Forms/AdminList";
+import AdminList from "./AdminList";
 import {CSSTransition} from "react-transition-group";
 import StudentList from "./StudentList";
+import Application from "./Application";
+import ApplicationsSlider from "./ApplicationsSlider";
 
 export default function UniversityProfile(props) {
-    const {token} = useAuthState()
+    const {token, userData} = useAuthState()
     const [message, setMessage] = useMessage()
     let urlParams = useParams()
+    const [isAdmin, setIsAdmin] = useState(false)
 
+    // PAGE STATES
+        // General Profile Data
     const [universityData, setUniversityData] = useState({})
+
+        // Pictures Page
     const [pictureItems, setPictureItems] = useState([])
+
+        // Students Page
     const [studentItems, setStudentItems] = useState([])
+    const [applicationsToggle, setApplicationsToggle] = useState(false)
+	const [applicationsList, setApplicationsList] = useState(<></>)
+
+        // Admins Page
     const [adminItems, setAdminItems] = useState([])
-    const [applicationItems, setApplicationItems] = useState([])
+
+        // Posts Page
     const [postItems, setPostItems] = useState([])
+
+        // Comments Page
     const [commentItems, setCommentItems] = useState([])
 
-
-    const [menuClassesArray, setMenuClassesArray] = useState(["active-menu-item", "", "", "", "", ""]);
-    const [contentClassesArray, setContentClassesArray] = useState(["", "hidden", "hidden", "hidden", "hidden", "hidden"]);
-
     // FORM STATES
-    // University Info Form
+        // University Info Form
     const [uniName, setUniName] = useState("")
     const [uniDescription, setUniDescription] = useState("")
     const [uniWebsite, setUniWebsite] = useState("")
@@ -54,13 +66,16 @@ export default function UniversityProfile(props) {
     const [uniCity, setUniCity] = useState("")
     const [uniStudentRange, setUniStudentRange] = useState("")
 
-    // Add Pictures Form
+        // Add Pictures Form
     const [newImage, setNewImage] = useState("")
     const [uniImages, setUniImages] = useState([])
 
-
-    // Admins Form
+        // Admins Form
     const [forceReload, setForceReload] = useState(false)
+
+    // CSS stuff
+    const [menuClassesArray, setMenuClassesArray] = useState(["active-menu-item", "", "", "", "", ""]);
+    const [contentClassesArray, setContentClassesArray] = useState(["", "hidden", "hidden", "hidden", "hidden", "hidden"]);
 
     function changePopupClasses(initState) {
         if (initState[1] === "hidden") {
@@ -130,6 +145,13 @@ export default function UniversityProfile(props) {
                 break;
         }
     }, [])
+
+    //
+    useEffect(()=>{
+        if (Object.keys(universityData).length > 0 && userData) {
+            setIsAdmin(universityData.admins.includes(userData.url))
+        }
+    },[universityData, userData])
 
     // load in initial data
     useEffect(async () => {
@@ -201,7 +223,6 @@ export default function UniversityProfile(props) {
         }
 
         if (uniImage) {
-            console.log(uniImage)
             payload["image"] = uniImage
         }
         const params = {
@@ -237,10 +258,34 @@ export default function UniversityProfile(props) {
     //     }
     // }
 
-    async function handleAdmins(e) {
+    async function seeApplications(userUrl, toggle) {
+        console.log(`userURl is: ${userUrl}`)
+        toggle(true)
+        const user = await apiCall(userUrl, token, {method:"GET", fullUrl:true})
+        const applications = user.applications
+		try {
+			if (applications.length === 0) {
+				setMessage("No applications made yet :(");
+				return;
+			}
 
-    }
-
+			const newApplicationsList = [];
+			for (const applicationUrl of applications) {
+                const application = await apiCall(applicationUrl, token, {method:"GET", fullUrl:true})
+				newApplicationsList.push(
+					<Application {...application}/>
+				);
+			}
+			setApplicationsList(
+				<ApplicationsSlider first_name={user.first_name} last_name={user.last_name}
+                                    closeEvent={(e) => {toggle(false)}}>
+					{newApplicationsList}
+				</ApplicationsSlider>
+			);
+		} catch (e) {
+			setMessage(`error in showApplicants: ${e}`);
+		}
+	}
 
     return (<>
         <NavMenu/>
@@ -289,14 +334,8 @@ export default function UniversityProfile(props) {
                 {/*    <AttachImage label={"Upload Picture"} required={false} image={newImage} setImage={setNewImage}/>*/}
                 
                 {/*</PopupForm>*/}
-                
-                <PopupForm title="Admins" popupClasses={popupClasses3} setPopupClasses={setPopupClasses2}
-                           handleSubmit={handleAdmins}>
 
-                    <h2>WIP</h2>
-
-                </PopupForm>
-
+                {/*SIDE BAR*/}
                 <div className={`main-profile-menu`}>
                     <div className={`fixed-menu`}>
 
@@ -305,16 +344,17 @@ export default function UniversityProfile(props) {
                             <div className={`item-text`}>University Information</div>
                         </NavLink>
 
-                        <NavLink to="#education" className={`profile-menu-item ${menuClassesArray[1]}`}
+                        <NavLink to="#students" className={`profile-menu-item ${menuClassesArray[1]}`}
                                  onClick={e => changeActiveItem(1)}>
                             <div className={`item-text`}>Students</div>
                         </NavLink>
-                        
 
-                        <NavLink to="#skills" className={`profile-menu-item ${menuClassesArray[3]}`}
-                                 onClick={e => changeActiveItem(3)}>
-                            <div className={`item-text`}>Admins</div>
-                        </NavLink>
+                        {isAdmin &&
+                            <NavLink to="#admins" className={`profile-menu-item ${menuClassesArray[3]}`}
+                                     onClick={e => changeActiveItem(3)}>
+                                <div className={`item-text`}>Admins</div>
+                            </NavLink>
+                        }
 
                         <NavLink to="#posts" className={`profile-menu-item ${menuClassesArray[4]}`}
                                  onClick={e => changeActiveItem(4)}>
@@ -329,6 +369,7 @@ export default function UniversityProfile(props) {
                     </div>
                 </div>
 
+                {/*MAIN CONTENT*/}
                 <div className={`profile-content-container`}>
 
                     <ProfileContentFrame id="basic-info" className={`${contentClassesArray[0]}`}>
@@ -336,8 +377,10 @@ export default function UniversityProfile(props) {
                             <img className={`profile-banner-pfp`} src={universityData.image} alt="Profile icon"/>
                         </div>
                         <div className={`profile-basic-info`}>
-                            <img className={`basic-info-toggler`} src={pencil_icon} alt="Pen icon"
-                                 onClick={setPopupClasses}/>
+                            {isAdmin &&
+                                <img className={`basic-info-toggler`} src={pencil_icon} alt="Pen icon"
+                                     onClick={setPopupClasses}/>
+                            }
                             <h3>
                                 {universityData.name}
                             </h3>
@@ -358,9 +401,12 @@ export default function UniversityProfile(props) {
                         </div>
                     </ProfileContentFrame>
 
+                    {/*Show grid of applications for a single user*/}
+                    {applicationsToggle && applicationsList}
+
                     <ProfileContentFrame id="students" className={`${contentClassesArray[1]}`} margin={true}
                                          title="Students"
-                                         plusBtn={true} onClick={setPopupClasses2}>
+                                         plusBtn={false} onClick={setPopupClasses2}>
                         <CSSTransition
                             in={!!universityData}
                             unmountOnExit
@@ -368,24 +414,29 @@ export default function UniversityProfile(props) {
                             classNames={"admin-list-transition"}
                         >
                             <div>
+                                {isAdmin &&
+                                    <div className={`add-new-field custom-scroll`}>
+                                        <StudentList
+                                            title="Add a new student:"
+                                            option="ADD"
+                                            forceReload={[forceReload, setForceReload]}
+                                            entityUrl={universityData.url}
+                                            entity={"university"}
+                                            editable={isAdmin}
+                                        />
+                                    </div>
+                                }
 
                                 <div className={`add-new-field custom-scroll`}>
                                     <StudentList
-                                        title="Add a new student:"
-                                        option="ADD"
-                                        forceReload={[forceReload, setForceReload]}
-                                        entityUrl={universityData.url}
-                                        entity={"university"}
-                                    />
-                                </div>
-
-                                <div className={`add-new-field custom-scroll`}>
-                                    <StudentList
-                                        title={`Manage Students:`}
+                                        title={`Students:`}
                                         option="REMOVE"
                                         forceReload={[forceReload, setForceReload]}
                                         entityUrl={universityData.url}
                                         entity={"university"}
+                                        editable={isAdmin}
+                                        seeApplications={seeApplications}
+                                        setApplicationsToggle={setApplicationsToggle}
                                     />
                                 </div>
 
@@ -395,7 +446,7 @@ export default function UniversityProfile(props) {
 
                     <ProfileContentFrame id="admins" className={`${contentClassesArray[3]}`} margin={true}
                                          title="Admins"
-                                         plusBtn={true} onClick={setPopupClasses2}>
+                                         plusBtn={isAdmin} onClick={setPopupClasses2}>
 
                     <CSSTransition
                             in={!!universityData}
@@ -432,21 +483,23 @@ export default function UniversityProfile(props) {
 
                     <ProfileContentFrame id="posts" className={`${contentClassesArray[4]}`} margin={true} title="Posts">
 
-                        {postItems}
+                        To be implemented...
+                        {/*{postItems}*/}
 
-                        {postItems || <h4 className={`normal`} style={{margin: "1rem 0"}}>
-                            You haven't posted anything yet...
-                        </h4>}
+                        {/*{postItems || <h4 className={`normal`} style={{margin: "1rem 0"}}>*/}
+                        {/*    You haven't posted anything yet...*/}
+                        {/*</h4>}*/}
 
                     </ProfileContentFrame>
 
                     <ProfileContentFrame id="comments" className={`${contentClassesArray[5]}`} margin={true}
                                          title="Comments">
-                        {commentItems}
+                        To be implemented...
+                        {/*{commentItems}*/}
 
-                        {commentItems || <h4 className={`normal`} style={{margin: "1rem 0"}}>
-                            You haven't commented on anything yet...
-                        </h4>}
+                        {/*{commentItems || <h4 className={`normal`} style={{margin: "1rem 0"}}>*/}
+                        {/*    You haven't commented on anything yet...*/}
+                        {/*</h4>}*/}
 
                     </ProfileContentFrame>
 

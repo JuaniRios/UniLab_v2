@@ -60,7 +60,7 @@ export default function SliderCard(props) {
 					</NavLink>
 
 					<p className={`gray-text`}>{content.industry_verbose}</p>
-					<p className={`gray-text`}>{content.employee_range}</p>
+					<p className={`gray-text`}>{content.employee_range_verbose}</p>
 					<p>
 						<span className={`gray-text smaller-text`}>{content.rating}</span>
 					</p>

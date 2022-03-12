@@ -42,9 +42,10 @@ export default function JobDetails(props) {
 			const params = {
 				method: "POST",
 				payload: {
-					cv: cv,
-					motivation_letter: letter,
-					job: jobData.url,
+					"cv": cv,
+					"motivation_letter": letter,
+					"job": jobData.url,
+					"user": userData.url
 				},
 			};
 			await apiCall("applications", token, params);

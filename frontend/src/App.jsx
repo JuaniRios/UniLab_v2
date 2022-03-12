@@ -80,7 +80,7 @@ function App() {
 						<Route path="" element={<Jobs />} />
 					</Route>
 
-					<Route path="/profile" element={<PrivateRoute />}>
+					<Route path="/profile/:id" element={<PrivateRoute />}>
 						<Route path="" element={<Profile />} />
 					</Route>
 

@@ -1,18 +1,21 @@
 import React, {useEffect, useState} from "react";
 // STYLES
 // import "./BasicList.css";
+import LocalCSS from "./StudentList.module.css"
 import profile_icon from "../../Assets/img/profile.png";
 import apiCall from "../HelperFunctions/apiCall";
 import {useAuthState, useMessage} from "../../Context/context";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {CSSTransition} from "react-transition-group";
+import {Link} from "react-router-dom";
+import urlToPk from "../HelperFunctions/urlToPk";
 const element = <FontAwesomeIcon icon={faSearch} size="1x" color="gray" />;
 
 function UserBar(props) {
     const {userData} = useAuthState()
     return (<>
-        <div className={`basic-list-item shadow`}>
+        <Link to={`/profile/${urlToPk(props.url)}`} className={`${LocalCSS.UserBar} basic-list-item shadow`}>
             <img
                 className={`basic-list-item-icon`}
                 src={props.image}
@@ -21,13 +24,14 @@ function UserBar(props) {
             {props.first_name} {props.last_name}
 
             {props.url !== userData.url &&
-                <div className={`basic-list-item-btn noselect`} tabIndex={1} onClick={() => {
+                <div className={`basic-list-item-btn noselect`} style={{fontSize: "2rem"}} tabIndex={1} onClick={(e) => {
+                    e.preventDefault()
                     props.changeUser()
                 }}>
-                    {props.option}
+                    {props.option === "ADD" ? "+" : "🗑"}
                 </div>
             }
-        </div>
+        </Link>
     </>)
 }
 
@@ -74,14 +78,12 @@ export default function AdminList(props) {
 
     // For props.option == "ADD"
     async function retrieveNonAdmins() {
-        console.log("retrieving non admins")
         const params = {
             "method": "GET",
             "fullUrl": false,
             "payload": {"page": page}
         }
         try {
-            console.log(`running non admins with url = ${props.entityUrl}`)
             const data = await apiCall(`users?search=${search}&not_admin_of=${props.entityUrl}`, token, params)
             const newUsers = []
             data.results.forEach((info, key) => {
@@ -113,7 +115,6 @@ export default function AdminList(props) {
 
      // For props.option == "DELETE"
     async function retrieveAdmins() {
-                console.log("retrieving admins")
         const params = {
             "method": "GET",
             "fullUrl": true

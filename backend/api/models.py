@@ -266,7 +266,7 @@ class Job(models.Model):
     you_do = models.TextField(blank=True)
     we_offer = models.TextField(blank=True)
     employment_details = models.TextField(blank=True)
-    applicants = models.ManyToManyField(User, blank=True, through='Application', related_name='applications')
+    applicants = models.ManyToManyField(User, blank=True, through='Application', related_name="job")
 
     class JobCategories(models.IntegerChoices):
         ADMINISTRATIVE = 1, _('Administrative')
@@ -316,8 +316,8 @@ class Application(models.Model):
         verbose_name = _('application')
         verbose_name_plural = _('applications')
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="applications")
+    job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name="applications")
     cv = models.FileField(upload_to='cv/%Y/%m/%d/')
     motivation_letter = models.FileField(upload_to='motivation_letter/%Y/%m/%d/')
 

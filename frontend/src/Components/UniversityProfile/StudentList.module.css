@@ -24,3 +24,8 @@
 .basic-list-item-btn:focus {
 	border: 0.1px solid var(--unilab-orange);
 }
+
+.UserBar{
+	text-decoration: none;
+	color: black;
+}

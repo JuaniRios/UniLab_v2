@@ -7,6 +7,7 @@ import { useAuthState } from "../../Context";
 import { NavLink } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import apiCall from "../HelperFunctions/apiCall";
+import urlToPk from "../HelperFunctions/urlToPk";
 
 export default function SideProfileMenu(props) {
 	const { userData, token } = useAuthState();
@@ -26,7 +27,7 @@ export default function SideProfileMenu(props) {
 
 	const profileButton = (
 		<>
-			<NavLink to="/profile" className={`settings-button`}>
+			<NavLink to={`/profile/${urlToPk(userData.url)}`} className={`settings-button`}>
 				<div className={`prof-picture`} />
 				<p className={`w80 bold`}>My Profile</p>
 			</NavLink>

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import "./ApplicantsSlider.css";
-import CloseButton from "./Buttons/CloseButton";
+import CloseButton from "../Buttons/CloseButton";
 
 export default function ApplicantsSlider(props) {
 	useEffect(() => {
@@ -16,7 +16,7 @@ export default function ApplicantsSlider(props) {
 
 	return (
 		<>
-			<div className="overlay" onClick={props.closeEvent}></div>
+			<div className="overlay" onClick={props.closeEvent}/>
 			<div className="applicants-container shadow">
 				<h1 className="normal" style={{ textAlign: "center" }}>
 					Applicants for

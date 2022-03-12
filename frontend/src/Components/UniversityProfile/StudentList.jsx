@@ -1,17 +1,20 @@
 import React, {useEffect, useState} from "react";
 // STYLES
-import CSS from "./StudentList.module.css";
+import LocalCSS from "./StudentList.module.css";
 import profile_icon from "../../Assets/img/profile.png";
 import apiCall from "../HelperFunctions/apiCall";
 import {useAuthState, useMessage} from "../../Context/context";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {CSSTransition} from "react-transition-group";
+import {Link} from "react-router-dom";
+import urlToPk from "../HelperFunctions/urlToPk";
 const element = <FontAwesomeIcon icon={faSearch} size="1x" color="gray" />;
 
 function UserBar(props) {
+
     return (<>
-        <div className={`basic-list-item shadow`}>
+        <Link to={`/profile/${urlToPk(props.url)}`} className={`${LocalCSS.UserBar} basic-list-item shadow`}>
 
             <img
                 className={`basic-list-item-icon`}
@@ -21,19 +24,27 @@ function UserBar(props) {
 
             {props.first_name} {props.last_name}
 
-            {/*<div className={"basic-list-item-btn noselect"} style={{fontSize:"1rem"}} tabIndex={1} onClick={() => {*/}
-            {/*    props.showApplications()*/}
-            {/*}}>*/}
-            {/*    Applications*/}
-            {/*</div>*/}
+            {props.editable && props.option === "REMOVE" &&
+                <div className={`basic-list-item-btn noselect`} style={{fontSize: "1rem"}} tabIndex={1}
+                     onClick={(e) => {
+                         e.preventDefault()
+                         props.seeApplications(props.url, props.setApplicationsToggle)
+                     }}>
+                    See Applications
 
-            <div className={`basic-list-item-btn noselect`} style={{fontSize:"2rem"}} tabIndex={1} onClick={() => {
-                props.changeUser()
-            }}>
-                {props.option === "ADD" ? "+" : "🗑"}
+                </div>
+            }
 
-            </div>
-        </div>
+            {props.editable &&
+                <div className={`basic-list-item-btn noselect`} style={{fontSize: "2rem"}} tabIndex={1} onClick={(e) => {
+                    e.preventDefault()
+                    props.changeUser()
+                }}>
+                    {props.option === "ADD" ? "+" : "🗑"}
+
+                </div>
+            }
+        </Link>
     </>)
 }
 
@@ -70,28 +81,25 @@ export default function StudentList(props) {
             }
         }, 500)
         return () => clearTimeout(delayBounce)
-    }, [search, forceReload])
+    }, [search, forceReload, props.editable])
 
     useEffect(() => {
         if (props.entityUrl) {
             props.option === "REMOVE" ? retrieveStudents() : retrieveNonStudents()
         }
-    }, [forceReload, props.entityUrl])
+    }, [forceReload, props.entityUrl, props.editable])
 
     // For props.option == "ADD"
     async function retrieveNonStudents() {
-        console.log("retrieving non students")
         const params = {
             "method": "GET",
             "fullUrl": false,
-            "payload": {"page": page}
         }
         try {
-            console.log(`running non admins with url = ${props.entityUrl}`)
             const data = await apiCall(`users?search=${search}&not_student_of=${props.entityUrl}`, token, params)
             const newUsers = []
             data.results.forEach((info, key) => {
-                newUsers.push(<UserBar option={props.option} changeUser={() => {addUser(info.url)}} key={key} {...info}/>)
+                newUsers.push(<UserBar editable={props.editable} option={props.option} changeUser={() => {addUser(info.url)}} key={key} {...info}/>)
             })
             setUserList(newUsers)
 
@@ -124,17 +132,16 @@ export default function StudentList(props) {
             "fullUrl": true
         }
         try {
-            console.log(`THE UNI URL IS: ${props.entityUrl}`)
             const data = await apiCall(props.entityUrl, token, params)
-            console.log(`DATA IS:`)
-            console.log(data)
             const newUsers = []
             const insert_user = async (user_url, key) => {
 
                 const info = await apiCall(user_url, token, params)
-                newUsers.push(<UserBar option={props.option} changeUser={() => {
+                newUsers.push(<UserBar editable={props.editable} option={props.option} changeUser={() => {
                     deleteUser(info.url)
-                }} key={key} {...info} />)
+                }} key={key}
+                                       seeApplications={props.seeApplications} setApplicationsToggle={props.setApplicationsToggle}
+                                       {...info} />)
             }
             for (let i=0; i<data.students.length; i++ ) {
                 await insert_user(data.students[i], i)

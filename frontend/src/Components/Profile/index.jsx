@@ -1,5 +1,5 @@
 import React, {useEffect, useReducer, useState} from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, useParams} from "react-router-dom";
 import NavMenu from "../NavMenu";
 import "./index.css";
 // ICONS
@@ -17,11 +17,15 @@ import TextArea from "../Forms/TextArea";
 import PostCommentContainer from "./PostCommentContainer";
 import {useAuthState} from "../../Context";
 import apiCall from "../HelperFunctions/apiCall";
+import urlToPk from "../HelperFunctions/urlToPk";
 
 function Profile(props) {
+    let urlParams = useParams()
 
     document.title = "Profile - UniLab";
     const {userData, token} = useAuthState()
+    const [editable, setEditable] = useState(false)
+    const [targetUser, setTargetUserData] = useState("")
     const [userInformation, setUserInformation] = useState({})
     const [educationItems, setEducationItems] = useState([])
     const [experienceItems, setExperienceItems] = useState([])
@@ -85,6 +89,8 @@ function Profile(props) {
         document.body.classList.remove("noscroll");
     }
 
+    useEffect(()=>{setEditable(urlToPk(userData.url) === urlParams.id)}, [userData, urlParams])
+
     useEffect(() => {
         switch (window.location.href.substring((window.location.href.indexOf("#") + 1))) {
             case "basic-info":
@@ -128,8 +134,10 @@ function Profile(props) {
         }
         setSkillItems(newSkillItems)
     }
-    useEffect( () => {
-        apiCall(`user-data?user=${userData.url}&`, token, {method: "GET"}).then(data => {
+    useEffect( async () => {
+        const targetUser = await apiCall(`users/${urlParams.id}`, token, {method: "GET"})
+        setTargetUserData(targetUser)
+        apiCall(`user-data?user=${targetUser.url}&`, token, {method: "GET"}).then(data => {
                 let info = data.results[0]
                 setUserInformation(info)
                 setEditInfoHeadline(info["occupation"])
@@ -156,7 +164,7 @@ function Profile(props) {
         })
 
         let postCommentIdx = 0
-         apiCall(`posts?user=${userData.url}&`, token, {method: "GET"}).then(data => {
+         apiCall(`posts?user=${targetUser.url}&`, token, {method: "GET"}).then(data => {
              const posts = data.results
              let newPostItems = []
              for (const post of posts) {
@@ -167,7 +175,7 @@ function Profile(props) {
 
          })
 
-        apiCall(`comments?user=${userData.url}&`, token, {method: "GET"}).then(data => {
+        apiCall(`comments?user=${targetUser.url}&`, token, {method: "GET"}).then(data => {
              const comments = data.results
              let newCommentItems = []
              for (const comment of comments) {
@@ -177,7 +185,7 @@ function Profile(props) {
              setCommentItems(newCommentItems)
 
          })
-    }, [])
+    }, [urlParams])
 
     // useEffect( () => {console.log(editInfoSummary)}, [editInfoSummary])
 
@@ -398,12 +406,12 @@ function Profile(props) {
 
                         <ProfileContentFrame id="basic-info" className={`${contentClassesArray[0]}`}>
                             <div className={`profile-banner`}>
-                                <img className={`profile-banner-pfp`} src={userData.image} alt="Profile icon"/>
+                                <img className={`profile-banner-pfp`} src={targetUser.image} alt="Profile icon"/>
                             </div>
                             <div className={`profile-basic-info`}>
-                                <img className={`basic-info-toggler`} src={pencil_icon} alt="Pen icon" onClick={setPopupClasses}/>
+                                {editable && <img className={`basic-info-toggler`} src={pencil_icon} alt="Pen icon" onClick={setPopupClasses}/>}
                                 <h3>
-                                    {userData.first_name} {userData.last_name}
+                                    {targetUser.first_name} {targetUser.last_name}
                                 </h3>
                                 <p>{userInformation.occupation}</p>
                                 <p>
@@ -420,52 +428,51 @@ function Profile(props) {
                         </ProfileContentFrame>
 
                         <ProfileContentFrame id="education" className={`${contentClassesArray[1]}`} margin={true} title="Education"
-                            plusBtn={true} onClick={setPopupClasses2}>
+                            plusBtn={editable} onClick={setPopupClasses2}>
                             {educationItems}
                             {educationItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
                                                                 You haven't added any education yet...
                                                             </h4>
                             }
-
                         </ProfileContentFrame>
 
                         <ProfileContentFrame id="experience" className={`${contentClassesArray[2]}`} margin={true} title="Experience"
-                            plusBtn={true} onClick={setPopupClasses3}>
+                            plusBtn={editable} onClick={setPopupClasses3}>
                             {experienceItems}
                             {experienceItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
                                                                 You haven't added any experience yet...
                                                             </h4>
                             }
-
                         </ProfileContentFrame>
 
                         <ProfileContentFrame id="skills" className={`${contentClassesArray[3]}`} margin={true} title="Skills"
-                            plusBtn={true} onClick={setPopupClasses4}>
+                            plusBtn={editable} onClick={setPopupClasses4}>
 
                             {skillItems}
                             {skillItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
                                                             You haven't added any skills yet...
                                                         </h4>}
-
                         </ProfileContentFrame>
 
                         <ProfileContentFrame id="posts" className={`${contentClassesArray[4]}`} margin={true} title="Posts">
 
-                            {postItems}
+                            {/*{postItems}*/}
 
-                            {postItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
-                                                            You haven't posted anything yet...
-                                                       </h4>}
+                            {/*{postItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>*/}
+                            {/*                                You haven't posted anything yet...*/}
+                            {/*                           </h4>}*/}
 
+                            <h2>Work in Progress</h2>
                         </ProfileContentFrame>
 
                         <ProfileContentFrame id="comments" className={`${contentClassesArray[5]}`} margin={true} title="Comments">
-                            {commentItems}
+                            {/*{commentItems}*/}
 
-                            {commentItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
-                                                              You haven't commented on anything yet...
-                                                          </h4>}
+                            {/*{commentItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>*/}
+                            {/*                                  You haven't commented on anything yet...*/}
+                            {/*                              </h4>}*/}
 
+                            <h2>Work in Progress</h2>
                         </ProfileContentFrame>
 
                     </div>

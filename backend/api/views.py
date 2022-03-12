@@ -82,7 +82,16 @@ class ApplicationList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         user = self.request.user
-        serializer.save(user=user)
+        job_url = self.request.POST["job"]
+        job = Job.objects.filter(pk=url_to_pk(job_url)).first()
+        serializer.save(user=user, job=job)
+
+    def get_queryset(self):
+        user = self.request.query_params.get("user")
+        if not user:
+            return Application.objects.all()
+        else:
+            return Application.objects.filter(user=url_to_pk(user))
 
 
 class FeedbackFormDetail(generics.RetrieveUpdateDestroyAPIView):
