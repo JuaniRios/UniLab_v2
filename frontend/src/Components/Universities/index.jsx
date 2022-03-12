@@ -41,7 +41,7 @@ export default function Universities(props) {
 			<div className={`main-content-fixed`} style={mainFrameStyle}>
 				{userData.allowed_university_creation && createUniButton}
 				<Slider contentType={"universities"} reloadOn={formToggled} />
-				<Search searchType="universities" width="w60" />
+				{/* <Search searchType="universities" width="w60" /> */}
 				<UniversityForm toggle={[formToggled, setFormToggled]} />
 			</div>
 		</>

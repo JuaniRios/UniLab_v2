@@ -32,7 +32,7 @@ export default function Companies(props) {
 			<div className={`main-content-fixed`} style={mainFrameStyle}>
 				{userData.allowed_company_creation && createCompanyButton}
 				<Slider contentType={"companies"} reloadOn={formToggled} />
-				<Search searchType="companies" width="w60" />
+				{/* <Search searchType="companies" width="w60" /> */}
 				<CompanyForm toggle={[formToggled, setFormToggled]} />
 			</div>
 		</>
