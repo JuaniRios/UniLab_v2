@@ -260,7 +260,7 @@ export default function UniversityProfile(props) {
 
     async function seeApplications(userUrl, toggle) {
         console.log(`userURl is: ${userUrl}`)
-        toggle(true)
+
         const user = await apiCall(userUrl, token, {method:"GET", fullUrl:true})
         const applications = user.applications
 		try {
@@ -282,6 +282,7 @@ export default function UniversityProfile(props) {
 					{newApplicationsList}
 				</ApplicationsSlider>
 			);
+            toggle(true)
 		} catch (e) {
 			setMessage(`error in showApplicants: ${e}`);
 		}

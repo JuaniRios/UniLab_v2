@@ -7,28 +7,33 @@ import {useAuthState, useMessage} from "../../Context/context";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {CSSTransition} from "react-transition-group";
+import urlToPk from "../HelperFunctions/urlToPk";
+import LocalCSS from "../UniversityProfile/StudentList.module.css";
+import {Link} from "react-router-dom";
 const element = <FontAwesomeIcon icon={faSearch} size="1x" color="gray" />;
 
 function UserBar(props) {
     const {userData} = useAuthState()
 
     return (<>
-        <div className={`basic-list-item shadow`}>
+        <Link to={`/profile/${urlToPk(props.url)}`} className={`${LocalCSS.UserBar} basic-list-item shadow`}>
             <img
                 className={`basic-list-item-icon`}
                 src={props.image}
                 alt="user"
             />
+
             {props.first_name} {props.last_name}
 
             {props.url !== userData.url &&
-                <div className={`basic-list-item-btn noselect`} tabIndex={1} onClick={() => {
+                <div className={`basic-list-item-btn noselect`} style={{fontSize: "2rem"}} tabIndex={1} onClick={(e) => {
+                    e.preventDefault()
                     props.changeUser()
                 }}>
-                    {props.option}
+                    {props.option === "ADD" ? "+" : "🗑"}
                 </div>
             }
-        </div>
+        </Link>
     </>)
 }
 
