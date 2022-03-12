@@ -89,6 +89,13 @@ export default function CompanyProfile(props) {
 	const [jobWeOffer, setJobWeOffer] = useState("");
 	const [jobRequirements, setJobRequirements] = useState("");
 
+	const [jobFormFilled, setJobFormFilled] = useState(false)
+
+	// update jobFormFilled
+	useEffect(()=>{
+		const allFields = [jobTitle, jobCity, jobCountry, jobCategory, jobType, jobYouDo, jobWeOffer, jobRequirements]
+		setJobFormFilled(allFields.every(field=>!!field))
+	},[jobTitle, jobCity, jobCountry, jobCategory, jobType, jobYouDo, jobWeOffer, jobRequirements])
 
 
 	function changePopupClasses(initState) {
@@ -609,6 +616,7 @@ export default function CompanyProfile(props) {
 								value={jobSalary}
 								setter={setJobSalary}
 								required="yes"
+								maxLength={7}
 							/>
 							<BasicInput
 								name="add-job-hours"
@@ -617,6 +625,7 @@ export default function CompanyProfile(props) {
 								value={jobHours}
 								setter={setJobHours}
 								required="yes"
+								maxLength={2}
 							/>
 						</DoubleInputWrap>
 

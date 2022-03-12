@@ -23,6 +23,15 @@ export default function CompanyForm(props) {
 	const [description, setDescription] = useState("")
 	const [image, setImage] = useState("")
 
+	const [formFilled, setFormFilled] = useState(false)
+
+	// update formFilled
+	useEffect(()=>{
+		const allFields = [name, size, industry, country, description]
+		setFormFilled(allFields.every(field=>!!field))
+	},[name, size, industry, country, description])
+
+
 	async function handleUniversitySubmit(e) {
 		e.preventDefault()
 		const payload = {
@@ -58,7 +67,7 @@ export default function CompanyForm(props) {
 	return (
 		<>
 			<GeneralForm formToggle={[formToggled, setFormToggled]} title={"Create a new Company"}
-				handleSubmit={handleUniversitySubmit} submitText={"Submit"}>
+				handleSubmit={handleUniversitySubmit} submitText={"Submit"} submitToggle={formFilled}>
 
 				<DoubleInputWrap>
 					<BasicInput label={"Company Name"} required={true} value={name} setter={setName}/>

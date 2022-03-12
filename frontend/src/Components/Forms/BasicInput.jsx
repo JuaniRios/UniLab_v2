@@ -27,7 +27,6 @@ export default function BasicInput(props) {
 	const [inputValue, setInput] = [props.value, props.setter];
 	const [shownErrors, setShownErrors] = useState([])
 
-
 	// update shown errors
 	useEffect( () => {
 		let errorList = []
@@ -69,7 +68,24 @@ export default function BasicInput(props) {
 		setErrorCheck("no-line");
 	}
 	let inputBody;
-	if (props.required === "no") {
+
+
+	if (props.type === "number") {
+		inputBody = (
+			<input
+				value={inputValue}
+				type={"text"}
+				pattern="\d*"
+				required
+				name={name}
+				onChange={(e) => {setInput(e.target.value)}}
+				maxLength={props.maxLength}
+
+			/>
+		);
+
+	}
+	else if (props.required === "no") {
 		inputBody = (
 			<input
 				value={inputValue}
@@ -77,6 +93,8 @@ export default function BasicInput(props) {
 				required
 				name={name}
 				onChange={(e) => {setInput(e.target.value)}}
+				maxLength={props.maxLength}
+
 			/>
 		);
 	} else if (props.required === "special") {
@@ -88,6 +106,7 @@ export default function BasicInput(props) {
 				required
 				name={name}
 				onChange={(e) => {setInput(e.target.value)}}
+				maxLength={props.maxLength}
 			/>
 		);
 	} else {
@@ -100,6 +119,7 @@ export default function BasicInput(props) {
 				onFocus={removeError}
 				onBlur={(e) => {emptyCheck(e.target.value)}}
 				onChange={(e) => {setInput(e.target.value)}}
+				maxLength={props.maxLength}
 			/>
 		);
 	}

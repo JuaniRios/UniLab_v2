@@ -22,6 +22,15 @@ export default function UniversityForm(props) {
 	const [uniVideo, setUniVideo] = useState("")
 	const [uniDescription, setUniDescription] = useState("")
 	const [uniImage, setUniImage] = useState("")
+	const [formFilled, setFormFilled] = useState(false)
+
+	// update formFilled
+	useEffect(()=>{
+		const allFields = [uniName, uniSize, uniCity, uniCountry, uniDescription]
+		setFormFilled(allFields.every(field=>!!field))
+	},[uniName, uniSize, uniCity, uniCountry, uniDescription])
+
+
 
 	async function handleUniversitySubmit(e) {
 		e.preventDefault()
@@ -57,7 +66,7 @@ export default function UniversityForm(props) {
 	return (
 		<>
 			<GeneralForm formToggle={[formToggled, setFormToggled]} title={"Create a new University"}
-				handleSubmit={handleUniversitySubmit} submitText={"Submit"}>
+				handleSubmit={handleUniversitySubmit} submitText={"Submit"} submitToggle={formFilled}>
 
 				<DoubleInputWrap>
 					<BasicInput label={"University Name"} required={true} value={uniName} setter={setUniName}/>

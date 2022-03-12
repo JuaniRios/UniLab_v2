@@ -8,6 +8,12 @@ import {CSSTransition} from "react-transition-group";
 
 export default function GeneralForm(props) {
 	const [formToggled, setFormToggled] = props.formToggle
+	let submitToggle;
+	if ("submitToggle" in props) {
+		submitToggle = props.submitToggle
+	} else {
+		submitToggle = true
+	}
 
 	return (
 		<>
@@ -26,7 +32,12 @@ export default function GeneralForm(props) {
 
 						{props.children}
 
-						<div className="uni-create-btn uni-button" onClick={props.handleSubmit}>{props.submitText}</div>
+						{submitToggle ?
+							<div className="uni-create-btn uni-button"
+								 onClick={props.handleSubmit}>{props.submitText}</div>
+							:
+							<div className="uni-create-btn uni-button-disabled" style={{opacity: 0.3}}>{props.submitText}</div>
+						}
 					</div>
 				</div>
 			</CSSTransition>
