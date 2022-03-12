@@ -38,7 +38,7 @@ export default function Universities(props) {
 	return (
 		<>
 			<NavMenu />
-			<div className={`main-content-fixed`} style={mainFrameStyle}>
+			<div className={`main-content-fixed-3`} style={mainFrameStyle}>
 				{userData.allowed_university_creation && createUniButton}
 				<Slider contentType={"universities"} reloadOn={formToggled} />
 				{/* <Search searchType="universities" width="w60" /> */}

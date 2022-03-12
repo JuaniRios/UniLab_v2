@@ -692,6 +692,15 @@ tr:nth-child(even) {
 	width: 70%;
 	margin: auto;
 }
+.main-content-fixed-3 {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	flex-direction: column;
+	height: calc(80vh - var(--topnav-height));
+	overflow-x: hidden;
+	position: relative;
+}
 .custom-scroll {
 	overflow-y: scroll;
 	overflow-x: hidden;
