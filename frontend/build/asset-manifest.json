@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.781e0a86.chunk.css",
-    "main.js": "/static/js/main.223bac77.chunk.js",
-    "main.js.map": "/static/js/main.223bac77.chunk.js.map",
+    "main.css": "/static/css/main.dceb7d8f.chunk.css",
+    "main.js": "/static/js/main.510310cf.chunk.js",
+    "main.js.map": "/static/js/main.510310cf.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.a03b80f6.js",
     "runtime-main.js.map": "/static/js/runtime-main.a03b80f6.js.map",
     "static/js/2.4ab58d26.chunk.js": "/static/js/2.4ab58d26.chunk.js",
     "static/js/2.4ab58d26.chunk.js.map": "/static/js/2.4ab58d26.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.781e0a86.chunk.css.map": "/static/css/main.781e0a86.chunk.css.map",
+    "static/css/main.dceb7d8f.chunk.css.map": "/static/css/main.dceb7d8f.chunk.css.map",
     "static/js/2.4ab58d26.chunk.js.LICENSE.txt": "/static/js/2.4ab58d26.chunk.js.LICENSE.txt",
     "static/media/index.css": "/static/media/vienna.ae6b896e.jpg",
     "static/media/main_style.css": "/static/media/norwester.696306af.otf",
@@ -37,7 +37,7 @@
   "entrypoints": [
     "static/js/runtime-main.a03b80f6.js",
     "static/js/2.4ab58d26.chunk.js",
-    "static/css/main.781e0a86.chunk.css",
-    "static/js/main.223bac77.chunk.js"
+    "static/css/main.dceb7d8f.chunk.css",
+    "static/js/main.510310cf.chunk.js"
   ]
 }
