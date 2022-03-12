@@ -460,7 +460,7 @@ export default function CompanyProfile(props) {
 								}}
 							/>
 							<SelectorInput
-								label={"Size"}
+								label={"Industry"}
 								required={false}
 								value={companyIndustry}
 								setter={setCompanyIndustry}

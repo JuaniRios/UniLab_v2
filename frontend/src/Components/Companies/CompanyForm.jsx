@@ -78,7 +78,7 @@ export default function CompanyForm(props) {
 					<SelectorInput label={"Size"} required={false} vale={size} setter={setSize}
 						choices={{"1-20 employees": 1,"21-100 employees": 2, "101-200 employees": 3,
 							"201-500 employees": 4,"501+ employees": 5}}/>
-					<SelectorInput label={"Size"} required={false} vale={industry} setter={setIndustry}
+					<SelectorInput label={"Industry"} required={false} vale={industry} setter={setIndustry}
 						choices={{"Energy, Utilities and Resources": 1, "Government and Public Sector": 2,
 							"Pharmaceuticals and Life Sciences": 3, "Real Estate": 4, "Sports Business Advisory": 5,
 							"Financial Services": 6,"Health Services": 7, "Industrial Manufacturing": 8,
