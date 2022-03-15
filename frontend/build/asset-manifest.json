@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/static/css/main.dceb7d8f.chunk.css",
+    "main.js": "/static/js/main.26a4e1c1.chunk.js",
+    "main.js.map": "/static/js/main.26a4e1c1.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.a03b80f6.js",
+    "runtime-main.js.map": "/static/js/runtime-main.a03b80f6.js.map",
+    "static/js/2.4ab58d26.chunk.js": "/static/js/2.4ab58d26.chunk.js",
+    "static/js/2.4ab58d26.chunk.js.map": "/static/js/2.4ab58d26.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.dceb7d8f.chunk.css.map": "/static/css/main.dceb7d8f.chunk.css.map",
+    "static/js/2.4ab58d26.chunk.js.LICENSE.txt": "/static/js/2.4ab58d26.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/static/media/vienna.ae6b896e.jpg",
+    "static/media/main_style.css": "/static/media/norwester.696306af.otf",
+    "static/media/about2.240efda9.png": "/static/media/about2.240efda9.png",
+    "static/media/account.8b6c7178.png": "/static/media/account.8b6c7178.png",
+    "static/media/address.8f7153cf.png": "/static/media/address.8f7153cf.png",
+    "static/media/attach.1d5b659b.png": "/static/media/attach.1d5b659b.png",
+    "static/media/community2.90435dc5.png": "/static/media/community2.90435dc5.png",
+    "static/media/SideProfileMenu.css": "/static/media/university.df24f793.jpg",
+    "static/media/de.8b902d3a.webp": "/static/media/de.8b902d3a.webp",
+    "static/media/email.b5a9785e.png": "/static/media/email.b5a9785e.png",
+    "static/media/en.a50c6419.webp": "/static/media/en.a50c6419.webp",
+    "static/media/es.9024a6e8.webp": "/static/media/es.9024a6e8.webp",
+    "static/media/fr.5bc30542.webp": "/static/media/fr.5bc30542.webp",
+    "static/media/getFetch.cjs": "/static/media/getFetch.582d29c4.cjs",
+    "static/media/hide.3984c832.png": "/static/media/hide.3984c832.png",
+    "static/media/home.65ecfaa2.png": "/static/media/home.65ecfaa2.png",
+    "static/media/jobs.167c0e44.png": "/static/media/jobs.167c0e44.png",
+    "static/media/pencil.882e66c7.png": "/static/media/pencil.882e66c7.png",
+    "static/media/phone.7c1ca758.png": "/static/media/phone.7c1ca758.png",
+    "static/media/redirect.980375fa.svg": "/static/media/redirect.980375fa.svg",
+    "static/media/ru.d2c8f19f.webp": "/static/media/ru.d2c8f19f.webp",
+    "static/media/search.65529334.png": "/static/media/search.65529334.png",
+    "static/media/unilab_logo.e97ee9ad.png": "/static/media/unilab_logo.e97ee9ad.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a03b80f6.js",
+    "static/js/2.4ab58d26.chunk.js",
+    "static/css/main.dceb7d8f.chunk.css",
+    "static/js/main.26a4e1c1.chunk.js"
+  ]
+}
