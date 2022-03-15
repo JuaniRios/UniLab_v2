@@ -96,7 +96,12 @@ class UserViewPermissions(permissions.BasePermission):
             else:
                 return True
 
-        return request.user == obj
+        elif request.method == "PATCH" and ("allowed_company_creation" in list(request.POST) or
+                                            "allowed_university_creation" in list(request.POST)):
+            return request.user.is_superuser
+
+        else:
+            return request.user == obj
 
 
 class UniversityViewPermissions(permissions.BasePermission):
@@ -120,8 +125,6 @@ class UniversityViewPermissions(permissions.BasePermission):
 
         else:
             return obj in request.user.university_admins
-
-
 
 
 class IsCompanyOrReadOnly(permissions.BasePermission):
