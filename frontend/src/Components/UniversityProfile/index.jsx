@@ -148,7 +148,10 @@ export default function UniversityProfile(props) {
 
     //
     useEffect(()=>{
+        console.log("refreshing admin state")
         if (Object.keys(universityData).length > 0 && userData) {
+            console.log(universityData.admins)
+            console.log(userData.url)
             setIsAdmin(universityData.admins.includes(userData.url))
         }
     },[universityData, userData])

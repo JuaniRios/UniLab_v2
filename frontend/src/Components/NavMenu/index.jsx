@@ -80,6 +80,7 @@ export default function NavMenu(props) {
 	}
 
 	useEffect(() => {
+		console.log("userdata is:")
 		console.log(userData);
 	}, [userData]);
 
