@@ -264,13 +264,13 @@ class CompanyList(generics.ListCreateAPIView):
 class UniversityDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = University.objects.all()
     serializer_class = UniversitySerializer
-    permission_classes = [IsAdmin]
+    permission_classes = [UniversityViewPermissions]
 
 
 class UniversityList(generics.ListCreateAPIView):
     queryset = University.objects.all()
     serializer_class = UniversitySerializer
-    permission_classes = [IsCompanyOrReadOnly]
+    permission_classes = [UniversityViewPermissions]
     filter_backends = [filters.SearchFilter]
     search_fields = ['name']
     ordering = ['-id']

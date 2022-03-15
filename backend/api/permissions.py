@@ -99,6 +99,31 @@ class UserViewPermissions(permissions.BasePermission):
         return request.user == obj
 
 
+class UniversityViewPermissions(permissions.BasePermission):
+    def has_permission(self, request, view):
+        if request.user.is_superuser:
+            return True
+
+        if request.method in permissions.SAFE_METHODS:
+            return True
+        else:
+            if request.method == "POST":
+                return request.user.allowed_university_creation
+            return True
+
+    def has_object_permission(self, request, view, obj):
+        if request.user.is_superuser:
+            return True
+
+        if request.method in permissions.SAFE_METHODS or request.method == "POST":
+            return True
+
+        else:
+            return obj in request.user.university_admins
+
+
+
+
 class IsCompanyOrReadOnly(permissions.BasePermission):
     """
     Custom permission to allow companies and super-admins to create jobs, but not students. All users can GET.
