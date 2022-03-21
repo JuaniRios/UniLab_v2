@@ -54,7 +54,7 @@ def comment(request, token):
     }
     if user["user_type_verbose"] == "Student":
         response = requests.post(
-            f"http://{api_url}:{port}/api/comments/",
+            f"https://{api_url}:{port}/api/comments/",
             headers={"Authorization": f"Bearer {token}"},
             data=data,
         )
@@ -63,7 +63,7 @@ def comment(request, token):
     elif user["user_type_verbose"] == "Employer":
         assert company is not None, "No company specified in query"
         response = requests.post(
-            f"http://{api_url}:{port}/api/comments/?company={company}",
+            f"https://{api_url}:{port}/api/comments/?company={company}",
             headers={"Authorization": f"Bearer {token}"},
             data=data,
         )
@@ -86,18 +86,18 @@ def community(request):
                 return redirect("community_company_select")
             else:
                 company_request = requests.get(
-                    f"http://{api_url}:{port}/api/companies/{url_to_pk(company)}",
+                    f"https://{api_url}:{port}/api/companies/{url_to_pk(company)}",
                     headers={"Authorization": f"Bearer {token}"},
                 )
                 posts_request = requests.get(
-                    f"http://{api_url}:{port}/api/posts/?company={company}",
+                    f"https://{api_url}:{port}/api/posts/?company={company}",
                     headers={"Authorization": f"Bearer {token}"},
                 )
                 company_obj = company_request.json()
         elif user["user_type_verbose"] == "Student":
             company_obj = None
             posts_request = requests.get(
-                f"http://{api_url}:{port}/api/posts/",
+                f"https://{api_url}:{port}/api/posts/",
                 headers={"Authorization": f"Bearer {token}"},
             )
 
@@ -148,7 +148,7 @@ def community_company_select(request):
 
     if request.method == "GET":
         response = requests.get(
-            f"http://{api_url}:{port}/api/companies?email={user['email']}",
+            f"https://{api_url}:{port}/api/companies?email={user['email']}",
             headers={"Authorization": f"Bearer {token}"},
         )
         user_companies = response.json()["results"]
@@ -180,19 +180,19 @@ def companies(request):
                 company_url, headers={"Authorization": f"Bearer {token}"}
             ).json()
             pictures = requests.get(
-                f"http://{api_url}:{port}/api/company-pictures?owner={company_url}",
+                f"https://{api_url}:{port}/api/company-pictures?owner={company_url}",
                 headers={"Authorization": f"Bearer {token}"},
             ).json()["results"]
             jobs = requests.get(
-                f"http://{api_url}:{port}/api/jobs?owner={company_url}",
+                f"https://{api_url}:{port}/api/jobs?owner={company_url}",
                 headers={"Authorization": f"Bearer {token}"},
             ).json()["results"]
             posts = requests.get(
-                f"http://{api_url}:{port}/api/posts/?company_owner={company_url}&company={company_url}",
+                f"https://{api_url}:{port}/api/posts/?company_owner={company_url}&company={company_url}",
                 headers={"Authorization": f"Bearer {token}"},
             ).json()["results"]
             comments = requests.get(
-                f"http://{api_url}:{port}/api/comments?company_owner={company_url}",
+                f"https://{api_url}:{port}/api/comments?company_owner={company_url}",
                 headers={"Authorization": f"Bearer {token}"},
             ).json()["results"]
 
@@ -209,7 +209,7 @@ def companies(request):
 
         else:
             response = requests.get(
-                f"http://{api_url}:{port}/api/companies/?page=1",
+                f"https://{api_url}:{port}/api/companies/?page=1",
                 headers={"Authorization": f"Bearer {token}"},
             )
             discovered_list = response.json()["results"]
@@ -231,7 +231,7 @@ def get_job_applications(request):
         job = request.GET["job"]
         page = request.GET["page"]
         response = requests.get(
-            f"http://{api_url}:{port}/api/applications/?job={job}&page={page}",
+            f"https://{api_url}:{port}/api/applications/?job={job}&page={page}",
             headers={"Authorization": f"Bearer {token}"},
         )
         applicants = response.json()
@@ -250,7 +250,7 @@ def get_posts(request):
     if "email" in request.GET:
         email = request.GET["email"]
         posts = requests.get(
-            f"http://{api_url}:{port}/api/posts?email={email}&page={page}",
+            f"https://{api_url}:{port}/api/posts?email={email}&page={page}",
             headers={"Authorization": f"Bearer {token}"},
         ).json()
     else:
@@ -265,7 +265,7 @@ def get_user(token):
         validated_token = JWTAuthentication().get_validated_token(token)
         user_object = JWTAuthentication().get_user(validated_token)
         response = requests.get(
-            f"http://{api_url}:{port}/api/users/{user_object.id}",
+            f"https://{api_url}:{port}/api/users/{user_object.id}",
             headers={"Authorization": f"Bearer {token}"},
         )
         user_json = response.json()
@@ -283,13 +283,13 @@ def index(request):
     user = get_user(token)
 
     jobs_response = requests.get(
-        f"http://{api_url}:{port}/api/jobs/?page=1",
+        f"https://{api_url}:{port}/api/jobs/?page=1",
         headers={"Authorization": f"Bearer {token}"},
     )
     discovered_list = jobs_response.json()["results"]
 
     companies_response = requests.get(
-        f"http://{api_url}:{port}/api/companies/?page=1",
+        f"https://{api_url}:{port}/api/companies/?page=1",
         headers={"Authorization": f"Bearer {token}"},
     )
     top_companies = companies_response.json()["results"]
@@ -337,7 +337,7 @@ def jobs(request):
             return render(request, "single_job.html", variables)
         else:
             response = requests.get(
-                f"http://{api_url}:{port}/api/jobs/?page=1",
+                f"https://{api_url}:{port}/api/jobs/?page=1",
                 headers={"Authorization": f"Bearer {token}"},
             )
             discovered_list = response.json()["results"]
@@ -361,7 +361,7 @@ def jobs(request):
             "motivation_letter": motivation_letter,
         }
         response = requests.post(
-            f"http://{api_url}:{port}/api/applications/",
+            f"https://{api_url}:{port}/api/applications/",
             headers={"Authorization": f"Bearer {token}"},
             data=data,
             files=files,
@@ -389,31 +389,31 @@ def my_companies(request):
             company = company_response.json()
 
             pictures_response = requests.get(
-                f"http://{api_url}:{port}/api/company-pictures?owner={url}",
+                f"https://{api_url}:{port}/api/company-pictures?owner={url}",
                 headers={"Authorization": f"Bearer {token}"},
             )
             pictures = pictures_response.json()["results"]
 
             jobs_response = requests.get(
-                f"http://{api_url}:{port}/api/jobs?owner={url}",
+                f"https://{api_url}:{port}/api/jobs?owner={url}",
                 headers={"Authorization": f"Bearer {token}"},
             )
             jobs = jobs_response.json()["results"]
 
             job_choices_response = requests.get(
-                f"http://{api_url}:{port}/api/jobs/choices/",
+                f"https://{api_url}:{port}/api/jobs/choices/",
                 headers={"Authorization": f"Bearer {token}"},
             )
             job_choices = job_choices_response.json()
 
             posts_response = requests.get(
-                f"http://{api_url}:{port}/api/posts/?company_owner={url}&company={url}",
+                f"https://{api_url}:{port}/api/posts/?company_owner={url}&company={url}",
                 headers={"Authorization": f"Bearer {token}"},
             )
             posts = posts_response.json()["results"]
 
             comments_response = requests.get(
-                f"http://{api_url}:{port}/api/comments/?company_owner={url}",
+                f"https://{api_url}:{port}/api/comments/?company_owner={url}",
                 headers={"Authorization": f"Bearer {token}"},
             )
             comments = comments_response.json()["results"]
@@ -434,12 +434,12 @@ def my_companies(request):
 
         else:  # give company list page
             response = requests.get(
-                f"http://{api_url}:{port}/api/companies?email={user['email']}",
+                f"https://{api_url}:{port}/api/companies?email={user['email']}",
                 headers={"Authorization": f"Bearer {token}"},
             )
             user_companies = response.json()["results"]
             company_choices_response = requests.get(
-                f"http://{api_url}:{port}/api/companies/choices",
+                f"https://{api_url}:{port}/api/companies/choices",
                 headers={"Authorization": f"Bearer {token}"},
             )
             company_choices = company_choices_response.json()
@@ -480,7 +480,7 @@ def my_companies(request):
                 files = {}
 
             response = requests.post(
-                f"http://{api_url}:{port}/api/companies/",
+                f"https://{api_url}:{port}/api/companies/",
                 headers={"Authorization": f"Bearer {token}"},
                 data=data,
                 files=files,
@@ -523,7 +523,7 @@ def my_companies(request):
                 }
                 files = {"image": image}
                 response = requests.post(
-                    f"http://{api_url}:{port}/api/company-pictures/",
+                    f"https://{api_url}:{port}/api/company-pictures/",
                     headers={"Authorization": f"Bearer {token}"},
                     data=data,
                     files=files,
@@ -559,7 +559,7 @@ def my_companies(request):
                 }
 
                 response = requests.post(
-                    f"http://{api_url}:{port}/api/jobs/",
+                    f"https://{api_url}:{port}/api/jobs/",
                     headers={"Authorization": f"Bearer {token}"},
                     data=data,
                 )
@@ -596,7 +596,7 @@ def object_search(request):
     slug = queries.pop("slug")
     query_string = "".join([f"{k}={v}&" for k, v in queries.items()])
     response = requests.get(
-        f"http://{api_url}:{port}/api/{slug}/?{query_string}",
+        f"https://{api_url}:{port}/api/{slug}/?{query_string}",
         headers={"Authorization": f"Bearer {token}"},
     )
     result = {"result": response.json()["results"]}
@@ -615,7 +615,7 @@ def post(request, token):
     files = {"image": image}
     if user["user_type_verbose"] == "Student":
         response = requests.post(
-            f"http://{api_url}:{port}/api/posts/",
+            f"https://{api_url}:{port}/api/posts/",
             headers={"Authorization": f"Bearer {token}"},
             data=data,
             files=files,
@@ -624,7 +624,7 @@ def post(request, token):
     elif user["user_type_verbose"] == "Employer":
         assert company is not None, "No company specified in query"
         response = requests.post(
-            f"http://{api_url}:{port}/api/posts/?company={company}",
+            f"https://{api_url}:{port}/api/posts/?company={company}",
             headers={"Authorization": f"Bearer {token}"},
             data=data,
             files=files,
@@ -652,7 +652,7 @@ def profile(request):
             experience_data = user_data["experience_data"]
 
             posts = requests.get(
-                f'http://{api_url}:{port}/api/posts?email={user["email"]}',
+                f'https://{api_url}:{port}/api/posts?email={user["email"]}',
                 headers={"Authorization": f"Bearer {token}"},
             ).json()
 
@@ -662,11 +662,11 @@ def profile(request):
             #     url = post['url']
             #     # encoding url to not expose api endpoint to user
             #     enc_url = fernet.encrypt(url.encode()).decode()
-            #     website_url = f'http://{api_url}:{port}/posts/{enc_url}'
+            #     website_url = f'https://{api_url}:{port}/posts/{enc_url}'
             #     post['web_url'] = website_url
 
             comments = requests.get(
-                f'http://{api_url}:{port}/api/comments?email={user["email"]}',
+                f'https://{api_url}:{port}/api/comments?email={user["email"]}',
                 headers={"Authorization": f"Bearer {token}"},
             )
             comments = comments.json()
@@ -674,7 +674,7 @@ def profile(request):
             # for comment in comments['results']:
             #     post_url = comment['post']
             #     enc_url = fernet.encrypt(post_url.encode()).decode()
-            #     website_url = f'http://{api_url}:{port}/posts/{enc_url}'
+            #     website_url = f'https://{api_url}:{port}/posts/{enc_url}'
             #     comment['web_url'] = website_url
 
             variables = {
@@ -686,7 +686,7 @@ def profile(request):
                 "skill_data": skill_data,
                 "posts": posts["results"],
                 "comments": comments["results"],
-                "base_api": f"http://{api_url}:{port}/api",
+                "base_api": f"https://{api_url}:{port}/api",
             }
             return render(request, "student_profile_owner.html", variables)
 
@@ -729,7 +729,7 @@ def profile(request):
                 end_date = request.POST["end_date"]
                 description = request.POST["description"]
                 response = requests.post(
-                    f"http://{api_url}:{port}/api/education-data/",
+                    f"https://{api_url}:{port}/api/education-data/",
                     headers={"Authorization": f"Bearer {token}"},
                     data={
                         "institution": institution,
@@ -747,7 +747,7 @@ def profile(request):
                 end_date = request.POST["end_date"]
                 description = request.POST["description"]
                 response = requests.post(
-                    f"http://{api_url}:{port}/api/experience-data/",
+                    f"https://{api_url}:{port}/api/experience-data/",
                     headers={"Authorization": f"Bearer {token}"},
                     data={
                         "company": company,
@@ -768,7 +768,7 @@ def profile(request):
 
                 if not exists:
                     response = requests.post(
-                        f"http://{api_url}:{port}/api/skill-data/",
+                        f"https://{api_url}:{port}/api/skill-data/",
                         headers={"Authorization": f"Bearer {token}"},
                         data={"category": category, "skill": skill},
                     )
@@ -848,7 +848,7 @@ def signin(request):
             email = request.POST.getlist("email")
             password = request.POST.getlist("password")
             response = requests.post(
-                f"http://{api_url}:{port}/api/token/",
+                f"https://{api_url}:{port}/api/token/",
                 data={"email": email, "password": password},
             )
             if response.status_code == 200:
@@ -896,7 +896,7 @@ def signup_employer(request):
         )
         # get admin token
         response = requests.post(
-            f"http://{api_url}:{port}/api/token/",
+            f"https://{api_url}:{port}/api/token/",
             data={"email": "shin@gmail.com", "password": "lak868"},
         )
 
@@ -904,7 +904,7 @@ def signup_employer(request):
             token = "Bearer " + (json.loads(response.text)["access"])
             # post new user
             response2 = requests.post(
-                f"http://{api_url}:{port}/api/users/",
+                f"https://{api_url}:{port}/api/users/",
                 headers={"Authorization": token},
                 data={
                     "email": email,
@@ -918,7 +918,7 @@ def signup_employer(request):
             if response2.status_code == 201:
                 # get new user token
                 response3 = requests.post(
-                    f"http://{api_url}:{port}/api/token/",
+                    f"https://{api_url}:{port}/api/token/",
                     data={"email": email, "password": password},
                 )
                 token = json.loads(response3.text)["access"]
@@ -957,7 +957,7 @@ def signup_student(request):
         )
         # get admin token
         response = requests.post(
-            f"http://{api_url}:{port}/api/token/",
+            f"https://{api_url}:{port}/api/token/",
             data={"email": "shin@gmail.com", "password": "lak868"},
         )
 
@@ -965,7 +965,7 @@ def signup_student(request):
             token = "Bearer " + (json.loads(response.text)["access"])
             # post new user
             response2 = requests.post(
-                f"http://{api_url}:{port}/api/users/",
+                f"https://{api_url}:{port}/api/users/",
                 headers={"Authorization": token},
                 data={
                     "email": email,
@@ -979,7 +979,7 @@ def signup_student(request):
             if response2.status_code == 201:
                 # get new user token
                 response3 = requests.post(
-                    f"http://{api_url}:{port}/api/token/",
+                    f"https://{api_url}:{port}/api/token/",
                     data={"email": email, "password": password},
                 )
                 token = json.loads(response3.text)["access"]
@@ -1031,11 +1031,11 @@ def single_post(request):
         if user["user_type_verbose"] == "Employer":
             assert company is not None, "no current company in cookies"
             company_request = requests.get(
-                f"http://{api_url}:{port}/api/companies/{url_to_pk(company)}",
+                f"https://{api_url}:{port}/api/companies/{url_to_pk(company)}",
                 headers={"Authorization": f"Bearer {token}"},
             )
             post_request = requests.get(
-                f"http://{api_url}:{port}/api/posts/{url_to_pk(post_url)}/?company={company}",
+                f"https://{api_url}:{port}/api/posts/{url_to_pk(post_url)}/?company={company}",
                 headers={"Authorization": f"Bearer {token}"},
             )
             company_obj = company_request.json()
@@ -1043,7 +1043,7 @@ def single_post(request):
         elif user["user_type_verbose"] == "Student":
             company_obj = None
             post_request = requests.get(
-                f"http://{api_url}:{port}/api/posts/{url_to_pk(post_url)}",
+                f"https://{api_url}:{port}/api/posts/{url_to_pk(post_url)}",
                 headers={"Authorization": f"Bearer {token}"},
             )
 
@@ -1105,13 +1105,13 @@ def students(request):
             experience_data = user_data["experience_data"]
 
             posts = requests.get(
-                f'http://{api_url}:{port}/api/posts?email={student["email"]}&company={company}',
+                f'https://{api_url}:{port}/api/posts?email={student["email"]}&company={company}',
                 headers={"Authorization": f"Bearer {token}"},
             )
 
             posts = posts.json()
             comments = requests.get(
-                f'http://{api_url}:{port}/api/comments?email={student["email"]}',
+                f'https://{api_url}:{port}/api/comments?email={student["email"]}',
                 headers={"Authorization": f"Bearer {token}"},
             ).json()
 
@@ -1125,7 +1125,7 @@ def students(request):
                 "skill_data": skill_data,
                 "posts": posts["results"],
                 "comments": comments["results"],
-                "base_api": f"http://{api_url}:{port}/api",
+                "base_api": f"https://{api_url}:{port}/api",
             }
             return render(request, "student_profile_public.html", variables)
 
@@ -1145,7 +1145,7 @@ def validate(request):
         return "invalid"
 
     access_response = requests.post(
-        f"http://{api_url}:{port}/api/token/validate/", data={"token": token}
+        f"https://{api_url}:{port}/api/token/validate/", data={"token": token}
     )
     if access_response.status_code != 200:
         return "invalid"
@@ -1167,7 +1167,7 @@ def vote(request, token):
     if method[vote_type] == "post":
         if user["user_type_verbose"] == "Student":
             response = requests.post(
-                f"http://{api_url}:{port}/api/vote/",
+                f"https://{api_url}:{port}/api/vote/",
                 headers={"Authorization": f"Bearer {token}"},
                 data={"user": user["url"], "post": post, "type": type_int[vote_type]},
             )
@@ -1176,7 +1176,7 @@ def vote(request, token):
         elif user["user_type_verbose"] == "Employer":
             assert company is not None, "No company specified in query"
             response = requests.post(
-                f"http://{api_url}:{port}/api/vote/?company={company}",
+                f"https://{api_url}:{port}/api/vote/?company={company}",
                 headers={"Authorization": f"Bearer {token}"},
                 data={"user": user["url"], "post": post, "type": type_int[vote_type]},
             )
@@ -1185,7 +1185,7 @@ def vote(request, token):
     elif method[vote_type] == "delete":
         if user["user_type_verbose"] == "Student":
             response = requests.delete(
-                f"http://{api_url}:{port}/api/vote/",
+                f"https://{api_url}:{port}/api/vote/",
                 headers={"Authorization": f"Bearer {token}"},
                 data={"user": user["url"], "post": post, "type": type_int[vote_type]},
             )
@@ -1194,7 +1194,7 @@ def vote(request, token):
         elif user["user_type_verbose"] == "Employer":
             assert company is not None, "No company specified in query"
             response = requests.delete(
-                f"http://{api_url}:{port}/api/vote/?company={company}",
+                f"https://{api_url}:{port}/api/vote/?company={company}",
                 headers={"Authorization": f"Bearer {token}"},
                 data={"user": user["url"], "post": post, "type": type_int[vote_type]},
             )

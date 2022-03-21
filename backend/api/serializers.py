@@ -262,7 +262,7 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
 # custom field to fetch user linked to a user_data model
 class UserDataToUserField(serializers.RelatedField):
     def to_representation(self, value):
-        return f'http://{api_url}:{port}/api/users/{value.user.id}/'
+        return f'https://{api_url}:{port}/api/users/{value.user.id}/'
 
 
 class VoteSerializer(serializers.HyperlinkedModelSerializer):
@@ -278,7 +278,7 @@ class VoteSerializer(serializers.HyperlinkedModelSerializer):
 
     # def convert_userdata(self, vote):
     #     user_pk = vote.user_data.user.id
-    #     return f'http://{api_url}:{port}/api/users/{user_pk}/'
+    #     return f'https://{api_url}:{port}/api/users/{user_pk}/'
 
     def create(self, validated_data):
         # delete previous votes from the same user on same post
