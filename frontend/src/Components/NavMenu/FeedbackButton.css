@@ -14,8 +14,8 @@
 	position: fixed;
 	z-index: 10;
 	cursor: pointer;
-	right: 50px;
-	bottom: 50px;
+	right: 1rem;
+	bottom: 1rem;
 }
 
 .fab:hover {

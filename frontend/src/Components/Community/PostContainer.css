@@ -1,14 +1,72 @@
-.post-container {
-	border-radius: 10px;
-	margin-bottom: 3rem;
-	position: relative;
-	padding: 2rem 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	background-color: var(--unilab-gray);
+@media only screen and (min-width: 1030px) {
+	.post-container {
+		border-radius: 10px;
+		margin-bottom: 3rem;
+		position: relative;
+		padding: 2rem 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background-color: var(--unilab-gray);
+	}
+	.post-option-img {
+		height: 1.5rem;
+		object-fit: cover;
+		object-position: center center;
+		margin-right: 0.5rem;
+	}
+	.post-option {
+		border-radius: 10px;
+		cursor: pointer;
+		padding: 1rem;
+		width: 32%;
+	}
+	.post-details-img {
+		height: 50px;
+		width: 50px;
+		object-fit: cover;
+		object-position: center center;
+		margin-right: 1rem;
+		border-radius: 50%;
+		border: 1px solid var(--gray-hover);
+	}
+	.post-option:hover {
+		background-color: var(--gray-hover);
+	}
 }
+@media only screen and (max-width: 1030px) {
+	.post-container {
+		margin-bottom: 3rem;
+		position: relative;
+		padding: 2rem 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background-color: var(--unilab-gray);
+	}
+	.post-option-img {
+		height: 1rem;
+		object-fit: cover;
+		object-position: center center;
+		margin-right: 0.5rem;
+	}
+	.post-option {
+		border-radius: 10px;
+		cursor: pointer;
+	}
+	.post-details-img {
+		height: 2.5rem;
+		width: 2.5rem;
+		object-fit: cover;
+		object-position: center center;
+		margin-right: 1rem;
+		border-radius: 50%;
+		border: 1px solid var(--gray-hover);
+	}
+}
+
 .vote-container {
 	position: absolute;
 	display: flex;
@@ -63,15 +121,6 @@
 	text-align: center;
 	margin: 1rem 0;
 }
-.post-details-img {
-	height: 50px;
-	width: 50px;
-	object-fit: cover;
-	object-position: center center;
-	margin-right: 1rem;
-	border-radius: 50%;
-	border: 1px solid var(--gray-hover);
-}
 .post-details {
 	margin-bottom: 2rem;
 }
@@ -82,21 +131,6 @@
 	margin-bottom: 2rem;
 	max-height: 40rem;
 	max-width: 100%;
-}
-.post-option {
-	border-radius: 10px;
-	cursor: pointer;
-	padding: 1rem;
-	width: 32%;
-}
-.post-option:hover {
-	background-color: var(--gray-hover);
-}
-.post-option-img {
-	height: 25px;
-	object-fit: cover;
-	object-position: center center;
-	margin-right: 0.5rem;
 }
 .comment-section-container {
 	display: flex;

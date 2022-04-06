@@ -6,8 +6,10 @@ import EmoteMenu from "../EmoteMenu";
 import { useAuthState } from "../../Context";
 import postContent from "../HelperFunctions/postContent";
 import CommentContainer from "./CommentContainer";
+import useWindowSize from "../../CustomHooks/useWindowSize";
 
 export default function CommentForm(props) {
+	const windowSize = useWindowSize();
 	const authState = useAuthState();
 	const textarea = useRef(null);
 	const inputContainer = useRef(null);
@@ -88,15 +90,27 @@ export default function CommentForm(props) {
 					onBlur={() => setFocused(false)}
 					onKeyPress={preventNewLine}
 				/>
-				<EmoteMenu
-					menuWidth="60%"
-					menuTop="100%"
-					menuRight="0"
-					message={message}
-					setMessage={setMessage}
-					textarea={textarea}
-					setCursorPosition={setCursorPosition}
-				/>
+				{windowSize[0] < 1030 ? (
+					<EmoteMenu
+						menuWidth="100%"
+						menuTop="100%"
+						menuRight="0"
+						message={message}
+						setMessage={setMessage}
+						textarea={textarea}
+						setCursorPosition={setCursorPosition}
+					/>
+				) : (
+					<EmoteMenu
+						menuWidth="60%"
+						menuTop="100%"
+						menuRight="0"
+						message={message}
+						setMessage={setMessage}
+						textarea={textarea}
+						setCursorPosition={setCursorPosition}
+					/>
+				)}
 			</div>
 		</form>
 	);

@@ -6,8 +6,10 @@ import Loader from "../Loader";
 // STYLES
 import "./Slider.css";
 import apiCall from "../HelperFunctions/apiCall";
+import useWindowSize from "../../CustomHooks/useWindowSize";
 
 export default function Slider(props) {
+	const windowSize = useWindowSize();
 	const authState = useAuthState();
 	const contentType = props.contentType;
 	const slider = useRef(null);
@@ -16,7 +18,6 @@ export default function Slider(props) {
 	const [page, setPage] = useState(1);
 	const [loaderState, setLoaderState] = useState("shown");
 	const header = props.contentType.charAt(0).toUpperCase() + props.contentType.slice(1);
-
 
 	function toggleSlide(direction) {
 		var currentLeft = parseInt(slider.current.style.left);
@@ -45,32 +46,32 @@ export default function Slider(props) {
 		} else {
 			moreBtn.current.classList.remove("hidden");
 		}
-
-		var sliderWidth = slider.current.childElementCount * 20;
-		slider.current.style.width = `${sliderWidth}rem`;
-		slider.current.style.left = "0rem";
+		if (windowSize[0] > 1030) {
+			var sliderWidth = slider.current.childElementCount * 20;
+			slider.current.style.width = `${sliderWidth}rem`;
+			slider.current.style.left = "0rem";
+		}
 	});
 
 	useEffect(() => {
 		const params = {
-			"method": "GET",
-			"page": page
-		}
-		apiCall(contentType, null, params).
-
-		then(data=>{
-			const items = data.results;
-			let newCards = [];
-			for (let i = 0; i < items.length; i++) {
-				let icard = <SliderCard key={i} contentType={contentType} content={items[i]} />;
-				newCards.push(icard);
-			}
-			setLoaderState("hidden");
-			setCards(newCards);
-
-		}).catch(error=> {
-			console.log(error)
-		})
+			method: "GET",
+			page: page,
+		};
+		apiCall(contentType, null, params)
+			.then((data) => {
+				const items = data.results;
+				let newCards = [];
+				for (let i = 0; i < items.length; i++) {
+					let icard = <SliderCard key={i} contentType={contentType} content={items[i]} />;
+					newCards.push(icard);
+				}
+				setLoaderState("hidden");
+				setCards(newCards);
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	}, [page, props["reloadOn"]]);
 
 	// TODO: Pagination
@@ -80,9 +81,18 @@ export default function Slider(props) {
 				<h3>Discover {header}</h3>
 				<span className={`filter-btn noselect`}>Filter</span>
 			</div>
-
-			<button className={`arrow-btn arrow-prev`} onClick={() => toggleSlide("prev")} />
-			<button className={`arrow-btn arrow-next`} onClick={() => toggleSlide("next")} />
+			{windowSize[0] < 1030 ? null : (
+				<>
+					<button
+						className={`arrow-btn arrow-prev`}
+						onClick={() => toggleSlide("prev")}
+					/>
+					<button
+						className={`arrow-btn arrow-next`}
+						onClick={() => toggleSlide("next")}
+					/>
+				</>
+			)}
 			<Loader color="orange" size="4" state={loaderState} />
 			<div className={`slider`} ref={slider}>
 				{cards}

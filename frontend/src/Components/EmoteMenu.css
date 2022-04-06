@@ -1,3 +1,20 @@
+@media only screen and (min-width: 1030px) {
+	.emote-field {
+		position: absolute;
+		display: inline-block;
+		z-index: 5;
+		height: 25rem;
+	}
+}
+@media only screen and (max-width: 1030px) {
+	.emote-field {
+		position: absolute;
+		display: inline-block;
+		z-index: 5;
+		height: 25rem;
+	}
+}
+
 .emote-btn {
 	outline: none;
 	border: none;
@@ -15,12 +32,6 @@
 }
 .emote-btn-toggled {
 	transform: scale(1.2);
-}
-.emote-field {
-	position: absolute;
-	display: inline-block;
-	z-index: 5;
-	height: 25rem;
 }
 .content-wrapper::before {
 	content: "" !important;

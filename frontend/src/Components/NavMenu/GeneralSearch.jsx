@@ -10,6 +10,7 @@ import apiCall from "../HelperFunctions/apiCall";
 import { useAuthState } from "../../Context";
 import urlToPk from "../HelperFunctions/urlToPk";
 import { useMessage } from "../../Context/context";
+import useWindowSize from "../../CustomHooks/useWindowSize";
 
 export default function GeneralSearch(props) {
 	const { token } = useAuthState();
@@ -19,6 +20,7 @@ export default function GeneralSearch(props) {
 	const [uniResults, setUniResults] = useState([]);
 	const [userResults, setUserResults] = useState([]);
 	// const [searchString, setSearchString] = useState("")
+	const windowSize = useWindowSize();
 
 	async function getResults(e) {
 		e.preventDefault();
@@ -174,7 +176,7 @@ export default function GeneralSearch(props) {
 				uniResults.length > 0 ||
 				userResults.length > 0 ? (
 					<div
-						className="custom-scroll w60"
+						className={`custom-scroll ${windowSize[0] < 1030 ? "w100" : "w60"}`}
 						style={{
 							zIndex: "10500",
 							margin: "0 auto",
