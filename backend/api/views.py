@@ -30,7 +30,6 @@ def get_user(request):
 
         """Returns: the user object serialized from a token"""
         try:
-            print("token is ", token)
             validated_token = JWTAuthentication().get_validated_token(token)
             user_object = JWTAuthentication().get_user(validated_token)
             response = requests.get(
@@ -43,7 +42,8 @@ def get_user(request):
             return JsonResponse({'response': None, "error": ex.detail["detail"]})
 
         except Exception as ex:
-            return JsonResponse({'response': None, "error": ex.detail["detail"]})
+            print(ex)
+            return JsonResponse({'response': None, "error": "unknown error"})
 
         return JsonResponse({'response': user_json})
 
