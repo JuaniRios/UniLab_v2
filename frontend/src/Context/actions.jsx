@@ -1,4 +1,5 @@
 import { config } from "../Config/config";
+import apiCall from "../Components/HelperFunctions/apiCall";
 const ROOT_URL = config.django_api;
 
 export async function loginUser(dispatch, loginPayload) {
@@ -44,12 +45,20 @@ export async function read_token(dispatch) {
     body: JSON.stringify({token: token}),
     };
 
+    let params = {
+        "method": "POST",
+        "payload": {
+            "token": token
+        }
+    }
+
     try {
         // dispatch({ type: 'REQUEST_LOGIN' });
-        let response = await fetch(`${ROOT_URL}token/get-user`, requestOptions);
-        let data = await response.json();
+        let data = await apiCall("token/get-user", "", params);
+        // let response = await fetch(`${ROOT_URL}token/get-user`, requestOptions);
+        // let data = await response.json();
 
-        if (data.response) {
+        if (data) {
             dispatch({ type: 'LOGIN_SUCCESS', payload: {userData: data.response, token: token} });
             return true
         }
