@@ -38,7 +38,7 @@ def get_user(request):
                 f"{api_url}/api/users/{user_object.id}",
                 headers={"Authorization": f"Bearer {token}"},
             )
-            print(response, flush=True)
+            print(response.text, flush=True)
             user_json = response.json()
         except InvalidToken as ex:
             print(ex)
