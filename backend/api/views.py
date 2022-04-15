@@ -33,7 +33,7 @@ def get_user(request):
             validated_token = JWTAuthentication().get_validated_token(token)
             user_object = JWTAuthentication().get_user(validated_token)
             response = requests.get(
-                f"https://{api_url}:{port}/api/users/{user_object.id}",
+                f"{api_url}/api/users/{user_object.id}",
                 headers={"Authorization": f"Bearer {token}"},
             )
             user_json = response.json()
@@ -585,3 +585,50 @@ class UpdatePassword(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ExternalProfileList(generics.ListCreateAPIView):
+    queryset = ExternalProfile.objects.all()
+    serializer_class = ExternalProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user.user_data)
+
+
+class ExternalProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ExternalProfile.objects.all()
+    serializer_class = ExternalProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class UniversityCourseList(generics.ListCreateAPIView):
+    queryset = UniversityCourse.objects.all()
+    serializer_class = UniversityCourseSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user.user_data)
+
+
+class UniversityCourseDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UniversityCourse.objects.all()
+    serializer_class = UniversityCourseSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class CertificationList(generics.ListCreateAPIView):
+    queryset = Certification.objects.all()
+    serializer_class = CertificationSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user.user_data)
+
+
+class CertificationDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Certification.objects.all()
+    serializer_class = CertificationSerializer
+    permission_classes = [IsAuthenticated]
+
+

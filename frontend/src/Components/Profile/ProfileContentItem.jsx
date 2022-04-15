@@ -1,12 +1,13 @@
 import React from "react";
 import "./ProfileContentItem.css";
+import {Link} from "react-router-dom";
 
 export default function ProfileContentItem(props) {
 	const mainStyle = {
 		width: props.width,
 	};
 
-	if ("degree" in props) {
+	if (props.type === "education") {
 		return (
 			<div className={`profile-content-item`} style={mainStyle}>
 				<img
@@ -28,7 +29,7 @@ export default function ProfileContentItem(props) {
 		);
 	}
 
-	if ("company" in props) {
+	if (props.type === "experience") {
 		return (
 			<div className={`profile-content-item`} style={mainStyle}>
 				<img
@@ -49,5 +50,26 @@ export default function ProfileContentItem(props) {
 			</div>
 		)
 	}
+
+	if (props.type === "external profile") {
+		return (
+			<div className={`profile-content-item`} style={mainStyle}>
+				<div className={`profile-content-item-text`}>
+					<a href={"//" + props.url} className={`profile-content-item-subtext normal`}>
+						<h3 className={`profile-content-item-subtext`}>{props.title}</h3>
+					</a>
+				</div>
+			</div>
+		)
+	}
+
+	return (
+		<div className={`profile-content-item`} style={mainStyle}>
+			<div className={`profile-content-item-text`}>
+				<h3 className={`profile-content-item-subtext`}>{props.title}</h3>
+				<h4 className={`profile-content-item-subtext normal`}>{props.subTitle}</h4>
+			</div>
+		</div>
+	)
 
 }

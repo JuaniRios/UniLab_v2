@@ -50,7 +50,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     university = models.ForeignKey("University", related_name='students', on_delete=models.CASCADE,
                                    null=True, blank=True)
 
-
     @property
     def is_authenticated(self):
         return True
@@ -73,6 +72,35 @@ class UserData(models.Model):
     location = models.CharField(blank=True, max_length=100)
     occupation = models.CharField(blank=True, max_length=100, default="Student")
     website = models.TextField(blank=True)
+
+class ExternalProfile(models.Model):
+    class Meta:
+        verbose_name = "external profile"
+        verbose_name_plural = "external profiles"
+
+    owner = models.ForeignKey("UserData", related_name="external_profiles", on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    url = models.CharField(max_length=200)
+
+
+class UniversityCourse(models.Model):
+    class Meta:
+        verbose_name = "university course"
+        verbose_name_plural = "university courses"
+
+    owner = models.ForeignKey("UserData", related_name="university_courses", on_delete=models.CASCADE)
+    course = models.CharField(max_length=200)
+    grade = models.CharField(max_length=200, null=True, blank=True)
+
+
+class Certification(models.Model):
+    class Meta:
+        verbose_name = "certification"
+        verbose_name_plural = "certifications"
+
+    owner = models.ForeignKey("UserData", related_name="certifications", on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
+    description = models.CharField(max_length=200, null=True, blank=True)
 
 
 class EducationData(models.Model):
@@ -372,3 +400,10 @@ class FeedbackForm(models.Model):
     future_use = models.BooleanField()
     recommend = models.BooleanField()
     comments = models.TextField()
+
+
+
+
+
+
+

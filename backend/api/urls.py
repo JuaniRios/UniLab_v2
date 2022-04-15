@@ -92,6 +92,15 @@ urlpatterns += [
     path('api/feedback-form', views.FeedbackFormList.as_view(), name="feedbackform-list"),
     path('api/feedback-form/<int:pk>', views.FeedbackFormDetail.as_view(), name="feedbackform-detail"),
 
+    path('api/external-profiles', views.ExternalProfileList.as_view(), name="externalprofile-list"),
+    path('api/external-profiles/<int:pk>', views.ExternalProfileDetail.as_view(), name="externalprofile-detail"),
+
+    path('api/university-courses', views.UniversityCourseList.as_view(), name="universitycourse-list"),
+    path('api/university-courses/<int:pk>', views.UniversityCourseDetail.as_view(), name="universitycourse-detail"),
+
+    path('api/certifications', views.CertificationList.as_view(), name="certification-list"),
+    path('api/certifications/<int:pk>', views.CertificationDetail.as_view(), name="certification-detail"),
+
 ]
 
 # urlpatterns = format_suffix_patterns(urlpatterns)
