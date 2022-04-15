@@ -23,13 +23,14 @@ User = get_user_model()
 @csrf_exempt
 def get_user(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        token = data.get('token')
+        # data = json.loads(request.body)
+        token = request.POST.get('token')
         if not token:
             return JsonResponse({'response': None, 'error': "no token given"})
 
         """Returns: the user object serialized from a token"""
         try:
+            print("token is ", token)
             validated_token = JWTAuthentication().get_validated_token(token)
             user_object = JWTAuthentication().get_user(validated_token)
             response = requests.get(
