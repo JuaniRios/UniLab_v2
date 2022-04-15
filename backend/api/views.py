@@ -33,7 +33,7 @@ def get_user(request):
             validated_token = JWTAuthentication().get_validated_token(token)
             user_object = JWTAuthentication().get_user(validated_token)
             print(user_object, flush=True)
-            print(api_url, flush=True)
+            print(f"{api_url}/api/users/{user_object.id}", flush=True)
             response = requests.get(
                 f"{api_url}/api/users/{user_object.id}",
                 headers={"Authorization": f"Bearer {token}"},
