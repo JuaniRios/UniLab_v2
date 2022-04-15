@@ -43,7 +43,7 @@ def get_user(request):
             return JsonResponse({'response': None, "error": ex.detail["detail"]})
 
         except Exception as ex:
-            return JsonResponse({'response': None, "error": ex})
+            return JsonResponse({'response': None, "error": ex.detail["detail"]})
 
         return JsonResponse({'response': user_json})
 
