@@ -628,7 +628,7 @@ function Profile(props) {
                     <ProfileContentFrame id="external-profiles" className={`${contentClassesArray[0]}`} margin={true}
                                          title="External Profiles" plusBtn={editable} onClick={setPopupClasses2}>
                         {externalProfileItems}
-                        {experienceItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
+                        {externalProfileItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
                                                             You haven't added any experience yet...
                                                         </h4>
                         }
@@ -646,7 +646,7 @@ function Profile(props) {
                     <ProfileContentFrame id="university-courses" className={`${contentClassesArray[1]}`} margin={true}
                                          title="University Courses" plusBtn={editable} onClick={setPopupClasses4}>
                         {universityCourseItems}
-                        {experienceItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
+                        {universityCourseItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
                                                             You haven't added any experience yet...
                                                         </h4>
                         }
@@ -655,7 +655,7 @@ function Profile(props) {
                     <ProfileContentFrame id="certifications" className={`${contentClassesArray[1]}`} margin={true}
                                          title="Certifications" plusBtn={editable} onClick={setPopupClasses5}>
                         {certificationItems}
-                        {experienceItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
+                        {certificationItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
                                                             You haven't added any experience yet...
                                                         </h4>
                         }
