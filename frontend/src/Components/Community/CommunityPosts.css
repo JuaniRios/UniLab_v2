@@ -1,0 +1,14 @@
+@media only screen and (min-width: 1030px) {
+	.posts-holder {
+		width: 40rem;
+		position: relative;
+		margin-bottom: 15rem;
+	}
+}
+@media only screen and (max-width: 1030px) {
+	.posts-holder {
+		width: 100%;
+		position: relative;
+		margin-bottom: 2rem;
+	}
+}

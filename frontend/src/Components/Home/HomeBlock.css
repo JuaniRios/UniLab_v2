@@ -1,14 +1,31 @@
-.home-block {
-	position: relative;
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	flex-flow: column;
-	height: 500px;
-	width: 500px;
-	background-color: var(--unilab-gray);
-	border-radius: 10px;
+@media only screen and (min-width: 1030px) {
+	.home-block {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+		flex-flow: column;
+		height: 500px;
+		width: 500px;
+		background-color: var(--unilab-gray);
+		border-radius: 10px;
+	}
 }
+@media only screen and (max-width: 1030px) {
+	.home-block {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+		flex-flow: column;
+		width: calc(100% - 4rem);
+		background-color: var(--unilab-gray);
+		border-radius: 10px;
+		margin: 1rem 0;
+		padding: 1rem;
+	}
+}
+
 .home-block-btn {
 	z-index: 100;
 }

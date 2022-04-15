@@ -4,6 +4,8 @@ import fetchContent from "../HelperFunctions/fetchContent";
 import PostContainer from "./PostContainer";
 import Loader from "../Loader";
 
+import "./CommunityPosts.css";
+
 export default function CommunityPosts(props) {
 	const state = useAuthState();
 	const posts = props.posts;
@@ -24,7 +26,7 @@ export default function CommunityPosts(props) {
 
 	if (posts) {
 		return (
-			<div className={`w40`} style={{ position: "relative", marginBottom: "3rem" }}>
+			<div className={`posts-holder`}>
 				<Loader color="orange" size="4" state={loaderState} />
 				{posts}
 			</div>

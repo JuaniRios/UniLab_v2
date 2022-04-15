@@ -1,3 +1,40 @@
+@media only screen and (min-width: 1030px) {
+	.login-form {
+		display: flex;
+		z-index: 10500 !important;
+		position: fixed;
+		align-items: center;
+		flex-direction: column;
+		--form-width: min(30vw, 500px);
+		width: var(--form-width);
+		background-color: var(--unilab-white);
+		overflow-y: auto;
+		border-radius: 10px;
+		padding: 3rem;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+@media only screen and (max-width: 1030px) {
+	.login-form {
+		display: flex;
+		z-index: 10500 !important;
+		position: fixed;
+		align-items: center;
+		flex-direction: column;
+		/* --form-width: min(30vw, 500px);
+		width: var(--form-width); */
+		background-color: var(--unilab-white);
+		overflow-y: auto;
+		border-radius: 10px;
+		padding: 3rem;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+	}
+}
 .menu-login-enter {
 	opacity: 0;
 	transform: scale(0.9);
@@ -14,23 +51,6 @@
 	opacity: 0;
 	transform: scale(0.9);
 	transition: opacity 300ms, transform 300ms;
-}
-
-.login-form {
-	display: flex;
-	z-index: 10500 !important;
-	position: fixed;
-	align-items: center;
-	flex-direction: column;
-	--form-width: min(30vw, 500px);
-	width: var(--form-width);
-	background-color: var(--unilab-white);
-	overflow-y: auto;
-	border-radius: 10px;
-	padding: 3rem;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
 }
 .signin-buttons {
 	display: flex;

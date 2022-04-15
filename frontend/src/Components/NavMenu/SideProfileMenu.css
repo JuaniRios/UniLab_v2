@@ -24,6 +24,7 @@
 @media only screen and (max-width: 1030px) {
 	.profile-menu {
 		width: 100%;
+		overflow-y: scroll;
 	}
 	.profile-menu-closed {
 		right: -100%;

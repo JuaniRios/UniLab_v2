@@ -1,6 +1,7 @@
 @media only screen and (min-width: 1030px) {
 	.language-menu {
 		width: 20rem;
+		justify-content: flex-end;
 	}
 
 	.menu-lang-enter {
@@ -22,7 +23,8 @@
 @media only screen and (max-width: 1030px) {
 	.language-menu {
 		width: 100%;
-		justify-content: space-evenly;
+		justify-content: flex-start;
+		overflow-y: scroll;
 	}
 	.language-menu-closed {
 		left: 100%;
@@ -30,6 +32,7 @@
 	.language-menu-opened {
 		opacity: 1 !important;
 		left: 0;
+		overflow-y: scroll;
 	}
 }
 .language-menu {
@@ -43,10 +46,9 @@
 	top: 0;
 	background-color: var(--unilab-white);
 	transition: 0.4s linear;
-	justify-content: flex-end;
 }
 .select-lang {
-	margin-bottom: 3rem;
+	margin: 3rem 0;
 }
 #language-picture {
 	height: 25vh;

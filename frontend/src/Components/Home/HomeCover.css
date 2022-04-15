@@ -1,3 +1,67 @@
+@media only screen and (min-width: 1030px) {
+	.home-cover-polygon {
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		z-index: 4;
+		background-color: var(--unilab-white);
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+		animation: 2s reveal;
+		animation-fill-mode: forwards;
+	}
+	.home-cover-message {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		z-index: 5;
+		height: 100%;
+		text-align: center;
+		padding: 0 4rem;
+		position: relative;
+		bottom: -100%;
+		transition: 1s;
+		animation: 2s revealCoverMessage;
+		animation-fill-mode: forwards;
+		width: 30%;
+	}
+}
+@media only screen and (max-width: 1030px) {
+	.home-cover-polygon {
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		z-index: 4;
+		background-color: var(--unilab-white);
+		clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+		/* animation: 2s reveal;
+		animation-fill-mode: forwards; */
+	}
+	.home-cover-message {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		flex-direction: column;
+		z-index: 5;
+		height: 100%;
+		text-align: center;
+		padding: 0 2rem;
+		position: relative;
+		bottom: 0%;
+		transition: 1s;
+		width: 100%;
+		background-color: rgba(255, 255, 255, 0.5);
+		/* animation: 2s revealCoverMessage;
+		animation-fill-mode: forwards; */
+	}
+	.home-cover-message h1,
+	.home-cover-message h2 {
+		align-self: flex-start;
+	}
+	.get-started {
+		margin: auto;
+	}
+}
 .home-cover {
 	position: relative;
 	display: flex;
@@ -8,31 +72,6 @@
 	background-image: url("../../Assets/img/vienna.jpg");
 	background-size: cover;
 	overflow: hidden;
-}
-.home-cover-polygon {
-	height: 100%;
-	width: 100%;
-	position: absolute;
-	z-index: 4;
-	background-color: var(--unilab-white);
-	clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-	animation: 2s reveal;
-	animation-fill-mode: forwards;
-}
-.home-cover-message {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	z-index: 5;
-	height: 100%;
-	text-align: center;
-	padding: 0 4rem;
-	position: relative;
-	bottom: -100%;
-	transition: 1s;
-	animation: 2s revealCoverMessage;
-	animation-fill-mode: forwards;
 }
 @keyframes revealCoverMessage {
 	0% {

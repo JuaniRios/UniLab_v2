@@ -12,7 +12,7 @@ export default function CreatePost(props) {
 		backgroundImage: `url(${userData.image})`,
 	};
 	return (
-		<div className={`create-post flex-row a-i-c w40 shadow`}>
+		<div className={`create-post flex-row a-i-c shadow`}>
 			<NavLink to="/profile" style={picStyle} className={`post-pfp`} />
 			<h4 className={`action-btn shadow normal`} onClick={setPostFormClasses}>
 				Create a post

@@ -70,31 +70,26 @@ export default function NavMenu(props) {
 
 	function anyMenu() {
 		return (
-			displayLanguage ||
-			displaySearch ||
-			displayProfile ||
-			displayLogin ||
-			displayMobile ||
-			displayFeedback
+			displayLanguage || displaySearch || displayProfile || displayLogin || displayFeedback
 		);
 	}
 
 	useEffect(() => {
-		console.log("userdata is:")
+		console.log("userdata is:");
 		console.log(userData);
 	}, [userData]);
 
 	return (
 		<>
 			{anyMenu() && <div className={`overlay shown`} onClick={() => setAll(false)} />}
-			<FeedbackForm setDisplay={setDisplayFeedback} display={displayFeedback} />
+			{/* <FeedbackForm setDisplay={setDisplayFeedback} display={displayFeedback} />
 			{userData && (
 				<FeedbackButton
 					onClick={() => {
 						setDisplayFeedback(true);
 					}}
 				/>
-			)}
+			)} */}
 
 			<TopNav
 				setDisplayProfile={setDisplayProfile}

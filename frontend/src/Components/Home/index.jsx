@@ -16,11 +16,10 @@ export default function Home(props) {
 	document.body.classList.remove("noscroll");
 	return (
 		<>
-			<NavMenu/>
+			<NavMenu />
 			<HomeCover />
 			<div className={`home-content`}>
 				<HomePrimary />
-				<Announcements />
 			</div>
 			<Slider contentType={"jobs"} />
 			<Footer />
