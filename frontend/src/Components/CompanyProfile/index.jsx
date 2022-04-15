@@ -822,8 +822,8 @@ export default function CompanyProfile(props) {
 							margin={true}
 							title="Posts"
 						>
-							{postItems}
-
+							{/*{postItems}*/}
+							<h2>Work in progress</h2>
 							{postItems || (
 								<h4 className={`normal`} style={{ margin: "1rem 0" }}>
 									You haven't posted anything yet...
@@ -837,7 +837,8 @@ export default function CompanyProfile(props) {
 							margin={true}
 							title="Comments"
 						>
-							{commentItems}
+							{/*{commentItems}*/}
+							<h2>Work in progress</h2>
 
 							{commentItems || (
 								<h4 className={`normal`} style={{ margin: "1rem 0" }}>

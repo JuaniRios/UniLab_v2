@@ -547,45 +547,45 @@ function Profile(props) {
                             <div className={`item-text`}>Basic Information</div>
                         </NavLink>
 
-                        <NavLink to="#external-profiles" className={`profile-menu-item ${menuClassesArray[1]}`}
+                        <NavLink to="#education" className={`profile-menu-item ${menuClassesArray[1]}`}
                             onClick={e => changeActiveItem(1)}>
-                            <div className={`item-text`}>External Profiles</div>
-                        </NavLink>
-
-                        <NavLink to="#education" className={`profile-menu-item ${menuClassesArray[2]}`}
-                            onClick={e => changeActiveItem(2)}>
                             <div className={`item-text`}>Education</div>
                         </NavLink>
 
-                        <NavLink to="#university-courses" className={`profile-menu-item ${menuClassesArray[3]}`}
-                            onClick={e => changeActiveItem(3)}>
-                            <div className={`item-text`}>University Courses</div>
-                        </NavLink>
-
-                        <NavLink to="#certifications" className={`profile-menu-item ${menuClassesArray[4]}`}
-                            onClick={e => changeActiveItem(4)}>
-                            <div className={`item-text`}>Certifications</div>
-                        </NavLink>
-
-                        <NavLink to="#experience" className={`profile-menu-item ${menuClassesArray[5]}`}
-                            onClick={e => changeActiveItem(5)}>
+                        <NavLink to="#experience" className={`profile-menu-item ${menuClassesArray[2]}`}
+                            onClick={e => changeActiveItem(2)}>
                             <div className={`item-text`}>Experience</div>
                         </NavLink>
 
-                        <NavLink to="#skills" className={`profile-menu-item ${menuClassesArray[6]}`}
-                            onClick={e => changeActiveItem(6)}>
-                            <div className={`item-text`}>Skills</div>
+                        {/*<NavLink to="#university-courses" className={`profile-menu-item ${menuClassesArray[3]}`}*/}
+                        {/*    onClick={e => changeActiveItem(3)}>*/}
+                        {/*    <div className={`item-text`}>University Courses</div>*/}
+                        {/*</NavLink>*/}
+
+                        {/*<NavLink to="#certifications" className={`profile-menu-item ${menuClassesArray[4]}`}*/}
+                        {/*    onClick={e => changeActiveItem(4)}>*/}
+                        {/*    <div className={`item-text`}>Certifications</div>*/}
+                        {/*</NavLink>*/}
+
+                        <NavLink to="#community" className={`profile-menu-item ${menuClassesArray[5]}`}
+                            onClick={e => changeActiveItem(3)}>
+                            <div className={`item-text`}>Community</div>
                         </NavLink>
 
-                        <NavLink to="#posts" className={`profile-menu-item ${menuClassesArray[7]}`}
-                            onClick={e => changeActiveItem(7)}>
-                            <div className={`item-text`}>Posts</div>
-                        </NavLink>
+                        {/*<NavLink to="#skills" className={`profile-menu-item ${menuClassesArray[6]}`}*/}
+                        {/*    onClick={e => changeActiveItem(6)}>*/}
+                        {/*    <div className={`item-text`}>Skills</div>*/}
+                        {/*</NavLink>*/}
 
-                        <NavLink to="#comments" className={`profile-menu-item ${menuClassesArray[8]}`}
-                            onClick={e => changeActiveItem(8)}>
-                            <div className={`item-text`}>Comments</div>
-                        </NavLink>
+                        {/*<NavLink to="#posts" className={`profile-menu-item ${menuClassesArray[7]}`}*/}
+                        {/*    onClick={e => changeActiveItem(7)}>*/}
+                        {/*    <div className={`item-text`}>Posts</div>*/}
+                        {/*</NavLink>*/}
+
+                        {/*<NavLink to="#comments" className={`profile-menu-item ${menuClassesArray[8]}`}*/}
+                        {/*    onClick={e => changeActiveItem(8)}>*/}
+                        {/*    <div className={`item-text`}>Comments</div>*/}
+                        {/*</NavLink>*/}
 
                     </div>
                 </div>
@@ -615,7 +615,7 @@ function Profile(props) {
                         </div>
                     </ProfileContentFrame>
 
-                    <ProfileContentFrame id="external-profiles" className={`${contentClassesArray[1]}`} margin={true}
+                    <ProfileContentFrame id="external-profiles" className={`${contentClassesArray[0]}`} margin={true}
                                          title="External Profiles" plusBtn={editable} onClick={setPopupClasses2}>
                         {externalProfileItems}
                         {experienceItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
@@ -624,7 +624,7 @@ function Profile(props) {
                         }
                     </ProfileContentFrame>
 
-                    <ProfileContentFrame id="education" className={`${contentClassesArray[2]}`} margin={true}
+                    <ProfileContentFrame id="education" className={`${contentClassesArray[1]}`} margin={true}
                                          title="Education" plusBtn={editable} onClick={setPopupClasses3}>
                         {educationItems}
                         {educationItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
@@ -633,7 +633,7 @@ function Profile(props) {
                         }
                     </ProfileContentFrame>
 
-                    <ProfileContentFrame id="university-courses" className={`${contentClassesArray[3]}`} margin={true}
+                    <ProfileContentFrame id="university-courses" className={`${contentClassesArray[1]}`} margin={true}
                                          title="University Courses" plusBtn={editable} onClick={setPopupClasses4}>
                         {universityCourseItems}
                         {experienceItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
@@ -642,7 +642,7 @@ function Profile(props) {
                         }
                     </ProfileContentFrame>
 
-                    <ProfileContentFrame id="certifications" className={`${contentClassesArray[4]}`} margin={true}
+                    <ProfileContentFrame id="certifications" className={`${contentClassesArray[1]}`} margin={true}
                                          title="Certifications" plusBtn={editable} onClick={setPopupClasses5}>
                         {certificationItems}
                         {experienceItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
@@ -651,7 +651,7 @@ function Profile(props) {
                         }
                     </ProfileContentFrame>
 
-                    <ProfileContentFrame id="experience" className={`${contentClassesArray[5]}`} margin={true} title="Experience"
+                    <ProfileContentFrame id="experience" className={`${contentClassesArray[2]}`} margin={true} title="Experience"
                         plusBtn={editable} onClick={setPopupClasses6}>
                         {experienceItems}
                         {experienceItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>
@@ -660,7 +660,7 @@ function Profile(props) {
                         }
                     </ProfileContentFrame>
 
-                    <ProfileContentFrame id="skills" className={`${contentClassesArray[6]}`} margin={true} title="Skills"
+                    <ProfileContentFrame id="skills" className={`${contentClassesArray[2]}`} margin={true} title="Skills"
                         plusBtn={editable} onClick={setPopupClasses7}>
 
                         {skillItems}
@@ -669,7 +669,7 @@ function Profile(props) {
                                                     </h4>}
                     </ProfileContentFrame>
 
-                    <ProfileContentFrame id="posts" className={`${contentClassesArray[7]}`} margin={true} title="Posts">
+                    <ProfileContentFrame id="posts" className={`${contentClassesArray[3]}`} margin={true} title="Posts">
 
                         {/*{postItems}*/}
 
@@ -680,7 +680,7 @@ function Profile(props) {
                         <h2>Work in Progress</h2>
                     </ProfileContentFrame>
 
-                    <ProfileContentFrame id="comments" className={`${contentClassesArray[8]}`} margin={true} title="Comments">
+                    <ProfileContentFrame id="comments" className={`${contentClassesArray[3]}`} margin={true} title="Comments">
                         {/*{commentItems}*/}
 
                         {/*{commentItems.length === 0 && <h4 className={`normal`} style={{margin: "1rem 0"}}>*/}
