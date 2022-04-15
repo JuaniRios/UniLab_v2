@@ -30,6 +30,7 @@ def get_user(request):
 
         """Returns: the user object serialized from a token"""
         try:
+            print("in try", flush=True)
             validated_token = JWTAuthentication().get_validated_token(token)
             user_object = JWTAuthentication().get_user(validated_token)
             response = requests.get(
