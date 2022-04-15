@@ -90,7 +90,8 @@ class UniversityCourse(models.Model):
 
     owner = models.ForeignKey("UserData", related_name="university_courses", on_delete=models.CASCADE)
     course = models.CharField(max_length=200)
-    grade = models.CharField(max_length=200, null=True, blank=True)
+    ects = models.CharField(max_length=200, null=True, blank=True)
+    description = models.CharField(max_length=200)
 
 
 class Certification(models.Model):
@@ -101,6 +102,7 @@ class Certification(models.Model):
     owner = models.ForeignKey("UserData", related_name="certifications", on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=200, null=True, blank=True)
+    proof = models.ImageField(upload_to='certification_proof/%Y/%m/%D/', null=True, blank=True)
 
 
 class EducationData(models.Model):

@@ -19,6 +19,7 @@ import {useAuthState} from "../../Context";
 import apiCall from "../HelperFunctions/apiCall";
 import urlToPk from "../HelperFunctions/urlToPk";
 import {useMessage} from "../../Context/context";
+import AttachImage from "../Forms/AttachImage";
 
 function Profile(props) {
     let urlParams = useParams()
@@ -64,11 +65,13 @@ function Profile(props) {
 
     // university courses
     const [course, setCourse] = useState("");
-    const [grade, setGrade] = useState("");
+    const [ects, setEcts] = useState("");
+    const [courseDesc, setCourseDesc] = useState("");
 
     // certifications
     const [certificationTitle, setCertificationTitle] = useState("");
     const [certificationDescription, setCertificationDescription] = useState("");
+    const [certificationImage, setCertificationImage] = useState("");
 
     // experience
     const [expCompany, setExpCompany] = useState('');
@@ -130,30 +133,19 @@ function Profile(props) {
             case "basic-info":
                 changeActiveItem(0);
                 break;
-            case "external-profiles":
+
+            case "education":
                 changeActiveItem(1);
                 break;
-            case "education":
+
+            case "experience":
                 changeActiveItem(2);
                 break;
-            case "university-courses":
+
+            case "community":
                 changeActiveItem(3);
                 break;
-            case "certifications":
-                changeActiveItem(4);
-                break;
-            case "experience":
-                changeActiveItem(5);
-                break;
-            case "skills":
-                changeActiveItem(6);
-                break;
-            case "posts":
-                changeActiveItem(7);
-                break;
-            case "comments":
-                changeActiveItem(8);
-                break;
+
             default:
                 changeActiveItem(0);
                 break;
@@ -204,13 +196,25 @@ function Profile(props) {
                 setEducationItems(newEducationItems)
 
                 let newUniversityCourseItems = info["university_courses"].map((entry, index) => {
-                    return <ProfileContentItem title={entry.course} subTitle={entry.grade} key={index}/>
+                    let ects = ""
+                    if (entry.ects) {
+                        ects = "ECTS: " + entry.ects
+                    }
+
+                    const subtitle = ects ? <p>{ects} <br/> {entry.description}</p> : entry.description
+
+                    return <ProfileContentItem title={entry.course} subTitle={subtitle} key={index}/>
                 })
                 // update state containing all components
                 setUniversityCourseItems(newUniversityCourseItems)
 
                 let newCertificationItems = info["certifications"].map((entry, index) => {
-                    return <ProfileContentItem title={entry.title} subTitle={entry.description} key={index}/>
+                    let proof = ""
+                    if (entry.proof) {
+                        proof = <a href={entry.proof} target="_blank" rel="noopener noreferrer">Proof</a>
+                    }
+                    const subtitle = proof ? <p>{proof} <br/> {entry.description}</p> : entry.description
+                    return <ProfileContentItem title={entry.title} subTitle={subtitle} key={index}/>
                 })
                 // update state containing all components
                 setCertificationItems(newCertificationItems)
@@ -332,7 +336,8 @@ function Profile(props) {
         e.preventDefault()
         let payload = {
             "course": course,
-            "grade": grade
+            "ects": ects,
+            "description": courseDesc
         }
 
 
@@ -347,7 +352,8 @@ function Profile(props) {
             setMessage(error)
         }
         setCourse("")
-        setGrade("")
+        setEcts("")
+        setCourseDesc("")
         setPopupClasses4()
     }
 
@@ -356,7 +362,8 @@ function Profile(props) {
         e.preventDefault()
         let payload = {
             "title": certificationTitle,
-            "description": certificationDescription
+            "description": certificationDescription,
+            "proof": certificationImage
         }
 
         const params = {
@@ -490,8 +497,10 @@ function Profile(props) {
 
                     <BasicInput name="add-skill-category" type="text" width="100%" label="Course"
                         value={course} setter={setCourse} required="yes"/>
-                    <BasicInput name="add-skill-skill" type="text" width="100%" label="Grade (optional)"
-                        value={grade} setter={setGrade} required="yes"/>
+                    <BasicInput name="add-skill-category" type="text" width="100%" label="Description"
+                        value={courseDesc} setter={setCourseDesc} required="yes"/>
+                    <BasicInput name="add-skill-skill" type="text" width="100%" label="ECTS (optional)"
+                        value={ects} setter={setEcts} required="no"/>
 
                 </PopupForm>
 
@@ -502,6 +511,7 @@ function Profile(props) {
                         value={certificationTitle} setter={setCertificationTitle} required="yes"/>
                     <BasicInput name="add-skill-skill" type="text" width="100%" label="Description (optional)"
                         value={certificationDescription} setter={setCertificationDescription} required="yes"/>
+                    <AttachImage image={certificationImage} setImage={setCertificationImage} label={"Attach proof"}/>
 
                 </PopupForm>
 
