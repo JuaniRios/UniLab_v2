@@ -19,7 +19,7 @@ from .serializers import *
 
 User = get_user_model()
 
-
+api_url = conf_settings.API_URL
 @csrf_exempt
 def get_user(request):
     if request.method == 'POST':
