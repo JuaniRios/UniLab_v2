@@ -32,11 +32,13 @@ def get_user(request):
         try:
             validated_token = JWTAuthentication().get_validated_token(token)
             user_object = JWTAuthentication().get_user(validated_token)
-            print("passed user object", flush=True)
+            print(user_object, flush=True)
+            print(api_url, flush=True)
             response = requests.get(
                 f"{api_url}/api/users/{user_object.id}",
                 headers={"Authorization": f"Bearer {token}"},
             )
+            print(response, flush=True)
             user_json = response.json()
         except InvalidToken as ex:
             print(ex)
