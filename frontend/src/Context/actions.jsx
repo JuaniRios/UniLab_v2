@@ -10,6 +10,7 @@ export async function loginUser(dispatch, loginPayload) {
     };
 
     try {
+        console.log("fetching token for the following payload: ", loginPayload);
         let response = await fetch(`${ROOT_URL}token`, requestOptions);
         let data = await response.json();
 

@@ -25,7 +25,7 @@ urlpatterns = [
     path("", include("api.urls")),
 ]
 
-urlpatterns += i18n_patterns(path("", include("website.urls")))
+# urlpatterns += i18n_patterns(path("", include("website.urls")))
 
 print(settings.MEDIA_ROOT)
 
