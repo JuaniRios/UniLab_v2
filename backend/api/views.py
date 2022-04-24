@@ -19,7 +19,7 @@ from .serializers import *
 
 User = get_user_model()
 
-
+api_url = conf_settings.API_URL
 @csrf_exempt
 def get_user(request):
     if request.method == 'POST':
@@ -38,7 +38,7 @@ def get_user(request):
                 f"{api_url}/api/users/{user_object.id}",
                 headers={"Authorization": f"Bearer {token}"},
             )
-            print(response.text, flush=True)
+            print(response.content, flush=True)
             user_json = response.json()
         except InvalidToken as ex:
             print(ex)
