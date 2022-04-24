@@ -29,6 +29,7 @@
 		padding: 1rem;
 		transition: 0.7s;
 		width: 100%;
+		overflow: scroll;
 	}
 	.slider-item {
 		height: 15rem;

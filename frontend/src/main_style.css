@@ -697,7 +697,7 @@ tr:nth-child(even) {
 	justify-content: flex-end;
 	align-items: center;
 	flex-direction: column;
-	height: calc(80vh - var(--topnav-height));
+	height: calc(100vh - var(--topnav-height));
 	overflow-x: hidden;
 	position: relative;
 }
