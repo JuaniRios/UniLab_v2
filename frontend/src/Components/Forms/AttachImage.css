@@ -31,20 +31,39 @@ input[type="file"] {
 	border-radius: 10px;
 }
 /* Avatar Version */
-.avatar-upload-wrapper {
-	display: flex;
-	align-items: center;
-	margin: 3rem 0;
-	flex-flow: row wrap;
+@media only screen and (min-width: 1030px) {
+	.avatar-upload-wrapper {
+		display: flex;
+		align-items: center;
+		margin: 3rem 0;
+		flex-flow: row wrap;
+	}
+	.img-preview-avatar {
+		height: 9rem;
+		width: 9rem;
+		border-radius: 50%;
+		object-fit: cover;
+		object-position: center center;
+		margin-right: 3rem;
+		border: 1px solid var(--gray-hover);
+	}
 }
-.img-preview-avatar {
-	height: 9rem;
-	width: 9rem;
-	border-radius: 50%;
-	object-fit: cover;
-	object-position: center center;
-	margin-right: 3rem;
-	border: 1px solid var(--gray-hover);
+@media only screen and (max-width: 1030px) {
+	.avatar-upload-wrapper {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 3rem 0;
+		flex-flow: row wrap;
+	}
+	.img-preview-avatar {
+		height: 9rem;
+		width: 9rem;
+		border-radius: 50%;
+		object-fit: cover;
+		object-position: center center;
+		border: 1px solid var(--gray-hover);
+	}
 }
 .avatar-upload-btn,
 .avatar-upload-title {
