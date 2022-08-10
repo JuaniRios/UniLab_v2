@@ -1,29 +1,56 @@
-.rect-item-container {
-	width: 100%;
-	padding: 1rem;
-	border-radius: 10px;
-	display: flex;
-	/* justify-content: space-between; */
-	align-items: center;
-	margin: 1rem 0;
-	text-decoration: none;
-	color: black;
+@media only screen and (min-width: 1030px) {
+	.rect-item-container {
+		width: 100%;
+		padding: 1rem;
+		border-radius: 10px;
+		display: flex;
+		/* justify-content: space-between; */
+		align-items: center;
+		margin: 1rem 0;
+		text-decoration: none;
+		color: black;
+	}
+	.rect-item-btn-holder {
+		display: flex;
+		justify-content: space-between;
+		align-self: center;
+	}
+	.rect-item-btn {
+		padding: 0.5rem !important;
+		text-align: center;
+		margin: 0.5rem;
+	}
+}
+@media only screen and (max-width: 1030px) {
+	.rect-item-container {
+		width: 100%;
+		padding: 1rem;
+		border-radius: 10px;
+		display: flex;
+		flex-flow: row wrap;
+		/* justify-content: space-between; */
+		align-items: center;
+		margin: 1rem 0;
+		text-decoration: none;
+		color: black;
+	}
+	.rect-item-btn-holder {
+		display: flex;
+		flex-flow: row wrap;
+		margin-top: 1rem;
+	}
+	.rect-item-btn {
+		padding: 0.5rem !important;
+		text-align: center;
+		margin: 0.5rem;
+		width: 100%;
+	}
 }
 .rect-item-content {
 	width: 20%;
 	max-height: 4rem;
 	padding: 0 1rem;
 	flex-grow: 1;
-}
-.rect-item-btn-holder {
-	display: flex;
-	justify-content: space-between;
-	align-self: center;
-}
-.rect-item-btn {
-	padding: 0.5rem !important;
-	text-align: center;
-	margin: 0.5rem;
 }
 .rect-item-img {
 	height: 4rem;

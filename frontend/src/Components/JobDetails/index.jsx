@@ -42,10 +42,10 @@ export default function JobDetails(props) {
 			const params = {
 				method: "POST",
 				payload: {
-					"cv": cv,
-					"motivation_letter": letter,
-					"job": jobData.url,
-					"user": userData.url
+					cv: cv,
+					motivation_letter: letter,
+					job: jobData.url,
+					user: userData.url,
 				},
 			};
 			await apiCall("applications", token, params);
@@ -86,7 +86,7 @@ export default function JobDetails(props) {
 						</div>
 					</div>
 					<div className={`job-details-right`}>
-						<h2>{jobData.title}</h2>
+						<h2 className={`job-details-title`}>{jobData.title}</h2>
 						<hr className="hr100" />
 						<div className={`job-info-container`}>
 							<div className={`job-info-subcontainer`}>

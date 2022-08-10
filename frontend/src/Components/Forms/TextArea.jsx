@@ -65,11 +65,11 @@ export default function TextArea(props) {
 					setMessage={setMessage}
 					textarea={textarea}
 					setCursorPosition={setCursorPosition}
-					menuWidth="40%"
+					menuWidth="80%"
 					menuTop={props.menuTop ? props.menuTop : "10%"}
 					menuRight="0"
 				/>
-				<span className={`${errorCheck} bottom-line`}/>
+				<span className={`${errorCheck} bottom-line`} />
 			</div>
 		</div>
 	);

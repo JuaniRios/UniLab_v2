@@ -681,17 +681,6 @@ tr:nth-child(even) {
 	overflow-x: hidden;
 	position: relative;
 }
-.main-content-fixed-2 {
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	flex-direction: column;
-	/* height: calc(100vh - var(--topnav-height));
-	overflow-x: hidden; */
-	position: relative;
-	width: 70%;
-	margin: auto;
-}
 .main-content-fixed-3 {
 	display: flex;
 	justify-content: flex-end;

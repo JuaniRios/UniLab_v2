@@ -1,11 +1,24 @@
-.basic-list {
-	border-radius: 10px;
-	width: 35rem;
-	height: 100%;
-	scrollbar-color: transparent transparent;
-	padding: 1rem;
-	display: flex;
-	flex-direction: column;
+@media only screen and (min-width: 1030px) {
+	.basic-list {
+		border-radius: 10px;
+		width: 35rem;
+		height: 100%;
+		scrollbar-color: transparent transparent;
+		padding: 1rem;
+		display: flex;
+		flex-direction: column;
+	}
+}
+@media only screen and (max-width: 1030px) {
+	.basic-list {
+		border-radius: 10px;
+		width: 100%;
+		height: 100%;
+		scrollbar-color: transparent transparent;
+		padding: 1rem 0;
+		display: flex;
+		flex-direction: column;
+	}
 }
 .basic-list:hover {
 	scrollbar-color: lightgray rgba(0, 0, 0, 0);

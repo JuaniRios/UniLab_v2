@@ -89,14 +89,31 @@ export default function CompanyProfile(props) {
 	const [jobWeOffer, setJobWeOffer] = useState("");
 	const [jobRequirements, setJobRequirements] = useState("");
 
-	const [jobFormFilled, setJobFormFilled] = useState(false)
+	const [jobFormFilled, setJobFormFilled] = useState(false);
 
 	// update jobFormFilled
-	useEffect(()=>{
-		const allFields = [jobTitle, jobCity, jobCountry, jobCategory, jobType, jobYouDo, jobWeOffer, jobRequirements]
-		setJobFormFilled(allFields.every(field=>!!field))
-	},[jobTitle, jobCity, jobCountry, jobCategory, jobType, jobYouDo, jobWeOffer, jobRequirements])
-
+	useEffect(() => {
+		const allFields = [
+			jobTitle,
+			jobCity,
+			jobCountry,
+			jobCategory,
+			jobType,
+			jobYouDo,
+			jobWeOffer,
+			jobRequirements,
+		];
+		setJobFormFilled(allFields.every((field) => !!field));
+	}, [
+		jobTitle,
+		jobCity,
+		jobCountry,
+		jobCategory,
+		jobType,
+		jobYouDo,
+		jobWeOffer,
+		jobRequirements,
+	]);
 
 	function changePopupClasses(initState) {
 		if (initState[1] === "hidden") {
@@ -252,8 +269,8 @@ export default function CompanyProfile(props) {
 								return showApplicants(job);
 							},
 							(e) => {
-							return deleteJob(job.url, id)
-							}
+								return deleteJob(job.url, id);
+							},
 						]}
 						key={id}
 						img={data.image}
@@ -275,7 +292,9 @@ export default function CompanyProfile(props) {
 			const applications = [];
 			// get applications from url
 			for (const application of job["applications"]) {
-				applications.push(await apiCall(application, token, { method: "GET", fullUrl: true }));
+				applications.push(
+					await apiCall(application, token, { method: "GET", fullUrl: true })
+				);
 			}
 
 			// build application widgets
@@ -295,12 +314,16 @@ export default function CompanyProfile(props) {
 
 			// build main widget for application list
 			setApplicantsList(
-				<ApplicantsSlider jobName={job.title} closeEvent={(e) => {setApplicantsToggle(false)}}>
+				<ApplicantsSlider
+					jobName={job.title}
+					closeEvent={(e) => {
+						setApplicantsToggle(false);
+					}}
+				>
 					{newApplicationsList}
 				</ApplicantsSlider>
 			);
 			setApplicantsToggle(true);
-
 		} catch (e) {
 			setMessage(`error in showApplicants: ${e}`);
 		}
@@ -317,10 +340,9 @@ export default function CompanyProfile(props) {
 			await apiCall(jobUrl, token, params);
 
 			// UI Change
-			setJobItems(prev => {
-				return prev.filter(item => item.key !== `${id}`)
-			})
-
+			setJobItems((prev) => {
+				return prev.filter((item) => item.key !== `${id}`);
+			});
 		} catch (e) {
 			setMessage(`delete job error: ${e}`);
 		}
@@ -392,7 +414,8 @@ export default function CompanyProfile(props) {
 		};
 		try {
 			const newJob = await apiCall("jobs", token, params);
-			const newIdx = jobItems.length > 0 ? parseInt(jobItems[jobItems.length-1].key) + 1 : 0;
+			const newIdx =
+				jobItems.length > 0 ? parseInt(jobItems[jobItems.length - 1].key) + 1 : 0;
 			const newJobItem = (
 				<RectangleItem
 					content={newJob.title}
@@ -423,7 +446,7 @@ export default function CompanyProfile(props) {
 			<NavMenu />
 
 			<div className={`main-content`}>
-				<div className={`profile`}>
+				<div className={`profile-company`}>
 					<PopupForm
 						title="Edit company information"
 						popupClasses={popupClasses}
@@ -660,11 +683,11 @@ export default function CompanyProfile(props) {
 						/>
 					</PopupForm>
 
-					<div className={`main-profile-menu`}>
-						<div className={`fixed-menu`}>
+					<div className={`main-profile-menu-company`}>
+						<div className={`fixed-menu-company`}>
 							<NavLink
 								to="#basic-info"
-								className={`profile-menu-item ${menuClassesArray[0]}`}
+								className={`profile-menu-item-company ${menuClassesArray[0]}`}
 								onClick={(e) => changeActiveItem(0)}
 							>
 								<div className={`item-text`}>Company Information</div>
@@ -672,7 +695,7 @@ export default function CompanyProfile(props) {
 
 							<NavLink
 								to="#education"
-								className={`profile-menu-item ${menuClassesArray[1]}`}
+								className={`profile-menu-item-company ${menuClassesArray[1]}`}
 								onClick={(e) => changeActiveItem(1)}
 							>
 								<div className={`item-text`}>Pictures</div>
@@ -680,7 +703,7 @@ export default function CompanyProfile(props) {
 
 							<NavLink
 								to="#experience"
-								className={`profile-menu-item ${menuClassesArray[2]}`}
+								className={`profile-menu-item-company ${menuClassesArray[2]}`}
 								onClick={(e) => changeActiveItem(2)}
 							>
 								<div className={`item-text`}>Jobs</div>
@@ -688,7 +711,7 @@ export default function CompanyProfile(props) {
 
 							<NavLink
 								to="#skills"
-								className={`profile-menu-item ${menuClassesArray[3]}`}
+								className={`profile-menu-item-company ${menuClassesArray[3]}`}
 								onClick={(e) => changeActiveItem(3)}
 							>
 								<div className={`item-text`}>Admins</div>
@@ -696,7 +719,7 @@ export default function CompanyProfile(props) {
 
 							<NavLink
 								to="#posts"
-								className={`profile-menu-item ${menuClassesArray[4]}`}
+								className={`profile-menu-item-company ${menuClassesArray[4]}`}
 								onClick={(e) => changeActiveItem(4)}
 							>
 								<div className={`item-text`}>Posts</div>
@@ -704,7 +727,7 @@ export default function CompanyProfile(props) {
 
 							<NavLink
 								to="#comments"
-								className={`profile-menu-item ${menuClassesArray[5]}`}
+								className={`profile-menu-item-company ${menuClassesArray[5]}`}
 								onClick={(e) => changeActiveItem(5)}
 							>
 								<div className={`item-text`}>Comments</div>
@@ -712,21 +735,21 @@ export default function CompanyProfile(props) {
 						</div>
 					</div>
 
-					<div className={`profile-content-container`}>
+					<div className={`profile-content-container-company`}>
 						<ProfileContentFrame
 							id="basic-info"
 							className={`${contentClassesArray[0]}`}
 						>
-							<div className={`profile-banner`}>
+							<div className={`profile-banner-company`}>
 								<img
-									className={`profile-banner-pfp`}
+									className={`profile-banner-pfp-company`}
 									src={companyData.image}
 									alt="Profile icon"
 								/>
 							</div>
 							<div className={`profile-basic-info`}>
 								<img
-									className={`basic-info-toggler`}
+									className={`basic-info-toggler-company`}
 									src={pencil_icon}
 									alt="Pen icon"
 									onClick={setPopupClasses}
@@ -795,7 +818,7 @@ export default function CompanyProfile(props) {
 								timeout={500}
 								classNames={"admin-list-transition"}
 							>
-								<div>
+								<>
 									<div className={`add-new-field custom-scroll`}>
 										<AdminList
 											title="Add a new admin:"
@@ -812,7 +835,7 @@ export default function CompanyProfile(props) {
 											companyUrl={companyData.url}
 										/>
 									</div>
-								</div>
+								</>
 							</CSSTransition>
 						</ProfileContentFrame>
 
