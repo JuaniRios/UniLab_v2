@@ -39,7 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     voted_posts = models.ManyToManyField(Post, blank=True, through='Vote', related_name='votes')
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'user_type']
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     is_active = models.BooleanField(default=True)
     objects = UserManager()
